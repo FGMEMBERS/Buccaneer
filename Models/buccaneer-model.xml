@@ -1165,25 +1165,24 @@
 	</animation>
 
 	--><!-- ***************** Control Surfaces *********** --><!--
-	--><!-- *********** Rudder *************** --><!--
+	--><!-- *********** Rudder *************** -->
+
 	<animation>
 		<type>rotate</type>
-		<object-name>Rudder-Assmbly</object-name>
+		<object-name>Rudder</object-name>
 		<property>surface-positions/rudder-pos-norm</property>
 		<factor>-15</factor>
-		<center>
-			<x-m>5.59</x-m>
-			<y-m>0</y-m>
-			<z-m>1.1</z-m>
-		</center>
 		<axis>
-			<x>0.75</x>
-			<y>0</y>
-			<z>1</z>
+			<x1-m>16.0501</x1-m>
+				<y1-m>0</y1-m>
+				<z1-m>1.18808</z1-m>
+				<x2-m>16.6735</x2-m>
+				<y2-m>0</y2-m>
+				<z2-m>2.79738</z2-m>
 		</axis>
 	</animation>
 
-	--><!--  ********** Ailerons ************ -->
+			<!--  ********** Ailerons ************ -->
 	<!-- Port -->
 	<animation>
 		<type>rotate</type>
@@ -1484,40 +1483,40 @@
 		</axis>
 	</animation>
 
-	<!-- nose wheel castering --><!--
+	<!-- nose wheel castering -->
 	<animation>
 		<type>rotate</type>
-		<object-name>F-Wheel</object-name>
+		<object-name>Assmbly-Lower-Nose</object-name>
 		<object-name>F-Arm</object-name>
 		<object-name>F-DArm</object-name>
 		<property>gear/gear/caster-angle-deg</property>
-		<factor>-1</factor>
+		<factor>1</factor>
 		<axis>
-			<x1-m>-5.23</x1-m>
+			<x1-m>3.374</x1-m>
 			<y1-m>0</y1-m>
-			<z1-m>-0.67</z1-m>
-			<x2-m>-5.23</x2-m>
+			<z1-m>-0.374706</z1-m>
+			<x2-m>3.374</x2-m>
 			<y2-m>0</y2-m>
-			<z2-m>-1.03</z2-m>
+			<z2-m>-0.999678</z2-m>
 		</axis>
 	</animation>
 
 	<animation>
 		<type>rotate</type>
-		<object-name>F-Lower-Leg</object-name>
+		<object-name>Pivot-Bracket</object-name>
 		<property>gear/gear/caster-angle-deg</property>
-		<factor>-1</factor>
+		<factor>1</factor>
 		<axis>
-			<x1-m>-5.23</x1-m>
+			<x1-m>3.374</x1-m>
 			<y1-m>0</y1-m>
-			<z1-m>-0.67</z1-m>
-			<x2-m>-5.23</x2-m>
+			<z1-m>-0.374706</z1-m>
+			<x2-m>3.374</x2-m>
 			<y2-m>0</y2-m>
-			<z2-m>-1.03</z2-m>
+			<z2-m>-0.999678</z2-m>
 		</axis>
 	</animation>
 
-	--><!-- Compression -->
+	<!-- Compression -->
 	<animation>
 		<type>rotate</type>
 		<object-name>Assmbly-Lower-Nose</object-name>
