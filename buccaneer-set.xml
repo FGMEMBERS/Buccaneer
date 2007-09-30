@@ -143,6 +143,15 @@ Ver 0.0.1
 			<setting>0.75</setting>
 			<setting>1.00</setting>
 		</airbrake>
+		
+		<aoa-indexer>
+			<too-slow-deg>8.7</too-slow-deg>
+			<slow-deg>6.7</slow-deg>
+			<fast-deg>4.7</fast-deg>
+			<too-fast-deg>2.7</too-fast-deg>
+			<bug>0</bug>
+			<bug>-50</bug>
+		</aoa-indexer>
 
 	</sim>
 
@@ -362,7 +371,7 @@ Ver 0.0.1
 			<!-- map keys for 10 deg flap steps -->
 			<key n="91">
 				<name>[</name>
-				
+
 				<desc>Increase flap lever.</desc>
 				<binding>
 					<command>nasal</command>
@@ -376,7 +385,7 @@ Ver 0.0.1
 						<script>controls.flapsDown(0)</script>
 					</binding>
 				</mod-up>
-				
+
 			</key>
 			<key n="93">
 				<name>]</name>
@@ -395,7 +404,7 @@ Ver 0.0.1
 						</script>
 					</binding>
 				</mod-up>
-				
+
 			</key>
 			<key n="123">
 				<name>{</name>

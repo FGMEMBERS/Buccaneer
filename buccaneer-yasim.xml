@@ -164,7 +164,6 @@
 		<control-speed control="FLAP1"
 									 transition-time="5"/>
 	</hstab>
-	-1.22097
 
 	<vstab x="-15.2196"
 				 y="0"
@@ -448,7 +447,7 @@ axial flow engine, dry wt 2471 lbs -->
 	</hook>
 
 	<!-- The tank locations and contents are accurately modelled: if the rear tanks are filled
-	 before the fronthe the ac will sit on its tail bumper-->
+	 before the fronts the ac will sit on its tail bumper -->
 
 	<!-- tank #1-->
 	<tank x="-6.63737"
@@ -505,7 +504,7 @@ axial flow engine, dry wt 2471 lbs -->
 				z="0.885529"
 				jet="true"
 				capacity="1663"/>
-	<!--***** ballast *****-->
+	
 	<!-- cockpit -->
 	<ballast x="-4.6"
 					 y="0"
@@ -517,6 +516,7 @@ axial flow engine, dry wt 2471 lbs -->
 					 z="-0.35"
 					 mass="2500"/>
 
+	<!--***** ballast *****-->
 	<!-- trim -->
 	<ballast x="-2"
 					 y="0"

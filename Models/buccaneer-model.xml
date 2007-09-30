@@ -263,6 +263,16 @@
 			<z-m>0.65</z-m>
 		</offsets>
 	</model>
+	 
+	 <model>
+		<path>Aircraft/SeaVixen/Models/aoa-indexer.xml</path>
+		<offsets>
+			<x-m>3.140</x-m>
+			<y-m>-0.59</y-m>
+			<z-m> 0.828</z-m>
+		</offsets>
+	</model>
+
 
 	<model>
 		<path>Aircraft/Hunter/Models/blackout.xml</path>
@@ -274,7 +284,22 @@
 		</offsets>
 	</model>
 
-	--><!-- ***** Navigation Lights ****** --><!--
+	-->
+	<model>
+		<path>Aircraft/Buccaneer/Models/aoa-indexer.xml</path>
+				
+
+		<offsets>
+			<x-m>3.36104</x-m>
+			<y-m>-0.171994</y-m>
+			<z-m>0.877309 </z-m>
+			<roll-deg>17.5</roll-deg>
+			<pitch-deg>-5</pitch-deg>
+			
+		</offsets>
+	</model>
+
+	<!-- ***** Navigation Lights ****** --><!--
 
 	<model>
 		<path>Aircraft/Hunter/Models/light-green.xml</path>
