@@ -30,7 +30,7 @@ Ver 0.0.1
 			</electrical>
 		</systems>
 		<instrumentation>
-			<path>Aircraft/Hunter/Systems/instrumentation.xml</path>
+			<path>Aircraft/Buccaneer/Systems/instrumentation.xml</path>
 		</instrumentation>
 		<ai>
 			<aircraft>
@@ -143,7 +143,7 @@ Ver 0.0.1
 			<setting>0.75</setting>
 			<setting>1.00</setting>
 		</airbrake>
-		
+
 		<aoa-indexer>
 			<too-slow-deg>8.7</too-slow-deg>
 			<slow-deg>6.7</slow-deg>
@@ -513,6 +513,9 @@ Ver 0.0.1
 		<hunter>
 			<file>Aircraft/Hunter/Models/hunter.nas</file>
 		</hunter>
+		<!--<seavixen-instrumentation>
+			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>
+		</seavixen-instrumentation>-->
 	</nasal>
 
 	<environment>
