@@ -281,7 +281,7 @@ Ver 0.0.1
 				</binding>
 			</key>
 			<!-- map keys for no action  -->
-			<key n="107">
+			<!--<key n="107">
 				<name>k</name>
 				<desc>Null.</desc>
 				<binding>
@@ -289,7 +289,7 @@ Ver 0.0.1
 					<property>null</property>
 					<value type="double">0</value>
 				</binding>
-			</key>
+			</key>-->
 			<!-- map keys for seat vertical adjust -->
 			<key n="21">
 				<name>CTRL-U</name>
@@ -362,6 +362,43 @@ Ver 0.0.1
 			<!-- map keys for 10 deg flap steps -->
 			<key n="91">
 				<name>[</name>
+				
+				<desc>Increase flap lever.</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						controls.flapsDown(1)
+					</script>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>nasal</command>
+						<script>controls.flapsDown(0)</script>
+					</binding>
+				</mod-up>
+				
+			</key>
+			<key n="93">
+				<name>]</name>
+				<desc>Increase aileron droop.</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop", 1);
+					</script>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>nasal</command>
+						<script>
+							controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop", 0);
+						</script>
+					</binding>
+				</mod-up>
+				
+			</key>
+			<key n="123">
+				<name>{</name>
 				<desc>Decrease flap lever.</desc>
 				<binding>
 					<command>nasal</command>
@@ -376,45 +413,13 @@ Ver 0.0.1
 					</binding>
 				</mod-up>
 			</key>
-			<key n="93">
-				<name>]</name>
-				<desc>Increase flap lever.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-						controls.flapsDown(1)
-					</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.flapsDown(0)</script>
-					</binding>
-				</mod-up>
-			</key>
-			<key n="123">
-				<name>{</name>
+			<key n="125">
+				<name>}</name>
 				<desc>Decrease aileron droop.</desc>
 				<binding>
 					<command>nasal</command>
 					<script>
 						controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop", -1);
-					</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop",0);</script>
-					</binding>
-				</mod-up>
-			</key>
-			<key n="125">
-				<name>}</name>
-				<desc>Increase aileron droop.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-						controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop", 1);
 					</script>
 				</binding>
 				<mod-up>
