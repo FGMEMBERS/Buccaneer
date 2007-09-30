@@ -1828,49 +1828,11 @@
 			<z>1</z>
 		</axis>
 	</animation>
-	<!--
-	<animation>
-		<type>translate</type>
-		<object-name>UC-L-Lower-Leg</object-name>
-		<object-name>UC-L-Hub</object-name>
-		<object-name>UC-L-Tyre</object-name>
-		<property>gear/gear[1]/compression-norm</property>
-		<factor>0.19</factor>
-		<axis>
-			<x>0.02</x>
-			<y>0.01</y>
-			<z>0.2</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>translate</type>
-		<object-name>Door2-L</object-name>
-		<property>gear/gear[1]/compression-norm</property>
-		<factor>0.2</factor>
-		<axis>
-			<x>0</x>
-			<y>-1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>translate</type>
-		<object-name>noshadow.SerNo-Door2-L</object-name>
-		<property>gear/gear[1]/compression-norm</property>
-		<factor>0.2</factor>
-		<axis>
-			<x>0</x>
-			<y>-1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	--><!-- hide the undercarriage when retracted --><!--
+	
+	<!-- hide the undercarriage when retracted -->
 	<animation>
 		<type>select</type>
-		<object-name>UC-Main-L-Assembly</object-name>
+		<object-name>Gear-Main-Port</object-name>
 		<condition>
 			<greater-than>
 				<property>gear/gear[0]/position-norm</property>
@@ -1879,7 +1841,7 @@
 		</condition>
 	</animation>
 
-	--><!-- Main U/C - Right --><!--
+	<!-- Main U/C - Right --><!--
 	--><!-- Extend/Retract -->
 	<animation>
 		<type>rotate</type>
@@ -2033,6 +1995,19 @@
 			<z>1</z>
 		</axis>
 	</animation>
+
+	<!-- hide the undercarriage when retracted -->
+	<animation>
+		<type>select</type>
+		<object-name>Gear-Main-Stbd</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.02</value>
+			</greater-than>
+		</condition>
+	</animation>
+
 	<!--
 	<animation>
 		<type>translate</type>
