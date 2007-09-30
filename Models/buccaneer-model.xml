@@ -287,15 +287,23 @@
 	-->
 	<model>
 		<path>Aircraft/Buccaneer/Models/aoa-indexer.xml</path>
-				
-
 		<offsets>
 			<x-m>3.36104</x-m>
-			<y-m>-0.171994</y-m>
-			<z-m>0.877309 </z-m>
-			<roll-deg>17.5</roll-deg>
+			<y-m>-0.143849</y-m>
+			<z-m>0.889089</z-m>
+			<roll-deg>12</roll-deg>
 			<pitch-deg>-5</pitch-deg>
-			
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Models/asi.xml</path>
+		<offsets>
+			<x-m>3.36104</x-m>
+			<y-m>-0.212109</y-m>
+			<z-m>0.881491</z-m>
+			<roll-deg>12</roll-deg>
+			<pitch-deg>-5</pitch-deg>
 		</offsets>
 	</model>
 
