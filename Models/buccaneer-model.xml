@@ -84,6 +84,15 @@
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Buccaneer/Models/altimeter.xml</path>
+		<offsets>
+			<x-m>3.36104</x-m>
+			<y-m>-0.290753</y-m>
+			<z-m>0.556558</z-m>
+		</offsets>
+	</model>
+
 <!--
 	<model>
 		<path>Aircraft/Hunter/Models/hsi.xml</path>
@@ -103,14 +112,7 @@
 		</offsets>
 	</model>
 
-	<model>
-		<path>Aircraft/Hunter/Models/altimeter.xml</path>
-		<offsets>
-			<x-m>-4.83</x-m>
-			<y-m>-0.115</y-m>
-			<z-m>0.37</z-m>
-		</offsets>
-	</model>
+	
 
 	<model>
 		<path>Aircraft/Hunter/Models/mach.xml</path>
