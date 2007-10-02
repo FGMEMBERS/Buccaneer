@@ -93,16 +93,15 @@
 		</offsets>
 	</model>
 
-<!--
 	<model>
-		<path>Aircraft/Hunter/Models/hsi.xml</path>
+		<path>Aircraft/Buccaneer/Instruments/attitude_rb.xml</path>
 		<offsets>
-			<x-m>-4.83</x-m>
-			<y-m>0.00</y-m>
-			<z-m>0.33</z-m>
+			<x-m>3.36104</x-m>
+			<y-m>-0.142496</y-m>
+			<z-m>0.52068</z-m>
 		</offsets>
 	</model>
-
+<!--
 	<model>
 		<path>Aircraft/Hunter/Models/asi.xml</path>
 		<offsets>
@@ -187,7 +186,8 @@
 		</offsets>
 	</model>
 
-	--><!-- **************** Right Panel *********** --><!--
+	-->
+		<!-- **************** Right Panel *********** --><!--
 
 	<model>
 		<path>Aircraft/Hunter/Models/egt.xml</path>
