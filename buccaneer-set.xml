@@ -15,7 +15,7 @@ Ver 0.0.1
 <PropertyList>
 	<sim include="help.xml">
 		<description type="string" >Blackburn Buccaneer S2(YASim)</description>
-		<author type="string">Vivian Meazza, AJ MacLeod</author>
+		<author type="string">Vivian Meazza, AJ MacLeod. Melchior Franz</author>
 		<status type="string">alpha</status>
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<flight-model>yasim</flight-model>
@@ -119,7 +119,7 @@ Ver 0.0.1
 				<default-field-of-view-deg>60</default-field-of-view-deg>
 				<dynamic>
 					<enabled type="bool"
-									 userarchive="y">false</enabled>
+									 userarchive="y">true</enabled>
 				</dynamic>
 			</config>
 		</view>
@@ -541,6 +541,10 @@ Ver 0.0.1
 		<seavixen-electrical>
 			<file>Aircraft/SeaVixen/Systems/seavixen-electrical.nas</file>
 		</seavixen-electrical>
+		<gunview>
+			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
+		</gunview>
+		
 	</nasal>
 
 	<environment>
