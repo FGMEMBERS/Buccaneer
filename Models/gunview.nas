@@ -1,10 +1,5 @@
 var loopid = 0;
-var gunview = nil;
-
-var views = props.globals.getNode("/sim").getChildren("view");
-forindex (var i; views)
-	if (views[i].getNode("name", 1).getValue() == "Gun Camera View")
-		gunview = i;
+var gunview = view.indexof("Gun Camera View");
 
 var loop = func(id) {
 	id != loopid and return;
