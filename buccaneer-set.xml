@@ -117,10 +117,7 @@ Ver 0.0.1
 										type="double">5.2269</z-offset-m>
 				<pitch-offset-deg>-15</pitch-offset-deg>
 				<default-field-of-view-deg>60</default-field-of-view-deg>
-				<dynamic>
-					<enabled type="bool"
-									 userarchive="y">true</enabled>
-				</dynamic>
+				<dynamic-view type="bool">true</dynamic-view>
 			</config>
 		</view>
 		<view n="101">
@@ -131,7 +128,7 @@ Ver 0.0.1
 				<from-model type="bool">true</from-model>
 				<from-model-idx type="int">0</from-model-idx>
 				<ground-level-nearplane-m type="double">0.01f</ground-level-nearplane-m>
-				<default-field-of-view-deg type="double">86.0</default-field-of-view-deg>
+				<default-field-of-view-deg type="double">30</default-field-of-view-deg>
 				<pitch-offset-deg>-15</pitch-offset-deg>
 				<x-offset-m archive="y">0.0</x-offset-m>
 				<!--Right-->
