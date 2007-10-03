@@ -476,9 +476,13 @@
 			</equals>
 		</condition>
 	</animation>
-
-
 	-->
+
+	<animation>
+		<type>select</type>
+		<object-name>Place-Holders</object-name>
+	</animation>
+
 	<!-- **************************** Pilot ******************************* -->
 	<!--
 	-->
