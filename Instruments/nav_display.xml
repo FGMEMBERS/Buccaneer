@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+
+<!-- Nav Display -->
+
+<PropertyList>
+	
+	<path>nav_display.ac</path>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>mag_compass_card</object-name>
+		<property>instrumentation/master-reference-gyro/indicated-hdg-deg</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>360</ind>
+				<dep>360</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>mag_compass_card</object-name>
+		<condition>
+			<property>instrumentation/heading-indicator/heading-source</property>
+		</condition>
+	</animation>
+<!--
+	<animation>
+		<type>select</type>
+		<object-name>compass_DG_flag</object-name>
+		<condition>
+			<not>
+				<property>instrumentation/heading-indicator/heading-source</property>
+			</not>
+		</condition>
+	</animation>
+-->
+	<animation>
+		<type>rotate</type>
+		<object-name>dg_compass_card</object-name>
+		<property>instrumentation/heading-indicator-dg/indicated-heading-deg</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>360</ind>
+				<dep>360</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>select</type>
+		<object-name>dg_compass_card</object-name>
+		<condition>
+			<not>
+				<property>instrumentation/heading-indicator/heading-source</property>
+			</not>
+		</condition>
+	</animation>
+	<animation>
+		<type>select</type>
+		<object-name>flag-DG</object-name>
+		<condition>
+			<not>
+				<property>instrumentation/heading-indicator/heading-source</property>
+			</not>
+		</condition>
+	</animation>
+
+	<!-- Heading Bug and knob -->
+	<animation>
+		<type>rotate</type>
+		<object-name>heading_pointer</object-name>
+		<property>instrumentation/heading-indicator/heading-bug-deg</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>360</ind>
+				<dep>360</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<visible>false</visible>
+		<object-name>hdg_knob_up</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>instrumentation/heading-indicator/heading-bug-deg</property>
+				<step>5</step>
+				<min>0</min>
+				<max>359</max>
+				<wrap>1</wrap>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>hdg_knob_down</object-name>
+		<visible>false</visible>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>instrumentation/heading-indicator/heading-bug-deg</property>
+				<step>-5</step>
+				<min>0</min>
+				<max>359</max>
+				<wrap>1</wrap>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>hdg_knob</object-name>
+		<property>instrumentation/heading-indicator/heading-bug-deg</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>360</ind>
+				<dep>3600</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>0.00888639</x-m>
+			<y-m>-0.0733985</y-m>
+			<z-m>-0.0808194</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- DG select button -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>dg_select</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>instrumentation/heading-indicator/heading-source</property>
+				<value>0</value>
+				<value>1</value>
+			</binding>
+			<binding>
+				<command>property-assign</command>
+				<property>sim/model/buccaneer/controls/dg-toggle</property>
+				<value type="int">1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>sim/model/buccaneer/controls/dg-toggle</property>
+					<value type="int">0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>dg_select</object-name>
+		<property>sim/model/buccaneer/controls/dg-toggle</property>
+		<factor>0.005</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Day/Night ILS marker switch  -->
+	<animation>
+		<type>pick</type>
+		<object-name>day_night_switch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>sim/model/buccaneer/controls/ILS_day_night_switch</property>
+				<value>0</value>
+				<value>1</value>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>translate</type>
+		<object-name>day_night_switch</object-name>
+		<property>sim/model/buccaneer/controls/ILS_day_night_switch</property>
+		<factor>0.01</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- TACAN Range -->
+	<animation>
+		<type>textranslate</type>
+		<object-name>distance_1</object-name>
+		<property>instrumentation/tacan/indicated-distance-nm</property>
+		<factor>0.1</factor>
+		<step>10</step>
+		<scroll>1</scroll>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>textranslate</type>
+		<object-name>distance_2</object-name>
+		<property>instrumentation/tacan/indicated-distance-nm</property>
+		<factor>1</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>textranslate</type>
+		<object-name>distance_3</object-name>
+		<property>instrumentation/tacan/indicated-distance-nm</property>
+		<factor>10</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Panel Lighting -->
+	<!--
+	<animation>
+		<type>material</type>
+		<emission>
+			<factor-prop>/controls/lighting/panel-norm</factor-prop>
+			<red>0.75</red>
+			<green>0.25</green>
+			<blue>0.25</blue>
+		</emission>
+	</animation>
+	-->
+
+	<!-- Flags are always lit so long as MRG power available -->
+	<animation>
+		<object-name>GS_flag</object-name>
+		<object-name>beam_flag</object-name>
+		<type>material</type>
+		<emission>
+			<factor-prop>systems/electrical/outputs/MRG</factor-prop>
+			<red>0.0086956</red>
+			<green>0.0086956</green>
+			<blue>0.0086956</blue>
+		</emission>
+	</animation>
+
+	<!-- *** LoD *** -->
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>5</max-m>
+	</animation>
+
+</PropertyList>

@@ -262,7 +262,7 @@ kids 0
 OBJECT poly
 name "knob"
 loc -0.00401681 0.741655 -0.00769449
-texture "D:/Cygwin/FlightGear/data/Aircraft/Hunter/Models/hunter-attitude-bezel.rgb"
+texture "hunter-attitude-bezel.rgb"
 crease 61.000000
 numvert 25
 0.00943228 0.00353128 0.00497989
@@ -511,7 +511,7 @@ kids 0
 OBJECT poly
 name "bezelinside"
 loc 0.0112073 -1.19534 -0.00123882
-texture "D:/Cygwin/FlightGear/data/Aircraft/Hunter/Models/hunter-attitude-bezel.rgb"
+texture "hunter-attitude-bezel.rgb"
 crease 61.000000
 numvert 64
 -0.00706986 1.93812 -0.0435119

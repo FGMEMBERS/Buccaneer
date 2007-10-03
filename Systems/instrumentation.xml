@@ -137,6 +137,11 @@ file, these values will be used (they are hardcoded).
     <number>0</number>
   </tacan>
 
+	<master-reference-gyro>
+		<name>master-reference-gyro</name>
+		<number>0</number>
+	</master-reference-gyro>
+
   <!--<mk-viii>
    <name>mk-viii</name>
    <number>0</number>

@@ -5,7 +5,7 @@ OBJECT world
 kids 15
 OBJECT poly
 name "indicator_disk"
-loc 0.00795599 0.0458017 -0.0743128
+loc -0.00103555 0.0458017 -0.0743128
 texture "main_ai.rgb"
 crease 45.000000
 numvert 7
@@ -56,7 +56,7 @@ refs 3
 kids 0
 OBJECT poly
 name "ellipse"
-loc 0.00655274 1.76024e-010 -7.33791e-005
+loc -0.0024388 1.76024e-010 -7.33791e-005
 texture "roller_blind.rgb"
 crease 45.000000
 numvert 25
@@ -117,7 +117,7 @@ refs 25
 kids 0
 OBJECT poly
 name "ILS_hor"
-loc 0.00348644 9.74719e-010 -1.02318e-012
+loc -0.0055051 9.74719e-010 -1.02318e-012
 texture "main_ai.rgb"
 crease 45.000000
 numvert 4
@@ -236,7 +236,7 @@ refs 3
 kids 0
 OBJECT poly
 name "face"
-loc 0.000699566 0.0107031 0.17939
+loc -0.00829197 0.0107031 0.17939
 texture "roller_blind.rgb"
 crease 45.000000
 numvert 14
@@ -336,7 +336,7 @@ refs 3
 kids 0
 OBJECT poly
 name "bezel"
-loc 0.00951065 0 0
+loc 0.000519111 0 0
 texture "main_ai.rgb"
 crease 45.000000
 numvert 48
@@ -560,7 +560,7 @@ refs 4
 kids 0
 OBJECT poly
 name "roll_marker"
-loc 0.00696657 0.0497825 2.3235e-010
+loc -0.00202497 0.0497825 2.3235e-010
 texture "main_ai.rgb"
 crease 45.000000
 numvert 4
@@ -579,7 +579,7 @@ refs 4
 kids 0
 OBJECT poly
 name "indicator_disk_black"
-loc 0.00915881 0.0458017 -0.0743128
+loc 0.00016727 0.0458017 -0.0743128
 texture "roller_blind.rgb"
 crease 45.000000
 numvert 7
@@ -630,7 +630,7 @@ refs 3
 kids 0
 OBJECT poly
 name "ILS_vert"
-loc 0.00348644 9.74719e-010 -1.02318e-012
+loc -0.0055051 9.74719e-010 -1.02318e-012
 texture "main_ai.rgb"
 crease 45.000000
 numvert 4
@@ -649,7 +649,7 @@ refs 4
 kids 0
 OBJECT poly
 name "slip_skid_tube"
-loc 0.0163096 0.000664927 0
+loc 0.00731806 0.000664927 0
 texture "main_ai.rgb"
 crease 45.000000
 numvert 175
@@ -2608,7 +2608,7 @@ refs 3
 kids 0
 OBJECT poly
 name "slip_skid_ball"
-loc 0.0152935 0.0742653 -0.000366648
+loc 0.00630196 0.0742653 -0.000366648
 crease 45.000000
 numvert 20
 0 0.000267945 0.00383549
@@ -2749,7 +2749,7 @@ refs 3
 kids 0
 OBJECT poly
 name "screws"
-loc 0.00963749 0.076854 0.000410491
+loc 0.00064595 0.076854 0.000410491
 texture "main_ai.rgb"
 crease 45.000000
 numvert 78
@@ -3329,7 +3329,7 @@ refs 4
 kids 0
 OBJECT poly
 name "ellipse"
-loc 0.00655274 3.56701e-010 -0.000148699
+loc -0.0024388 3.56701e-010 -0.000148699
 texture "roller_blind.rgb"
 crease 45.000000
 numvert 50
@@ -3562,7 +3562,7 @@ refs 4
 kids 0
 OBJECT poly
 name "slip_skid_housing"
-loc 0.00978347 0.0762028 2.1732e-010
+loc 0.000791931 0.0762028 2.1732e-010
 texture "main_ai.rgb"
 crease 45.000000
 numvert 44
@@ -3876,7 +3876,7 @@ refs 16
 kids 0
 OBJECT poly
 name "main_panel"
-loc 0.00951065 0 0
+loc 0.000519111 0 0
 texture "main_ai.rgb"
 crease 45.000000
 numvert 40
