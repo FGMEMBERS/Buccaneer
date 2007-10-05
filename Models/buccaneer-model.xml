@@ -78,7 +78,7 @@
 			<z-m>0.889089</z-m>
 			<roll-deg>12</roll-deg>
 			<pitch-deg>-5</pitch-deg>
-					</offsets>
+		</offsets>
 	</model>
 
 	<model>
@@ -117,7 +117,7 @@
 			<z-m>0.471447</z-m>
 		</offsets>
 	</model>-->
-	
+
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/altimeter_vsi.xml</path>
 		<offsets>
@@ -153,17 +153,18 @@
 			<z-m>0.52068</z-m>
 		</offsets>
 	</model>
-	<!--
+
 	<model>
-		<path>Aircraft/Hunter/Models/asi.xml</path>
+		<path>Aircraft/Buccaneer/Instruments/speed_display.xml</path>
 		<offsets>
-			<x-m>-4.83</x-m>
-			<y-m>-0.11</y-m>
-			<z-m>0.46</z-m>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<x-m>-3.36104</x-m>
+			<y-m>-0.175319</y-m>
+			<z-m>0.651294</z-m>
 		</offsets>
 	</model>
 
-	
+	<!--	
 
 	<model>
 		<path>Aircraft/Hunter/Models/mach.xml</path>
