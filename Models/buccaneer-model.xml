@@ -71,7 +71,7 @@
 	</over-main-panel>
 
 	<model>
-		<path>Aircraft/Buccaneer/Models/aoa-indexer.xml</path>
+		<path>Aircraft/Buccaneer/Instruments/aoa_indexer.xml</path>
 		<offsets>
 			<x-m>3.36104</x-m>
 			<y-m>-0.143849</y-m>
