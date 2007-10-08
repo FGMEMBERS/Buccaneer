@@ -403,8 +403,8 @@ axial flow engine, dry wt 2471 lbs -->
 				y="-0"
 				z="-0.896817"
 				compression="0.19"
-				sfric="1"
-				dfric="0.8"
+				sfric="0.02"
+				dfric="0.01"
          >
 		<control-input axis="/controls/gear/brake-parking"
 									 control="BRAKE"
@@ -445,6 +445,24 @@ axial flow engine, dry wt 2471 lbs -->
 		<control-speed control="HEXTEND"
 									 transition-time="5"/>
 	</hook>
+
+
+	<!-- Launch-bar 			-0.780453-->
+	<launchbar 	x="-7.77252"
+							y="0.0"
+							z="-0.370128"
+							length="3.5052"
+							down-angle="90"
+							up-angle="0"
+							holdback-x="-16.3"
+							holdback-y="0.0"
+							holdback-z="0.1175"
+							holdback-length="2.0">
+		<control-input axis="/controls/gear/launchbar"
+									 control="LEXTEND"/>
+		<control-speed control="LEXTEND"
+									 transition-time="1"/>
+	</launchbar>
 
 	<!-- The tank locations and contents are accurately modelled: if the rear tanks are filled
 	 before the fronts the ac will sit on its tail bumper -->

@@ -20,7 +20,7 @@ Ver 0.0.1
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<flight-model>yasim</flight-model>
 		<aero>buccaneer-yasim</aero>
-		<fuel-fraction>1.0</fuel-fraction>
+		<fuel-fraction>0.2</fuel-fraction>
 		<systems>
 			<autopilot>
 				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
@@ -42,7 +42,7 @@ Ver 0.0.1
 			<path>Aircraft/Hunter/Models/hunter-submodels.xml</path>
 		</submodels>
 		<sound>
-			<path>Aircraft/Hunter/Sounds/hunter-sound.xml</path>
+			<path>Aircraft/Buccaneer/Sounds/buccaneer-sound.xml</path>
 		</sound>
 		<!-- hide the 2D panel -->
 		<panel>
@@ -245,7 +245,7 @@ Ver 0.0.1
 	</instrumentation>
 	<!-- map keyboard input -->
 	<input>
-		<keyboard>
+		<keyboard include="../../Input/Keyboard/carrier-bindings.xml">
 			<!-- map keys for airbrake interlock -->
 			<key n="2">
 				<name>Ctrl-B</name>
