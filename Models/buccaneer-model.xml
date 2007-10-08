@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<!-- Hunter model config file -->
-<!-- Vivian Meazza 2004/1/2 vivian.meazza@lineone.net -->
+<!-- Buccaneer model config file -->
+<!-- Vivian Meazza 2007/10/1 vivian.meazza@lineone.net -->
 <!-- Ver 0.1.0 -->
 <PropertyList>
 	<path>buccaneer.ac</path>
@@ -9,7 +9,7 @@
 		<x-m>0</x-m>
 	</offsets>
 
-
+	<!-- **** non-panel models **** -->
 
 	<model>
 		<path>Aircraft/Buccaneer/Models/fan.xml</path>
@@ -22,7 +22,6 @@
 		</offsets>
 	</model>
 
-
 	<model>
 		<path>Aircraft/Buccaneer/Models/fan.xml</path>
 		<name>Fan-Port</name>
@@ -33,8 +32,17 @@
 			<pitch-deg>2</pitch-deg>
 		</offsets>
 	</model>
-	<!--
-	-->
+
+	<model>
+		<path>Aircraft/Buccaneer/Models/strop.xml</path>
+		<name>New-Strop</name>
+		<offsets>
+			<x-m>7.77252</x-m>
+			<y-m>0.0</y-m>
+			<z-m>-0.370128</z-m>
+		</offsets>
+	</model>
+
 	<!-- ***************** Cockpit *************************** -->
 	<!--
 	-->
@@ -2398,6 +2406,48 @@
 			<y>1</y>
 			<z>0</z>
 		</axis>
+	</animation>
+
+	<!-- lower/raise holdback -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Holdback</object-name>
+		<property>gear/launchbar/holdback-position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>45</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>90</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>16.27641</x-m>
+			<y-m>0</y-m>
+			<z-m>0.116332</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Holdback</object-name>
+		<condition>
+			<equals>
+				<property>gear/launchbar/state</property>
+				<value>Engaged</value>
+			</equals>
+		</condition>
 	</animation>
 
 	<!-- ************ Panel Lighting ************** -->
