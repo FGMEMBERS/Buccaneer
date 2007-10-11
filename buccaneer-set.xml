@@ -20,7 +20,7 @@ Ver 0.0.1
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<flight-model>yasim</flight-model>
 		<aero>buccaneer-yasim</aero>
-		<fuel-fraction>0.2</fuel-fraction>
+		<fuel-fraction>0.8</fuel-fraction>
 		<systems>
 			<autopilot>
 				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
@@ -231,7 +231,7 @@ Ver 0.0.1
 
 	<engines>
 		<engine>
-			<smoking>true</smoking>
+			<smoking type="bool">true</smoking>
 		</engine>
 	</engines>
 
