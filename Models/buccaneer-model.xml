@@ -43,6 +43,28 @@
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
+		<name>Smoke</name>
+	</model>
+
+	<animation>
+		<type>select</type>
+		<object-name>Smoke</object-name>
+		<condition>
+			<and>
+				<equals>
+					<property>/engines/engine/smoking</property>
+					<value>true</value>
+				</equals>
+				<less-than>
+					<property>/position/altitude-agl-ft</property>
+					<value>12000</value>
+				</less-than>
+			</and>
+		</condition>
+	</animation>
+
 	<!-- ***************** Cockpit *************************** -->
 	<!--
 	-->
