@@ -78,15 +78,15 @@ UniqueID Group_0
       defaultBoundingBox -10 -10 -10 10 10 10
       particleTemplate {
         shape QUAD
-        lifeTime 1
-        sizeRange 2 10
-        alphaRange 0.1 0
-        colorRange 0.3 0.25 0.25 1 1 1 1 1 1
+        lifeTime 0.5
+        sizeRange 2 12
+        alphaRange 0.025 0.001
+        colorRange 0.204 0.153 0.05 1 1 1 1 1 1
         position 0 0 0
-        velocity 300 0 0
+        velocity 0 0 0
         angle 0 0 0
         angularVelocity 0 0 0
-        radius 0.1
+        radius 0.5
         mass 0.1
         textureTile 1 1 1
         sizeInterpolator {
@@ -120,7 +120,7 @@ UniqueID Group_0
     osgParticle::RandomRateCounter {
       UniqueID RandomRateCounter_9
       DataVariance DYNAMIC
-      rateRange 30 50
+      rateRange 50 70
     }
     osgParticle::PointPlacer {
       UniqueID PointPlacer_10
@@ -130,9 +130,9 @@ UniqueID Group_0
     osgParticle::RadialShooter {
       UniqueID RadialShooter_11
       DataVariance DYNAMIC
-      thetaRange 1.48352986 1.48352986
-      phiRange 0 0
-      initialSpeedRange 100 150
+      thetaRange 1.46607657 1.50098316 
+      phiRange -0.0174532925 0.0174532925
+      initialSpeedRange 200 250
       initialRotationalSpeedRange 1 0 0 1.5 0 0
     }
   }
@@ -150,11 +150,9 @@ UniqueID Group_0
     startTime 0
     currentTime 0
     resetTime 0
-    osgParticle::FluidFrictionOperator {
+    osgParticle::AccelOperator {
       DataVariance DYNAMIC
-      fluidDensity 0.108
-      fluidViscosity 1.8e-005
-      overrideRadius 0    }
+      acceleration -50 0 10
     }
   }
 
@@ -162,7 +160,7 @@ UniqueID Group_0
     DataVariance DYNAMIC
     name "ParticleSystemUpdater2"
     nodeMask 0xffffffff
-    cullingActive FALSE
+    cullingActive TRUE
     Use ParticleSystem_2
   }
 
@@ -170,7 +168,7 @@ UniqueID Group_0
     DataVariance DYNAMIC
     name "geode1"
     nodeMask 0xffffffff
-    cullingActive FALSE
+    cullingActive TRUE
     num_drawables 1
     Use ParticleSystem_2
   }
