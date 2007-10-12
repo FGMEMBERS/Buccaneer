@@ -45,12 +45,44 @@
 
 	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
-		<name>Smoke</name>
+		<name>Smoke-Stbd</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>1</y-m>
+			<z-m>0</z-m>
+		</offsets>
 	</model>
 
 	<animation>
 		<type>select</type>
-		<object-name>Smoke</object-name>
+		<object-name>Smoke-Stbd</object-name>
+		<condition>
+			<and>
+				<equals>
+					<property>/engines/engine/smoking</property>
+					<value>true</value>
+				</equals>
+				<less-than>
+					<property>/position/altitude-agl-ft</property>
+					<value>12000</value>
+				</less-than>
+			</and>
+		</condition>
+	</animation>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
+		<name>Smoke-Port</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>-1</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+		<type>select</type>
+		<object-name>Smoke-Port</object-name>
 		<condition>
 			<and>
 				<equals>
