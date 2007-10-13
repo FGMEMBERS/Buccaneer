@@ -1,14 +1,15 @@
 Group {
-UniqueID Group_0
+  UniqueID Group_0
+  name "smoke.osg" 
   DataVariance DYNAMIC
-  name "smoke.osg"
   nodeMask 0xffffffff
   cullingActive TRUE
   num_children 4
+
   osgParticle::ModularEmitter {
     UniqueID ModularEmitter_1
-    DataVariance DYNAMIC
     name "ModularEmitter0"
+    DataVariance DYNAMIC
     nodeMask 0xffffffff
     cullingActive TRUE
     osgParticle::ParticleSystem {
@@ -78,7 +79,7 @@ UniqueID Group_0
       defaultBoundingBox -10 -10 -10 10 10 10
       particleTemplate {
         shape QUAD
-        lifeTime 0.5
+        lifeTime 1
         sizeRange 2 12
         alphaRange 0.025 0.001
         colorRange 0.204 0.153 0.05 1 1 1 1 1 1
@@ -112,7 +113,7 @@ UniqueID Group_0
     enabled TRUE
     referenceFrame ABSOLUTE
     endless TRUE
-    lifeTime 0.5
+    lifeTime 1
     startTime 0
     currentTime 0
     resetTime 0
@@ -138,18 +139,9 @@ UniqueID Group_0
   }
 
   osgParticle::ModularProgram {
-    DataVariance DYNAMIC
     name "ModularProgram1"
     nodeMask 0xffffffff
-    cullingActive FALSE
     Use ParticleSystem_2
-    enabled TRUE
-    referenceFrame RELATIVE
-    endless TRUE
-    lifeTime 0
-    startTime 0
-    currentTime 0
-    resetTime 0
     osgParticle::AccelOperator {
       DataVariance DYNAMIC
       acceleration -50 0 10
@@ -157,20 +149,20 @@ UniqueID Group_0
   }
 
   osgParticle::ParticleSystemUpdater {
-    DataVariance DYNAMIC
     name "ParticleSystemUpdater2"
-    nodeMask 0xffffffff
-    cullingActive TRUE
+    DataVariance DYNAMIC
+    nodeMask 0xffffffff 
+    cullingActive TRUE 
     Use ParticleSystem_2
   }
 
   Geode {
-    DataVariance DYNAMIC
     name "geode1"
+    DataVariance DYNAMIC
     nodeMask 0xffffffff
     cullingActive TRUE
     num_drawables 1
     Use ParticleSystem_2
   }
 
-  }
+}
