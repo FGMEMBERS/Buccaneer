@@ -529,9 +529,9 @@ Ver 0.0.1
 
 	<!-- nasal stuff -->
 	<nasal>
-		<hunter>
-			<file>Aircraft/Hunter/Models/hunter.nas</file>
-		</hunter>
+		<buccaneer>
+			<file>Aircraft/Buccaneer/Models/buccaneer.nas</file>
+		</buccaneer>
 		<!--<seavixen-instrumentation>
 			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>
 		</seavixen-instrumentation>-->
