@@ -86,16 +86,26 @@
 		<condition>
 			<and>
 				<equals>
-					<property>/engines/engine/smoking</property>
+					<property>engines/engine/smoking</property>
 					<value>true</value>
 				</equals>
 				<less-than>
-					<property>/position/altitude-agl-ft</property>
+					<property>position/altitude-agl-ft</property>
 					<value>12000</value>
 				</less-than>
 			</and>
 		</condition>
 	</animation>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
+		<name>Haze</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>-1</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
 
 	<!-- ***************** Cockpit *************************** -->
 	<!--

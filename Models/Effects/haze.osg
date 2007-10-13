@@ -1,0 +1,168 @@
+Group {
+  UniqueID Group_1
+  name "haze.osg" 
+  DataVariance DYNAMIC
+  nodeMask 0xffffffff
+  cullingActive TRUE
+  num_children 4
+
+  osgParticle::ModularEmitter {
+    UniqueID ModularEmitter_2
+    name "ModularEmitter1"
+    DataVariance DYNAMIC
+    nodeMask 0xffffffff
+    cullingActive TRUE
+    osgParticle::ParticleSystem {
+      UniqueID ParticleSystem_3
+      DataVariance DYNAMIC
+      StateSet {
+        UniqueID StateSet_4
+        DataVariance STATIC
+        rendering_hint TRANSPARENT_BIN
+        renderBinMode USE
+        binNumber 1
+        binName DepthSortedBin
+        GL_LIGHTING OFF
+        GL_COLOR_MATERIAL ON
+        GL_BLEND ON
+        Material {
+          DataVariance STATIC
+          ColorMode OFF
+          ambientColor 0.2 0.2 0.2 1
+          diffuseColor 0.2 0.2 0.2 1
+          specularColor FRONT 0 0 0 1
+          specularColor BACK  0 0 0 1
+          emissionColor FRONT 0 0 0 1
+          emissionColor BACK  0 0 0 1
+          shininess 0
+        }
+        BlendFunc {
+          DataVariance STATIC
+          source SRC_ALPHA
+          destination ONE_MINUS_SRC_ALPHA
+        }
+        textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            UniqueID Texture2D_5
+            DataVariance STATIC
+            file "smoke.rgb"
+            wrap_s CLAMP
+            wrap_t CLAMP
+            wrap_r CLAMP
+            min_filter LINEAR
+            mag_filter LINEAR
+            maxAnisotropy 1
+            borderColor 0 0 0 0
+            borderWidth 0
+            useHardwareMipMapGeneration TRUE
+            unRefImageDataAfterApply FALSE
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+            resizeNonPowerOfTwo TRUE
+          }
+          TexEnv {
+            UniqueID TexEnv_6
+            DataVariance STATIC
+            mode MODULATE
+          }
+        }
+      }
+      supportsDisplayList FALSE
+      useDisplayList FALSE
+      useVertexBufferObjects FALSE
+      particleAlignment BILLBOARD
+      alignVectorX 1 0 0
+      alignVectorY 0 1 0
+      doublePassRendering FALSE
+      frozen FALSE
+      freezeOnCull FALSE
+      defaultBoundingBox -10 -10 -10 10 10 10
+      particleTemplate {
+        shape QUAD
+        lifeTime 1.5
+        sizeRange 3 15
+        alphaRange 0.020 0.001
+        colorRange 1 1 1 1 1 1 1 1 1
+        position 0 0 0
+        velocity 0 0 0
+        angle 0 0 0
+        angularVelocity 0 0 0
+        radius 3
+        mass 0.1
+        textureTile 1 1 1
+        sizeInterpolator {
+          osgParticle::LinearInterpolator {
+            UniqueID LinearInterpolator_7
+            DataVariance DYNAMIC
+          }
+        }
+        alphaInterpolator {
+          osgParticle::LinearInterpolator {
+            UniqueID LinearInterpolator_8
+            DataVariance DYNAMIC
+          }
+        }
+        colorInterpolator {
+          osgParticle::LinearInterpolator {
+            UniqueID LinearInterpolator_9
+            DataVariance DYNAMIC
+          }
+        }
+      }
+    }
+    enabled TRUE
+    referenceFrame ABSOLUTE
+    endless TRUE
+    lifeTime 1.5
+    startTime 0
+    currentTime 0
+    resetTime 0
+    useDefaultTemplate TRUE
+    osgParticle::RandomRateCounter {
+      UniqueID RandomRateCounter_10
+      DataVariance DYNAMIC
+      rateRange 50 70
+    }
+    osgParticle::PointPlacer {
+      UniqueID PointPlacer_11
+      DataVariance STATIC
+      center 10 0 0
+    }
+    osgParticle::RadialShooter {
+      UniqueID RadialShooter_12
+      DataVariance DYNAMIC
+      thetaRange 1.46607657 1.50098316 
+      phiRange -0.0174532925 0.0174532925
+      initialSpeedRange 200 250
+      initialRotationalSpeedRange 1 0 0 1.5 0 0
+    }
+  }
+
+  osgParticle::ModularProgram {
+    name "ModularProgram1"
+    nodeMask 0xffffffff
+    Use ParticleSystem_3
+    osgParticle::AccelOperator {
+      DataVariance DYNAMIC
+      acceleration -50 0 10
+    }
+  }
+
+  osgParticle::ParticleSystemUpdater {
+    name "ParticleSystemUpdater2"
+    DataVariance DYNAMIC
+    nodeMask 0xffffffff 
+    cullingActive TRUE 
+    Use ParticleSystem_3
+  }
+
+  Geode {
+    name "geode1"
+    DataVariance DYNAMIC
+    nodeMask 0xffffffff
+    cullingActive TRUE
+    num_drawables 1
+    Use ParticleSystem_3
+  }
+
+}
