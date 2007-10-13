@@ -69,7 +69,7 @@
 			</and>
 		</condition>
 	</animation>
-	
+
 	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
 		<name>Smoke-Port</name>
@@ -171,15 +171,6 @@
 		</offsets>
 	</model>
 
-	<!--<model>
-		<path>Aircraft/Buccaneer/Models/vsi.xml</path>
-		<offsets>
-			<x-m alias="../../../over-main-panel/offsets/x-m"/>
-			<y-m>-0.291678</y-m>
-			<z-m>0.471447</z-m>
-		</offsets>
-	</model>-->
-
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/altimeter_vsi.xml</path>
 		<offsets>
@@ -190,7 +181,7 @@
 	</model>
 
 	<model>
-		<path>Aircraft/Buccaneer/Models/attitude.xml</path>
+		<path>Aircraft/Buccaneer/Instruments/standby_ai.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>0.0996834</y-m>
@@ -220,9 +211,26 @@
 		<path>Aircraft/Buccaneer/Instruments/speed_display.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
-			<x-m>-3.36104</x-m>
 			<y-m>-0.175319</y-m>
 			<z-m>0.651294</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/exh2.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.192853</y-m>
+			<z-m>0.546493</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/exh1.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.269613</y-m>
+			<z-m>0.546493</z-m>
 		</offsets>
 	</model>
 
