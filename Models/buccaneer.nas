@@ -492,11 +492,7 @@ registerTimer(fuelTrans);
 
 # ========================== Dialogs ==================================
 
-var dialog = gui.Dialog.new("/sim/gui/dialogs/lightning/config/dialog",
-		"Aircraft/Lightning/Dialogs/config.xml");
-
 aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 		"sim/model/livery/variant");
-
 
 # ========================== End ======================================
