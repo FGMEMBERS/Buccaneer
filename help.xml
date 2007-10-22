@@ -15,6 +15,10 @@
 			<desc> airbrake close/open</desc>
 		</key>
 		<key>
+			<name>l</name>
+			<desc>Select squadron markings</desc>
+		</key>
+		<key>
 			<name>u/U</name>
 			<desc>seat down/up</desc>
 		</key>
