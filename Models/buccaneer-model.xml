@@ -44,11 +44,21 @@
 	</model>
 
 	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
+		<name>Haze</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
 		<name>Smoke-Stbd</name>
 		<offsets>
 			<x-m>0</x-m>
-			<y-m>1</y-m>
+			<y-m>0</y-m>
 			<z-m>0</z-m>
 		</offsets>
 	</model>
@@ -96,16 +106,8 @@
 			</and>
 		</condition>
 	</animation>
-	
-	<model>
-		<path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
-		<name>Haze</name>
-		<offsets>
-			<x-m>0</x-m>
-			<y-m>-1</y-m>
-			<z-m>0</z-m>
-		</offsets>
-	</model>
+
+
 
 	<!-- ***************** Cockpit *************************** -->
 	<!--
@@ -2549,7 +2551,85 @@
 		<object-name>Pitot-Head</object-name>
 	</animation>
 
+	<!-- Material Animations -->
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Fuselage-Markings-Side-No</object-name>
+		<property-base>sim/model/livery/material/Fuselage-Markings-Side-No</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
 
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Fuselage-Markings-Ser-No</object-name>
+		<property-base>sim/model/livery/material/Fuselage-Markings-Ser-No</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Wing-Inner-Ser-No-Stbd</object-name>
+		<property-base>sim/model/livery/material/Markings-Wing-Inner-Ser-No-Stbd</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Wing-Outer-Ser-No-Stbd</object-name>
+		<property-base>sim/model/livery/material/Markings-Wing-Outer-Ser-No-Stbd</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation><animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Wing-Inner-Ser-No-Stbd</object-name>
+		<property-base>sim/model/livery/material/Markings-Wing-Inner-Ser-No-Stbd</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Wing-Outer-Ser-No-Stbd</object-name>
+		<property-base>sim/model/livery/material/Markings-Wing-Outer-Ser-No-Stbd</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Wing-Inner-Ser-No-Port</object-name>
+		<property-base>sim/model/livery/material/Markings-Wing-Inner-Ser-No-Port</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Wing-Outer-Ser-No-Port</object-name>
+		<property-base>sim/model/livery/material/Markings-Wing-Outer-Ser-No-Port</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Flap-Stbd</object-name>
+		<property-base>sim/model/livery/material/Markings-Flap-Stbd</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<!--global type="bool">true</global-->
+		<object-name>Markings-Flap-Port</object-name>
+		<property-base>sim/model/livery/material/Markings-Flap-Port</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+	
 	<!-- *** LoD for the whole model *** -->
 	<!--
 	<animation>
