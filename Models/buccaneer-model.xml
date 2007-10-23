@@ -245,6 +245,15 @@
 			<z-m>0.546493</z-m>
 		</offsets>
 	</model>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/standby_heading_indicator.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.204185</y-m>
+			<z-m>0.767485</z-m>
+		</offsets>
+	</model>
 
 	<!--	
 
