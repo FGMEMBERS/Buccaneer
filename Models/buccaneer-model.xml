@@ -254,6 +254,24 @@
 			<z-m>0.767485</z-m>
 		</offsets>
 	</model>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/rpm.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.269613</y-m>
+			<z-m>0.61737</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/rpm2.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.191928</y-m>
+			<z-m>0.61737</z-m>
+		</offsets>
+	</model>
 
 	<!--	
 
@@ -294,14 +312,6 @@
 		</offsets>
 	</model>
 
-	<model>
-		<path>Aircraft/Hunter/Models/rpm.xml</path>
-		<offsets>
-			<x-m>-4.83</x-m>
-			<y-m>0.185</y-m>
-			<z-m>0.41</z-m>
-		</offsets>
-	</model>
 
 	<model>
 		<path>Aircraft/Hunter/Models/dme.xml</path>
