@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>uc_warning.ac</path>
+
+	<animation>
+		<type>select</type>
+		<object-name>light</object-name>
+		<object-name>lamp</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/mach</property>
+				<value>0.25</value>
+			</less-than>
+			<not>
+				<equals>
+					<property>gear/gear[0]/position-norm</property>
+					<value>1</value>
+				</equals>
+			</not>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>body</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
+			<red>0.75</red>
+			<green>0.25</green>
+			<blue>0.25</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>noshadow</type>
+	</animation>
+
+	<!-- *** LoD *** -->
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>5</max-m>
+	</animation>
+
+</PropertyList>
