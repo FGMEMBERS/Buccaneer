@@ -107,8 +107,6 @@
 		</condition>
 	</animation>
 
-
-
 	<!-- ***************** Cockpit *************************** -->
 	<!--
 	-->
@@ -245,7 +243,7 @@
 			<z-m>0.546493</z-m>
 		</offsets>
 	</model>
-	
+
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/standby_heading_indicator.xml</path>
 		<offsets>
@@ -254,7 +252,7 @@
 			<z-m>0.767485</z-m>
 		</offsets>
 	</model>
-	
+
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/rpm.xml</path>
 		<offsets>
@@ -263,7 +261,7 @@
 			<z-m>0.61737</z-m>
 		</offsets>
 	</model>
-	
+
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/rpm2.xml</path>
 		<offsets>
@@ -273,25 +271,63 @@
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/mag_indicator_oilp-2.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.280158</y-m>
+			<z-m>0.452599</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/mag_indicator_oilp-1.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.188296</y-m>
+			<z-m>0.452599</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/lp_ospeed1.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.356726</y-m>
+			<z-m>0.634352</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/lp_ospeed2.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.324243</y-m>
+			<z-m>0.629711</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/lp_rotating.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.229113</y-m>
+			<z-m>0.650593</z-m>
+		</offsets>
+	</model>
+	3.36104		-
+
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/uc_warning.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.0187441</y-m>
+			<z-m>0.659101</z-m>
+		</offsets>
+	</model>
 	<!--	
 
-	<model>
-		<path>Aircraft/Hunter/Models/mach.xml</path>
-		<offsets>
-			<x-m>-4.83</x-m>
-			<y-m>-0.20</y-m>
-			<z-m>0.43</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/Hunter/Models/trim.xml</path>
-		<offsets>
-			<x-m>-4.81</x-m>
-			<y-m>-0.20</y-m>
-			<z-m>0.50</z-m>
-		</offsets>
-	</model>
+	
 
 	<model>
 		<path>Aircraft/Hunter/Models/flaps.xml</path>
@@ -2632,7 +2668,7 @@
 		<property-base>sim/model/livery/material/Markings-Wing-Outer-Ser-No-Port</property-base>
 		<texture-prop>texture</texture-prop>
 	</animation>
-	
+
 	<animation>
 		<type>material</type>
 		<!--global type="bool">true</global-->
@@ -2648,7 +2684,7 @@
 		<property-base>sim/model/livery/material/Markings-Flap-Port</property-base>
 		<texture-prop>texture</texture-prop>
 	</animation>
-	
+
 	<!-- *** LoD for the whole model *** -->
 	<!--
 	<animation>
