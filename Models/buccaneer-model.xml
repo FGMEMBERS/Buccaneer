@@ -58,7 +58,7 @@
 		<name>Smoke-Stbd</name>
 		<offsets>
 			<x-m>0</x-m>
-			<y-m>0</y-m>
+			<y-m>1</y-m>
 			<z-m>0</z-m>
 		</offsets>
 	</model>
@@ -105,7 +105,36 @@
 				</less-than>
 			</and>
 		</condition>
+	</animation>-->
+
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/fuel.xml</path>
+		<name>Fuel-Port</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>-0.3</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+		<type>select</type>
+		<object-name>Fuel-Port</object-name>
+		<condition>
+			<or>
+				<greater-than>
+					<property>consumables/fuel/tank[8]/dump-rate-lbs-hr</property>
+					<value>0.1</value>
+				</greater-than>
+				<greater-than>
+					<property>consumables/fuel/tank[9]/dump-rate-lbs-hr</property>
+					<value>0.1</value>
+				</greater-than>
+			</or>
+		</condition>
 	</animation>
+
+
 
 	<!-- ***************** Cockpit *************************** -->
 	<!--
@@ -279,7 +308,7 @@
 			<z-m>0.452599</z-m>
 		</offsets>
 	</model>
-	
+
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/mag_indicator_oilp-1.xml</path>
 		<offsets>
@@ -297,7 +326,7 @@
 			<z-m>0.634352</z-m>
 		</offsets>
 	</model>
-	
+
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/lp_ospeed2.xml</path>
 		<offsets>
