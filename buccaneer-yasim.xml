@@ -465,69 +465,88 @@ axial flow engine, dry wt 2471 lbs -->
 	</launchbar>
 
 	<!-- The tank locations and contents are accurately modelled: if the rear tanks are filled
-	 before the fronts the ac will sit on its tail bumper -->
+	 before the fronts the ac will sit on its tail bumper 
+		
+		old CG  -9.125, 0.002, 0.625
+		new  CG: -9.124, 0.002, 0.626
+			-->
 
 	<!-- tank #1-->
-	<tank x="-6.63737"
-				y="-0.445641"
-				z="0.625565"
+	<tank x="-6.00247"
+				y="0"
+				z="0.630794"
 				jet="true"
-				capacity="1753"/>
+				capacity="1776"/>
 
-	<!-- tank #2-->
-	<tank x="-6.63737"
-				y="0.445641"
-				z="0.625565"
+	<!-- tank #2 -->
+	<tank x="-7.22332"
+				y="0"
+				z="0.634883"
 				jet="true"
-				capacity="1835"/>
+				capacity="1859"/>
 
-	<!-- tank #3-->
-	<tank x="-9.24522"
-				y="-0.460256"
-				z="0.758575"
+	<!-- tank #3 -->
+	<tank x="-8.22185"
+				y="0"
+				z="0.620906"
 				jet="true"
-				capacity="1425"/>
+				capacity="1444"/>
 
-	<!-- tank #4-->
-	<tank x="-9.24522"
-				y="0.460256"
-				z="0.758575"
+	<!-- tank #4 -->
+	<tank x="-9.06562"
+				y="0"
+				z="0.634701"
 				jet="true"
-				capacity="1385"/>
+				capacity="1403"/>
 
-	<!-- tank #5-->
-	<tank x="-11.6034"
-				y="-0.545775"
-				z="0.881977"
+	<!-- tank #5 -->		0
+	<tank x="-9.83955"
+				y="0"
+				z="0.616226"
 				jet="true"
-				capacity="1565"/>
+				capacity="1585"/>
 
-	<!-- tank #6-->
-	<tank x="-11.6034"
-				y="0.545775"
-				z="0.881977"
+	<!-- tank #6 -->		0
+	<tank x="-10.599"
+				y="0"
+				z="0.62787"
 				jet="true"
-				capacity="1573"/>
+				capacity="1594"/>
 
-	<!-- tank #7-->
-	<tank x="-13.6382"
-				y="-0.535772"
-				z="0.885529"
+	<!-- tank #7 -->
+	<tank x="-11.3574"
+				y="0"
+				z="0.73467"
 				jet="true"
-				capacity="1580"/>
+				capacity="1602"/>
 
-	<!-- tank #8-->
-	<tank x="-13.6382"
-				y="0.535772"
-				z="0.885529"
+	<!-- tank #8 -->
+	<tank x="-12.0327"
+				y="0"
+				z="0.737762"
 				jet="true"
 				capacity="1663"/>
 	
+	<!-- proportioner port -->
+	<tank x="-9.125"
+				y="0"
+				z="0"
+				jet="true"
+				capacity="10"/>
+	
+	<!-- proportioner stbd -->
+	<tank x="-9.125"
+				y="0"
+				z="0"
+				jet="true"
+				capacity="10"/>
+
 	<!-- cockpit -->
 	<ballast x="-4.6"
 					 y="0"
 					 z="-0.1"
-					 mass="2000"/>
+					 mass="1600"/>
+
 	<!-- trim -->
 	<ballast x="-0.5"
 					 y="0"

@@ -20,7 +20,7 @@ Ver 0.0.1
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<flight-model>yasim</flight-model>
 		<aero>buccaneer-yasim</aero>
-		<fuel-fraction>0.8</fuel-fraction>
+		<fuel-fraction>1.0</fuel-fraction>
 		<systems>
 			<autopilot>
 				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
@@ -238,6 +238,14 @@ Ver 0.0.1
 			</tank>
 			<tank n="7">
 				<name type="string">#8</name>
+				<selected type="bool">1</selected>
+			</tank>
+			<tank n="8">
+				<name type="string">Prop Port</name>
+				<selected type="bool">1</selected>
+			</tank>
+			<tank n="9">
+				<name type="string">Prop Stbd</name>
 				<selected type="bool">1</selected>
 			</tank>
 		</fuel>
@@ -572,7 +580,9 @@ Ver 0.0.1
 	<!-- nasal stuff -->
 	<nasal>
 		<buccaneer>
-			<file>Aircraft/Buccaneer/Models/buccaneer.nas</file>
+			<file>Aircraft/Buccaneer/Models/buccaneer-utils.nas</file>
+			<!--<file>Aircraft/Buccaneer/Models/buccaneer-fuel.nas</file>-->
+			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
 		</buccaneer>
 		<!--<seavixen-instrumentation>
 			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>

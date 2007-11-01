@@ -1,0 +1,505 @@
+# This is a replacement for fuel.nas for the particlar fuel 
+# system of the Buccaneer
+
+# Properties under /consumables/fuel/tank[n]:
+# + level-gal_us    - Current fuel load.  Can be set by user code.
+# + level-lbs       - OUTPUT ONLY property, do not try to set
+# + selected        - boolean indicating tank selection.
+# + density-ppg     - Fuel density, in lbs/gallon.
+# + capacity-gal_us - Tank capacity 
+#
+# Properties under /engines/engine[n]:
+# + fuel-consumed-lbs - Output from the FDM, zeroed by this script
+# + out-of-fuel       - boolean, set by this code.
+
+
+# ==================================== fuel tank stuff ===================================
+# replace the generic fuel updater
+fuel.update = func{};
+
+###
+# Initialize internal values
+##
+tank_1 = nil;
+tank_2 = nil;
+tank_3 = nil;
+tank_4 = nil;
+tank_5 = nil;
+tank_6 = nil;
+tank_7 = nil;
+tank_8 = nil;
+proportioner_port = nil;
+proportioner_stbd = nil;
+neg_g = nil;
+
+PortEngine		= props.globals.getNode("engines").getChild("engine", 0);
+StbdEngine		= props.globals.getNode("engines").getChild("engine", 1);
+PortFuel		= PortEngine.getNode("fuel-consumed-lbs", 1);
+StbdFuel		= StbdEngine.getNode("fuel-consumed-lbs", 1);
+DumpValve		= props.globals.getNode("controls/fuel/dump-valve", 1);
+CrossConnect	= props.globals.getNode("controls/fuel/cross-connect", 1);
+TotalFuelLbs	= props.globals.getNode("consumables/fuel/total-fuel-lbs", 1);
+TotalFuelGals	= props.globals.getNode("consumables/fuel/total-fuel-gals", 1);
+TotalFuelNorm	= props.globals.getNode("/consumables/fuel/total-fuel-norm", 1);
+
+PortEngine.getNode("out-of-fuel", 1);
+StbdEngine.getNode("out-of-fuel", 1); 
+
+#variables 
+var amount_stbd = amount_port = 0;
+var amount_2 = amount_6 = 0;
+var amount_3 = amount_5 = 0;
+var total_cap_port = total_cap_stbd = 0;
+var prop_2 = prop_3 = prop_5 = prop_6 = 0;
+
+var dumprate_lbs_hr = 620 * 60; #1240 lbs / min total
+var flowrate_lbs_hr = dumprate_lbs_hr * 1.1;
+
+var time = 0;
+var dt = 0;
+var last_time = 0.0;
+var total = 0;
+var dump_valve = 0;
+var cross_connect = 0;
+
+##
+# Initialize the fuel system
+#
+
+var init_fuel_system = func {
+	print("Initializing Buccaneer fuel system ...");
+
+	# set initial values
+	DumpValve.setBoolValue(0);
+	CrossConnect.setBoolValue(0);
+	TotalFuelLbs.setDoubleValue(0.01);
+	TotalFuelGals.setDoubleValue(0.01);
+	PortEngine.setBoolValue(0);
+	StbdEngine.setBoolValue(0);
+
+	###
+	#tanks ("name", number, initial connection status)
+	###
+		tank_1				= Tank.new("tank_No1", 0, 0);
+		tank_2				= Tank.new("tank_No2", 1, 0);
+		tank_3				= Tank.new("tank_No3", 2, 0);
+		tank_4				= Tank.new("tank_No4", 3, 0);
+		tank_5				= Tank.new("tank_No5", 4, 0);
+		tank_6				= Tank.new("tank_No6", 5, 0);
+		tank_7				= Tank.new("tank_No7", 6, 0);
+		tank_8				= Tank.new("tank_No8", 7, 0);
+		
+	###
+	#proportioners ("name", number, initial connection status, operational status)
+	###
+		proportioner_port	= Prop.new("prop_port", 8, 1, 1);
+		proportioner_stbd	= Prop.new("prop_stbd", 9, 1, 1);
+		
+	###
+	#switches (intitial status)
+	##
+		neg_g = Neg_g.new(0);
+
+
+	#calculate the proportions, based on the total capacity of tanks port and stbd
+
+	total_cap_port = tank_2.get_capacity() + tank_4.get_capacity() + tank_6.get_capacity() + tank_8.get_capacity();
+	prop_2 = (tank_2.get_capacity() + tank_4.get_capacity())/total_cap_port;
+	# print ("proportion 2: ", prop_2, " total cap port: ", total_cap_port);
+	prop_6 = (tank_6.get_capacity() + tank_8.get_capacity())/total_cap_port;
+	# print ("proportion 6: ", prop_6, " sum ", prop_2 + prop_6);
+
+	total_cap_stbd = tank_1.get_capacity() + tank_3.get_capacity() + tank_5.get_capacity() + tank_7.get_capacity();
+	prop_3 = (tank_1.get_capacity() + tank_3.get_capacity())/total_cap_stbd;
+	# print ("proportion 3: ", prop_3, " total cap stbd: ", total_cap_stbd);
+	prop_5 = (tank_5.get_capacity() + tank_7.get_capacity())/total_cap_stbd;
+	# print ("proportion 5: ", prop_5, " sum ", prop_3 + prop_5);
+
+	# initialise listeners
+	setlistener("controls/fuel/dump-valve", func {	dump_valve = DumpValve.getValue();
+													#print("dump_valve ", dump_valve);
+													});
+
+	setlistener("controls/fuel/cross-connect", func {	cross_connect = CrossConnect.getValue();
+													#print("cross_connect ", cross_connect);
+
+													});
+	#run the main loop
+	settimer(fuel_update,0);
+
+	print ("All Done ... Running Buccaneer fuel system");
+
+} # end intitialization
+
+
+###
+# This is the main loop which keeps everything updated
+##
+
+var fuel_update = func {
+
+	# if fuel consumption is frozen, skip it
+	if(getprop("/sim/freeze/fuel")) { return settimer(mainLoop, 0); }
+
+	#calculate dt
+	time = props.globals.getNode("/sim/time/elapsed-sec", 1).getValue();
+	dt = time - last_time;
+	#print("dt " , dt);
+	last_time = time;
+
+	#calculate total fuel in tanks (not including small amount in proportioners)
+	total_gals = total_lbs = 0;
+
+	foreach (var t; Tank.list) {
+		total_gals = total_gals + t.get_level();
+		total_lbs = total_lbs + t.get_level_lbs();
+	}
+
+	TotalFuelLbs.setValue(total_lbs);
+	TotalFuelGals.setValue(total_gals);
+	TotalFuelNorm.setValue(total_gals / (total_cap_port + total_cap_stbd));
+
+	# if total fuel is less than 4000 lbs, close the dunp valve
+	if(TotalFuelLbs.getValue() < 4000) {
+		DumpValve.setBoolValue(0);
+	}
+
+	neg_g.update();
+
+	# these are the rules governing fuel transfer
+	
+	# transfer 1 to 3
+	if(tank_3.get_ullage() > 0 and tank_1.get_level() > 0){ 
+		tank_1.set_transfer_tank(dt, "tank_No3");
+	}
+
+	# transfer 4 to 2
+	if(tank_2.get_ullage() > 0 and tank_4.get_level() > 0){
+		tank_4.set_transfer_tank(dt, "tank_No2");
+	}
+
+	# transfer 7 to 5
+	if(tank_5.get_ullage() > 0 and tank_7.get_level() > 0){ 
+		tank_7.set_transfer_tank(dt, "tank_No5");
+	}
+
+	# transfer 8 to 6
+	if(tank_6.get_ullage() > 0 and tank_8.get_level() > 0){
+		tank_8.set_transfer_tank(dt, "tank_No6");
+	}
+
+	# jettison fuel
+	if(dump_valve) {
+		proportioner_port.jettisonFuel(dt);
+		proportioner_stbd.jettisonFuel(dt);
+	}
+
+	# transfer to port proportioner
+	if(proportioner_port.get_ullage() > 0){
+		amount_port = proportioner_port.get_ullage();
+		# print ("amount to port prop: ", amount_port);
+		# if there is any fuel in No2 transfer the correct proportion
+		if(tank_2.get_level() > 0){
+			amount_2 = amount_port * prop_2;
+			if(amount_2 > tank_2.get_level()) {
+			amount_2 = tank_2.get_level();
+			}
+		#print("Amount 2: " , amount_2);
+		tank_2.set_level(tank_2.get_level() - amount_2);
+		proportioner_port.set_level(proportioner_port.get_level() + amount_2);
+		}
+	# if there is any fuel in No6 transfer the correct proportion
+		if(tank_6.get_level() > 0){
+			amount_6 = amount_port * prop_6;
+			if(amount_6 > tank_6.get_level()) {
+				amount_6 = tank_6.get_level();
+			}
+			#print("Amount 6: ", amount_6);
+			tank_6.set_level(tank_6.get_level() - amount_6);
+			proportioner_port.set_level(proportioner_port.get_level() + amount_6);
+		}
+	}
+
+	# transfer to stbd proportioner
+	if(proportioner_stbd.get_ullage() > 0){
+		amount_stbd = proportioner_stbd.get_ullage();
+		#print ("amount to stbd prop: ", amount_stbd);
+		# if there is any fuel in No3 transfer the correct proportion
+		if(tank_3.get_level() > 0){
+			amount_3 = amount_stbd * prop_3;
+			if(amount_3 > tank_3.get_level()) {
+			amount_3 = tank_3.get_level();
+			}
+		#print("Amount 3: " , amount_3);
+		tank_3.set_level(tank_3.get_level() - amount_3);
+		proportioner_stbd.set_level(proportioner_stbd.get_level() + amount_3);
+		}
+		# if there is any fuel in No5 transfer the correct proportion
+		if(tank_5.get_level() > 0){
+			amount_5 = amount_stbd * prop_5;
+			if(amount_5 > tank_5.get_level()) {
+				amount_5 = tank_5.get_level();
+			}
+			#print("Amount 5: ", amount_5);
+			tank_5.set_level(tank_5.get_level() - amount_5);
+			proportioner_stbd.set_level(proportioner_stbd.get_level() + amount_5);
+		}
+		
+	}
+
+	# transfer from the proportioners to the engines
+	var port_fuel_consumed = PortFuel.getValue();
+	var stbd_fuel_consumed = StbdFuel.getValue();
+	if(port_fuel_consumed == nil) port_fuel_consumed = 0;
+	if(stbd_fuel_consumed == nil) stbd_fuel_consumed = 0;
+	#print ( "port_fuel consumed", PortFuel.getValue() );
+	#print ( "stbd_fuel consumed", StbdFuel.getValue() );
+
+	if (cross_connect){
+		total = port_fuel_consumed + stbd_fuel_consumed;
+		port_outOfFuel = proportioner_port.update(total/2);
+		stbd_outOfFuel = proportioner_stbd.update(total/2);
+		
+		if(port_outOfFuel and stbd_outOfFuel) {
+			port_outOfFuel = stbd_outOfFuel = 1;
+		} else {
+			port_outOfFuel = stbd_outOfFuel = 0;
+		}
+
+	} else {
+		port_outOfFuel = proportioner_port.update(port_fuel_consumed);
+		stbd_outOfFuel = proportioner_stbd.update(stbd_fuel_consumed);
+	}
+
+	#reset the fuel consumed
+	PortFuel.setDoubleValue(0);
+	StbdFuel.setDoubleValue(0);
+
+	#set engines
+	PortEngine.getNode("out-of-fuel").setBoolValue(port_outOfFuel);
+	StbdEngine.getNode("out-of-fuel").setBoolValue(stbd_outOfFuel);
+
+	settimer(fuel_update, 0.3);
+
+} # end funtion mainLoop    
+
+
+###
+# Specify Classes
+##
+
+##
+# This class defines a tank
+#
+Tank = {
+	new : func (name, number, connect) {
+		var obj = { parents : [Tank]};
+		obj.prop = props.globals.getNode("consumables/fuel").getChild ("tank", number , 1);
+		obj.name = obj.prop.getNode("name", 1);
+		obj.prop.getChild("name", 0, 1).setValue(name);
+		obj.capacity = obj.prop.getNode("capacity-gal_us", 1);
+		obj.ppg = obj.prop.getNode("density-ppg", 1);
+		obj.level_gal_us = obj.prop.getNode("level-gal_us", 1);
+		obj.level_lbs = obj.prop.getNode("level-lbs", 1);
+		obj.transfering = obj.prop.getNode("transfering", 1);
+		#obj.dumprate = obj.prop.getNode("dump-rate-lbs-hr", 1);
+		obj.prop.getChild("selected", 0, 1).setBoolValue(connect);
+		obj.prop.getChild("transfering", 0, 1).setBoolValue(0);
+		obj.ppg.setDoubleValue(6.3);
+
+		append(Tank.list, obj);
+		print ("tank ", obj.name.getValue()); 
+
+		return obj;
+	},
+	get_capacity : func {
+		return me.capacity.getValue(); 
+	},
+	get_level : func {
+		return me.level_gal_us.getValue();	
+	},	
+	get_level_lbs : func {
+		return me.level_lbs.getValue();	
+	},
+	set_level : func (gals_us){
+		if(gals_us < 0) gals_us = 0;
+		me.level_gal_us.setDoubleValue(gals_us);
+		me.level_lbs.setDoubleValue(gals_us * me.ppg.getValue());
+	},
+	set_transfering : func (transfering){
+		me.transfering.setBoolValue(transfering);
+	},
+#	set_dumprate : func (dumprate){
+#		me.dumprate.setDoubleValue(dumprate);
+#	},
+	get_amount : func (dt, ullage) {
+		var amount = (flowrate_lbs_hr / (me.ppg.getValue() * 60 * 60)) * dt * 1 ;
+		if(amount > me.level_gal_us.getValue()) {
+			amount = me.level_gal_us.getValue();
+		} 
+		if(amount > ullage) {
+			amount = ullage;
+		} 
+		var flowrate_lbs = ((amount/dt) * 60 * 60) * me.ppg.getValue();
+		#print ("flowrate_lbsph_actual ", me.name, " ", flowrate_lbs);
+		return amount
+	},
+	get_ullage : func () {
+		return me.get_capacity() - me.get_level()
+	},
+	get_name : func () {
+		return me.name.getValue();
+	},
+	set_transfer_tank : func (dt, tank) {
+	#print (me.name.getValue(), " transfer ");
+		foreach (var t; Tank.list) {
+			if(t.get_name() == tank)  {
+				transfer = me.get_amount(dt, t.get_ullage());
+				#print (me.name.getValue(), " transfer ", transfer, " ", t.get_name());
+				me.set_level(me.get_level() - transfer);
+				t.set_level(t.get_level() + transfer);
+			} 
+		}
+	},
+	list : [],
+};
+
+##
+# This class defines a proportioner
+#
+
+Prop = {
+	new : func (name, number, connect, running) {
+		var obj = { parents : [Prop]};
+		obj.prop = props.globals.getNode("consumables/fuel").getChild ("tank", number , 1);
+		obj.name = obj.prop.getNode("name", 1);
+		obj.prop.getChild("name", 0, 1).setValue(name);
+		obj.capacity = obj.prop.getNode("capacity-gal_us", 1);
+		obj.ppg = obj.prop.getNode("density-ppg", 1);
+		obj.level_gal_us = obj.prop.getNode("level-gal_us", 1);
+		obj.level_lbs = obj.prop.getNode("level-lbs", 1);
+		obj.dumprate = obj.prop.getNode("dump-rate-lbs-hr", 1);
+		obj.running = obj.prop.getNode("running", 1);
+		obj.prop.getChild("selected", 0, 1).setBoolValue(connect);
+		obj.prop.getChild("dump-rate-lbs-hr", 0, 1).setDoubleValue(0);
+		obj.prop.getChild("running", 0, 1).setBoolValue(running);
+		obj.ppg.setDoubleValue(6.3);
+		append(Prop.list, obj);
+		print ("Proportioner ", obj.name.getValue()); 
+		return obj;
+	},
+	
+	set_level : func (gals_us){
+		if(gals_us < 0) gals_us = 0;
+		me.level_gal_us.setDoubleValue(gals_us);
+		me.level_lbs.setDoubleValue(gals_us * me.ppg.getValue());
+	},
+	set_dumprate : func (dumprate){
+		me.dumprate.setDoubleValue(dumprate);
+	},
+	get_capacity : func {
+		return me.capacity.getValue(); 
+	},
+	get_level : func {
+		return me.level_gal_us.getValue();	
+	},
+	get_running : func {
+		return me.running.getValue();	
+	},
+	get_ullage : func () {
+		return me.get_capacity() - me.get_level();
+	},
+	get_name : func () {
+		return me.name.getValue();
+	},
+	get_lbs : func () {
+		return me.level_lbs.getValue();
+	},
+	update : func (amount_lbs) {
+		# var servicable = me.get_servicable();
+		var neg_g = neg_g.get_neg_g();
+		var ppg = me.ppg.getValue();
+		var level = me.get_lbs();
+
+		# print("updating ", me.name.getValue();"amount ", amount_lbs, " level ", level, " ppg ", me.ppg.getValue());
+		level = level - amount_lbs ;
+
+		if (neg_g or level <= 0) {
+			level = 0;
+			me.prop.getChild("selected").setBoolValue(0);
+			me.prop.getChild("running").setBoolValue(0);
+			me.set_level(level/ppg);
+			return 1;
+		} else {
+			me.prop.getChild("selected").setBoolValue(1);
+			me.prop.getChild("running").setBoolValue(1);
+			me.set_level(level/ppg);
+			return 0;
+		}
+
+	},
+#	get_amount : func (dt, ullage) {
+#		var amount = (flowrate_lbs_hr / (me.ppg.getValue() * 60 * 60)) * dt * 1 ;
+#		if(amount > me.level_gal_us.getValue()) {
+#			amount = me.level_gal_us.getValue();
+#		} 
+#		if(amount > ullage) {
+#			amount = ullage;
+#		} 
+#		var flowrate_lbs = ((amount/dt) * 60 * 60) * me.ppg.getValue();
+#		#print ("flowrate_lbsph_actual ", me.name, " ", flowrate_lbs);
+#		return amount
+#	},
+	
+	jettisonFuel : func (dt) {
+		var amount = 0;
+		#print("jettisoning fuel ",me.name.getValue()," ", dt, " ", me.get_level() );
+		if(me.get_level() > 0 and me.get_running()) {
+			amount = (dumprate_lbs_hr / (me.ppg.getValue() * 60 * 60)) * dt * 1 ;
+			if(amount > me.level_gal_us.getValue()) {
+				amount = me.level_gal_us.getValue();
+			}
+		}
+		var dumprate_lbs = ((amount/dt) * 60) * me.ppg.getValue();
+		#print ("dumprate_lbspm_actual ", me.name, " ", dumprate_lbs);
+		me.set_dumprate(dumprate_lbs);
+		me.set_level(me.get_level() - amount);
+	},
+	list : [],
+};
+
+###
+# this class specifies the negative g switch
+##
+Neg_g = {
+	new : func(switch) {
+		var obj = { parents : [Neg_g]};
+		obj.prop = props.globals.getNode("controls/fuel/neg-g",1);
+		obj.switch = switch;
+		obj.prop.setBoolValue(switch);
+		obj.acceleration = props.globals.getNode("accelerations/pilot-g", 1);
+		print ("Neg-G ", switch); 
+		return obj;
+	},
+	update : func() {
+		var acc = me.acceleration.getValue();
+#		print("accleration ",acc );
+		if (acc < 0) {
+			me.prop.setBoolValue(1);
+		} else {
+			me.prop.setBoolValue(0);
+		}
+	},
+	get_neg_g : func() {
+		return me.prop.getValue();
+	},
+};	
+	# end specify classes
+	
+	##### 
+	# fire it up
+	#####
+	
+	settimer(init_fuel_system, 0);
+	
+	
