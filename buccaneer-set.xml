@@ -248,6 +248,14 @@ Ver 0.0.1
 				<name type="string">Prop Stbd</name>
 				<selected type="bool">1</selected>
 			</tank>
+			<tank n="10">
+				<name type="string">Recup Port</name>
+				<selected type="bool">0</selected>
+			</tank>
+			<tank n="11">
+				<name type="string">Recup Stbd</name>
+				<selected type="bool">0</selected>
+			</tank>
 		</fuel>
 	</consumables>
 

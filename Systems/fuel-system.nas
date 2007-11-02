@@ -30,6 +30,8 @@ tank_7 = nil;
 tank_8 = nil;
 proportioner_port = nil;
 proportioner_stbd = nil;
+recuperator_port = nil;
+recuperator_stbd = nil;
 neg_g = nil;
 
 PortEngine		= props.globals.getNode("engines").getChild("engine", 0);
@@ -71,7 +73,7 @@ var init_fuel_system = func {
 
 	# set initial values
 	DumpValve.setBoolValue(0);
-	CrossConnect.setBoolValue(0);
+	CrossConnect.setBoolValue(1);
 	TotalFuelLbs.setDoubleValue(0.01);
 	TotalFuelGals.setDoubleValue(0.01);
 	PortEngine.setBoolValue(0);
@@ -88,13 +90,19 @@ var init_fuel_system = func {
 		tank_6				= Tank.new("tank_No6", 5, 0);
 		tank_7				= Tank.new("tank_No7", 6, 0);
 		tank_8				= Tank.new("tank_No8", 7, 0);
-		
+
 	###
 	#proportioners ("name", number, initial connection status, operational status)
 	###
 		proportioner_port	= Prop.new("prop_port", 8, 1, 1);
 		proportioner_stbd	= Prop.new("prop_stbd", 9, 1, 1);
-		
+	###
+
+	#recuperators ("name", number, initial connection status)
+	###
+		recuperator_port = Recup.new("recup_port", 10, 0);
+		recuperator_stbd = Recup.new("recup_stbd", 11, 0);
+
 	###
 	#switches (intitial status)
 	##
@@ -122,8 +130,8 @@ var init_fuel_system = func {
 
 	setlistener("controls/fuel/cross-connect", func {	cross_connect = CrossConnect.getValue();
 													#print("cross_connect ", cross_connect);
-
 													});
+
 	#run the main loop
 	settimer(fuel_update,0);
 
@@ -246,6 +254,23 @@ var fuel_update = func {
 		}
 		
 	}
+	# transfer proportioners to recuperators
+	if(!cross_connect) {
+		if(recuperator_port.get_ullage() > 0 and proportioner_port.get_level() > 0){
+			proportioner_port.set_transfer_tank(dt, "recup_port");
+		}
+		if(recuperator_stbd.get_ullage() > 0 and proportioner_stbd.get_level() > 0){
+			proportioner_stbd.set_transfer_tank(dt, "recup_stbd");
+		}
+	} elsif (recuperator_port.get_ullage() > 0  or recuperator_stbd.get_ullage() > 0){
+		if(proportioner_port.get_level() > 0 or proportioner_stbd.get_level() > 0){
+			# print("cross-connected");
+			proportioner_port.set_transfer_tank(dt, "recup_port");
+			proportioner_stbd.set_transfer_tank(dt, "recup_port");
+			proportioner_port.set_transfer_tank(dt, "recup_stbd");
+			proportioner_stbd.set_transfer_tank(dt, "recup_stbd");
+		}
+	}	
 
 	# transfer from the proportioners to the engines
 	var port_fuel_consumed = PortFuel.getValue();
@@ -256,10 +281,22 @@ var fuel_update = func {
 	#print ( "stbd_fuel consumed", StbdFuel.getValue() );
 
 	if (cross_connect){
+		var num_prop_running = 0;
+		foreach (var p; Prop.list) {
+			# print(p.get_name());
+			if (p.get_running()) num_prop_running += 1;
+		}
+		print("num_prop_running ", num_prop_running);
+
 		total = port_fuel_consumed + stbd_fuel_consumed;
 		port_outOfFuel = proportioner_port.update(total/2);
 		stbd_outOfFuel = proportioner_stbd.update(total/2);
 		
+		if(port_outOfFuel and stbd_outOfFuel) {
+			port_outOfFuel = recuperator_port.update(total/2);
+			stbd_outOfFuel = recuperator_stbd.update(total/2);
+		}
+
 		if(port_outOfFuel and stbd_outOfFuel) {
 			port_outOfFuel = stbd_outOfFuel = 1;
 		} else {
@@ -268,7 +305,10 @@ var fuel_update = func {
 
 	} else {
 		port_outOfFuel = proportioner_port.update(port_fuel_consumed);
+		if(port_outOfFuel) port_outOfFuel = recuperator_port.update(port_fuel_consumed);
+		
 		stbd_outOfFuel = proportioner_stbd.update(stbd_fuel_consumed);
+		if(stbd_outOfFuel) stbd_outOfFuel = recuperator_stbd.update(stbd_fuel_consumed);
 	}
 
 	#reset the fuel consumed
@@ -380,12 +420,12 @@ Prop = {
 		obj.level_lbs = obj.prop.getNode("level-lbs", 1);
 		obj.dumprate = obj.prop.getNode("dump-rate-lbs-hr", 1);
 		obj.running = obj.prop.getNode("running", 1);
+		obj.running.setBoolValue(running);
 		obj.prop.getChild("selected", 0, 1).setBoolValue(connect);
 		obj.prop.getChild("dump-rate-lbs-hr", 0, 1).setDoubleValue(0);
-		obj.prop.getChild("running", 0, 1).setBoolValue(running);
 		obj.ppg.setDoubleValue(6.3);
 		append(Prop.list, obj);
-		print ("Proportioner ", obj.name.getValue()); 
+		print ("Proportioner ", obj.name.getValue(), " running ", obj.running.getValue() ); 
 		return obj;
 	},
 	
@@ -397,6 +437,115 @@ Prop = {
 	set_dumprate : func (dumprate){
 		me.dumprate.setDoubleValue(dumprate);
 	},
+	get_capacity : func {
+		return me.capacity.getValue();
+	},
+	get_level : func {
+		return me.level_gal_us.getValue();
+	},
+	get_running : func {
+		return me.running.getValue();
+	},
+	get_ullage : func () {
+		return me.get_capacity() - me.get_level();
+	},
+	get_name : func () {
+		return me.name.getValue();
+	},
+	get_lbs : func () {
+		return me.level_lbs.getValue();
+	},
+	update : func (amount_lbs) {
+		# var servicable = me.get_servicable();
+		var neg_g = neg_g.get_neg_g();
+		var ppg = me.ppg.getValue();
+		var level = me.get_lbs();
+
+		# print("updating prop ", me.name.getValue(),"amount ", amount_lbs, 
+		#" level ", level, " ppg ", me.ppg.getValue());
+		if (neg_g or level == 0) {
+			me.prop.getChild("selected").setBoolValue(0);
+			me.running.setBoolValue(0);
+			return 1;
+		} else {
+			me.prop.getChild("selected").setBoolValue(1);
+			me.running.setBoolValue(1);
+			level = level - amount_lbs ;
+			if(level <= 0) level = 0;
+			me.set_level(level/ppg);
+			return 0;
+		}
+	},
+	get_amount : func (dt, ullage) {
+		var amount = (dumprate_lbs_hr / (me.ppg.getValue() * 60 * 60)) * dt * 1 ;
+		if(amount > me.level_gal_us.getValue()) {
+			amount = me.level_gal_us.getValue();
+		}
+		if(amount > ullage) {
+			amount = ullage;
+		}
+		var dumprate_lbs = ((amount/dt) * 60 * 60) * me.ppg.getValue();
+		# print ("flowrate_lbsph_actual ", me.name, " ", dumprate_lbs);
+		return amount
+	},
+	set_transfer_tank : func (dt, tank) {
+	# print (me.name.getValue(), " transfer to ", tank, "running ", me.get_running());
+		foreach (var r; Recup.list) {
+			if(r.get_name() == tank and me.get_running()) {
+				transfer = me.get_amount(dt, r.get_ullage());
+				#print (me.name.getValue(), " transfering ", transfer, " ", r.get_name());
+				me.set_level(me.get_level() - transfer);
+				r.set_level(r.get_level() + transfer);
+			}
+		}
+	},
+	jettisonFuel : func (dt) {
+		var amount = 0;
+		#print("jettisoning fuel ",me.name.getValue()," ", dt, " ", me.get_level() );
+		if(me.get_level() > 0 and me.get_running()) {
+			amount = (dumprate_lbs_hr / (me.ppg.getValue() * 60 * 60)) * dt * 1 ;
+			if(amount > me.level_gal_us.getValue()) {
+				amount = me.level_gal_us.getValue();
+			}
+		}
+		var dumprate_lbs = ((amount/dt) * 60) * me.ppg.getValue();
+		#print ("dumprate_lbspm_actual ", me.name, " ", dumprate_lbs);
+		me.set_dumprate(dumprate_lbs);
+		me.set_level(me.get_level() - amount);
+	},
+	list : [],
+};
+
+##
+# This class defines a recuperator
+#
+Recup = {
+	new : func (name, number, connect) {
+		var obj = { parents : [Recup]};
+		obj.prop = props.globals.getNode("consumables/fuel").getChild ("tank", number , 1);
+		obj.name = obj.prop.getNode("name", 1);
+		obj.prop.getChild("name", 0, 1).setValue(name);
+		obj.capacity = obj.prop.getNode("capacity-gal_us", 1);
+		obj.ppg = obj.prop.getNode("density-ppg", 1);
+		obj.level_gal_us = obj.prop.getNode("level-gal_us", 1);
+		obj.level_lbs = obj.prop.getNode("level-lbs", 1);
+		obj.prop.getChild("selected", 0, 1).setBoolValue(connect);
+		obj.ppg.setDoubleValue(6.3);
+		obj.level_gal_us.setDoubleValue(0);
+		obj.level_lbs.setDoubleValue(0);
+		append(Recup.list, obj);
+		print ("Recuperator ", obj.name.getValue()); 
+		return obj;
+	},
+	
+	set_level : func (gals_us){
+		if(gals_us < 0) gals_us = 0;
+		me.level_gal_us.setDoubleValue(gals_us);
+		me.level_lbs.setDoubleValue(gals_us * me.ppg.getValue());
+	},
+#	set_dumprate : func (dumprate){
+#		me.dumprate.setDoubleValue(dumprate);
+#	},
 	get_capacity : func {
 		return me.capacity.getValue(); 
 	},
@@ -417,22 +566,22 @@ Prop = {
 	},
 	update : func (amount_lbs) {
 		# var servicable = me.get_servicable();
-		var neg_g = neg_g.get_neg_g();
 		var ppg = me.ppg.getValue();
 		var level = me.get_lbs();
 
-		# print("updating ", me.name.getValue();"amount ", amount_lbs, " level ", level, " ppg ", me.ppg.getValue());
+		# print("updating recup ", me.name.getValue(), "amount ", amount_lbs, " level ",
+		#level, " ppg ", me.ppg.getValue());
 		level = level - amount_lbs ;
 
-		if (neg_g or level <= 0) {
+		if (level <= 0) {
 			level = 0;
 			me.prop.getChild("selected").setBoolValue(0);
-			me.prop.getChild("running").setBoolValue(0);
+			#me.prop.getChild("running").setBoolValue(0);
 			me.set_level(level/ppg);
 			return 1;
 		} else {
 			me.prop.getChild("selected").setBoolValue(1);
-			me.prop.getChild("running").setBoolValue(1);
+			#me.prop.getChild("running").setBoolValue(1);
 			me.set_level(level/ppg);
 			return 0;
 		}
@@ -450,21 +599,31 @@ Prop = {
 #		#print ("flowrate_lbsph_actual ", me.name, " ", flowrate_lbs);
 #		return amount
 #	},
-	
-	jettisonFuel : func (dt) {
-		var amount = 0;
-		#print("jettisoning fuel ",me.name.getValue()," ", dt, " ", me.get_level() );
-		if(me.get_level() > 0 and me.get_running()) {
-			amount = (dumprate_lbs_hr / (me.ppg.getValue() * 60 * 60)) * dt * 1 ;
-			if(amount > me.level_gal_us.getValue()) {
-				amount = me.level_gal_us.getValue();
-			}
-		}
-		var dumprate_lbs = ((amount/dt) * 60) * me.ppg.getValue();
-		#print ("dumprate_lbspm_actual ", me.name, " ", dumprate_lbs);
-		me.set_dumprate(dumprate_lbs);
-		me.set_level(me.get_level() - amount);
-	},
+#	set_transfer_tank : func (dt, tank) {
+#	#print (me.name.getValue(), " transfer ");
+#		foreach (var t; Tank.list) {
+#			if(t.get_name() == tank)  {
+#				transfer = me.get_amount(dt, t.get_ullage());
+#				#print (me.name.getValue(), " transfer ", transfer, " ", t.get_name());
+#				me.set_level(me.get_level() - transfer);
+#				t.set_level(t.get_level() + transfer);
+#			} 
+#		}
+#	},
+#	jettisonFuel : func (dt) {
+#		var amount = 0;
+#		#print("jettisoning fuel ",me.name.getValue()," ", dt, " ", me.get_level() );
+#		if(me.get_level() > 0 and me.get_running()) {
+#			amount = (dumprate_lbs_hr / (me.ppg.getValue() * 60 * 60)) * dt * 1 ;
+#			if(amount > me.level_gal_us.getValue()) {
+#				amount = me.level_gal_us.getValue();
+#			}
+#		}
+#		var dumprate_lbs = ((amount/dt) * 60) * me.ppg.getValue();
+#		#print ("dumprate_lbspm_actual ", me.name, " ", dumprate_lbs);
+#		me.set_dumprate(dumprate_lbs);
+#		me.set_level(me.get_level() - amount);
+#	},
 	list : [],
 };
 

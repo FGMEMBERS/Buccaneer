@@ -540,6 +540,20 @@ axial flow engine, dry wt 2471 lbs -->
 				z="0"
 				jet="true"
 				capacity="10"/>
+	
+	<!-- recuperator port (inside Tank #1) -->
+	<tank x="-6.00247"
+				y="0"
+				z="0.630794"
+				jet="true"
+				capacity="63"/>
+	
+	<!-- recuperator stbd (inside Tank #1)-->
+	<tank x="-6.00247"
+				y="0"
+				z="0.630794"
+				jet="true"
+				capacity="63"/>
 
 	<!-- cockpit -->
 	<ballast x="-4.6"
