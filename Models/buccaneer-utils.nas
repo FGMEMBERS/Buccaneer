@@ -18,6 +18,13 @@ n1_node = props.globals.getNode("engines/engine/n1", 1);
 smoke_node = props.globals.getNode("engines/engine/smoking", 1);
 smoke_node.setBoolValue(1);
 
+fuel_dump_lever_Node = props.globals.getNode("controls/fuel/dump-valve-lever", 1);
+fuel_dump_lever_Node.setDoubleValue(0);
+fuel_dump_lever_pos_Node = props.globals.getNode("controls/fuel/dump-valve-lever-pos", 1);
+fuel_dump_lever_pos_Node.setDoubleValue(0);
+fuel_dump_Node = props.globals.getNode("controls/fuel/dump-valve", 1);
+fuel_dump_lever_Node.setBoolValue(0);
+
 controls.fullBrakeTime = 0;
 
 pilot_g = nil;
@@ -37,6 +44,8 @@ var last_xDivergence = 0;
 var last_yDivergence = 0;
 var last_zDivergence = 0;
 
+var lever_sum = 0;
+var direction = 0 ;
 
 initialize = func {
 
@@ -56,10 +65,9 @@ initialize = func {
 	
 	#set listeners
 
-#	setlistener("engines/engine/cranking", func }smoke.updateSmoking(); 
+#	setlistener("engines/engine/cranking", func {smoke.updateSmoking(); 
 #												  });
-#	setlistener("engines/engine/running", func }smoke.updateSmoking(); 
-#												  });
+
 
 	# set it running on the next update cycle
 	settimer(update, 0);

@@ -344,7 +344,6 @@
 			<z-m>0.650593</z-m>
 		</offsets>
 	</model>
-	3.36104		-
 
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/uc_warning.xml</path>
@@ -354,6 +353,26 @@
 			<z-m>0.659101</z-m>
 		</offsets>
 	</model>
+
+	<!-- **************** Stbd Panel ********** -->
+	<stbd-panel>
+		<offsets>
+			<z-m>3.36104</z-m>
+		</offsets>
+	</stbd-panel>
+	
+	<model>
+		<path>Aircraft/Buccaneer/Models/fuel-jettison.xml</path>
+		<offsets>
+			<x-m>3.53718</x-m>
+			<y-m>0.392233</y-m>
+			<z-m>0.397295</z-m>
+			<pitch-deg>-79.5</pitch-deg>
+		</offsets>
+	</model>
+
+	
+	
 	<!--	
 
 	

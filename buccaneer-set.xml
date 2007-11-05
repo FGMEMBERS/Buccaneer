@@ -4,7 +4,7 @@
 Blackburn Buccaneer simulation config. This files ties together 
 all the components used by FGFS to represent the aircraft. Components include 
 the flight data model, instrument panel, and external 3D model. Lots still relies
-on the Hawker Hunter
+on the Hawker Hunter/
 
 Ver 0.0.1
 
@@ -174,34 +174,6 @@ Ver 0.0.1
 
 		<livery>
 			<variant type="string">Side No 322</variant>
-			<!--<model>
-				<material>
-					<Fuselage-Markings-Side-No>
-						<texture>empty.rgb</texture>
-					</Fuselage-Markings-Side-No>
-					<Fuselage-Markings-Ser-No>
-						<texture>empty.rgb</texture>
-					</Fuselage-Markings-Ser-No>
-					<Markings-Wing-Inner-Ser-No-Stbd>
-						<texture>empty.rgb</texture>
-					</Markings-Wing-Inner-Ser-No-Stbd>
-					<Markings-Wing-Outer-Ser-No-Stbd>
-						<texture>empty.rgb</texture>
-					</Markings-Wing-Outer-Ser-No-Stbd>
-					<Markings-Wing-Inner-Ser-No-Port>
-						<texture>empty.rgb</texture>
-					</Markings-Wing-Inner-Ser-No-Port>
-					<Markings-Wing-Outer-Ser-No-Port>
-						<texture>empty.rgb</texture>
-					</Markings-Wing-Outer-Ser-No-Port>
-					<Markings-Flap-Stbd>
-						<texture>empty.rgb</texture>
-					</Markings-Flap-Stbd>
-					<Markings-Flap-Port>
-						<texture>empty.rgb</texture>
-					</Markings-Flap-Port>
-				</material>
-			</model>-->
 		</livery>
 
 	</sim>
@@ -589,7 +561,6 @@ Ver 0.0.1
 	<nasal>
 		<buccaneer>
 			<file>Aircraft/Buccaneer/Models/buccaneer-utils.nas</file>
-			<!--<file>Aircraft/Buccaneer/Models/buccaneer-fuel.nas</file>-->
 			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
 		</buccaneer>
 		<!--<seavixen-instrumentation>
@@ -601,7 +572,6 @@ Ver 0.0.1
 		<gunview>
 			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
 		</gunview>
-
 	</nasal>
 
 	<environment>

@@ -33,6 +33,7 @@ proportioner_stbd = nil;
 recuperator_port = nil;
 recuperator_stbd = nil;
 neg_g = nil;
+valve_1 = nil;
 
 PortEngine		= props.globals.getNode("engines").getChild("engine", 0);
 StbdEngine		= props.globals.getNode("engines").getChild("engine", 1);
@@ -72,7 +73,6 @@ var init_fuel_system = func {
 	print("Initializing Buccaneer fuel system ...");
 
 	# set initial values
-	DumpValve.setBoolValue(0);
 	CrossConnect.setBoolValue(1);
 	TotalFuelLbs.setDoubleValue(0.01);
 	TotalFuelGals.setDoubleValue(0.01);
@@ -108,6 +108,10 @@ var init_fuel_system = func {
 	##
 		neg_g = Neg_g.new(0);
 
+	###
+	#valves ("name",property, intitial status)
+	##
+		valve_1 = Valve.new("dump_valve","controls/fuel/dump-valve",0);
 
 	#calculate the proportions, based on the total capacity of tanks port and stbd
 
@@ -124,13 +128,35 @@ var init_fuel_system = func {
 	# print ("proportion 5: ", prop_5, " sum ", prop_3 + prop_5);
 
 	# initialise listeners
-	setlistener("controls/fuel/dump-valve", func {	dump_valve = DumpValve.getValue();
-													#print("dump_valve ", dump_valve);
-													});
+	setlistener("controls/fuel/dump-valve", func {
+		dump_valve = DumpValve.getValue();
+		#print("dump_valve ", dump_valve);
+		}
+	);
 
-	setlistener("controls/fuel/cross-connect", func {	cross_connect = CrossConnect.getValue();
-													#print("cross_connect ", cross_connect);
-													});
+	setlistener("controls/fuel/cross-connect", func {
+		cross_connect = CrossConnect.getValue();
+		#print("cross_connect ", cross_connect);
+		}
+	);
+
+	setlistener("controls/fuel/dump-valve-lever", func {	
+		var lever= fuel_dump_lever_Node.getValue();
+		if(lever_sum >=2) direction = -1;
+		if(lever_sum <=0) direction = 1;
+		lever_sum += lever * direction;
+#		print("total_lever ", lever_sum);
+		fuel_dump_lever_pos_Node.setDoubleValue(lever_sum);
+
+		if(lever_sum == 2) {
+			Valve.set("dump_valve",1);
+#			print("valve ", fuel_dump_Node.getBoolValue());
+		} else {
+			Valve.set("dump_valve",0);
+#			print("valve ", fuel_dump_Node.getBoolValue());
+		}
+	}
+	,1);
 
 	#run the main loop
 	settimer(fuel_update,0);
@@ -653,11 +679,44 @@ Neg_g = {
 		return me.prop.getValue();
 	},
 };	
-	# end specify classes
+
+###
+# this class specifies fuel valves
+##
+
+Valve = {
+	new : func (name,
+				prop,
+				initial_pos
+				){
+		var obj = {parents : [Valve] };
+		obj.prop = props.globals.getNode(prop, 1);
+		obj.name = name;
+		obj.prop.setBoolValue(initial_pos);
+		print (obj.name, );
+		append(Valve.list, obj);
+		return obj;
+	},
+	set : func (valve, pos) {	# operate valve
+		 foreach (var v; Valve.list) {
+			if(v.get_name() == valve) {
+#				print("valve ",v.get_name()," ", pos);
+				v.prop.setValue(pos);
+			} 
+		}
+		
+	},
+	get_name : func () {
+		return me.name;
+	},
+	list : [],
+}; #
 	
-	##### 
-	# fire it up
-	#####
+# end specify classes
+	
+##### 
+# fire it up
+#####
 	
 	settimer(init_fuel_system, 0);
 	
