@@ -105,7 +105,7 @@
 				</less-than>
 			</and>
 		</condition>
-	</animation>-->
+	</animation>
 
 	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/fuel.xml</path>
@@ -193,8 +193,18 @@
 			<yaw-deg>10</yaw-deg>
 		</offsets>
 	</model>
-
+	
 	<!-- **************** Main Panel ********** -->
+	<model>
+		<path>Aircraft/Buccaneer/Models/main-panel.xml</path>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0.060</z-m>
+		</offsets>
+	</model>
+
+	<!--
 	<main-panel>
 		<offsets>
 			<x-m>3.36104</x-m>
@@ -352,22 +362,35 @@
 			<y-m>0.0187441</y-m>
 			<z-m>0.659101</z-m>
 		</offsets>
-	</model>
+	</model>-->
 
 	<!-- **************** Stbd Panel ********** -->
 	<stbd-panel>
 		<offsets>
-			<z-m>3.36104</z-m>
+			<pitch-deg>32.0</pitch-deg>
+			<roll-deg>7.0</roll-deg>
 		</offsets>
 	</stbd-panel>
-	
+
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/fuel_gauges.xml</path>
+		<offsets>
+			<x-m>3.54847</x-m>
+			<y-m>0.361662</y-m>
+			<z-m>0.443722</z-m>
+			<pitch-deg alias="../../../stbd-panel/offsets/pitch-deg"/>
+			<roll-deg alias="../../../stbd-panel/offsets/roll-deg"/>
+		</offsets>
+	</model>
+
 	<model>
 		<path>Aircraft/Buccaneer/Models/fuel-jettison.xml</path>
 		<offsets>
-			<x-m>3.53718</x-m>
-			<y-m>0.392233</y-m>
+			<x-m>3.62872</x-m>
+			<y-m>0.395064</y-m>
 			<z-m>0.397295</z-m>
-			<pitch-deg>-79.5</pitch-deg>
+			<pitch-deg alias="../../../stbd-panel/offsets/pitch-deg"/>
+			<roll-deg alias="../../../stbd-panel/offsets/roll-deg"/>
 		</offsets>
 	</model>
 
@@ -694,7 +717,7 @@
 			<not>
 				<equals>
 					<property>sim/current-view/view-number</property>
-					<value>7</value>
+					<value>8</value>
 				</equals>
 			</not>
 		</condition>
