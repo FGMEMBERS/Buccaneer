@@ -26,9 +26,9 @@
 			</entry>
 		</interpolation>
 		<axis>
-			<x>-1</x>
+			<x>0</x>
 			<y>0</y>
-			<z>0</z>
+			<z>-1</z>
 		</axis>
 	</animation>
 
@@ -51,9 +51,9 @@
 			</entry>
 		</interpolation>
 		<axis>
-			<x>1</x>
+			<x>0</x>
 			<y>0</y>
-			<z>0</z>
+			<z>1</z>
 		</axis>
 	</animation>
 
