@@ -63,7 +63,7 @@ Ver 0.0.1
 				<y-offset-m archive="y">1.09045</y-offset-m>
 				<z-offset-m archive="y">3.99331</z-offset-m>
 				<pitch-offset-deg>-20</pitch-offset-deg>
-				<default-field-of-view-deg>60</default-field-of-view-deg>
+				<default-field-of-view-deg>70</default-field-of-view-deg>
 			</config>
 		</view>
 		<view n="1">
@@ -138,6 +138,57 @@ Ver 0.0.1
 				<!--Back-->
 			</config>
 		</view>
+		<view n="98">
+			<name>Model View</name>
+			<type>lookat</type>
+			<config>
+				<from-model type="bool">false</from-model>
+				<from-model-idx type="int">0</from-model-idx>
+				<eye-lat-deg-path>/sim/viewer/eye/latitude-deg</eye-lat-deg-path>
+				<eye-lon-deg-path>/sim/viewer/eye/longitude-deg</eye-lon-deg-path>
+				<eye-alt-ft-path>/sim/viewer/eye/altitude-ft</eye-alt-ft-path>
+				<eye-heading-deg-path>/sim/viewer/eye/heading-deg</eye-heading-deg-path>
+				<eye-pitch-deg-path>/sim/viewer/eye/pitch-deg</eye-pitch-deg-path>
+				<eye-roll-deg-path>/sim/viewer/eye/roll-deg</eye-roll-deg-path>
+				<at-model type="bool">false</at-model>
+				<at-model-idx type="int">0</at-model-idx>
+				<target-lat-deg-path>/sim/viewer/target/latitude-deg</target-lat-deg-path>
+				<target-lon-deg-path>/sim/viewer/target/longitude-deg</target-lon-deg-path>
+				<target-alt-ft-path>/sim/viewer/target/altitude-ft</target-alt-ft-path>
+				<target-heading-deg-path>/sim/viewer/target/heading-deg</target-heading-deg-path>
+				<target-pitch-deg-path>/sim/viewer/target/pitch-deg</target-pitch-deg-path>
+				<target-roll-deg-path>/sim/viewer/target/roll-deg</target-roll-deg-path>
+				<target-x-offset-m type="double">0</target-x-offset-m>
+				<target-y-offset-m type="double">0</target-y-offset-m>
+				<target-z-offset-m type="double">0</target-z-offset-m>
+				<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+				<default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+				<x-offset-m type="double">0</x-offset-m>
+				<y-offset-m type="double">0</y-offset-m>
+				<z-offset-m type="double">100</z-offset-m>
+				<heading-offset-deg>0</heading-offset-deg>
+				<pitch-offset-deg>0</pitch-offset-deg>
+				<roll-offset-deg>0</roll-offset-deg>
+			</config>
+		</view>
+		<viewer>
+			<eye>
+				<latitude-deg type="double">0</latitude-deg>
+				<longitude-deg type="double">0</longitude-deg>
+				<altitude-ft type="double">0</altitude-ft>
+				<heading-deg type="double">0</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+				<roll-deg type="double">0</roll-deg>
+			</eye>
+			<target>
+				<latitude-deg type="double">0</latitude-deg>
+				<longitude-deg type="double">0</longitude-deg>
+				<altitude-ft type="double">0</altitude-ft>
+				<heading-deg type="double">0</heading-deg>
+				<pitch-deg type="double">0</pitch-deg>
+				<roll-deg type="double">0</roll-deg>
+			</target>
+		</viewer>
 
 		<flaps>
 			<setting>0.00</setting>
@@ -546,6 +597,22 @@ Ver 0.0.1
 					<script>aircraft.livery.dialog.toggle()</script>
 				</binding>
 			</key>
+			<key n="81">
+				<name>Q</name>
+				<desc>Switch to previous model</desc>
+				<binding>
+					<command>nasal</command>
+					<script>globals["model-view"].model_view_handler.next(-1)</script>
+				</binding>
+			</key>
+			<key n="113">
+				<name>q</name>
+				<desc>Switch to next model</desc>
+				- <binding>
+					<command>nasal</command>
+					<script>globals["model-view"].model_view_handler.next(1)</script>
+				</binding>
+			</key>
 		</keyboard>
 	</input>
 
@@ -572,6 +639,74 @@ Ver 0.0.1
 		<gunview>
 			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
 		</gunview>
+
+		<model-view>
+			<script>
+				var model_view_handler = {
+				init : func {
+				me.list = [];
+				},
+				start : func {
+				me.models = {};
+				var ai = props.globals.getNode("/ai/models", 1);
+				foreach (var m; [props.globals]
+				~ ai.getChildren("aircraft")
+				~ ai.getChildren("tanker")
+				~ ai.getChildren("multiplayer")
+				~ ai.getChildren("carrier"))
+				me.models[m.getPath()] = m;
+
+				me.addL = setlistener("/ai/models/model-added", func(n) {
+				var m = props.globals.getNode(n.getValue(), 1);
+				me.models[m.getPath()] = m;
+				});
+				me.delL = setlistener("/ai/models/model-removed", func(n) {
+				var m = props.globals.getNode(n.getValue(), 1);
+				delete(me.models, m.getPath());
+				});
+				me.heading = 0;
+				me.next(me.current = 0);
+				},
+				stop : func {
+				removelistener(me.addL);
+				removelistener(me.delL);
+				},
+				reset : func {
+				},
+				next : func(v) {
+				me.current += v;
+				me.list = sort(keys(me.models), cmp);
+				if (me.current &lt; 0)
+				me.current = size(me.list) - 1;
+				elsif (me.current >= size(me.list))
+				me.current = 0;
+
+				var s = "/sim/view[98]/config";
+				var c = me.list[me.current];
+				setprop(s, "eye-lat-deg-path", c ~ "/position/latitude-deg");
+				setprop(s, "eye-lon-deg-path", c ~ "/position/longitude-deg");
+				setprop(s, "eye-alt-ft-path", c ~ "/position/altitude-ft");
+
+				setprop(s, "target-lat-deg-path", c ~ "/position/latitude-deg");
+				setprop(s, "target-lon-deg-path", c ~ "/position/longitude-deg");
+				setprop(s, "target-alt-ft-path", c ~ "/position/altitude-ft");
+
+				var type = me.models[me.list[me.current]].getName();
+				if (type == "")
+				var z = getprop("/sim/chase-distance-m");
+				elsif (type == "carrier")
+				var z = 350;
+				else
+				var z = 70;
+				setprop("/sim/current-view/z-offset-m", z);
+				},
+				};
+
+				setlistener("/sim/signals/fdm-initialized", func {
+				view.manager.register("Model View", model_view_handler);
+				});
+			</script>
+		</model-view>
 	</nasal>
 
 	<environment>
@@ -579,5 +714,6 @@ Ver 0.0.1
 			<contrail-altitude type="double">50000</contrail-altitude>
 		</params>
 	</environment>
+
 
 </PropertyList>
