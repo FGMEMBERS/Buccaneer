@@ -46,7 +46,6 @@
 	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
-		<object-name>rpm</object-name>
 		<emission>
 			<factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
 			<red>0.03125</red>
@@ -58,7 +57,6 @@
 	<!-- Noshadow -->
 	<animation>
 		<type>noshadow</type>
-		<object-name>rpm</object-name>
 	</animation>
 
 	<!-- *** LoD *** -->
