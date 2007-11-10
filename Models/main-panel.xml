@@ -6,7 +6,7 @@
 <PropertyList>
 
 	<!-- **************** Main Panel ********** -->
-	
+
 	<main-panel>
 		<offsets>
 			<x-m>3.4850</x-m>
@@ -68,11 +68,20 @@
 	</model>
 
 	<model>
+		<path>Aircraft/Buccaneer/Instruments/standby_heading_indicator.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.204185</y-m>
+			<z-m>0.761135</z-m>
+		</offsets>
+	</model>
+
+	<model>
 		<path>Aircraft/Buccaneer/Instruments/exh2.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>0.192853</y-m>
-			<z-m>0.546493</z-m>
+			<z-m>0.556728</z-m>
 		</offsets>
 	</model>
 
@@ -81,16 +90,7 @@
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>0.269613</y-m>
-			<z-m>0.546493</z-m>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/Buccaneer/Instruments/standby_heading_indicator.xml</path>
-		<offsets>
-			<x-m alias="../../../main-panel/offsets/x-m"/>
-			<y-m>0.204185</y-m>
-			<z-m>0.767485</z-m>
+			<z-m>0.556728</z-m>
 		</offsets>
 	</model>
 
@@ -99,7 +99,7 @@
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>0.269613</y-m>
-			<z-m>0.61737</z-m>
+			<z-m>0.62372</z-m>
 		</offsets>
 	</model>
 
@@ -108,16 +108,33 @@
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>0.191928</y-m>
-			<z-m>0.61737</z-m>
+			<z-m>0.62372</z-m>
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/rpm3.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.269613</y-m>
+			<z-m>0.489736</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/rpm4.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.191928</y-m>
+			<z-m>0.489736</z-m>
+		</offsets>
+	</model>
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/mag_indicator_oilp-2.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>0.280158</y-m>
-			<z-m>0.452599</z-m>
+			<z-m>0.439899</z-m>
 		</offsets>
 	</model>
 
@@ -125,8 +142,8 @@
 		<path>Aircraft/Buccaneer/Instruments/mag_indicator_oilp-1.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
-			<y-m>0.188296</y-m>
-			<z-m>0.452599</z-m>
+			<y-m>0.175596</y-m>
+			<z-m>0.439899</z-m>
 		</offsets>
 	</model>
 
