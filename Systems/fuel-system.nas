@@ -718,6 +718,6 @@ Valve = {
 # fire it up
 #####
 	
-	settimer(init_fuel_system, 0);
+	setlistener("/sim/signals/fdm-initialized", init_fuel_system);
 	
 	
