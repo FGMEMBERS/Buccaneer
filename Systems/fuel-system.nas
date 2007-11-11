@@ -43,7 +43,7 @@ DumpValve		= props.globals.getNode("controls/fuel/dump-valve", 1);
 CrossConnect	= props.globals.getNode("controls/fuel/cross-connect", 1);
 TotalFuelLbs	= props.globals.getNode("consumables/fuel/total-fuel-lbs", 1);
 TotalFuelGals	= props.globals.getNode("consumables/fuel/total-fuel-gals", 1);
-TotalFuelNorm	= props.globals.getNode("/consumables/fuel/total-fuel-norm", 1);
+TotalFuelNorm	= props.globals.getNode("consumables/fuel/total-fuel-norm", 1);
 
 PortEngine.getNode("out-of-fuel", 1);
 StbdEngine.getNode("out-of-fuel", 1); 
@@ -226,6 +226,9 @@ var fuel_update = func {
 	if(dump_valve) {
 		proportioner_port.jettisonFuel(dt);
 		proportioner_stbd.jettisonFuel(dt);
+	} else {
+		proportioner_port.set_dumprate(0);
+		proportioner_stbd.set_dumprate(0);
 	}
 
 	# transfer to port proportioner
@@ -719,5 +722,3 @@ Valve = {
 #####
 	
 	setlistener("/sim/signals/fdm-initialized", init_fuel_system);
-	
-	
