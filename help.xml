@@ -19,6 +19,14 @@
 			<desc>Select squadron markings</desc>
 		</key>
 		<key>
+			<name>t</name>
+			<desc>Set Autotrim</desc>
+		</key>
+		<key>
+			<name>T</name>
+			<desc>Set all trim values to 0</desc>
+		</key>
+		<key>
 			<name>u/U</name>
 			<desc>seat down/up</desc>
 		</key>
@@ -47,6 +55,9 @@
 		<line> </line>
 		<line>Fuel may be jettisoned by the operation of Fuel Jettison knob. Fuel will be</line>
 		<line>jettisoned until either 4000 lbs remains, or the knob is shut.</line>
-		
+		<line>-----------------------------------------------------------</line>
+		<line>To use the Autotrim function - put the aircraft in the attitude required with the</line>
+		<line>joystick, press key t, centre the joystick, release key t. Key T removes ALL trim </line>
+		<line>settings.</line>
 	</help>
 </PropertyList>
