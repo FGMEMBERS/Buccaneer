@@ -438,6 +438,6 @@ Smoke = {
 
 # Fire it up
 
-setlistener("/sim/signals/fdm-initialized", init_fuel_system);
+setlistener("/sim/signals/fdm-initialized", initialize);
 
 # end 
