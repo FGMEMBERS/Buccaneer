@@ -695,16 +695,15 @@
 	<!-- **************************** Pilot ******************************* -->
 	<!--
 	-->
-	<!--  conceal Pilot Head etc in Cockpit View-->
-
+	<!--  conceal Pilot Head etc in Cockpit Views -->
 	<animation>
 		<type>select</type>
 		<object-name>Pilot-Head</object-name>
 		<condition>
 			<not>
 				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
+					<property>sim/current-view/name</property>
+					<value>Cockpit View</value>
 				</equals>
 			</not>
 		</condition>
@@ -716,8 +715,21 @@
 		<condition>
 			<not>
 				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>8</value>
+					<property>sim/current-view/name</property>
+					<value>Back Seat View</value>
+				</equals>
+			</not>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>Observer-Head</object-name>
+		<condition>
+			<not>
+				<equals>
+					<property>sim/current-view/name</property>
+					<value>Model Cockpit View</value>
 				</equals>
 			</not>
 		</condition>
