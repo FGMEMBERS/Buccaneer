@@ -64,7 +64,8 @@ var last_time = 0.0;
 var total = 0;
 var dump_valve = 0;
 var cross_connect = 0;
-
+var LP_port = 0;
+var LP_stbd = 0;
 ##
 # Initialize the fuel system
 #
@@ -73,7 +74,7 @@ var init_fuel_system = func {
 	print("Initializing Buccaneer fuel system ...");
 
 	# set initial values
-	CrossConnect.setBoolValue(1);
+#CrossConnect.setBoolValue(1);
 	TotalFuelLbs.setDoubleValue(0.01);
 	TotalFuelGals.setDoubleValue(0.01);
 	PortEngine.setBoolValue(0);
@@ -112,6 +113,9 @@ var init_fuel_system = func {
 	#valves ("name",property, intitial status)
 	##
 		valve_1 = Valve.new("dump_valve","controls/fuel/dump-valve",0);
+		valve_2 = Valve.new("cross_connect_valve","controls/fuel/cross-connect",0);
+		valve_3 = Valve.new("LP_valve_port","controls/fuel/LP-port",1);
+		valve_4 = Valve.new("LP_valve_stbd","controls/fuel/LP-stbd",1);
 
 	#calculate the proportions, based on the total capacity of tanks port and stbd
 
@@ -140,7 +144,21 @@ var init_fuel_system = func {
 		}
 	);
 
-	setlistener("controls/fuel/dump-valve-lever", func {	
+	setlistener("controls/fuel/LP-port", func {
+		LP_port = Valve.get("LP_valve_port");
+		#print("LP_port ", LP_port);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/LP-stbd", func {
+		LP_stbd = Valve.get("LP_valve_stbd");
+		#print("LP_stbd ", LP_stbd);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/dump-valve-lever", func {
 		var lever= fuel_dump_lever_Node.getValue();
 		if(lever_sum >=2) direction = -1;
 		if(lever_sum <=0) direction = 1;
@@ -315,11 +333,11 @@ var fuel_update = func {
 			# print(p.get_name());
 			if (p.get_running()) num_prop_running += 1;
 		}
-		print("num_prop_running ", num_prop_running);
+	#print("num_prop_running ", num_prop_running);
 
 		total = port_fuel_consumed + stbd_fuel_consumed;
-		port_outOfFuel = proportioner_port.update(total/2);
-		stbd_outOfFuel = proportioner_stbd.update(total/2);
+		port_outOfFuel = proportioner_port.update(total/num_prop_running);
+		stbd_outOfFuel = proportioner_stbd.update(total/num_prop_running);
 		
 		if(port_outOfFuel and stbd_outOfFuel) {
 			port_outOfFuel = recuperator_port.update(total/2);
@@ -345,8 +363,16 @@ var fuel_update = func {
 	StbdFuel.setDoubleValue(0);
 
 	#set engines
-	PortEngine.getNode("out-of-fuel").setBoolValue(port_outOfFuel);
-	StbdEngine.getNode("out-of-fuel").setBoolValue(stbd_outOfFuel);
+	if(LP_port) {
+		PortEngine.getNode("out-of-fuel").setBoolValue(port_outOfFuel);
+	} else {
+		PortEngine.getNode("out-of-fuel").setBoolValue(1);
+	}
+	if(LP_stbd) {
+		StbdEngine.getNode("out-of-fuel").setBoolValue(stbd_outOfFuel);
+	} else {
+		StbdEngine.getNode("out-of-fuel").setBoolValue(1);
+	}
 
 	settimer(fuel_update, 0.3);
 
@@ -701,13 +727,23 @@ Valve = {
 		return obj;
 	},
 	set : func (valve, pos) {	# operate valve
-		 foreach (var v; Valve.list) {
+		foreach (var v; Valve.list) {
 			if(v.get_name() == valve) {
 #				print("valve ",v.get_name()," ", pos);
 				v.prop.setValue(pos);
-			} 
+			}
 		}
 		
+	},
+	get : func (valve) {	# valve	position
+		var pos = 0;
+		foreach (var v; Valve.list) {
+			if(v.get_name() == valve) {
+#				print("valve ",v.get_name()," ", v.prop.getValue());
+				pos = v.prop.getValue();
+			}
+		}
+		return pos;
 	},
 	get_name : func () {
 		return me.name;
