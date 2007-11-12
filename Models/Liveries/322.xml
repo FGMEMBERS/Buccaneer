@@ -5,6 +5,7 @@
 		<model>
 			<livery>
 				<variant type="string">Side No 322</variant>
+				<index type="int">1</index>
 				<material>
 					<Fuselage-Markings-Side-No>
 						<texture>Liveries/bucc-textures-01-t.rgb</texture>

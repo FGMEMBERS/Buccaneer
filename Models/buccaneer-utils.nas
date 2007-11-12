@@ -24,6 +24,8 @@ fuel_dump_lever_pos_Node = props.globals.getNode("controls/fuel/dump-valve-lever
 fuel_dump_lever_pos_Node.setDoubleValue(0);
 fuel_dump_Node = props.globals.getNode("controls/fuel/dump-valve", 1);
 fuel_dump_lever_Node.setBoolValue(0);
+model_variant_Node = props.globals.getNode("sim/model/variant", 1);
+
 
 controls.fullBrakeTime = 0;
 
@@ -56,7 +58,9 @@ initialize = func {
 	
 	# initialise dialogs 
 	aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
-		"sim/model/livery/variant");
+		"sim/model/livery/variant",
+		"sim/model/livery/index"
+		);
 
 	# initialize objects
 	pilot_g = PilotG.new();
@@ -67,8 +71,22 @@ initialize = func {
 
 #	setlistener("engines/engine/cranking", func {smoke.updateSmoking(); 
 #												  });
-
-
+	
+	setlistener("sim/model/variant", func {
+		var index = getprop("sim/model/variant");
+		aircraft.livery.set(index);
+	},
+	1);
+	
+	setlistener("sim/model/livery/variant", func {
+		var name = getprop("sim/model/livery/variant");
+		forindex (var i; aircraft.livery.data){
+#			print("variant index: ", aircraft.livery.data[i][0]," ",aircraft.livery.data[i][1]);
+			if(aircraft.livery.data[i][0]== name)
+				model_variant_Node.setIntValue(i);
+		}
+	},
+	1);
 	# set it running on the next update cycle
 	settimer(update, 0);
 
