@@ -25,6 +25,7 @@ fuel_dump_lever_pos_Node.setDoubleValue(0);
 fuel_dump_Node = props.globals.getNode("controls/fuel/dump-valve", 1);
 fuel_dump_lever_Node.setBoolValue(0);
 model_variant_Node = props.globals.getNode("sim/model/variant", 1);
+model_variant_Node.setIntValue(0);
 
 
 controls.fullBrakeTime = 0;
@@ -437,6 +438,6 @@ Smoke = {
 
 # Fire it up
 
-settimer(initialize,0);
+setlistener("/sim/signals/fdm-initialized", init_fuel_system);
 
 # end 
