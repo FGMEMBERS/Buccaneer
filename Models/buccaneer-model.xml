@@ -69,11 +69,11 @@
 		<condition>
 			<and>
 				<equals>
-					<property>/engines/engine/smoking</property>
+					<property>engines/engine/smoking</property>
 					<value>true</value>
 				</equals>
 				<less-than>
-					<property>/position/altitude-agl-ft</property>
+					<property>position/altitude-agl-ft</property>
 					<value>12000</value>
 				</less-than>
 			</and>
