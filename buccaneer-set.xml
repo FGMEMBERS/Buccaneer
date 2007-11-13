@@ -55,6 +55,10 @@ Ver 0.0.1
 		</hud>
 		<model>
 			<path>Aircraft/Buccaneer/Models/buccaneer-model.xml</path>
+			<livery>
+				<variant type="string">Side No 322</variant>
+			</livery>
+			<variant type="int">1</variant>
 		</model>
 		<view n="0">
 			<internal archive="y">true</internal>
@@ -254,45 +258,40 @@ Ver 0.0.1
 			<bug>-50</bug>
 		</aoa-indexer>
 
-		<livery>
-			<variant type="string">Side No 322</variant>
-		</livery>
-
 	</sim>
-
 	<consumables>
 		<fuel>
 			<tank n="0">
 				<name type="string">#1</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="1">
 				<name type="string">#2</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="2">
 				<name type="string">#3</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="3">
 				<name type="string">#4</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="4">
 				<name type="string">#5</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="5">
 				<name type="string">#6</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="6">
 				<name type="string">#7</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="7">
 				<name type="string">#8</name>
-				<selected type="bool">1</selected>
+				<selected type="bool">0</selected>
 			</tank>
 			<tank n="8">
 				<name type="string">Prop Port</name>
@@ -363,12 +362,12 @@ Ver 0.0.1
 				<desc>Emergency Flap Lowering.</desc>
 				<binding>
 					<command>property-assign</command>
-					<property>/controls/flight/flaps-alternate-extension</property>
+					<property>controls/flight/flaps-alternate-extension</property>
 					<value type="double">0</value>
 				</binding>
 				<binding>
 					<command>property-assign</command>
-					<property>/controls/flight/flaps</property>
+					<property>controls/flight/flaps</property>
 					<value type="double">1</value>
 				</binding>
 			</key>
