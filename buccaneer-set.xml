@@ -56,9 +56,9 @@ Ver 0.0.1
 		<model>
 			<path>Aircraft/Buccaneer/Models/buccaneer-model.xml</path>
 			<livery>
-				<variant type="string">Side No 322</variant>
+				<variant type="string" >Side No 322</variant>
 			</livery>
-			<variant type="int">1</variant>
+			<variant type="int" >1</variant>
 		</model>
 		<view n="0">
 			<internal archive="y">true</internal>
@@ -258,6 +258,17 @@ Ver 0.0.1
 			<bug>-50</bug>
 		</aoa-indexer>
 
+		<headshake>
+			<enabled type="bool">1</enabled>
+		</headshake>
+
+		<engines>
+			<engine n="9">
+				<rpm type="double">100</rpm>
+			</engine>
+		</engines>
+
+
 	</sim>
 	<consumables>
 		<fuel>
@@ -437,7 +448,7 @@ Ver 0.0.1
 					</condition>
 					<command>property-assign</command>
 					<property>sim/current-view/y-offset-m</property>
-					<value type="double">0.7839</value>
+					<value type="double">1.09045</value>
 				</binding>
 			</key>
 			<key n="85">
