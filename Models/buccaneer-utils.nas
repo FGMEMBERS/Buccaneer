@@ -8,10 +8,12 @@
 # Make sure all needed properties are present and accounted 
 # for, and that they have sane default values.
 
-view_number_Node = props.globals.getNode("/sim/current-view/view-number",1);
+view_number_Node = props.globals.getNode("sim/current-view/view-number",1);
 view_number_Node.setDoubleValue(0);
 
-enabledNode = props.globals.getNode("/sim/headshake/enabled", 1);
+view_name_Node = props.globals.getNode("sim/current-view/name",1);
+
+enabledNode = props.globals.getNode("sim/headshake/enabled", 1);
 enabledNode.setBoolValue(1);
 
 n1_node = props.globals.getNode("engines/engine/n1", 1);
@@ -31,7 +33,8 @@ model_variant_Node.setIntValue(0);
 controls.fullBrakeTime = 0;
 
 pilot_g = nil;
-headshake = nil;
+pilot_headshake = nil;
+observer_headshake = nil;
 smoke = nil;
 
 var old_n1 = 0;
@@ -65,7 +68,8 @@ initialize = func {
 
 	# initialize objects
 	pilot_g = PilotG.new();
-	headshake = HeadShake.new();
+	pilot_headshake = HeadShake.new("pilot", 0);
+	observer_headshake = HeadShake.new("observer", 100);
 	smoke = Smoke.new();
 	
 	#set listeners
@@ -75,6 +79,7 @@ initialize = func {
 	
 	setlistener("sim/model/variant", func {
 		var index = getprop("sim/model/variant");
+		print("index", getprop("sim/model/variant"));
 		aircraft.livery.set(index);
 	},
 	1);
@@ -82,7 +87,7 @@ initialize = func {
 	setlistener("sim/model/livery/variant", func {
 		var name = getprop("sim/model/livery/variant");
 		forindex (var i; aircraft.livery.data){
-#			print("variant index: ", aircraft.livery.data[i][0]," ",aircraft.livery.data[i][1]);
+			print("variant index: ", aircraft.livery.data[i][0]," ",aircraft.livery.data[i][1]);
 			if(aircraft.livery.data[i][0]== name)
 				model_variant_Node.setIntValue(i);
 		}
@@ -108,10 +113,17 @@ update = func {
 	pilot_g.gmeter_update();
 	smoke.updateSmoking();
 	
-	if (enabledNode.getValue() and view_number_Node.getValue() == 0) {
-		headshake.update();
+	if (enabledNode.getValue() and (
+		view_name_Node.getValue() == "Cockpit View" or 
+		view_name_Node.getValue() == "Model Cockpit View")) {
+		pilot_headshake.update();
+#		print ("head shake", view_name_Node.getValue());
+	} elsif (enabledNode.getValue() and view_name_Node.getValue() == "Back Seat View") {
+		observer_headshake.update(); 
+#	print ( view_name_Node.getValue());
 	}
-		
+
+#	print("index", getprop("sim/model/variant"));
 	settimer(update, 0); 
 
 }# end main loop func
@@ -157,7 +169,8 @@ PilotG = {
 				acceleration = "accelerations",
 				pilot_g = "pilot-g",
 				g_timeratio = "timeratio", 
-				pilot_g_damped = "pilot-g-damped", 
+				pilot_g_damped = "pilot-g-damped",
+				pilot_g_damped_export = "engines/engine[9]/rpm",
 				g_min = "pilot-gmin", 
 				g_max = "pilot-gmax"
 				){
@@ -174,6 +187,7 @@ PilotG = {
 		obj.g_timeratio.setDoubleValue(0.0075);
 		obj.g_min.setDoubleValue(0);
 		obj.g_max.setDoubleValue(0);
+		obj.pilot_g_damped_Export = props.globals.getNode(pilot_g_damped_export, 1);
 		
 		print (obj.name);
 		return obj;
@@ -186,6 +200,7 @@ PilotG = {
 		g_damp = (g * n) + (g_damp * (1 - n));
 			
 		me.pilot_g_damped.setDoubleValue(g_damp);
+		me.pilot_g_damped_Export.setDoubleValue(g_damp);
 
 		# print(sprintf("pilot_g_damped in=%0.5f, out=%0.5f", g, g_damp));
 	},
@@ -207,44 +222,43 @@ PilotG = {
 # 
 #  - this is a modification of the original work by Josh Babcock
 
-HeadShake = {
-	new : func (name = "headshake",
-				x_accel_fps_sec = "x-accel-fps_sec",
-				y_accel_fps_sec = "y-accel-fps_sec",
-				z_accel_fps_sec = "z-accel-fps_sec",
-				x_max_m = "x-max-m",
-				x_min_m = "x-min-m",
-				y_max_m = "y-max-m",
-				y_min_m = "y-min-m",
-				z_max_m = "z-max-m",
-				z_min_m = "z-min-m",
-				x_threshold_g = "x-threshold-g",
-				y_threshold_g = "y-threshold-g",
-				z_threshold_g = "z-threshold-g",
-				x_config = "z-offset-m", 
-				y_config = "x-offset-m",
-				z_config = "y-offset-m",
-				time_ratio = "time-ratio",
-				){
-		var obj = {parents : [HeadShake] };
-		obj.name = name;
-		obj.accelerations = props.globals.getNode("accelerations/pilot", 1);
-		obj.xAccelNode = obj.accelerations.getChild( x_accel_fps_sec, 0, 1);
+	HeadShake = {
+		new : func (name, index){
+			var obj = {parents : [HeadShake]};
+			var x_accel_fps_sec = "x-accel-fps_sec";
+			var y_accel_fps_sec = "y-accel-fps_sec";
+			var z_accel_fps_sec = "z-accel-fps_sec";
+			x_max_m = "x-max-m";
+			x_min_m = "x-min-m";
+			y_max_m = "y-max-m";
+			y_min_m = "y-min-m";
+			z_max_m = "z-max-m";
+			z_min_m = "z-min-m";
+			x_threshold_g = "x-threshold-g";
+			y_threshold_g = "y-threshold-g";
+			z_threshold_g = "z-threshold-g";
+			x_config = "z-offset-m";
+			y_config = "x-offset-m";
+			z_config = "y-offset-m";
+			time_ratio = "time-ratio";
+			obj.name = name ~ " headshake";
+			obj.accelerations = props.globals.getNode("accelerations/pilot", 1);
+			obj.xAccelNode = obj.accelerations.getChild( x_accel_fps_sec, 0, 1);
 		obj.yAccelNode = obj.accelerations.getChild( y_accel_fps_sec, 0, 1);
 		obj.zAccelNode = obj.accelerations.getChild( z_accel_fps_sec, 0, 1);
 		obj.sim = props.globals.getNode("sim/headshake", 1);
 		obj.xMaxNode = obj.sim.getChild(x_max_m, 0, 1);
-		obj.xMaxNode.setDoubleValue(0.025);
+		obj.xMaxNode.setDoubleValue(0.0375);
 		obj.xMinNode = obj.sim.getChild(x_min_m, 0, 1);
-		obj.xMinNode.setDoubleValue(-0.01);
+		obj.xMinNode.setDoubleValue(-0.015);
 		obj.yMaxNode = obj.sim.getChild(y_max_m, 0, 1);
-		obj.yMaxNode.setDoubleValue(0.01);
+		obj.yMaxNode.setDoubleValue(0.015);
 		obj.yMinNode = obj.sim.getChild(y_min_m, 0, 1);
-		obj.yMinNode.setDoubleValue(-0.01);
+		obj.yMinNode.setDoubleValue(-0.015);
 		obj.zMaxNode = obj.sim.getChild(z_max_m, 0, 1);
-		obj.zMaxNode.setDoubleValue(0.01);
+		obj.zMaxNode.setDoubleValue(0.015);
 		obj.zMinNode = obj.sim.getChild(z_min_m, 0, 1);
-		obj.zMinNode.setDoubleValue(-0.03);
+		obj.zMinNode.setDoubleValue(-0.045);
 		obj.xThresholdNode = obj.sim.getChild(x_threshold_g, 0, 1);
 		obj.xThresholdNode.setDoubleValue(0.5);
 		obj.yThresholdNode = obj.sim.getChild(y_threshold_g, 0, 1);
@@ -253,11 +267,10 @@ HeadShake = {
 		obj.zThresholdNode.setDoubleValue(0.5);
 		obj.time_ratio_Node = obj.sim.getChild(time_ratio , 0, 1);
 		obj.time_ratio_Node.setDoubleValue(0.5);
-		obj.config = props.globals.getNode("/sim/view/config", 1);
-		obj.xConfigNode = obj.config.getChild(x_config , 0, 1);
-		obj.yConfigNode = obj.config.getChild(y_config , 0, 1);
-		obj.zConfigNode = obj.config.getChild(z_config , 0, 1);
-		
+		obj.config = props.globals.getNode("sim/view[" ~ index ~"]/config", 1);
+		obj.xConfigNode = obj.config.getChild(x_config, 0, 1);
+		obj.yConfigNode = obj.config.getChild(y_config, 0, 1);
+		obj.zConfigNode = obj.config.getChild(z_config, 0, 1);
 		obj.seat_vertical_adjust_Node = props.globals.getNode("/controls/seat/vertical-adjust", 1);
 		obj.seat_vertical_adjust_Node.setDoubleValue(0);
 		
@@ -269,7 +282,17 @@ HeadShake = {
 		# There are two coordinate systems here, one used for accelerations, 
 		# and one used for the viewpoint.
 		# We will be using the one for accelerations.
+	
+		var x_config = "z-offset-m";
+		var y_config = "x-offset-m";
+		var z_config = "y-offset-m";
 		
+		var xConfig = me.xConfigNode.getValue();
+		var yConfig = me.yConfigNode.getValue();
+		var zConfig = me.zConfigNode.getValue();
+
+#		print ("xconfig ", xConfig);
+
 		var n = pilot_g.get_g_timeratio(); 
 		var seat_vertical_adjust = me.seat_vertical_adjust_Node.getValue();
 		
@@ -288,10 +311,6 @@ HeadShake = {
 		var xThreshold =  me.xThresholdNode.getValue();
 		var yThreshold =  me.yThresholdNode.getValue();
 		var zThreshold =  me.zThresholdNode.getValue();
-		
-		var xConfig = me.xConfigNode.getValue();
-		var yConfig = me.yConfigNode.getValue();
-		var zConfig = me.zConfigNode.getValue();
 		
 		# Set viewpoint divergence and clamp
 		# Note that each dimension has its own special ratio and +X is clamped at 1cm
@@ -339,8 +358,8 @@ HeadShake = {
 
 		last_xDivergence = xDivergence_damp;
 
-		#print (sprintf("x total=%0.5f, x min=%0.5f, x div damped=%0.5f", xDivergence_total,
-		# xMin , xDivergence_damp));	
+#		print (sprintf("x total=%0.5f, x min=%0.5f, x div damped=%0.5f", xDivergence_total,
+#		 xMin , xDivergence_damp));	
 
 		yDivergence_total = yDivergence;
 		if (yDivergence_total >= yMax){yDivergence_total = yMax; }
@@ -348,16 +367,16 @@ HeadShake = {
 
 		if (abs(last_yDivergence - yDivergence_total) <= yThreshold){
 			yDivergence_damp = (yDivergence_total * n) + (yDivergence_damp * (1 - n));
-	#	 	print ("y low pass");
+#		 	print ("y low pass");
 		} else {
 			yDivergence_damp = yDivergence_total;
-	#		print ("y high pass");
+#			print ("y high pass");
 		}
 
 		last_yDivergence = yDivergence_damp;
 
-	#	print (sprintf("y=%0.5f, y total=%0.5f, y min=%0.5f, y div damped=%0.5f",
-	#						yDivergence, yDivergence_total, yMin , yDivergence_damp));
+#		print (sprintf("y=%0.5f, y total=%0.5f, y min=%0.5f, y div damped=%0.5f",
+#							yDivergence, yDivergence_total, yMin , yDivergence_damp));
 	
 		zDivergence_total =  xDivergence + zDivergence;
 		if (zDivergence_total >= zMax){zDivergence_total = zMax;}
@@ -365,20 +384,20 @@ HeadShake = {
 
 		if (abs(last_zDivergence - zDivergence_total) <= zThreshold){
 			zDivergence_damp = (zDivergence_total * n) + (zDivergence_damp * (1 - n));
-		#	print ("z low pass");
+#			print ("z low pass");
 		} else {
 			zDivergence_damp = zDivergence_total;
-		#	print ("z high pass");
+#			print ("z high pass");
 		}
 	
 		last_zDivergence = zDivergence_damp;
 	
-	#	print (sprintf("z total=%0.5f, z min=%0.5f, z div damped=%0.5f", 
-	#										zDivergence_total, zMin , zDivergence_damp));
+#		print (sprintf("z total=%0.5f, z min=%0.5f, z div damped=%0.5f", 
+#											zDivergence_total, zMin , zDivergence_damp));
 	
-		setprop("/sim/current-view/z-offset-m", xConfig + xDivergence_damp);
-		setprop("/sim/current-view/x-offset-m", yConfig + yDivergence_damp);
-		setprop("/sim/current-view/y-offset-m", zConfig + zDivergence_damp 
+		setprop("sim/current-view/z-offset-m", xConfig + xDivergence_damp);
+		setprop("sim/current-view/x-offset-m", yConfig + yDivergence_damp);
+		setprop("sim/current-view/y-offset-m", zConfig + zDivergence_damp 
 																+ seat_vertical_adjust);
 	#	me.z_offset = xDivergence_damp;
 	#	me.x_offset = yDivergence_damp;
@@ -408,7 +427,7 @@ Smoke = {
 	},
 
 	updateSmoking: func {    # set the smoke value according to the engine conditions
-#		print("updating Smoke");
+#	print("updating Smoke");
 		
 		var n1 = me.n1.getValue();
 		var smoke = me.smoking.getValue();
@@ -438,6 +457,6 @@ Smoke = {
 
 # Fire it up
 
-setlistener("/sim/signals/fdm-initialized", initialize);
+setlistener("sim/signals/fdm-initialized", initialize);
 
 # end 
