@@ -702,7 +702,7 @@
 		<condition>
 			<not>
 				<equals>
-					<property>sim/current-view/name</property>
+					<property>/sim/current-view/name</property>
 					<value>Cockpit View</value>
 				</equals>
 			</not>
@@ -715,7 +715,7 @@
 		<condition>
 			<not>
 				<equals>
-					<property>sim/current-view/name</property>
+					<property>/sim/current-view/name</property>
 					<value>Back Seat View</value>
 				</equals>
 			</not>
@@ -728,7 +728,7 @@
 		<condition>
 			<not>
 				<equals>
-					<property>sim/current-view/name</property>
+					<property>/sim/current-view/name</property>
 					<value>Model Cockpit View</value>
 				</equals>
 			</not>
