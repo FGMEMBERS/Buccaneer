@@ -6,6 +6,8 @@ all the components used by FGFS to represent the aircraft. Components include
 the flight data model, instrument panel, and external 3D model. Lots still relies
 on the Hawker Hunter/
 
+This config is base
+
 Ver 0.0.1
 
 
@@ -14,132 +16,38 @@ Ver 0.0.1
 -->
 <PropertyList>
 	<sim include="help.xml">
-		<description type="string" >Blackburn Buccaneer S2(YASim)</description>
-		<author type="string">Vivian Meazza, AJ MacLeod. Melchior Franz</author>
+		<description type="string" >Blackburn Buccaneer S2(Observer)</description>
+		<author type="string">Vivian Meazza, AJ MacLeod.</author>
 		<status type="string">alpha</status>
-		<virtual-cockpit archive="y">true</virtual-cockpit>
-		<flight-model>yasim</flight-model>
-		<aero>buccaneer-yasim</aero>
-		<fuel-fraction>1.0</fuel-fraction>
+		<aircraft-version>0.1</aircraft-version>
+
+		<flight-model>null</flight-model>
+
+		<model>
+			<path>Models/Geometry/null.ac</path>
+		</model>
+
+		<presets>
+			<onground>true</onground>
+		</presets>
+
 		<systems>
-			<autopilot>
-				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
-			</autopilot>
 			<electrical>
-				<path></path>
+				<path/>
 			</electrical>
 		</systems>
 		<instrumentation>
-			<path>Aircraft/Buccaneer/Systems/instrumentation.xml</path>
+			<path/>
 		</instrumentation>
-		<ai>
-			<aircraft>
-				<exhaust type="bool">false</exhaust>
-			</aircraft>
-		</ai>
-		<submodels>
-			<serviceable type="bool">true</serviceable>
-			<path>Aircraft/Hunter/Models/hunter-submodels.xml</path>
-		</submodels>
-		<sound>
-			<path>Aircraft/Buccaneer/Sounds/buccaneer-sound.xml</path>
-		</sound>
-		<!-- hide the 2D panel -->
-		<panel>
-			<visibility archive="y">false</visibility>
-		</panel>
-		<!-- no HUD -->
-		<hud>
-			<path>Huds/Default/default.xml</path>
-			<visibility>false</visibility>
-		</hud>
-		<model>
-			<path>Aircraft/Buccaneer/Models/buccaneer-model.xml</path>
-			<livery>
-				<variant type="string" >Side No 322</variant>
-			</livery>
-			<variant type="int" >1</variant>
-		</model>
+
 		<view n="0">
 			<internal archive="y">true</internal>
 			<config>
-				<x-offset-m archive="y">-0.05</x-offset-m>
-				<y-offset-m archive="y">1.09045</y-offset-m>
-				<z-offset-m archive="y">3.99331</z-offset-m>
+				<x-offset-m archive="y">0</x-offset-m>
+				<y-offset-m archive="y">5</y-offset-m>
+				<z-offset-m archive="y">0</z-offset-m>
 				<pitch-offset-deg>-20</pitch-offset-deg>
 				<default-field-of-view-deg>70</default-field-of-view-deg>
-			</config>
-		</view>
-		<view n="1">
-			<config>
-				<target-z-offset-m archive="y"
-													 type="double">8.5</target-z-offset-m>
-			</config>
-		</view>
-		<view n="2">
-			<config>
-				<target-z-offset-m archive="y"
-													 type="double">8.5</target-z-offset-m>
-			</config>
-		</view>
-		<view n="3">
-			<config>
-				<target-z-offset-m archive="y"
-													 type="double">8.5</target-z-offset-m>
-			</config>
-		</view>
-		<view n="4">
-			<config>
-				<target-z-offset-m archive="y"
-													 type="double">7</target-z-offset-m>
-			</config>
-		</view>
-		<view n="5">
-			<config>
-				<target-z-offset-m archive="y"
-													 type="double">7</target-z-offset-m>
-			</config>
-		</view>
-		<view n="6">
-			<config>
-				<target-z-offset-m archive="y"
-													 type="double">7</target-z-offset-m>
-			</config>
-		</view>
-		<view n="100">
-			<name>Back Seat View</name>
-			<internal archive="y">true</internal>
-			<type>lookfrom</type>
-			<config>
-				<from-model type="bool">true</from-model>
-				<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-				<x-offset-m archive="y"
-										type="double">0.05</x-offset-m>
-				<y-offset-m archive="y"
-										type="double">1.30165</y-offset-m>
-				<z-offset-m archive="y"
-										type="double">5.2269</z-offset-m>
-				<pitch-offset-deg>-15</pitch-offset-deg>
-				<default-field-of-view-deg>60</default-field-of-view-deg>
-				<dynamic-view type="bool">true</dynamic-view>
-			</config>
-		</view>
-		<view n="101">
-			<name>Gun Camera View</name>
-			<type>lookfrom</type>
-			<internal archive="y">true</internal>
-			<config>
-				<from-model type="bool">true</from-model>
-				<from-model-idx type="int">0</from-model-idx>
-				<ground-level-nearplane-m type="double">0.01f</ground-level-nearplane-m>
-				<default-field-of-view-deg type="double">30</default-field-of-view-deg>
-				<pitch-offset-deg>-15</pitch-offset-deg>
-				<x-offset-m archive="y">0.0</x-offset-m>
-				<!--Right-->
-				<y-offset-m archive="y">-0.531504</y-offset-m>
-				<!--Up-->
-				<z-offset-m archive="y">1.92197</z-offset-m>
-				<!--Back-->
 			</config>
 		</view>
 		<view n="97">
@@ -148,20 +56,16 @@ Ver 0.0.1
 			<config>
 				<from-model type="bool">false</from-model>
 				<from-model-idx type="int">0</from-model-idx>
-
 				<at-model type="bool">false</at-model>
 				<at-model-idx type="int">0</at-model-idx>
-
 				<eye-lat-deg-path>/sim/viewer/eye/latitude-deg</eye-lat-deg-path>
 				<eye-lon-deg-path>/sim/viewer/eye/longitude-deg</eye-lon-deg-path>
 				<eye-alt-ft-path>/sim/viewer/eye/altitude-ft</eye-alt-ft-path>
 				<eye-heading-deg-path>/sim/viewer/eye/heading-deg</eye-heading-deg-path>
 				<eye-pitch-deg-path>/sim/viewer/eye/pitch-deg</eye-pitch-deg-path>
 				<eye-roll-deg-path>/sim/viewer/eye/roll-deg</eye-roll-deg-path>
-
 				<ground-level-nearplane-m type="double">0.2f</ground-level-nearplane-m>
 				<default-field-of-view-deg type="double">65.0</default-field-of-view-deg>
-
 				<x-offset-m type="double">0.05</x-offset-m>
 				<y-offset-m
 					type="double">1.30165</y-offset-m>
@@ -225,211 +129,22 @@ Ver 0.0.1
 			</target>
 		</viewer>
 
-		<flaps>
-			<setting>0.00</setting>
-			<setting>0.25</setting>
-			<setting>0.5</setting>
-			<setting>0.75</setting>
-			<setting>1.00</setting>
-		</flaps>
-		<aileron-droop>
-			<setting>0.00</setting>
-			<setting>0.1667</setting>
-			<setting>0.3333</setting>
-			<setting>0.5</setting>
-			<setting>0.6667</setting>
-			<setting>0.8333</setting>
-			<setting>0.8333</setting>
-		</aileron-droop>
-		<airbrake>
-			<setting>0.00</setting>
-			<setting>0.25</setting>
-			<setting>0.5</setting>
-			<setting>0.75</setting>
-			<setting>1.00</setting>
-		</airbrake>
-
-		<aoa-indexer>
-			<too-slow-deg>8.7</too-slow-deg>
-			<slow-deg>6.7</slow-deg>
-			<fast-deg>4.7</fast-deg>
-			<too-fast-deg>2.7</too-fast-deg>
-			<bug>0</bug>
-			<bug>-50</bug>
-		</aoa-indexer>
-
 		<headshake>
 			<enabled type="bool">1</enabled>
 		</headshake>
 
 	</sim>
-
+	
 	<rotors>
 		<main>
 			<rpm type="double">1</rpm>
 		</main>
 	</rotors>
 
-	<consumables>
-		<fuel>
-			<tank n="0">
-				<name type="string">#1</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="1">
-				<name type="string">#2</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="2">
-				<name type="string">#3</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="3">
-				<name type="string">#4</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="4">
-				<name type="string">#5</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="5">
-				<name type="string">#6</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="6">
-				<name type="string">#7</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="7">
-				<name type="string">#8</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="8">
-				<name type="string">Prop Port</name>
-				<selected type="bool">1</selected>
-			</tank>
-			<tank n="9">
-				<name type="string">Prop Stbd</name>
-				<selected type="bool">1</selected>
-			</tank>
-			<tank n="10">
-				<name type="string">Recup Port</name>
-				<selected type="bool">0</selected>
-			</tank>
-			<tank n="11">
-				<name type="string">Recup Stbd</name>
-				<selected type="bool">0</selected>
-			</tank>
-		</fuel>
-	</consumables>
 
-	<!-- *************** set properties **********************-->
-	<!--parking brake ON -->
-	<!-- nosewheel lock OFF -->
-	<controls>
-		<gear>
-			<brake-parking>1</brake-parking>
-			<tailwheel-lock>false</tailwheel-lock>
-		</gear>
-		<flight>
-			<flaps-alternate-extension type="double">1</flaps-alternate-extension>
-			<aileron-droop type="double">0</aileron-droop>
-			<tail-flaps type="double">0</tail-flaps>
-		</flight>
-		<lighting>
-			<nav-lights>false</nav-lights>
-		</lighting>
-	</controls>
-
-	<engines>
-		<engine>
-			<smoking type="bool">true</smoking>
-		</engine>
-	</engines>
-
-	<!-- hsi heading bug and source select-->
-	<instrumentation>
-		<heading-indicator>
-			<heading-bug-deg type="double">95</heading-bug-deg>
-			<heading-source type="bool">true</heading-source>
-		</heading-indicator>
-
-	</instrumentation>
-	<!-- map keyboard input -->
 	<input>
-		<keyboard include="../../Input/Keyboard/carrier-bindings.xml">
-			<!-- map keys for airbrake interlock -->
-			<key n="2">
-				<name>Ctrl-B</name>
-				<desc>Toggle speedbrake.</desc>
-				<binding>
-					<command>property-toggle</command>
-					<property>/controls/flight/speedbrake</property>
-				</binding>
-			</key>
-			<!-- map keys for emergency flap lowering -->
-			<key n="6">
-				<name>Ctrl-F</name>
-				<desc>Emergency Flap Lowering.</desc>
-				<binding>
-					<command>property-assign</command>
-					<property>controls/flight/flaps-alternate-extension</property>
-					<value type="double">0</value>
-				</binding>
-				<binding>
-					<command>property-assign</command>
-					<property>controls/flight/flaps</property>
-					<value type="double">1</value>
-				</binding>
-			</key>
-			<!-- map keys for arrester hook -->
-			<key n="79">
-				<name>O</name>
-				<desc>Hook down.</desc>
-				<binding>
-					<command>property-assign</command>
-					<property>controls/gear/tailhook</property>
-					<value type="double">1.0</value>
-				</binding>
-			</key>
-			<key n="111">
-				<name>o</name>
-				<desc>Hook Up.</desc>
-				<binding>
-					<command>property-assign</command>
-					<property>controls/gear/tailhook</property>
-					<value type="double">0.0</value>
-				</binding>
-			</key>
-			<!-- map keys for wing fold -->
-			<key n="70">
-				<name>F</name>
-				<desc>Wing Fold Down/Canopy Close.</desc>
-				<binding>
-					<command>property-assign</command>
-					<property>/controls/flight/wing-fold</property>
-					<value type="bool">1.0</value>
-				</binding>
-			</key>
-			<key n="102">
-				<name>f</name>
-				<desc>Wing Fold Up/Canopy Open.</desc>
-				<binding>
-					<command>property-assign</command>
-					<property>/controls/flight/wing-fold</property>
-					<value type="bool">0.0</value>
-				</binding>
-			</key>
-			<!-- map keys for no action  -->
-			<!--<key n="107">
-				<name>k</name>
-				<desc>Null.</desc>
-				<binding>
-					<command>property-assign</command>
-					<property>null</property>
-					<value type="double">0</value>
-				</binding>
-			</key>-->
+		<keyboard>
+
 			<!-- map keys for seat vertical adjust -->
 			<key n="21">
 				<name>CTRL-U</name>
@@ -499,111 +214,6 @@ Ver 0.0.1
 					<max type="double">0.85</max>
 				</binding>
 			</key>
-			<!-- map keys for 10 deg flap steps -->
-			<key n="91">
-				<name>[</name>
-
-				<desc>Increase flap lever.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-						controls.flapsDown(1)
-					</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.flapsDown(0)</script>
-					</binding>
-				</mod-up>
-
-			</key>
-			<key n="93">
-				<name>]</name>
-				<desc>Increase aileron droop.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-						controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop", 1);
-					</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>
-							controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop", 0);
-						</script>
-					</binding>
-				</mod-up>
-
-			</key>
-			<key n="123">
-				<name>{</name>
-				<desc>Decrease flap lever.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-						controls.flapsDown(-1)
-					</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.flapsDown(0)</script>
-					</binding>
-				</mod-up>
-			</key>
-			<key n="125">
-				<name>}</name>
-				<desc>Decrease aileron droop.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-						controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop", -1);
-					</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop",0);</script>
-					</binding>
-				</mod-up>
-			</key>
-			<!-- map keys for jettison stores  -->
-			<!-- not used right now -->
-			<key n="74">
-				<name>J</name>
-				<desc>Jettison Outer Pylon Stores.</desc>
-			</key>
-			<key n="106">
-				<name>j</name>
-				<desc>Decrease airbrake.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>controls.stepProps("/controls/flight/speedbrake","/sim/airbrake",-1);</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.stepProps("/controls/flight/speedbrake","/sim/airbrake",0);</script>
-					</binding>
-				</mod-up>
-			</key>
-			<key n="107">
-				<name>k</name>
-				<desc>Increase airbrake.</desc>
-				<binding>
-					<command>nasal</command>
-					<script>controls.stepProps("/controls/flight/speedbrake","/sim/airbrake",1);</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>controls.stepProps("/controls/flight/speedbrake","/sim/airbrake",0);</script>
-					</binding>
-				</mod-up>
-			</key>
-
 			<key n="10">
 				<name>Ctrl-J</name>
 				<desc>Jettison Inner and Outer Pylon Stores.</desc>
@@ -629,15 +239,6 @@ Ver 0.0.1
 					<value type="double">0.0</value>
 				</binding>-->
 			</key>
-			<!-- Livery Box -->
-			<key n="108">
-				<name>l</name>
-				<desc>Show livery select dialog</desc>
-				<binding>
-					<command>nasal</command>
-					<script>aircraft.livery.dialog.toggle()</script>
-				</binding>
-			</key>
 			<key n="81">
 				<name>Q</name>
 				<desc>Switch to previous model</desc>
@@ -654,48 +255,14 @@ Ver 0.0.1
 					<script>globals["model-view"].model_view_handler.next(1)</script>
 				</binding>
 			</key>
-			<key n="84">
-				<name>T</name>
-				<desc>Autotrim cancel</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-						setprop("controls/flight/elevator-trim",0);
-						setprop("controls/flight/aileron-trim",0);
-						setprop("controls/flight/rudder-trim",0);
-					</script>
-				</binding>
-			</key>
-			<key n="116">
-				<name>t</name>
-				<desc>Autotrim</desc>
-				<binding>
-					<command>nasal</command>
-					<script>aircraft.autotrim.start()</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>aircraft.autotrim.stop()</script>
-					</binding>
-				</mod-up>
-			</key>
 		</keyboard>
 	</input>
-
-	<yasim>
-		<weights>
-			<pilot-lb type="double">200</pilot-lb>
-			<!--<tank-100gal-lbs type="double">170</tank-100gal-lbs>
-			<tank-100gal-lbs type="double">170</tank-100gal-lbs>-->
-		</weights>
-	</yasim>
 
 	<!-- nasal stuff -->
 	<nasal>
 		<buccaneer>
-			<file>Aircraft/Buccaneer/Models/buccaneer-utils.nas</file>
-			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
+			<file>Aircraft/Buccaneer/Models/buccaneer-obs-utils.nas</file>
+			<!--<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>-->
 		</buccaneer>
 		<!--<seavixen-instrumentation>
 			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>
@@ -704,7 +271,7 @@ Ver 0.0.1
 			<file>Aircraft/SeaVixen/Systems/seavixen-electrical.nas</file>
 		</seavixen-electrical>
 		<gunview>
-			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
+			#			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
 		</gunview>
 
 		<model-view>
