@@ -56,7 +56,7 @@ var update = func {
 # Mess with the MP filters. Highly experimental.
 #if (copilot.getNode("controls/lag-time-offset") != nil) {
 #        var v = copilot.getNode("controls/lag-time-offset").getValue();
-#        copilot.getNode("controls/lag-time-offset").setValue(0.97 * v);
+#        copilot.getNode("controls/lag-time-offset").setValue(0.97 * v);  
 #				}
 
 				foreach (w; in_data) {
