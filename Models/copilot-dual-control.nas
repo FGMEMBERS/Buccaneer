@@ -165,10 +165,10 @@ var last_view = 0;
 setlistener("/sim/signals/fdm-initialized", func {
 	setlistener("/sim/current-view/view-number", func {
 		var vn = getprop("/sim/current-view/view-number");
-		print("Index ", view.indexof("Copilot View"));
-		var copilot_index = view.indexof("Copilot View");
+		print("Index ", view.indexof("Observer View"));
+		var copilot_index = view.indexof("Observer View");
 		if (vn < copilot_index or vn > copilot_index) {
-			setprop("/sim/current-view/view-number", view.indexof("Copilot View"));
+			setprop("/sim/current-view/view-number", view.indexof("Observer View"));
 		}
 	});
 

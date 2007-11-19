@@ -142,7 +142,7 @@ Ver 0.0.1
 				<!--Back-->
 			</config>
 		</view>
-		<view n="97">
+		<view n="197">
 			<name>Model Cockpit View</name>
 			<type>lookfrom</type>
 			<config>
@@ -172,7 +172,7 @@ Ver 0.0.1
 				<roll-offset-deg>0</roll-offset-deg>
 			</config>
 		</view>
-		<view n="98">
+		<view n="198">
 			<name>Model View</name>
 			<type>lookat</type>
 			<config>
@@ -847,9 +847,10 @@ Ver 0.0.1
 				me.current = size(me.list) - 1;
 				elsif (me.current >= size(me.list))
 				me.current = 0;
-
-				var s = "/sim/view[98]/config";
+				
 				var c = me.list[me.current];
+				var s = "/sim/view[198]/config";
+				
 				setprop(s, "eye-lat-deg-path", c ~ "/position/latitude-deg");
 				setprop(s, "eye-lon-deg-path", c ~ "/position/longitude-deg");
 				setprop(s, "eye-alt-ft-path", c ~ "/position/altitude-ft");
@@ -858,7 +859,7 @@ Ver 0.0.1
 				setprop(s, "target-lon-deg-path", c ~ "/position/longitude-deg");
 				setprop(s, "target-alt-ft-path", c ~ "/position/altitude-ft");
 
-				var s = "/sim/view[97]/config";
+				var s = "/sim/view[197]/config";
 				setprop(s, "eye-lat-deg-path", c ~ "/position/latitude-deg");
 				setprop(s, "eye-lon-deg-path", c ~ "/position/longitude-deg");
 				setprop(s, "eye-alt-ft-path", c ~ "/position/altitude-ft");

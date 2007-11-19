@@ -71,7 +71,7 @@ next : func(v) {
 		   me.current = 0;
 
 	   var c = me.list[me.current];
-	   var s = "/sim/view[98]/config";
+	   var s = "/sim/view[198]/config";
 	   setprop(s, "eye-lat-deg-path", c ~ "/position/latitude-deg");
 	   setprop(s, "eye-lon-deg-path", c ~ "/position/longitude-deg");
 	   setprop(s, "eye-alt-ft-path", c ~ "/position/altitude-ft");
@@ -104,5 +104,5 @@ next : func(v) {
 
 setlistener("/sim/signals/fdm-initialized", func {
 	view.manager.register("Model View", model_view_handler);
-	view.manager.register("Copilot View", model_view_handler);
+	view.manager.register("Observer View", model_view_handler);
 });

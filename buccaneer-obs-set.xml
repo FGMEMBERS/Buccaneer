@@ -45,8 +45,8 @@ Ver 0.0.1
 				<default-field-of-view-deg>70</default-field-of-view-deg>
 			</config>
 		</view>
-		<view n="98">
-			<name>Copilot View</name>
+		<view n="198">
+			<name>Observer View</name>
 			<type>lookfrom</type>
 			<config>
 				<from-model type="bool">false</from-model>
@@ -71,7 +71,7 @@ Ver 0.0.1
 				<roll-offset-deg>0</roll-offset-deg>
 			</config>
 		</view>
-		<view n="97">
+		<view n="197">
 			<name>Model View</name>
 			<type>lookat</type>
 			<config>
@@ -139,11 +139,11 @@ Ver 0.0.1
 		<keyboard>
 			<key n="22">
 				<name>Ctrl-V</name>
-				<desc>Select initial view ("Copilot View").</desc>
+				<desc>Select initial view ("Obserever View").</desc>
 				<binding>
 					<command>nasal</command>
 					<script>
-						setprop("/sim/current-view/view-number", view.indexof("Copilot View"));
+						setprop("/sim/current-view/view-number", view.indexof("Observer View"));
 					</script>
 				</binding>
 			</key>
@@ -160,8 +160,8 @@ Ver 0.0.1
 				<binding>
 					<condition>
 						<equals>
-							<property>sim/current-view/view-number</property>
-							<value>8</value>
+							<property>/sim/current-view/name</property>
+							<value>Observer View</value>
 						</equals>
 					</condition>
 					<command>property-assign</command>
@@ -182,8 +182,8 @@ Ver 0.0.1
 				<binding>
 					<condition>
 						<equals>
-							<property>sim/current-view/view-number</property>
-							<value>8</value>
+							<property>/sim/current-view/name</property>
+							<value>Observer View</value>
 						</equals>
 					</condition>
 					<command>property-adjust</command>
@@ -206,8 +206,8 @@ Ver 0.0.1
 				<binding>
 					<condition>
 						<equals>
-							<property>sim/current-view/view-number</property>
-							<value>8</value>
+							<property>/sim/current-view/name</property>
+							<value>Observer View</value>
 						</equals>
 					</condition>
 					<command>property-adjust</command>
