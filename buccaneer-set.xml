@@ -262,13 +262,65 @@ Ver 0.0.1
 			<enabled type="bool">1</enabled>
 		</headshake>
 
+		<remote>
+			<pilot-callsign>G-VMM2</pilot-callsign>
+		</remote>
+		
 	</sim>
-
+	
+	<!--we use these properties for "aliasing" multiplayer properties-->
 	<rotors>
 		<main>
 			<rpm type="double">1</rpm>
+			<blade>
+				<flap-deg type="double">1</flap-deg>
+				<position-deg type="double">1</position-deg>
+			</blade>
+			<blade>
+				<flap-deg type="double">1</flap-deg>
+				<position-deg type="double">1</position-deg>
+			</blade>
+			<blade>
+				<flap-deg type="double">1</flap-deg>
+				<position-deg type="double">1</position-deg>
+			</blade>
+			<blade>
+				<flap-deg type="double">1</flap-deg>
+				<position-deg type="double">1</position-deg>
+			</blade>
 		</main>
+		<tail>
+			<rpm type="double">1</rpm>
+			<blade>
+				<position-deg type="double">1</position-deg>
+			</blade>
+			<blade>
+				<position-deg type="double">1</position-deg>
+			</blade>
+		</tail>
 	</rotors>
+	<engines>
+		<engine n="2">
+			<n1>0</n1>
+			<n2>0</n2>
+			<rpm>0</rpm>
+		</engine>
+		<engine n="3">
+			<n1>0</n1>
+			<n2>0</n2>
+			<rpm>0</rpm>
+		</engine>
+		<engine n="4">
+			<n1>0</n1>
+			<n2>0</n2>
+			<rpm>0</rpm>
+		</engine>
+		<engine n="5">
+			<n1>0</n1>
+			<n2>0</n2>
+			<rpm>0</rpm>
+		</engine>
+	</engines>
 
 	<consumables>
 		<fuel>
@@ -353,7 +405,9 @@ Ver 0.0.1
 			<heading-bug-deg type="double">95</heading-bug-deg>
 			<heading-source type="bool">true</heading-source>
 		</heading-indicator>
-
+		<heading-indicator>
+			<heading-bug-deg type="double">45</heading-bug-deg>
+		</heading-indicator>
 	</instrumentation>
 	<!-- map keyboard input -->
 	<input>
@@ -706,6 +760,15 @@ Ver 0.0.1
 		<gunview>
 			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
 		</gunview>
+		<dual_control_tools>
+			<file>Aircraft/Buccaneer/Models/dual-control-tools.nas</file>
+		</dual_control_tools>
+		<buccaneer_dual_control>
+			<file>Aircraft/Buccaneer/Models/buccaneer-dual-control.nas</file>
+		</buccaneer_dual_control>
+		<dual_control_copilot>
+			<file>Aircraft/Buccaneer/Models/pilot-dual-control.nas</file>
+		</dual_control_copilot>
 
 		<model-view>
 			<!--<file>Aircraft/Buccaneer/Models/modelview.nas</file>-->
@@ -806,6 +869,12 @@ Ver 0.0.1
 				var n = me.models[me.list[me.current]];
 				var type = n.getName();
 				var name = nil;
+				#if ((name = n.getNode("callsign")) != nil and (name = name.getValue())) {
+				#	print ("name ", name);
+				#	setprop("/sim/remote/pilot-callsign", name);
+				#} else {
+				#	setprop("/sim/remote/pilot-callsign", "");
+				#}
 				if (type == "") {
 				var z = getprop("/sim/chase-distance-m");
 				if (name = getprop("/sim/multiplay/callsign"))

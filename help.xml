@@ -43,8 +43,12 @@
 			<desc>hook up/down</desc>
 		</key>
 		<key>
-			<name>{/}</name>
+			<name>]/}</name>
 			<desc>aileron droop decrease/increase </desc>
+		</key>
+		<key>
+			<name>[/{</name>
+			<desc>flap decrease/increase </desc>
 		</key>
 		<line>Approach speed (full flaps/aileron droop/tail flaps/airbrake): 145 kts IAS</line>
 		<line>Touchdown speed: 130 kts IAS</line>

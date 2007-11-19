@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<PropertyList>
+	<help>
+		<title>Blackburn Buccaneer S2 - Observer</title>
+		<key>
+			<name>u/U</name>
+			<desc>seat down/up</desc>
+		</key>
+		<key>
+			<name>Ctrl-U</name>
+			<desc>seat default</desc>
+		</key>
+		<key>
+			<name>Ctrl-V</name>
+			<desc>view default - Observer View</desc>
+		</key>
+		<key>
+			<name>q/Q</name>
+			<desc>cycle remote view</desc>
+		</key>
+
+		<line>Approach speed (full flaps/aileron droop/tail flaps/airbrake): 145 kts IAS</line>
+		<line>Touchdown speed: 130 kts IAS</line>
+		<line>-----------------------------------------------------------</line>
+		<line> To use the Observer View set /sim/remote/pilot-callsign to the Buccaneer</line>
+		<line>multiplayer callsign you wish to link with (default G-VMM)</line>
+		<line>The other mulitplayer must similarly set your multiplayer callsign</line>
+		<line>If this is cooerct you will see "Welcome onboard" in your view</line>
+		<line>Now press Ctrl V then q/Q until you see the Buccaneer Observer view </line>
+		<line> </line>
+		<line>-----------------------------------------------------------</line>
+
+	</help>
+</PropertyList>

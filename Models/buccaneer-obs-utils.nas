@@ -109,8 +109,8 @@ initialize = func {
 ##
 update = func {
 
-	pilot_g.update();
-	pilot_g.gmeter_update();
+#	pilot_g.update();
+#	pilot_g.gmeter_update();
 #	smoke.updateSmoking();
 	
 	if (enabledNode.getValue() == "Model Cockpit View") {
@@ -118,7 +118,7 @@ update = func {
 	}
 
 #	print("index", getprop("sim/model/variant"));
-	print("pilot-g", getprop("engines/engine[9]/rpm",1));
+#	print("pilot-g ", getprop("rotors/main/rpm"));
 
 	settimer(update, 0); 
 
@@ -178,7 +178,7 @@ PilotG = {
 		obj.g_min = obj.accelerations.getChild(g_min, 0, 1);
 		obj.g_max = obj.accelerations.getChild(g_max, 0, 1);
 		obj.pilot_g.setDoubleValue(0);
-		obj.pilot_g_damped.setDoubleValue(0); 
+#		obj.pilot_g_damped.setDoubleValue(0); 
 		obj.g_timeratio.setDoubleValue(0.0075);
 		obj.g_min.setDoubleValue(0);
 		obj.g_max.setDoubleValue(0);

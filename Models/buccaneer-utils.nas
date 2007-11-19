@@ -113,9 +113,7 @@ update = func {
 	pilot_g.gmeter_update();
 	smoke.updateSmoking();
 	
-	if (enabledNode.getValue() and (
-		view_name_Node.getValue() == "Cockpit View" or 
-		view_name_Node.getValue() == "Model Cockpit View")) {
+	if (enabledNode.getValue() and view_name_Node.getValue() == "Cockpit View" ) { 
 		pilot_headshake.update();
 #		print ("head shake", view_name_Node.getValue());
 	} elsif (enabledNode.getValue() and view_name_Node.getValue() == "Back Seat View") {
@@ -170,7 +168,6 @@ PilotG = {
 				pilot_g = "pilot-g",
 				g_timeratio = "timeratio", 
 				pilot_g_damped = "pilot-g-damped",
-				pilot_g_damped_export = "engines/engine[9]/rpm",
 				g_min = "pilot-gmin", 
 				g_max = "pilot-gmax"
 				){
@@ -187,7 +184,7 @@ PilotG = {
 		obj.g_timeratio.setDoubleValue(0.0075);
 		obj.g_min.setDoubleValue(0);
 		obj.g_max.setDoubleValue(0);
-		obj.pilot_g_damped_Export = props.globals.getNode(pilot_g_damped_export, 1);
+#		obj.pilot_g_damped_Export = props.globals.getNode(pilot_g_damped_export, 1);
 		
 		print (obj.name);
 		return obj;
@@ -200,7 +197,7 @@ PilotG = {
 		g_damp = (g * n) + (g_damp * (1 - n));
 			
 		me.pilot_g_damped.setDoubleValue(g_damp);
-		me.pilot_g_damped_Export.setDoubleValue(g_damp);
+#		me.pilot_g_damped_Export.setDoubleValue(g_damp);
 
 		# print(sprintf("pilot_g_damped in=%0.5f, out=%0.5f", g, g_damp));
 	},
