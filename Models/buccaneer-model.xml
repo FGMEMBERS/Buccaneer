@@ -5,6 +5,12 @@
 <PropertyList>
 	<path>buccaneer.ac</path>
 
+	<nasal>
+		<load>
+			cmdarg().getNode("sim/model/ac-type", 1).setValue("buccaneer");
+		</load>
+	</nasal>
+
 	<offsets>
 		<x-m>0</x-m>
 	</offsets>
@@ -69,7 +75,7 @@
 		<condition>
 			<and>
 				<equals>
-					<property>engines/engine/smoking</property>
+					<property>engines/engine[1]/smoking</property>
 					<value>true</value>
 				</equals>
 				<less-than>
@@ -193,7 +199,7 @@
 			<yaw-deg>10</yaw-deg>
 		</offsets>
 	</model>
-	
+
 	<!-- **************** Main Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Models/main-panel.xml</path>
@@ -394,8 +400,8 @@
 		</offsets>
 	</model>
 
-	
-	
+
+
 	<!--	
 
 	
@@ -721,7 +727,7 @@
 			</not>
 		</condition>
 	</animation>
-	
+
 	<animation>
 		<type>select</type>
 		<object-name>Observer-Head</object-name>
@@ -730,6 +736,19 @@
 				<equals>
 					<property>/sim/current-view/name</property>
 					<value>Model Cockpit View</value>
+				</equals>
+			</not>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>Observer-Head</object-name>
+		<condition>
+			<not>
+				<equals>
+					<property>/sim/current-view/name</property>
+					<value>Observer View</value>
 				</equals>
 			</not>
 		</condition>
@@ -2720,7 +2739,8 @@
 		<object-name>Markings-Wing-Outer-Ser-No-Stbd</object-name>
 		<property-base>sim/model/livery/material/Markings-Wing-Outer-Ser-No-Stbd</property-base>
 		<texture-prop>texture</texture-prop>
-	</animation><animation>
+	</animation>
+	<animation>
 		<type>material</type>
 		<!--global type="bool">true</global-->
 		<object-name>Markings-Wing-Inner-Ser-No-Stbd</object-name>

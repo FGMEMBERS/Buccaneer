@@ -120,6 +120,9 @@
 
 	<animation>
 		<type>material</type>
+		<object-name>Needle1</object-name>
+		<object-name>Needle2</object-name>
+		<object-name>Face</object-name>
 		<emission>
 			<factor-prop>/controls/lighting/panel-norm</factor-prop>
 			<red>0.75</red>
