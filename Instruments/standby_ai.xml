@@ -92,8 +92,13 @@
 
 	<animation> 
 		<type>material</type>
-		<object-name>standby_ai</object-name>
-		<emission> 
+		<object-name>face</object-name>
+		<object-name>bezeloutside</object-name>
+		<object-name>horizonline</object-name>
+		<object-name>wingline</object-name>
+		<object-name>bankline</object-name>
+		<object-name>flag</object-name>
+		<emission>
 			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 				<red>0.03125</red>
 				<green>0.0089</green>

@@ -191,7 +191,7 @@
 		<type>material</type>
 		<object-name>altimeter_vsi</object-name>
 		<emission> 
-		<factor-prop>systems/electrical/outputs</factor-prop>
+		<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 			<red>0.03125</red>
 			<green>0.0089</green>
 			<blue>0.0089</blue>

@@ -219,7 +219,7 @@
 				<command>property-cycle</command>
 				<property>sim/model/buccaneer/controls/ILS_day_night_switch</property>
 				<value>0</value>
-				<value>1</value>
+				<value>28</value>
 			</binding>
 		</action>
 	</animation>
@@ -227,7 +227,7 @@
 		<type>translate</type>
 		<object-name>day_night_switch</object-name>
 		<property>sim/model/buccaneer/controls/ILS_day_night_switch</property>
-		<factor>0.01</factor>
+		<factor>0.000357</factor>
 		<axis>
 			<x>0</x>
 			<y>-1</y>
@@ -273,17 +273,19 @@
 	</animation>
 
 	<!-- Panel Lighting -->
-	<!--
+	
 	<animation>
 		<type>material</type>
 		<emission>
-			<factor-prop>/controls/lighting/panel-norm</factor-prop>
-			<red>0.75</red>
-			<green>0.25</green>
-			<blue>0.25</blue>
+			<factor-prop>sim/model/buccaneer/controls/ILS_day_night_switch</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
 		</emission>
 	</animation>
-	-->
+
+
+
 
 	<!-- Flags are always lit so long as MRG power available -->
 	<animation>

@@ -81,10 +81,10 @@
 	</animation>
 	
 	<!-- Panel Lighting -->
-	<animation> 
+	<animation>
 		<type>material</type>
-		<emission> 
-			<factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 			<red>0.03125</red>
 			<green>0.0089</green>
 			<blue>0.0089</blue>
