@@ -803,9 +803,9 @@ Ver 0.0.1
 		<!--<seavixen-instrumentation>
 			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>
 		</seavixen-instrumentation>-->
-		<seavixen-electrical>
-			<file>Aircraft/SeaVixen/Systems/seavixen-electrical.nas</file>
-		</seavixen-electrical>
+		<buccaneer-electrical>
+			<file>Aircraft/Buccaneer/Systems/buccaneer-electrical.nas</file>
+		</buccaneer-electrical>
 		<gunview>
 			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
 		</gunview>
