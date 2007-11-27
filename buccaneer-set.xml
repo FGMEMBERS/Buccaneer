@@ -162,11 +162,11 @@ Ver 0.0.1
 				<ground-level-nearplane-m type="double">0.2f</ground-level-nearplane-m>
 				<default-field-of-view-deg type="double">65.0</default-field-of-view-deg>
 
-				<x-offset-m type="double">0.05</x-offset-m>
+				<x-offset-m type="double">0</x-offset-m>
 				<y-offset-m
-					type="double">1.30165</y-offset-m>
+					type="double">0</y-offset-m>
 				<z-offset-m
-					type="double">5.2269</z-offset-m>
+					type="double">0</z-offset-m>
 				<heading-offset-deg>0</heading-offset-deg>
 				<pitch-offset-deg>0</pitch-offset-deg>
 				<roll-offset-deg>0</roll-offset-deg>
@@ -265,9 +265,9 @@ Ver 0.0.1
 		<remote>
 			<pilot-callsign>G-VMM2</pilot-callsign>
 		</remote>
-		
+
 	</sim>
-	
+
 	<!--we use these properties for "aliasing" multiplayer properties-->
 	<rotors>
 		<main>
@@ -315,69 +315,94 @@ Ver 0.0.1
 			<n2>0</n2>
 			<rpm>0</rpm>
 		</engine>
-		<engine n="5">
+		<!--<engine n="5">
 			<n1>0</n1>
 			<n2>0</n2>
 			<rpm>0</rpm>
 		</engine>
+		<engine n="6">
+			<n1>0</n1>
+			<n2>0</n2>
+			<rpm>0</rpm>
+		</engine>
+		<engine n="7">
+			<n1>0</n1>
+			<n2>0</n2>
+			<rpm>0</rpm>
+		</engine>
+		<engine n="8">
+			<n1>0</n1>
+			<n2>0</n2>
+			<rpm>0</rpm>
+		</engine>-->
 	</engines>
-
+	
+	<!-- *************** set properties for own aircraft **********************-->
 	<consumables>
 		<fuel>
 			<tank n="0">
 				<name type="string">#1</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="1">
 				<name type="string">#2</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="2">
 				<name type="string">#3</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="3">
 				<name type="string">#4</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="4">
 				<name type="string">#5</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="5">
 				<name type="string">#6</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="6">
 				<name type="string">#7</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="7">
 				<name type="string">#8</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="8">
 				<name type="string">Prop Port</name>
 				<selected type="bool">1</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="9">
 				<name type="string">Prop Stbd</name>
 				<selected type="bool">1</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="10">
 				<name type="string">Recup Port</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 			<tank n="11">
 				<name type="string">Recup Stbd</name>
 				<selected type="bool">0</selected>
+				<level-lbs type="double">0</level-lbs>
 			</tank>
 		</fuel>
 	</consumables>
 
-	<!-- *************** set properties **********************-->
-	<!--parking brake ON -->
-	<!-- nosewheel lock OFF -->
 	<controls>
 		<gear>
 			<brake-parking>1</brake-parking>
@@ -389,11 +414,15 @@ Ver 0.0.1
 			<tail-flaps type="double">0</tail-flaps>
 		</flight>
 		<lighting>
-			<nav-lights>false</nav-lights>
+			<navigation-lights type="bool">true</navigation-lights>
+			<instrument-lights type="bool">true</instrument-lights>
 		</lighting>
 	</controls>
 
 	<engines>
+		<engine>
+			<smoking type="bool">true</smoking>
+		</engine>		
 		<engine>
 			<smoking type="bool">true</smoking>
 		</engine>
@@ -409,6 +438,20 @@ Ver 0.0.1
 			<heading-bug-deg type="double">45</heading-bug-deg>
 		</heading-indicator>
 	</instrumentation>
+
+	<systems>
+		<electrical>
+			<outputs>
+				<instrument-lighting type="double">0</instrument-lighting>
+			</outputs>
+		</electrical>
+	</systems>
+
+	<accelerations>
+		<pilot_g_damped type="double">1</pilot_g_damped>
+	</accelerations>
+	
+
 	<!-- map keyboard input -->
 	<input>
 		<keyboard include="../../Input/Keyboard/carrier-bindings.xml">
@@ -697,7 +740,10 @@ Ver 0.0.1
 				<desc>Switch to previous model</desc>
 				<binding>
 					<command>nasal</command>
-					<script>globals["model-view"].model_view_handler.next(-1)</script>
+					<script>
+						globals["model-view"].model_view_handler.next(-1);
+						globals["model-cockpit-view"].model_view_handler.next(-1)
+					</script>
 				</binding>
 			</key>
 			<key n="113">
@@ -705,7 +751,10 @@ Ver 0.0.1
 				<desc>Switch to next model</desc>
 				<binding>
 					<command>nasal</command>
-					<script>globals["model-view"].model_view_handler.next(1)</script>
+					<script>
+						globals["model-view"].model_view_handler.next(1);
+						globals["model-cockpit-view"].model_view_handler.next(1)
+					</script>
 				</binding>
 			</key>
 			<key n="84">
@@ -761,150 +810,20 @@ Ver 0.0.1
 			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
 		</gunview>
 		<dual_control_tools>
-			<file>Aircraft/Buccaneer/Models/dual-control-tools.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
 		</dual_control_tools>
 		<buccaneer_dual_control>
-			<file>Aircraft/Buccaneer/Models/buccaneer-dual-control.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/buccaneer-dual-control.nas</file>
 		</buccaneer_dual_control>
 		<dual_control_copilot>
-			<file>Aircraft/Buccaneer/Models/pilot-dual-control.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/pilot-dual-control.nas</file>
 		</dual_control_copilot>
-
 		<model-view>
-			<!--<file>Aircraft/Buccaneer/Models/modelview.nas</file>-->
-			<script>
-				var model_view_handler = {
-				init : func {
-				me.models = {};
-				me.list = [];
-				me.current = 0;
-				me.active = 0;
-				},
-				start : func {
-				me.models = {};
-				var ai = props.globals.getNode("/ai/models", 1);
-				foreach (var m; [props.globals]
-				~ ai.getChildren("aircraft")
-				~ ai.getChildren("carrier")
-				~ ai.getChildren("multiplayer")
-				~ ai.getChildren("tanker"))
-				me.models[m.getPath()] = m;
-
-				me.lnr = [];
-				append(me.lnr, setlistener("/ai/models/model-added", func(n) {
-				var m = props.globals.getNode(n.getValue(), 1);
-				me.models[m.getPath()] = m;
-				}));
-				append(me.lnr, setlistener("/ai/models/model-removed", func(n) {
-				var m = props.globals.getNode(n.getValue(), 1);
-				delete(me.models, m.getPath());
-				}));
-				append(me.lnr, setlistener("/devices/status/mice/mouse/mode", func(n) {
-				me.mouse_mode = n.getValue();
-				}, 1));
-				append(me.lnr, setlistener("/devices/status/mice/mouse/button", func(n) {
-				me.mouse_button = n.getValue();
-				if (me.mouse_button == 1)
-				me.mouse_start = me.mouse_y;
-				}, 1));
-				append(me.lnr, setlistener("/devices/status/mice/mouse/y", func(n) {
-				me.mouse_y = n.getValue();
-				}, 1));
-				me.offs = 0;
-				me.active = 1;
-				me.reset();
-				},
-				update : func {
-				if (me.mouse_mode == 0 and me.mouse_button) {
-				var curr = getprop("/sim/current-view/z-offset-m") - me.offs;
-				me.offs += me.mouse_y - me.mouse_start;
-				var new = curr + me.offs;
-				if (new &lt; 1)
-				new = 1;
-				setprop("/sim/current-view/z-offset-m", new);
-				me.mouse_start = me.mouse_y;
-				}
-				return 0;
-				},
-				stop : func {
-				me.active = 0;
-				foreach (var listener; me.lnr)
-				removelistener(listener);
-				},
-				reset : func {
-				me.next(me.current = 0);
-				},
-				next : func(v) {
-				if (!me.active or !size(me.models))
-				return;
-				if (v)
-				me.current += v;
-				else
-				me.current = 0;
-
-				me.list = sort(keys(me.models), cmp);
-				if (me.current &lt; 0)
-				me.current = size(me.list) - 1;
-				elsif (me.current >= size(me.list))
-				me.current = 0;
-				
-				var c = me.list[me.current];
-				var s = "/sim/view[198]/config";
-				
-				setprop(s, "eye-lat-deg-path", c ~ "/position/latitude-deg");
-				setprop(s, "eye-lon-deg-path", c ~ "/position/longitude-deg");
-				setprop(s, "eye-alt-ft-path", c ~ "/position/altitude-ft");
-
-				setprop(s, "target-lat-deg-path", c ~ "/position/latitude-deg");
-				setprop(s, "target-lon-deg-path", c ~ "/position/longitude-deg");
-				setprop(s, "target-alt-ft-path", c ~ "/position/altitude-ft");
-
-				var s = "/sim/view[197]/config";
-				setprop(s, "eye-lat-deg-path", c ~ "/position/latitude-deg");
-				setprop(s, "eye-lon-deg-path", c ~ "/position/longitude-deg");
-				setprop(s, "eye-alt-ft-path", c ~ "/position/altitude-ft");
-				setprop(s, "eye-heading-deg-path", c ~ "/orientation/true-heading-deg");
-				setprop(s, "eye-pitch-deg-path", c ~ "/orientation/pitch-deg");
-				setprop(s, "eye-roll-deg-path", c ~ "/orientation/roll-deg");
-
-				var n = me.models[me.list[me.current]];
-				var type = n.getName();
-				var name = nil;
-				#if ((name = n.getNode("callsign")) != nil and (name = name.getValue())) {
-				#	print ("name ", name);
-				#	setprop("/sim/remote/pilot-callsign", name);
-				#} else {
-				#	setprop("/sim/remote/pilot-callsign", "");
-				#}
-				if (type == "") {
-				var z = getprop("/sim/chase-distance-m");
-				if (name = getprop("/sim/multiplay/callsign"))
-				name = 'callsign "' ~ name ~ '"';
-				} else {
-				var z = type == "carrier" ? 350 : 70;
-				if ((name = n.getNode("callsign")) != nil and (name = name.getValue()))
-				name = 'callsign "' ~ name ~ '"';
-				elsif ((name = n.getNode("name")) != nil and (name = name.getValue()))
-				name = n.getName() ~ ' "' ~ name ~ '"';
-				else
-				name = n.getName() ~ " " ~ n.getIndex();
-				}
-				var color = {};
-				if (type != "multiplayer")
-				color = { text: { color: { red: 0.5, green: 0.8, blue: 0.5 }}};
-				if (getprop("/sim/current-view/view-number") == 98)
-				setprop("/sim/current-view/z-offset-m", me.offs = z);
-				if (name)
-				gui.popupTip(name, 2, color);
-				},
-				};
-
-				setlistener("/sim/signals/fdm-initialized", func {
-				view.manager.register("Model View", model_view_handler);
-				view.manager.register("Model Cockpit View", model_view_handler);
-				});
-			</script>
+			<file>Aircraft/Buccaneer/Models/model-view.nas</file>
 		</model-view>
+		<model-cockpit-view>
+			<file>Aircraft/Buccaneer/Models/model-cockpit-view.nas</file>
+		</model-cockpit-view>
 
 	</nasal>
 
