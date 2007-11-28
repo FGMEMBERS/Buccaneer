@@ -174,6 +174,7 @@ PilotG = {
 		var obj = {parents : [PilotG] };
 		obj.name = name;
 		obj.accelerations = props.globals.getNode("accelerations", 1);
+		obj.redout = props.globals.getNode("/sim/rendering/redout", 1);
 		obj.pilot_g = obj.accelerations.getChild(pilot_g, 0, 1);
 		obj.pilot_g_damped = obj.accelerations.getChild(pilot_g_damped, 0, 1);
 		obj.g_timeratio = obj.accelerations.getChild(g_timeratio, 0, 1);
@@ -184,8 +185,10 @@ PilotG = {
 		obj.g_timeratio.setDoubleValue(0.0075);
 		obj.g_min.setDoubleValue(0);
 		obj.g_max.setDoubleValue(0);
-#		obj.pilot_g_damped_Export = props.globals.getNode(pilot_g_damped_export, 1);
-		
+		obj.redout_alpha = obj.redout.getChild("alpha", 0, 1);
+		obj.redout_red = obj.redout.getChild("red", 0, 1);
+		obj.redout_alpha.setDoubleValue(0);
+		obj.redout_red.setDoubleValue(0);
 		print (obj.name);
 		return obj;
 	},
@@ -193,13 +196,25 @@ PilotG = {
 		var n = me.g_timeratio.getValue(); 
 		var g = me.pilot_g.getValue();
 		var g_damp = me.pilot_g_damped.getValue();
-		
-		g_damp = (g * n) + (g_damp * (1 - n));
-			
-		me.pilot_g_damped.setDoubleValue(g_damp);
-#		me.pilot_g_damped_Export.setDoubleValue(g_damp);
 
-		# print(sprintf("pilot_g_damped in=%0.5f, out=%0.5f", g, g_damp));
+		g_damp = (g * n) + (g_damp * (1 - n));
+
+		me.pilot_g_damped.setDoubleValue(g_damp);
+		if (getprop("/sim/current-view/name")== "Cockpit View" or
+			getprop("/sim/current-view/name")== "Back Seat View") {
+				if (g_damp > 1) {
+					me.redout_red.setDoubleValue(0);
+					me.redout_alpha.setDoubleValue((g_damp * 0.6667) - 2.3333);
+				} elsif (g_damp < -1) {
+					me.redout_red.setDoubleValue(1);
+					me.redout_alpha.setDoubleValue((g_damp * -0.5) - 1.5);
+				} else {
+					me.redout_red.setDoubleValue(0);
+				}
+		}
+
+#		 print(sprintf("pilot_g_damped in=%0.5f, out=%0.5f, alpha=%0.5f",
+#			  g, g_damp, me.redout_alpha.getValue()));
 	},
 	gmeter_update : func () {
 		if(me.pilot_g_damped.getValue() < me.g_min.getValue()){
