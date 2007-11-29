@@ -722,7 +722,7 @@ Valve = {
 		obj.prop = props.globals.getNode(prop, 1);
 		obj.name = name;
 		obj.prop.setBoolValue(initial_pos);
-		print (obj.name, );
+		print (obj.name, " ", initial_pos);
 		append(Valve.list, obj);
 		return obj;
 	},
@@ -757,4 +757,4 @@ Valve = {
 # fire it up
 #####
 	
-	setlistener("/sim/signals/fdm-initialized", init_fuel_system);
+	setlistener("sim/signals/fdm-initialized", init_fuel_system);
