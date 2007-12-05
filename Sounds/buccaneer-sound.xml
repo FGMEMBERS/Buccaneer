@@ -10,7 +10,7 @@
 			<mode>looped</mode>
 			<property>/engines/engine/running</property>
 			<volume>
-				<property>/engines/engine/prop-thrust</property>
+				<property>/engines/engine/thrust-lbs</property>
 				<type>lin</type>
 				<factor>0.0002353</factor>
 				<!-- Scales to 0-2 for 8500lb engine -->
