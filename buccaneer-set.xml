@@ -299,26 +299,37 @@ Ver 0.0.1
 			</blade>
 		</tail>
 	</rotors>
+
 	<engines>
+		<engine n="0">
+			<rpm type="float">0</rpm>
+			<smoking type="bool">true</smoking>
+			<running type="bool">true</running>
+		</engine>
+		<engine n="1">
+			<rpm type="float">1</rpm>
+			<smoking type="bool">true</smoking>
+			<running type="bool">true</running>
+		</engine>
 		<engine n="2">
-			<n1>0</n1>
-			<n2>0</n2>
-			<rpm>0</rpm>
+			<n1 type="float">0</n1>
+			<n2 type="float">0</n2>
+			<rpm type="float">2</rpm>
 		</engine>
 		<engine n="3">
-			<n1>0</n1>
-			<n2>0</n2>
-			<rpm>0</rpm>
+			<n1 type="float">0</n1>
+			<n2 type="float">0</n2>
+			<rpm type="float">3</rpm>
 		</engine>
 		<engine n="4">
-			<n1>0</n1>
-			<n2>0</n2>
-			<rpm>0</rpm>
+			<n1 type="float">0</n1>
+			<n2 type="float">0</n2>
+			<rpm type="float">4</rpm>
 		</engine>
 		<!--<engine n="5">
-			<n1>0</n1>
-			<n2>0</n2>
-			<rpm>0</rpm>
+			<n1 type="float">0</n1>
+			<n2  type="float">0</n2>
+			<rpm type="float">5</rpm>
 		</engine>
 		<engine n="6">
 			<n1>0</n1>
@@ -336,7 +347,7 @@ Ver 0.0.1
 			<rpm>0</rpm>
 		</engine>-->
 	</engines>
-	
+
 	<!-- *************** set properties for own aircraft **********************-->
 	<consumables>
 		<fuel>
@@ -419,14 +430,7 @@ Ver 0.0.1
 		</lighting>
 	</controls>
 
-	<engines>
-		<engine>
-			<smoking type="bool">true</smoking>
-		</engine>		
-		<engine>
-			<smoking type="bool">true</smoking>
-		</engine>
-	</engines>
+
 
 	<!-- hsi heading bug and source select-->
 	<instrumentation>
@@ -450,7 +454,7 @@ Ver 0.0.1
 	<accelerations>
 		<pilot_g_damped type="double">1</pilot_g_damped>
 	</accelerations>
-	
+
 
 	<!-- map keyboard input -->
 	<input>
@@ -797,7 +801,7 @@ Ver 0.0.1
 	<!-- nasal stuff -->
 	<nasal>
 		<buccaneer>
-			<file>Aircraft/Buccaneer/Models/buccaneer-utils.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/buccaneer-utils.nas</file>
 			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
 		</buccaneer>
 		<!--<seavixen-instrumentation>
@@ -812,17 +816,17 @@ Ver 0.0.1
 		<dual_control_tools>
 			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
 		</dual_control_tools>
-		<buccaneer_dual_control>
+		<aircraft_dual_control>
 			<file>Aircraft/Buccaneer/Nasal/buccaneer-dual-control.nas</file>
-		</buccaneer_dual_control>
+		</aircraft_dual_control>
 		<dual_control_copilot>
 			<file>Aircraft/Buccaneer/Nasal/pilot-dual-control.nas</file>
 		</dual_control_copilot>
 		<model-view>
-			<file>Aircraft/Buccaneer/Models/model-view.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/model-view.nas</file>
 		</model-view>
 		<model-cockpit-view>
-			<file>Aircraft/Buccaneer/Models/model-cockpit-view.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/model-cockpit-view.nas</file>
 		</model-cockpit-view>
 
 	</nasal>

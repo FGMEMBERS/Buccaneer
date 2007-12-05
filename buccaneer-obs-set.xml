@@ -32,18 +32,24 @@ Ver 0.0.1
 				<path/>
 			</electrical>
 		</systems>
-		<instrumentation>
-			<path>Aircraft/Buccaneer/Systems/instrumentation.xml</path>
-		</instrumentation>
+		<sound>
+			<path>Aircraft/Buccaneer/Sounds/buccaneer-sound.xml</path>
+		</sound>
 
 		<view n="0">
 			<internal archive="y">true</internal>
 			<config>
-				<x-offset-m archive="y">0</x-offset-m>
-				<y-offset-m archive="y">5</y-offset-m>
-				<z-offset-m archive="y">0</z-offset-m>
-				<pitch-offset-deg>0</pitch-offset-deg>
-				<default-field-of-view-deg>70</default-field-of-view-deg>
+				<from-model type="bool">true</from-model>
+				<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+				<x-offset-m archive="y"
+										type="double">0.05</x-offset-m>
+				<y-offset-m archive="y"
+										type="double">1.30165</y-offset-m>
+				<z-offset-m archive="y"
+										type="double">5.2269</z-offset-m>
+				<pitch-offset-deg>-15</pitch-offset-deg>
+				<default-field-of-view-deg>60</default-field-of-view-deg>
+				<dynamic-view type="bool">true</dynamic-view>
 			</config>
 		</view>
 		<view n="1">
@@ -207,6 +213,7 @@ Ver 0.0.1
 
 		<remote>
 			<pilot-callsign type="string">G-VMM</pilot-callsign>
+			<connected type="bool">false</connected>
 		</remote>
 
 	</sim>
@@ -215,16 +222,26 @@ Ver 0.0.1
 		<pilot-g-damped type="double">1</pilot-g-damped>
 	</accelerations>
 
+	<engines>
+		<engine n="0">
+			<running type="bool">false</running>
+		</engine>
+		<engine n="1">
+			<running type="bool">false</running>
+		</engine>
+	</engines>
+
 
 	<input>
 		<keyboard>
 			<key n="22">
 				<name>Ctrl-V</name>
-				<desc>Select initial view ("Obserever View").</desc>
+				<desc>Select initial view ("Observer View").</desc>
 				<binding>
 					<command>nasal</command>
 					<script>
 						setprop("/sim/current-view/view-number", view.indexof("Observer View"));
+						globals["observer-view"].model_view_handler.next(1)
 					</script>
 				</binding>
 			</key>
@@ -306,7 +323,8 @@ Ver 0.0.1
 					<command>nasal</command>
 					<script>
 								globals["model-view"].model_view_handler.next(-1);
-								globals["observer-view"].model_view_handler.next(1)</script>
+								globals["observer-view"].model_view_handler.next(-1)
+					</script>
 				</binding>
 			</key>
 			<key n="113">
@@ -326,28 +344,22 @@ Ver 0.0.1
 	<!-- nasal stuff -->
 	<nasal>
 		<buccaneer>
-			<file>Aircraft/Buccaneer/Models/buccaneer-obs-utils.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/buccaneer-obs-utils.nas</file>
 		</buccaneer>
 		<dual_control_tools>
 			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
 		</dual_control_tools>
-		<buccaneer_dual_control>
+		<aircraft_dual_control>
 			<file>Aircraft/Buccaneer/Nasal/buccaneer-dual-control.nas</file>
-		</buccaneer_dual_control>
+		</aircraft_dual_control>
 		<dual_control_copilot>
 			<file>Aircraft/Buccaneer/Nasal/copilot-dual-control.nas</file>
 		</dual_control_copilot>
-		<!--<seavixen-instrumentation>
-			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>
-		</seavixen-instrumentation>-->
-		<!--<seavixen-electrical>
-			<file>Aircraft/SeaVixen/Systems/seavixen-electrical.nas</file>
-		</seavixen-electrical>-->
 		<model-view>
-			<file>Aircraft/Buccaneer/Models/model-view.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/model-view.nas</file>
 		</model-view>
 		<observer-view>
-			<file>Aircraft/Buccaneer/Models/observer-view.nas</file>	
+			<file>Aircraft/Buccaneer/Nasal/observer-view.nas</file>	
 		</observer-view>
 	</nasal>
 
