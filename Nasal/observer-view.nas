@@ -9,7 +9,7 @@ start : func {
 	   me.models = {};
 	   var ai = props.globals.getNode("/ai/models", 1);
 	   foreach (var m; [props.globals]
-		   ~ ai.getChildren("multiplayer"))
+	   ~ ai.getChildren("multiplayer"))
 		   me.models[m.getPath()] = m;
 
 	   me.lnr = [];
@@ -85,17 +85,32 @@ next : func(v) {
 
 	   if (type == "") {
 		   var z = getprop("/sim/chase-distance-m");
-		   if (name = getprop("/sim/multiplay/callsign"))
+
+		   if (name = getprop("/sim/multiplay/callsign")){
+			   globals["observer-view"].model_view_handler.next(1);
+		   } elsif ((name = n.getNode("name")) != nil and (name = name.getValue())){
 			   name = 'callsign "' ~ name ~ '"';
+		   }
+
 	   } else {
-		   if ((name = n.getNode("name")) != nil and (name = name.getValue()))
-			   name = n.getName() ~ ' "' ~ name ~ '"';
+
+		   if ((name = n.getNode("callsign")) != nil and ((name = name.getValue()))){
+
+			   if (name != getprop("/sim/remote/pilot-callsign") and getprop("/sim/remote/connected"))	{
+#					print ("name: ", name, "remote ", getprop("/sim/remote/pilot-callsign"));
+				   globals["observer-view"].model_view_handler.next(1);
+			   } else {
+				   name = n.getName() ~ ' "' ~ name ~ '"';
+			   }
+
+		   }
+
 	   }
 
 	   var color = {};
 	   if (type != "multiplayer")
 		   color = { text: { color: { red: 0.5, green: 0.8, blue: 0.5 }}};
-	   if (getprop("/sim/current-view/view-number") == 98)
+	   if (getprop("/sim/current-view/view-number") == 198)
 		   setprop("/sim/current-view/z-offset-m", me.offs = z);
 	   if (name)
 		   gui.popupTip(name, 2, color);

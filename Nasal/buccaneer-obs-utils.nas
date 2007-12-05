@@ -96,7 +96,7 @@ initialize = func {
 	# set it running on the next update cycle
 	settimer(update, 0);
 
-	print("running Buccaneer utilities");
+	print("running Buccaneer Observer utilities");
 
 } # end func
 
@@ -109,12 +109,13 @@ initialize = func {
 ##
 update = func {
 
-#	pilot_g.update();
+	pilot_g.update();
 #	pilot_g.gmeter_update();
 #	smoke.updateSmoking();
 	
-	if (enabledNode.getValue() == "Model Cockpit View") {
+	if (enabledNode.getValue() and view_name_Node.getValue() == "Observer View") {
 		observer_headshake.update();
+#		print("running headshake");
 	}
 
 #	print("index", getprop("sim/model/variant"));
@@ -172,16 +173,21 @@ PilotG = {
 		var obj = {parents : [PilotG] };
 		obj.name = name;
 		obj.accelerations = props.globals.getNode("accelerations", 1);
+		obj.redout = props.globals.getNode("/sim/rendering/redout", 1);
 		obj.pilot_g = obj.accelerations.getChild(pilot_g, 0, 1);
 		obj.pilot_g_damped = obj.accelerations.getChild(pilot_g_damped, 0, 1);
 		obj.g_timeratio = obj.accelerations.getChild(g_timeratio, 0, 1);
 		obj.g_min = obj.accelerations.getChild(g_min, 0, 1);
 		obj.g_max = obj.accelerations.getChild(g_max, 0, 1);
 		obj.pilot_g.setDoubleValue(0);
-#		obj.pilot_g_damped.setDoubleValue(0); 
+		obj.pilot_g_damped.setDoubleValue(0); 
 		obj.g_timeratio.setDoubleValue(0.0075);
 		obj.g_min.setDoubleValue(0);
 		obj.g_max.setDoubleValue(0);
+		obj.redout_alpha = obj.redout.getChild("alpha", 0, 1);
+		obj.redout_red = obj.redout.getChild("red", 0, 1);
+		obj.redout_alpha.setDoubleValue(0);
+		obj.redout_red.setDoubleValue(0);
 		
 		print (obj.name);
 		return obj;
@@ -190,11 +196,24 @@ PilotG = {
 		var n = me.g_timeratio.getValue(); 
 		var g = me.pilot_g.getValue();
 		var g_damp = me.pilot_g_damped.getValue();
-		
-		g_damp = (g * n) + (g_damp * (1 - n));
-			
-		me.pilot_g_damped.setDoubleValue(g_damp);
-		# print(sprintf("pilot_g_damped in=%0.5f, out=%0.5f", g, g_damp));
+
+# We are using a filtered input from multiplayer, so we don't need to do it again
+#		g_damp = (g * n) + (g_damp * (1 - n));
+#		me.pilot_g_damped.setDoubleValue(g_damp);
+
+		if (getprop("/sim/current-view/name")== "Observer View") {
+			if (g_damp > 1) {
+				me.redout_red.setDoubleValue(0);
+				me.redout_alpha.setDoubleValue((g_damp * 0.6667) - 2.3333);
+			} elsif (g_damp < -1) {
+				me.redout_red.setDoubleValue(1);
+				me.redout_alpha.setDoubleValue((g_damp * -0.5) - 1.5);
+			} else {
+				me.redout_red.setDoubleValue(0);
+			}
+		}
+#		 print(sprintf("pilot_g_damped in=%0.5f, out=%0.5f, alpha=%0.5f",
+#			  g, g_damp, me.redout_alpha.getValue()));
 	},
 	gmeter_update : func () {
 		if(me.pilot_g_damped.getValue() < me.g_min.getValue()){
@@ -234,40 +253,43 @@ PilotG = {
 			z_config = "y-offset-m";
 			time_ratio = "time-ratio";
 			obj.name = name ~ " headshake";
-			obj.accelerations = props.globals.getNode("accelerations/pilot", 1);
+			obj.accelerations = props.globals.getNode("accelerations/pilot-r", 1);
 			obj.xAccelNode = obj.accelerations.getChild( x_accel_fps_sec, 0, 1);
-		obj.yAccelNode = obj.accelerations.getChild( y_accel_fps_sec, 0, 1);
-		obj.zAccelNode = obj.accelerations.getChild( z_accel_fps_sec, 0, 1);
-		obj.sim = props.globals.getNode("sim/headshake", 1);
-		obj.xMaxNode = obj.sim.getChild(x_max_m, 0, 1);
-		obj.xMaxNode.setDoubleValue(0.0375);
-		obj.xMinNode = obj.sim.getChild(x_min_m, 0, 1);
-		obj.xMinNode.setDoubleValue(-0.015);
-		obj.yMaxNode = obj.sim.getChild(y_max_m, 0, 1);
-		obj.yMaxNode.setDoubleValue(0.015);
-		obj.yMinNode = obj.sim.getChild(y_min_m, 0, 1);
-		obj.yMinNode.setDoubleValue(-0.015);
-		obj.zMaxNode = obj.sim.getChild(z_max_m, 0, 1);
-		obj.zMaxNode.setDoubleValue(0.015);
-		obj.zMinNode = obj.sim.getChild(z_min_m, 0, 1);
-		obj.zMinNode.setDoubleValue(-0.045);
-		obj.xThresholdNode = obj.sim.getChild(x_threshold_g, 0, 1);
-		obj.xThresholdNode.setDoubleValue(0.5);
-		obj.yThresholdNode = obj.sim.getChild(y_threshold_g, 0, 1);
-		obj.yThresholdNode.setDoubleValue(0.5);
-		obj.zThresholdNode = obj.sim.getChild(z_threshold_g, 0, 1);
-		obj.zThresholdNode.setDoubleValue(0.5);
-		obj.time_ratio_Node = obj.sim.getChild(time_ratio , 0, 1);
-		obj.time_ratio_Node.setDoubleValue(0.5);
-		obj.config = props.globals.getNode("sim/view[" ~ index ~"]/config", 1);
-		obj.xConfigNode = obj.config.getChild(x_config, 0, 1);
-		obj.yConfigNode = obj.config.getChild(y_config, 0, 1);
-		obj.zConfigNode = obj.config.getChild(z_config, 0, 1);
-		obj.seat_vertical_adjust_Node = props.globals.getNode("/controls/seat/vertical-adjust", 1);
-		obj.seat_vertical_adjust_Node.setDoubleValue(0);
-		
-		print (obj.name);
-		return obj;
+			obj.xAccelNode.setDoubleValue(0);
+			obj.yAccelNode = obj.accelerations.getChild( y_accel_fps_sec, 0, 1);
+			obj.yAccelNode.setDoubleValue(0);
+			obj.zAccelNode = obj.accelerations.getChild( z_accel_fps_sec, 0, 1);
+			obj.zAccelNode.setDoubleValue(0);
+			obj.sim = props.globals.getNode("sim/headshake", 1);
+			obj.xMaxNode = obj.sim.getChild(x_max_m, 0, 1);
+			obj.xMaxNode.setDoubleValue(0.0375);
+			obj.xMinNode = obj.sim.getChild(x_min_m, 0, 1);
+			obj.xMinNode.setDoubleValue(-0.015);
+			obj.yMaxNode = obj.sim.getChild(y_max_m, 0, 1);
+			obj.yMaxNode.setDoubleValue(0.015);
+			obj.yMinNode = obj.sim.getChild(y_min_m, 0, 1);
+			obj.yMinNode.setDoubleValue(-0.015);
+			obj.zMaxNode = obj.sim.getChild(z_max_m, 0, 1);
+			obj.zMaxNode.setDoubleValue(0.015);
+			obj.zMinNode = obj.sim.getChild(z_min_m, 0, 1);
+			obj.zMinNode.setDoubleValue(-0.045);
+			obj.xThresholdNode = obj.sim.getChild(x_threshold_g, 0, 1);
+			obj.xThresholdNode.setDoubleValue(0.5);
+			obj.yThresholdNode = obj.sim.getChild(y_threshold_g, 0, 1);
+			obj.yThresholdNode.setDoubleValue(0.5);
+			obj.zThresholdNode = obj.sim.getChild(z_threshold_g, 0, 1);
+			obj.zThresholdNode.setDoubleValue(0.5);
+			obj.time_ratio_Node = obj.sim.getChild(time_ratio , 0, 1);
+			obj.time_ratio_Node.setDoubleValue(0.25);
+			obj.config = props.globals.getNode("sim/view[" ~ index ~"]/config", 1);
+			obj.xConfigNode = obj.config.getChild(x_config, 0, 1);
+			obj.yConfigNode = obj.config.getChild(y_config, 0, 1);
+			obj.zConfigNode = obj.config.getChild(z_config, 0, 1);
+			obj.seat_vertical_adjust_Node = props.globals.getNode("/controls/seat/vertical-adjust", 1);
+			obj.seat_vertical_adjust_Node.setDoubleValue(0);
+
+			print (obj.name);
+			return obj;
 	},
 	update : func () {
 
@@ -284,6 +306,8 @@ PilotG = {
 		var zConfig = me.zConfigNode.getValue();
 
 #		print ("xconfig ", xConfig);
+#		print ("yconfig ", yConfig);
+#		print ("zconfig ", zConfig);
 
 		var n = pilot_g.get_g_timeratio(); 
 		var seat_vertical_adjust = me.seat_vertical_adjust_Node.getValue();
@@ -342,10 +366,10 @@ PilotG = {
 		if (xDivergence_total < xMin){xDivergence_total = xMin; }
 		if (abs(last_xDivergence - xDivergence_total) <= xThreshold){
 			xDivergence_damp = (xDivergence_total * n) + (xDivergence_damp * (1 - n));
-		#	print ("x low pass");
+#			print ("x low pass");
 		} else {
 			xDivergence_damp = xDivergence_total;
-		#	print ("x high pass");
+#			print ("x high pass");
 		}
 
 		last_xDivergence = xDivergence_damp;

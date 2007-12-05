@@ -35,7 +35,8 @@ controls.fullBrakeTime = 0;
 pilot_g = nil;
 pilot_headshake = nil;
 observer_headshake = nil;
-smoke = nil;
+smoke_0 = nil;
+smoke_1 = nil;
 
 var old_n1 = 0;
 var time = 0;
@@ -70,8 +71,9 @@ initialize = func {
 	pilot_g = PilotG.new();
 	pilot_headshake = HeadShake.new("pilot", 0);
 	observer_headshake = HeadShake.new("observer", 100);
-	smoke = Smoke.new();
-	
+	smoke_0 = Smoke.new(0);
+	smoke_1 = Smoke.new(1);
+
 	#set listeners
 
 #	setlistener("engines/engine/cranking", func {smoke.updateSmoking(); 
@@ -111,8 +113,9 @@ update = func {
 
 	pilot_g.update();
 	pilot_g.gmeter_update();
-	smoke.updateSmoking();
-	
+	smoke_0.updateSmoking();
+	smoke_1.updateSmoking();
+
 	if (enabledNode.getValue() and view_name_Node.getValue() == "Cockpit View" ) { 
 		pilot_headshake.update();
 #		print ("head shake", view_name_Node.getValue());
@@ -189,7 +192,7 @@ PilotG = {
 		obj.redout_red = obj.redout.getChild("red", 0, 1);
 		obj.redout_alpha.setDoubleValue(0);
 		obj.redout_red.setDoubleValue(0);
-		print (obj.name);
+		print (obj.name," ",obj.g_timeratio.getValue());
 		return obj;
 	},
 	update : func () {
@@ -198,8 +201,8 @@ PilotG = {
 		var g_damp = me.pilot_g_damped.getValue();
 
 		g_damp = (g * n) + (g_damp * (1 - n));
-
 		me.pilot_g_damped.setDoubleValue(g_damp);
+
 		if (getprop("/sim/current-view/name")== "Cockpit View" or
 			getprop("/sim/current-view/name")== "Back Seat View") {
 				if (g_damp > 1) {
@@ -278,7 +281,7 @@ PilotG = {
 		obj.zThresholdNode = obj.sim.getChild(z_threshold_g, 0, 1);
 		obj.zThresholdNode.setDoubleValue(0.5);
 		obj.time_ratio_Node = obj.sim.getChild(time_ratio , 0, 1);
-		obj.time_ratio_Node.setDoubleValue(0.5);
+		obj.time_ratio_Node.setDoubleValue(0.6);
 		obj.config = props.globals.getNode("sim/view[" ~ index ~"]/config", 1);
 		obj.xConfigNode = obj.config.getChild(x_config, 0, 1);
 		obj.yConfigNode = obj.config.getChild(y_config, 0, 1);
@@ -425,27 +428,26 @@ PilotG = {
 #
 
 Smoke = {
-	new : func (name = "smoke",
-				n1 = "engines/engine/n1",
-				smoking = "engines/engine/smoking"
+	new : func (number,
 				){
 		var obj = {parents : [Smoke] };
-		obj.name = name;
-		obj.n1 = props.globals.getNode(n1, 1);
-		obj.smoking = props.globals.getNode(smoking, 1);
+		obj.name = "smoke " ~ number;
+		obj.n1 = props.globals.getNode("engines/engine[" ~ number ~"]/n1", 1);
+		obj.smoking = props.globals.getNode("engines/engine[" ~ number ~"]/smoking", 1);
 		obj.smoking.setBoolValue(0);
-		print (obj.name);
+		obj.old_n1 = 0;
+		print (obj.name, " ", number, " ", obj.old_n1);
 		return obj;
 	},
 
 	updateSmoking: func {    # set the smoke value according to the engine conditions
-#	print("updating Smoke");
+#	print("updating Smoke ", me.name);
 		
 		var n1 = me.n1.getValue();
 		var smoke = me.smoking.getValue();
 		var diff = 0;
 		
-		diff = math.abs(n1 - old_n1);
+		diff = math.abs(n1 - me.old_n1);
 #		print("diff ", diff);
 		
 		if (n1 <= 65 or diff > 0.1) {
@@ -455,7 +457,7 @@ Smoke = {
 		}
 	
 		me.smoking.setBoolValue(smoke);
-		old_n1 = n1;
+		me.old_n1 = n1;
 		
 #		print("smoke ", smoke);
 
