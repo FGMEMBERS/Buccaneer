@@ -59,6 +59,11 @@ Ver 0.0.1
 				<variant type="string" >Side No 322</variant>
 			</livery>
 			<variant type="int" >1</variant>
+			<buccaneer>
+				<controls>
+					<recuperator_check_safety type="float">0</recuperator_check_safety>
+				</controls>
+			</buccaneer>
 		</model>
 		<view n="0">
 			<internal archive="y">true</internal>
@@ -424,6 +429,9 @@ Ver 0.0.1
 			<aileron-droop type="double">0</aileron-droop>
 			<tail-flaps type="double">0</tail-flaps>
 		</flight>
+		<fuel>
+			<indicator-supply-swap type="bool">0</indicator-supply-swap>
+		</fuel>
 		<lighting>
 			<navigation-lights type="bool">true</navigation-lights>
 			<instrument-lights type="bool">true</instrument-lights>
@@ -811,7 +819,7 @@ Ver 0.0.1
 			<file>Aircraft/Buccaneer/Systems/buccaneer-electrical.nas</file>
 		</buccaneer-electrical>
 		<gunview>
-			<file>Aircraft/Buccaneer/Models/gunview.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/gunview.nas</file>
 		</gunview>
 		<dual_control_tools>
 			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>

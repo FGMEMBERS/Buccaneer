@@ -373,28 +373,28 @@
 	<!-- **************** Stbd Panel ********** -->
 	<stbd-panel>
 		<offsets>
-			<pitch-deg>32.0</pitch-deg>
-			<roll-deg>7.0</roll-deg>
+			<pitch-deg>25.0</pitch-deg>
+			<roll-deg>10.0</roll-deg>
 		</offsets>
 	</stbd-panel>
 
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/fuel_gauges.xml</path>
 		<offsets>
-			<x-m>3.54847</x-m>
-			<y-m>0.361662</y-m>
-			<z-m>0.443722</z-m>
+			<x-m>3.602</x-m>
+			<y-m>0.35</y-m>
+			<z-m>0.49</z-m>
 			<pitch-deg alias="../../../stbd-panel/offsets/pitch-deg"/>
 			<roll-deg alias="../../../stbd-panel/offsets/roll-deg"/>
 		</offsets>
 	</model>
 
 	<model>
-		<path>Aircraft/Buccaneer/Models/fuel-jettison.xml</path>
+		<path>Aircraft/Buccaneer/Instruments/fuel_panel.xml</path>
 		<offsets>
-			<x-m>3.62872</x-m>
-			<y-m>0.395064</y-m>
-			<z-m>0.397295</z-m>
+			<x-m>3.73</x-m>
+			<y-m>0.361662</y-m>
+			<z-m>0.43</z-m>
 			<pitch-deg alias="../../../stbd-panel/offsets/pitch-deg"/>
 			<roll-deg alias="../../../stbd-panel/offsets/roll-deg"/>
 		</offsets>
