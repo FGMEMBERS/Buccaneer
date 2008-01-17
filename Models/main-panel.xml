@@ -23,6 +23,15 @@
 	</model>
 
 	<model>
+		<path>Aircraft/Buccaneer/Instruments/fast_erect_panel.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>-0.37</y-m>
+			<z-m>0.52068</z-m>
+		</offsets>
+	</model>
+
+	<model>
 		<path>Aircraft/Buccaneer/Instruments/altimeter_vsi.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>

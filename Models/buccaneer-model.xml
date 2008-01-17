@@ -200,6 +200,17 @@
 		</offsets>
 	</model>
 
+	<!-- *********** Port Coaming Panel ********** -->
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/port_coaming_panel.xml</path>
+		<offsets>
+			<x-m>3.556</x-m>
+			<y-m>-0.311199</y-m>
+			<z-m>0.778272</z-m>
+			<yaw-deg>-40</yaw-deg>
+		</offsets>
+	</model>
+
 	<!-- **************** Main Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Models/main-panel.xml</path>

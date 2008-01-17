@@ -7,6 +7,11 @@
 	<path>nav_display.ac</path>
 	
 	<animation>
+		<condition>
+			<not>
+				<property>sim/model/buccaneer/controls/compass_lock</property>
+			</not>
+		</condition>
 		<type>rotate</type>
 		<object-name>mag_compass_card</object-name>
 		<property>instrumentation/master-reference-gyro/indicated-hdg-deg</property>
@@ -46,6 +51,11 @@
 	</animation>
 -->
 	<animation>
+		<condition>
+			<not>
+				<property>sim/model/buccaneer/controls/compass_lock</property>
+			</not>
+		</condition>
 		<type>rotate</type>
 		<object-name>dg_compass_card</object-name>
 		<property>instrumentation/heading-indicator-dg/indicated-heading-deg</property>
