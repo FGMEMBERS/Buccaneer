@@ -121,7 +121,27 @@
 	<animation>
 		<type>material</type>
 		<object-name>Face</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+	<animation>
+		 
+		<type>material</type>
 		<object-name>Needle1</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+	
+	<animation>
+		<type>material</type>
 		<object-name>Needle2</object-name>
 		<emission>
 			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
