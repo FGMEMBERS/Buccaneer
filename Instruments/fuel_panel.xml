@@ -79,7 +79,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna2-lever</object-name>
-		<property>controls/fuel/fna2</property>
+		<property>controls/fuel/FNA-2</property>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
@@ -100,7 +100,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/fna2</property>
+				<property>controls/fuel/FNA-2</property>
 			</binding>
 		</action>
 	</animation>
@@ -108,7 +108,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna6-lever</object-name>
-		<property>controls/fuel/fna6</property>
+		<property>controls/fuel/FNA-6</property>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
@@ -129,7 +129,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/fna6</property>
+				<property>controls/fuel/FNA-6</property>
 			</binding>
 		</action>
 	</animation>
@@ -137,7 +137,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna3-lever</object-name>
-		<property>controls/fuel/fna3</property>
+		<property>controls/fuel/FNA-3</property>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
@@ -158,7 +158,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/fna3</property>
+				<property>controls/fuel/FNA-3</property>
 			</binding>
 		</action>
 	</animation>
@@ -166,7 +166,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna5-lever</object-name>
-		<property>controls/fuel/fna5</property>
+		<property>controls/fuel/FNA-5</property>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
@@ -187,7 +187,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/fna5</property>
+				<property>controls/fuel/FNA-5</property>
 			</binding>
 		</action>
 	</animation>

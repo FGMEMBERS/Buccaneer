@@ -66,6 +66,13 @@ var dump_valve = 0;
 var cross_connect = 0;
 var LP_port = 0;
 var LP_stbd = 0;
+var TX_fwd = 0;
+var TX_aft = 0;
+var FNA_2 = 0;
+var FNA_3 = 0;
+var FNA_5 = 0;
+var FNA_6 = 0;
+
 ##
 # Initialize the fuel system
 #
@@ -116,6 +123,12 @@ var init_fuel_system = func {
 		valve_2 = Valve.new("cross_connect_valve","controls/fuel/cross-connect",0);
 		valve_3 = Valve.new("LP_valve_port","controls/fuel/LP-port",1);
 		valve_4 = Valve.new("LP_valve_stbd","controls/fuel/LP-stbd",1);
+		valve_5 = Valve.new("TX_valve_fwd","controls/fuel/TX-fwd",0);
+		valve_6 = Valve.new("TX_valve_aft","controls/fuel/TX-aft",0);
+		valve_7 = Valve.new("FNA_2","controls/fuel/FNA-2",1);
+		valve_8 = Valve.new("FNA_3","controls/fuel/FNA-3",1);
+		valve_9 = Valve.new("FNA_5","controls/fuel/FNA-5",1);
+		valve_10 = Valve.new("FNA_6","controls/fuel/FNA-6",1);
 
 	#calculate the proportions, based on the total capacity of tanks port and stbd
 
@@ -154,6 +167,48 @@ var init_fuel_system = func {
 	setlistener("controls/fuel/LP-stbd", func {
 		LP_stbd = Valve.get("LP_valve_stbd");
 		#print("LP_stbd ", LP_stbd);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/TX-fwd", func {
+		TX_fwd = Valve.get("TX_valve_fwd");
+		print("TX_fwd ", TX_fwd);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/TX-aft", func {
+		TX_aft = Valve.get("TX_valve_aft");
+		print("TX_aft ", TX_aft);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/FNA-2", func {
+		FNA_2 = Valve.get("FNA_2");
+		print("FNA_2 ", FNA_2);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/FNA-3", func {
+		FNA_3 = Valve.get("FNA_3");
+		print("FNA_3 ", FNA_3);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/FNA-5", func {
+		FNA_5 = Valve.get("FNA_5");
+		print("FNA_5 ", FNA_5);
+		},
+	1
+	);
+
+	setlistener("controls/fuel/FNA-6", func {
+		FNA_6 = Valve.get("FNA_6");
+		print("FNA_6 ", FNA_6);
 		},
 	1
 	);
@@ -240,6 +295,24 @@ var fuel_update = func {
 		tank_8.set_transfer_tank(dt, "tank_No6");
 	}
 
+	# inter-tank tranfer
+	#  transfer 2 and 3
+	if(TX_fwd) {
+		if(tank_2.get_level() > tank_3.get_level() and tank_3.get_ullage() > 0){
+			tank_2.set_transfer_tank(dt, "tank_No3");
+		} elsif (tank_3.get_level() > tank_2.get_level() and tank_2.get_ullage() > 0){
+			tank_3.set_transfer_tank(dt, "tank_No2");
+		}
+	}
+	#  transfer 5 and 6
+	if(TX_aft) {
+		if(tank_5.get_level() > tank_6.get_level() and tank_6.get_ullage() > 0){
+			tank_5.set_transfer_tank(dt, "tank_No6");
+		} elsif (tank_6.get_level() > tank_5.get_level() and tank_5.get_ullage() > 0){
+			tank_6.set_transfer_tank(dt, "tank_No5");
+		}
+	}
+
 	# jettison fuel
 	if(dump_valve) {
 		proportioner_port.jettisonFuel(dt);
@@ -254,7 +327,7 @@ var fuel_update = func {
 		amount_port = proportioner_port.get_ullage();
 		# print ("amount to port prop: ", amount_port);
 		# if there is any fuel in No2 transfer the correct proportion
-		if(tank_2.get_level() > 0){
+		if(tank_2.get_level() > 0 and FNA_2){
 			amount_2 = amount_port * prop_2;
 			if(amount_2 > tank_2.get_level()) {
 			amount_2 = tank_2.get_level();
@@ -264,7 +337,7 @@ var fuel_update = func {
 		proportioner_port.set_level(proportioner_port.get_level() + amount_2);
 		}
 	# if there is any fuel in No6 transfer the correct proportion
-		if(tank_6.get_level() > 0){
+		if(tank_6.get_level() > 0 and FNA_6){
 			amount_6 = amount_port * prop_6;
 			if(amount_6 > tank_6.get_level()) {
 				amount_6 = tank_6.get_level();
@@ -280,7 +353,7 @@ var fuel_update = func {
 		amount_stbd = proportioner_stbd.get_ullage();
 		#print ("amount to stbd prop: ", amount_stbd);
 		# if there is any fuel in No3 transfer the correct proportion
-		if(tank_3.get_level() > 0){
+		if(tank_3.get_level() > 0 and FNA_3){
 			amount_3 = amount_stbd * prop_3;
 			if(amount_3 > tank_3.get_level()) {
 			amount_3 = tank_3.get_level();
@@ -290,7 +363,7 @@ var fuel_update = func {
 		proportioner_stbd.set_level(proportioner_stbd.get_level() + amount_3);
 		}
 		# if there is any fuel in No5 transfer the correct proportion
-		if(tank_5.get_level() > 0){
+		if(tank_5.get_level() > 0 and FNA_5){
 			amount_5 = amount_stbd * prop_5;
 			if(amount_5 > tank_5.get_level()) {
 				amount_5 = tank_5.get_level();
@@ -446,7 +519,7 @@ Tank = {
 		return me.name.getValue();
 	},
 	set_transfer_tank : func (dt, tank) {
-	#print (me.name.getValue(), " transfer ");
+	# print (me.name.getValue(), " transfer ");
 		foreach (var t; Tank.list) {
 			if(t.get_name() == tank)  {
 				transfer = me.get_amount(dt, t.get_ullage());
@@ -706,8 +779,8 @@ Neg_g = {
 			me.prop.setBoolValue(0);
 		}
 	},
-get_neg_g : func() {
-	return me.prop.getValue();
+	get_neg_g : func() {
+		return me.prop.getValue();
 	},
 };	
 
