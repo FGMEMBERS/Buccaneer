@@ -345,7 +345,7 @@ var fuel_update = func {
 			if(amount_2 > tank_2.get_level()) {
 			amount_2 = tank_2.get_level();
 			}
-		print("Amount 2 (from tank 2: " , amount_2);
+#	print("Amount 2 (from tank 2: " , amount_2);
 		tank_2.set_level(tank_2.get_level() - amount_2);
 		proportioner_port.set_level(proportioner_port.get_level() + amount_2);
 		}
@@ -355,7 +355,7 @@ var fuel_update = func {
 			if(amount_6 > tank_6.get_level()) {
 				amount_6 = tank_6.get_level();
 			}
-			print("Amount 6: ", amount_6);
+#	print("Amount 6: ", amount_6);
 			tank_6.set_level(tank_6.get_level() - amount_6);
 			proportioner_port.set_level(proportioner_port.get_level() + amount_6);
 		}
@@ -366,7 +366,7 @@ var fuel_update = func {
 			if(amount_2 > tank_3.get_level()) {
 			amount_2 = tank_3.get_level();
 			}
-		print("Amount 2 (from tank 3: " , amount_2);
+#	print("Amount 2 (from tank 3: " , amount_2);
 		tank_3.set_level(tank_3.get_level() - amount_2);
 		proportioner_port.set_level(proportioner_port.get_level() + amount_2);
 		}
