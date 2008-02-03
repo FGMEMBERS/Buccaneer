@@ -34,6 +34,15 @@ recuperator_port = nil;
 recuperator_stbd = nil;
 neg_g = nil;
 valve_1 = nil;
+valve_2 = nil; 
+valve_3 = nil;
+valve_4 = nil;
+valve_5 = nil;
+valve_6 = nil; 
+valve_7 = nil;
+valve_8 = nil;
+valve_9 = nil;
+valve_10 = nil;
 
 PortEngine		= props.globals.getNode("engines").getChild("engine", 0);
 StbdEngine		= props.globals.getNode("engines").getChild("engine", 1);
@@ -298,17 +307,21 @@ var fuel_update = func {
 	# inter-tank tranfer
 	#  transfer 2 and 3
 	if(TX_fwd) {
-		if(tank_2.get_level() > tank_3.get_level() and tank_3.get_ullage() > 0){
+		if(tank_2.get_level_lbs() > tank_3.get_level_lbs() 
+			and tank_3.get_ullage() > 0 and FNA_2){
 			tank_2.set_transfer_tank(dt, "tank_No3");
-		} elsif (tank_3.get_level() > tank_2.get_level() and tank_2.get_ullage() > 0){
+		} elsif (tank_3.get_level_lbs() > tank_2.get_level_lbs() 
+			and tank_2.get_ullage() > 0 and FNA_3){
 			tank_3.set_transfer_tank(dt, "tank_No2");
 		}
 	}
 	#  transfer 5 and 6
 	if(TX_aft) {
-		if(tank_5.get_level() > tank_6.get_level() and tank_6.get_ullage() > 0){
+		if(tank_5.get_level_lbs() > tank_6.get_level_lbs() 
+			and tank_6.get_ullage() > 0 and FNA_5){
 			tank_5.set_transfer_tank(dt, "tank_No6");
-		} elsif (tank_6.get_level() > tank_5.get_level() and tank_5.get_ullage() > 0){
+		} elsif (tank_6.get_level_lbs() > tank_5.get_level_lbs() 
+			and tank_5.get_ullage() > 0 and FNA_6){
 			tank_6.set_transfer_tank(dt, "tank_No5");
 		}
 	}
@@ -332,47 +345,68 @@ var fuel_update = func {
 			if(amount_2 > tank_2.get_level()) {
 			amount_2 = tank_2.get_level();
 			}
-		#print("Amount 2: " , amount_2);
+		print("Amount 2 (from tank 2: " , amount_2);
 		tank_2.set_level(tank_2.get_level() - amount_2);
 		proportioner_port.set_level(proportioner_port.get_level() + amount_2);
 		}
-	# if there is any fuel in No6 transfer the correct proportion
+		# if there is any fuel in No6 transfer the correct proportion
 		if(tank_6.get_level() > 0 and FNA_6){
 			amount_6 = amount_port * prop_6;
 			if(amount_6 > tank_6.get_level()) {
 				amount_6 = tank_6.get_level();
 			}
-			#print("Amount 6: ", amount_6);
+			print("Amount 6: ", amount_6);
 			tank_6.set_level(tank_6.get_level() - amount_6);
 			proportioner_port.set_level(proportioner_port.get_level() + amount_6);
+		}
+		# TX valve is open we substitute tank 3 for tank 2
+		# if there is any fuel in No3 transfer the correct proportion
+		if(tank_3.get_level() > 0 and FNA_3 and !FNA_2 and TX_fwd){
+			amount_2 = amount_port * prop_2;
+			if(amount_2 > tank_3.get_level()) {
+			amount_2 = tank_3.get_level();
+			}
+		print("Amount 2 (from tank 3: " , amount_2);
+		tank_3.set_level(tank_3.get_level() - amount_2);
+		proportioner_port.set_level(proportioner_port.get_level() + amount_2);
 		}
 	}
 
 	# transfer to stbd proportioner
 	if(proportioner_stbd.get_ullage() > 0){
 		amount_stbd = proportioner_stbd.get_ullage();
-		#print ("amount to stbd prop: ", amount_stbd);
-		# if there is any fuel in No3 transfer the correct proportion
+#print ("amount to stbd prop: ", amount_stbd);
+# if there is any fuel in No3 transfer the correct proportion
 		if(tank_3.get_level() > 0 and FNA_3){
 			amount_3 = amount_stbd * prop_3;
 			if(amount_3 > tank_3.get_level()) {
-			amount_3 = tank_3.get_level();
+				amount_3 = tank_3.get_level();
 			}
-		#print("Amount 3: " , amount_3);
-		tank_3.set_level(tank_3.get_level() - amount_3);
-		proportioner_stbd.set_level(proportioner_stbd.get_level() + amount_3);
+# print("Amount 3: " , amount_3);
+			tank_3.set_level(tank_3.get_level() - amount_3);
+			proportioner_stbd.set_level(proportioner_stbd.get_level() + amount_3);
 		}
-		# if there is any fuel in No5 transfer the correct proportion
+# if there is any fuel in No5 transfer the correct proportion
 		if(tank_5.get_level() > 0 and FNA_5){
 			amount_5 = amount_stbd * prop_5;
 			if(amount_5 > tank_5.get_level()) {
 				amount_5 = tank_5.get_level();
 			}
-			#print("Amount 5: ", amount_5);
+# print("Amount 5 (from tank 5: ", amount_5);
 			tank_5.set_level(tank_5.get_level() - amount_5);
 			proportioner_stbd.set_level(proportioner_stbd.get_level() + amount_5);
 		}
-		
+# TX_aft is open we sustitute 6 for 5
+# if there is any fuel in No6 transfer the correct proportion
+		if(tank_6.get_level() > 0 and FNA_6 and !FNA_5 and TX_aft){
+			amount_5 = amount_stbd * prop_5;
+			if(amount_5 > tank_6.get_level()) {
+				amount_5 = tank_6.get_level();
+			}
+# print("Amount 5 (from tank 6: ", amount_5);
+			tank_6.set_level(tank_6.get_level() - amount_5);
+			proportioner_stbd.set_level(proportioner_stbd.get_level() + amount_5);
+		}
 	}
 	# transfer proportioners to recuperators
 	if(!cross_connect) {
