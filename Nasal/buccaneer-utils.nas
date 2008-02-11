@@ -29,6 +29,18 @@ fuel_dump_lever_Node.setBoolValue(0);
 model_variant_Node = props.globals.getNode("sim/model/variant", 1);
 model_variant_Node.setIntValue(0);
 
+formation_variant_Node = props.globals.getNode("sim/formation/variant", 1);
+formation_variant_Node.setIntValue(0);
+
+tgt_x_offset_Node = props.globals.getNode("ai/models/wingman/position/tgt-x-offset",1);
+tgt_y_offset_Node = props.globals.getNode("ai/models/wingman/position/tgt-y-offset",1);
+tgt_z_offset_Node = props.globals.getNode("ai/models/wingman/position/tgt-z-offset",1);
+tgt_x_offset_1_Node = props.globals.getNode("ai/models/wingman[1]/position/tgt-x-offset",1);
+tgt_y_offset_1_Node = props.globals.getNode("ai/models/wingman[1]/position/tgt-y-offset",1);
+tgt_z_offset_1_Node = props.globals.getNode("ai/models/wingman[1]/position/tgt-z-offset",1);
+tgt_x_offset_2_Node = props.globals.getNode("ai/models/wingman[2]/position/tgt-x-offset",1);
+tgt_y_offset_2_Node = props.globals.getNode("ai/models/wingman[2]/position/tgt-y-offset",1);
+tgt_z_offset_2_Node = props.globals.getNode("ai/models/wingman[2]/position/tgt-z-offset",1);
 
 controls.fullBrakeTime = 0;
 
@@ -54,18 +66,30 @@ var last_zDivergence = 0;
 var lever_sum = 0;
 var direction = 0 ;
 
+#var dialog = gui.Dialog.new("/sim/gui/dialogs/buccaneer/config/dialog",
+#                            "Aircraft/Buccaneer/Dialogs/formation-select.xml");
+
+#var formation["echelon port", "echelon stbd"];
+#var data[];
+
 initialize = func {
 
 	print("Initializing Buccaneer utilities ...");
 	
 	# initialise differential braking
 	aircraft.steering.init();
-	
-	# initialise dialogs 
-	aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
-		"sim/model/livery/variant",
-		"sim/model/livery/index"
+
+    # initialise dialogs 
+
+	aircraft.formation.init("Aircraft/Buccaneer/Formations",
+		"sim/model/formation/variant",
+		"sim/model/formation/index"
 		);
+	
+    aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
+	    "sim/model/livery/variant",
+	    "sim/model/livery/index"
+	);
 
 	# initialize objects
 	pilot_g = PilotG.new();
@@ -78,23 +102,53 @@ initialize = func {
 
 #	setlistener("engines/engine/cranking", func {smoke.updateSmoking(); 
 #												  });
-	
-	setlistener("sim/model/variant", func {
-		var index = getprop("sim/model/variant");
-		print("index", getprop("sim/model/variant"));
+
+	setlistener("/sim/formation/variant", func {
+	var index = getprop("/sim/formation/variant");
+#	print("set formation index ", getprop("/sim/formation/variant"));
+	aircraft.formation.set(index);
+    },
+    1);
+
+    setlistener("/sim/model/formation/variant", func {
+		var name = getprop("/sim/model/formation/variant");
+		forindex (var i; aircraft.formation.data){
+#            print("formation index: ", aircraft.formation.data[i][0]," [1] ",aircraft.formation.data[i][1]);
+			
+            if(aircraft.formation.data[i][0]== name)
+				formation_variant_Node.setIntValue(i);
+            
+
+		}
+     tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
+     tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
+     tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
+     tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
+     tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
+     tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
+     tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
+     tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
+     tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
+	},
+	1);
+
+	setlistener("/sim/model/variant", func {
+		var index = getprop("/sim/model/variant");
+		print("set model index", getprop("/sim/model/variant"));
 		aircraft.livery.set(index);
 	},
 	1);
 	
-	setlistener("sim/model/livery/variant", func {
-		var name = getprop("sim/model/livery/variant");
+	setlistener("/sim/model/livery/variant", func {
+		var name = getprop("/sim/model/livery/variant");
 		forindex (var i; aircraft.livery.data){
-			print("variant index: ", aircraft.livery.data[i][0]," ",aircraft.livery.data[i][1]);
+            print("variant index: ", aircraft.livery.data[i][0]," [1] ",aircraft.livery.data[i][1]);
 			if(aircraft.livery.data[i][0]== name)
-				model_variant_Node.setIntValue(i);
+    			model_variant_Node.setIntValue(i);
 		}
 	},
 	1);
+
 	# set it running on the next update cycle
 	settimer(update, 0);
 
@@ -109,22 +163,34 @@ initialize = func {
 ###
 # ==== this is the Main Loop which keeps everything updated ========================
 ##
-update = func {
+var update = func {
+    
+#    var AllWingmen = props.globals.getNode("ai/models").getChildren("wingman");
 
-	pilot_g.update();
-	pilot_g.gmeter_update();
-	smoke_0.updateSmoking();
-	smoke_1.updateSmoking();
+#    allwingmen = [];
+	
+#		foreach(w; AllWingmen) {
+#			callsign_node = w.getNode("name");
+#			
+#			print ("wingman name " , callsign_node.getValue());
+#			
+#			append(allwingmen, w);
+#		}
+#    print ("wingmen ", size(allwingmen));
+
+    pilot_g.update();
+    pilot_g.gmeter_update();
+    smoke_0.updateSmoking();
+    smoke_1.updateSmoking();
 
 	if (enabledNode.getValue() and view_name_Node.getValue() == "Cockpit View" ) { 
 		pilot_headshake.update();
 #		print ("head shake", view_name_Node.getValue());
 	} elsif (enabledNode.getValue() and view_name_Node.getValue() == "Back Seat View") {
 		observer_headshake.update(); 
-#	print ( view_name_Node.getValue());
+#       print ( view_name_Node.getValue());
 	}
 
-#	print("index", getprop("sim/model/variant"));
 	settimer(update, 0); 
 
 }# end main loop func
@@ -192,7 +258,7 @@ PilotG = {
 		obj.redout_red = obj.redout.getChild("red", 0, 1);
 		obj.redout_alpha.setDoubleValue(0);
 		obj.redout_red.setDoubleValue(0);
-		print (obj.name," ",obj.g_timeratio.getValue());
+#		print (obj.name," ",obj.g_timeratio.getValue());
 		return obj;
 	},
 	update : func () {
@@ -436,7 +502,7 @@ Smoke = {
 		obj.smoking = props.globals.getNode("engines/engine[" ~ number ~"]/smoking", 1);
 		obj.smoking.setBoolValue(0);
 		obj.old_n1 = 0;
-		print (obj.name, " ", number, " ", obj.old_n1);
+#		print (obj.name, " ", number, " ", obj.old_n1);
 		return obj;
 	},
 

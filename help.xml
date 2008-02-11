@@ -7,6 +7,10 @@
 			<desc>emergency flap lowering</desc>
 		</key>
 		<key>
+			<name>Ctrl-I</name>
+			<desc>toggle formation select menu</desc>
+		</key>
+		<key>
 			<name>f/F</name>
 			<desc>canopy open/close</desc>
 		</key>
