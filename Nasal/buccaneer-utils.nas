@@ -26,11 +26,18 @@ fuel_dump_lever_pos_Node = props.globals.getNode("controls/fuel/dump-valve-lever
 fuel_dump_lever_pos_Node.setDoubleValue(0);
 fuel_dump_Node = props.globals.getNode("controls/fuel/dump-valve", 1);
 fuel_dump_lever_Node.setBoolValue(0);
+
 model_variant_Node = props.globals.getNode("sim/model/variant", 1);
 model_variant_Node.setIntValue(0);
 
+model_index_Node = props.globals.getNode("sim/model/index", 1);
+model_index_Node.setIntValue(0);
+
 formation_variant_Node = props.globals.getNode("sim/formation/variant", 1);
-formation_variant_Node.setIntValue(0);
+formation_variant_Node.setIntValue(0); 
+
+formation_index_Node = props.globals.getNode("sim/formation/index", 1);
+formation_index_Node.setIntValue(0);
 
 tgt_x_offset_Node = props.globals.getNode("ai/models/wingman/position/tgt-x-offset",1);
 tgt_y_offset_Node = props.globals.getNode("ai/models/wingman/position/tgt-y-offset",1);
