@@ -39,7 +39,7 @@ Ver 0.0.1
 			<submodels>
 				<contrails type="bool">false</contrails>
 			</submodels>
-			<scenario>wingman_demo</scenario>
+			<scenario n="100">wingman_demo</scenario>
 		</ai>
 		<submodels>
 			<serviceable type="bool">true</serviceable>
