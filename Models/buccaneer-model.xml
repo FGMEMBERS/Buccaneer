@@ -212,6 +212,17 @@
 		</offsets>
 	</model>
 
+	<!-- *********** Throttle Panel ********** -->
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/throttle_panel.xml</path>
+		<!--<path>Aircraft/Buccaneer/Instruments/throttle_panel.ac</path>-->
+		<offsets>
+			<x-m>3.83186</x-m>
+			<y-m>-0.45</y-m>
+			<z-m>0.347693</z-m>
+		</offsets>
+	</model>
+
 	<!-- **************** Main Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Models/main-panel.xml</path>
@@ -553,6 +564,16 @@
 	<!-- **************************** Pilot ******************************* -->
 	<!--
 	-->
+	<!--  conceal Pilot if user so chooses -->
+	<animation>
+		<type>select</type>
+		<object-name>Pilot</object-name>
+		<object-name>Parachute-Harness</object-name>
+		<condition>
+			<property>/sim/model/buccaneer/config/show-pilot</property>
+		</condition>
+	</animation>
+
 	<!--  conceal Pilot Head etc in Cockpit Views -->
 	<animation>
 		<type>select</type>
