@@ -53,6 +53,28 @@ Ver 0.0.1
 			<path>Huds/Default/default.xml</path>
 			<visibility>false</visibility>
 		</hud>
+		<menubar>
+			<default>
+				<menu n="1000">
+					<label>Buccaneer</label>
+					<enabled type="bool">true</enabled>
+					<item>
+						<label>Toggle pilot model</label>
+						<binding>
+							<command>property-toggle</command>
+							<property>/sim/model/buccaneer/config/show-pilot</property>
+						</binding>
+					</item>
+					<item>
+						<label>Toggle G-induced head movement</label>
+						<binding>
+							<command>property-toggle</command>
+							<property>/sim/headshake/enabled</property>
+						</binding>
+					</item>
+				</menu>
+			</default>
+		</menubar>
 		<model>
 			<path>Aircraft/Buccaneer/Models/buccaneer-model.xml</path>
 			<livery>
@@ -60,6 +82,9 @@ Ver 0.0.1
 			</livery>
 			<variant type="int" >1</variant>
 			<buccaneer>
+				<config>
+					<show-pilot type="bool">true</show-pilot>
+				</config>
 				<controls>
 					<recuperator_check_safety type="float">0</recuperator_check_safety>
 				</controls>
