@@ -57,6 +57,36 @@ Ver 0.0.1
 			<path>Huds/Default/default.xml</path>
 			<visibility>false</visibility>
 		</hud>
+		<rendering>
+			<redout>
+				<parameters>
+					<blackout-onset-g type="double">4.5</blackout-onset-g>
+					<blackout-complete-g type="double">6.0</blackout-complete-g>
+				</parameters>
+			</redout>
+		</rendering>
+		<menubar>
+			<default>
+				<menu n="1000">
+					<label>Buccaneer</label>
+					<enabled type="bool">true</enabled>
+					<item>
+						<label>Toggle pilot model</label>
+						<binding>
+							<command>property-toggle</command>
+							<property>/sim/model/buccaneer/config/show-pilot</property>
+						</binding>
+					</item>
+					<item>
+						<label>Toggle G-induced head movement</label>
+						<binding>
+							<command>property-toggle</command>
+							<property>/sim/headshake/enabled</property>
+						</binding>
+					</item>
+				</menu>
+			</default>
+		</menubar>
 		<model>
 			<path>Aircraft/Buccaneer/Models/buccaneer-model.xml</path>
 			<livery>
@@ -453,6 +483,9 @@ Ver 0.0.1
 		<heading-indicator>
 			<heading-bug-deg type="double">45</heading-bug-deg>
 		</heading-indicator>
+		<air-ground-radar>
+			<serviceable type="bool">true</serviceable>
+		</air-ground-radar>
 	</instrumentation>
 
 	<systems>
