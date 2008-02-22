@@ -177,7 +177,7 @@
 		</offsets>
 	</over-main-panel>
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Buccaneer/Instruments/aoa_indexer.xml</path>
 		<offsets>
 			<x-m>3.36104</x-m>
@@ -187,10 +187,10 @@
 			<pitch-deg>-15</pitch-deg>
 			<heading-deg>5</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
 	<model>
-		<path>Aircraft/Buccaneer/Models/asi.xml</path>
+		<path>Aircraft/Buccaneer/Instruments/asi.xml</path>
 		<offsets>
 			<x-m>3.36104</x-m>
 			<y-m>-0.212109</y-m>
