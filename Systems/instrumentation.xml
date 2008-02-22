@@ -25,15 +25,15 @@ file, these values will be used (they are hardcoded).
 
 <PropertyList>
 
-	<adf>
+	<!--<adf>
 		<name>adf</name>
 		<number>0</number>
-	</adf>
+	</adf>-->
 
-	<adf>
+	<!--<adf>
 		<name>adf-radio</name>
 		<number>0</number>
-	</adf>
+	</adf>-->
 
 	<airspeed-indicator>
 		<name>airspeed-indicator</name>
@@ -59,16 +59,16 @@ file, these values will be used (they are hardcoded).
     <number>0</number>
   </clock>-->
 
-	<dme>
+	<!--<dme>
 		<name>dme</name>
 		<number>0</number>
-	</dme>
+	</dme>-->
 
-	<encoder>
+	<!--<encoder>
 		<name>encoder</name>
 		<number>0</number>
 		<static-port>/systems/static</static-port>
-	</encoder>
+	</encoder>-->
 
 	<marker-beacon>
 		<name>marker-beacon</name>
@@ -127,10 +127,15 @@ file, these values will be used (they are hardcoded).
     <number>0</number>
   </gps>-->
 
-	<!--<radar>
-    <name>wxradar</name>
-    <number>0</number>
-  </radar>-->
+	<!--<ground-mapping-radar>
+		<name>ground-mapping-radar</name>
+		<number>0</number>
+	</ground-mapping-radar>-->
+
+	<air-ground-radar>
+		<name>air-ground-radar</name>
+		<number>0</number>
+	</air-ground-radar>
 
 	<tacan>
 		<name>tacan</name>
