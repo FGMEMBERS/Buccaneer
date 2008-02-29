@@ -122,20 +122,15 @@ file, these values will be used (they are hardcoded).
 		<static-port>/systems/static</static-port>
 	</vertical-speed-indicator>
 
-	<!--<gps>
-    <name>gps</name>
-    <number>0</number>
-  </gps>-->
-
-	<!--<ground-mapping-radar>
-		<name>ground-mapping-radar</name>
-		<number>0</number>
-	</ground-mapping-radar>-->
-
 	<air-ground-radar>
 		<name>air-ground-radar</name>
 		<number>0</number>
 	</air-ground-radar>
+
+	<radar-altimeter>
+		<name>radar-altimeter</name>
+		<number>0</number>
+	</radar-altimeter>
 
 	<tacan>
 		<name>tacan</name>
@@ -151,10 +146,5 @@ file, these values will be used (they are hardcoded).
 		<name>master-reference-gyro</name>
 		<number>1</number>
 	</master-reference-gyro>
-
-	<!--<mk-viii>
-   <name>mk-viii</name>
-   <number>0</number>
-  </mk-viii>-->
 
 </PropertyList>
