@@ -484,7 +484,67 @@ Ver 0.0.1
 		</heading-indicator>
 		<air-ground-radar>
 			<serviceable type="bool">true</serviceable>
+			<switch type="string">ON</switch>
+			<mode-control type="int">5</mode-control>
+			<scan-sec type="double">1</scan-sec>
+			<display-controls>
+				<WX type="bool">false</WX>
+				<pos type="bool">true</pos>
+				<data type="bool">false</data>
+				<symbol type="bool">false</symbol>
+			</display-controls>
+			<range type="int">30</range>
+			<mode type="string">WX</mode>
+			<lightning type="bool">false</lightning>
+			<display-mode type="string">arc</display-mode>
+			<minimized type="bool">false</minimized>
+			<echo-texture-path>Aircraft/Instruments/Textures/wxecho-orange.rgb</echo-texture-path>
+			<antenna>
+				<x-offset-m type="double">0</x-offset-m>
+				<y-offset-m type="double">-0.5</y-offset-m>
+				<z-offset-m type="double">0</z-offset-m>
+			</antenna>
+			<terrain-warning>
+				<elev-limit-deg type="double">2</elev-limit-deg>
+				<elev-step-deg type="double">1</elev-step-deg>
+				<az-limit-deg type="double">1</az-limit-deg>
+				<az-step-deg type="double">0.5</az-step-deg>
+				<max-range-m type="double">4000</max-range-m>
+				<min-range-m type="double">250</min-range-m>
+				<tilt type="double">-2</tilt>
+				<stabilisation>
+					<roll type="bool">true</roll>
+					<pitch type="bool">false</pitch>
+				</stabilisation>
+				<scan-sec type="double">1</scan-sec>
+			</terrain-warning>
+			<!--<surveillance>
+				<elev-limit-deg type="double">1</elev-limit-deg>
+				<elev-step-deg type="double">0.5</elev-step-deg>
+				<az-limit-deg type="double">45</az-limit-deg>
+				<az-step-deg type="double">5</az-step-deg>
+				<max-range-m type="double">120000</max-range-m>
+				<min-range-m type="double">1000</min-range-m>
+				<tilt type="double">-2.5</tilt>
+				<stabilisation>
+					<roll type="bool">true</roll>
+					<pitch type="bool">true</pitch>
+				</stabilisation>
+				<scan-sec type="double">3</scan-sec>
+				<persistance-sec type="double">3</persistance-sec>
+			</surveillance>-->
 		</air-ground-radar>
+		<radar-altimeter>
+			<switch type="string">ON</switch>
+			<serviceable type="bool">true</serviceable>
+			<antenna>
+				<x-offset-m type="double">-2.660540</x-offset-m>
+				<y-offset-m type="double">0</y-offset-m>
+				<z-offset-m type="double">-0.6275650</z-offset-m>
+			</antenna>
+			<set-height-ft>1000</set-height-ft>
+			<set-excursion-percent>5</set-excursion-percent>
+		</radar-altimeter>
 	</instrumentation>
 
 	<systems>
