@@ -54,11 +54,6 @@ file, these values will be used (they are hardcoded).
 		<vacuum-system>/systems/vacuum</vacuum-system>
 	</attitude-indicator>
 
-	<!--<clock>
-    <name>clock</name>
-    <number>0</number>
-  </clock>-->
-
 	<!--<dme>
 		<name>dme</name>
 		<number>0</number>
@@ -122,15 +117,16 @@ file, these values will be used (they are hardcoded).
 		<static-port>/systems/static</static-port>
 	</vertical-speed-indicator>
 
-	<air-ground-radar>
-		<name>air-ground-radar</name>
-		<number>0</number>
-	</air-ground-radar>
-
+<!-- radar-altimeter should come before air-ground-radar -->
 	<radar-altimeter>
 		<name>radar-altimeter</name>
 		<number>0</number>
 	</radar-altimeter>
+
+	<air-ground-radar>
+		<name>air-ground-radar</name>
+		<number>0</number>
+	</air-ground-radar>
 
 	<tacan>
 		<name>tacan</name>
