@@ -24,6 +24,7 @@ Ver 0.0.1
 		<systems>
 			<autopilot>
 				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
+				<!--<path>Aircraft/Buccaneer/Systems/autopilot.xml</path>-->
 			</autopilot>
 			<electrical>
 				<path></path>
@@ -106,6 +107,11 @@ Ver 0.0.1
 				<z-offset-m archive="y">3.99331</z-offset-m>
 				<pitch-offset-deg>-20</pitch-offset-deg>
 				<default-field-of-view-deg>70</default-field-of-view-deg>
+				<x-trans-m type="double">0.2</x-trans-m>
+				<x-trans-heading-normdeg-min type="double">-65</x-trans-heading-normdeg-min>
+				<x-trans-heading-normdeg-max type="double">65</x-trans-heading-normdeg-max>
+				<heading-normdeg-min type="double">-140</heading-normdeg-min>
+				<heading-normdeg-max type="double">140</heading-normdeg-max>
 			</config>
 		</view>
 		<view n="1">
@@ -158,8 +164,12 @@ Ver 0.0.1
 				<z-offset-m archive="y"
 										type="double">5.2269</z-offset-m>
 				<pitch-offset-deg>-15</pitch-offset-deg>
-				<default-field-of-view-deg>60</default-field-of-view-deg>
-				<dynamic-view type="bool">true</dynamic-view>
+				<default-field-of-view-deg>70</default-field-of-view-deg>
+				<x-trans-m type="double">0.2</x-trans-m>
+				<x-trans-heading-normdeg-min type="double">-65</x-trans-heading-normdeg-min>
+				<x-trans-heading-normdeg-max type="double">65</x-trans-heading-normdeg-max>
+				<heading-normdeg-min type="double">-140</heading-normdeg-min>
+				<heading-normdeg-max type="double">140</heading-normdeg-max>
 			</config>
 		</view>
 		<view n="101">
@@ -297,12 +307,13 @@ Ver 0.0.1
 		</aoa-indexer>
 
 		<headshake>
-			<enabled type="bool">1</enabled>
+			<enabled type="bool">0</enabled>
 		</headshake>
 
 		<remote>
 			<pilot-callsign>G-VMM2</pilot-callsign>
 		</remote>
+
 
 	</sim>
 
@@ -469,6 +480,13 @@ Ver 0.0.1
 			<navigation-lights type="bool">true</navigation-lights>
 			<instrument-lights type="bool">true</instrument-lights>
 		</lighting>
+		<switches>
+			<auto-stabs>
+				<yaw-channel>true</yaw-channel>
+				<pitch-channel>false</pitch-channel>
+				<roll-channel>false</roll-channel>
+			</auto-stabs>
+		</switches>
 	</controls>
 
 
@@ -518,7 +536,7 @@ Ver 0.0.1
 				</stabilisation>
 				<scan-sec type="double">1</scan-sec>
 			</terrain-warning>
-			<!--<surveillance>
+			<surveillance>
 				<elev-limit-deg type="double">1</elev-limit-deg>
 				<elev-step-deg type="double">0.5</elev-step-deg>
 				<az-limit-deg type="double">45</az-limit-deg>
@@ -532,7 +550,7 @@ Ver 0.0.1
 				</stabilisation>
 				<scan-sec type="double">3</scan-sec>
 				<persistance-sec type="double">3</persistance-sec>
-			</surveillance>-->
+			</surveillance>
 		</air-ground-radar>
 		<radar-altimeter>
 			<switch type="string">ON</switch>
@@ -908,12 +926,12 @@ Ver 0.0.1
 			<file>Aircraft/Buccaneer/Nasal/buccaneer-utils.nas</file>
 			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
 		</buccaneer>
-		<!--<seavixen-instrumentation>
-			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>
-		</seavixen-instrumentation>-->
 		<buccaneer-electrical>
 			<file>Aircraft/Buccaneer/Systems/buccaneer-electrical.nas</file>
 		</buccaneer-electrical>
+		<!--<buccaneer-autopilot>
+			<file>Aircraft/Buccaneer/Systems/autopilot.nas</file>
+		</buccaneer-autopilot>-->
 		<gunview>
 			<file>Aircraft/Buccaneer/Nasal/gunview.nas</file>
 		</gunview>
@@ -932,6 +950,9 @@ Ver 0.0.1
 		<model-cockpit-view>
 			<file>Aircraft/Buccaneer/Nasal/model-cockpit-view.nas</file>
 		</model-cockpit-view>
+		<view-limiter>
+			<file>Aircraft/Buccaneer/Nasal/view-limiter.nas</file>
+		</view-limiter>
 
 	</nasal>
 

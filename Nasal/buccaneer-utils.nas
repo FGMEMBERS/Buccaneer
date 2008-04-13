@@ -70,6 +70,11 @@ var last_xDivergence = 0;
 var last_yDivergence = 0;
 var last_zDivergence = 0;
 
+var old_xDivergence_damp = 0;
+var old_yDivergence_damp = 0;
+var old_zDivergence_damp = 0;
+
+
 var lever_sum = 0;
 var direction = 0 ;
 
@@ -139,15 +144,15 @@ initialize = func {
 	},
 	1);
 
-	setlistener("/sim/model/variant", func {
-		var index = getprop("/sim/model/variant");
+	setlistener("sim/model/variant", func {
+		var index = getprop("sim/model/variant");
 		print("set model index", getprop("/sim/model/variant"));
 		aircraft.livery.set(index);
 	},
 	1);
 	
 	setlistener("/sim/model/livery/variant", func {
-		var name = getprop("/sim/model/livery/variant");
+		var name = getprop("sim/model/livery/variant");
 		forindex (var i; aircraft.livery.data){
             print("variant index: ", aircraft.livery.data[i][0]," [1] ",aircraft.livery.data[i][1]);
 			if(aircraft.livery.data[i][0]== name)
@@ -172,18 +177,6 @@ initialize = func {
 ##
 var update = func {
     
-#    var AllWingmen = props.globals.getNode("ai/models").getChildren("wingman");
-
-#    allwingmen = [];
-	
-#		foreach(w; AllWingmen) {
-#			callsign_node = w.getNode("name");
-#			
-#			print ("wingman name " , callsign_node.getValue());
-#			
-#			append(allwingmen, w);
-#		}
-#    print ("wingmen ", size(allwingmen));
 
     pilot_g.update();
     pilot_g.gmeter_update();
@@ -261,10 +254,6 @@ PilotG = {
 		obj.g_timeratio.setDoubleValue(0.0075);
 		obj.g_min.setDoubleValue(0);
 		obj.g_max.setDoubleValue(0);
-		obj.redout_alpha = obj.redout.getChild("alpha", 0, 1);
-		obj.redout_red = obj.redout.getChild("red", 0, 1);
-		obj.redout_alpha.setDoubleValue(0);
-		obj.redout_red.setDoubleValue(0);
 #		print (obj.name," ",obj.g_timeratio.getValue());
 		return obj;
 	},
@@ -275,19 +264,6 @@ PilotG = {
 
 		g_damp = (g * n) + (g_damp * (1 - n));
 		me.pilot_g_damped.setDoubleValue(g_damp);
-
-		if (getprop("/sim/current-view/name")== "Cockpit View" or
-			getprop("/sim/current-view/name")== "Back Seat View") {
-				if (g_damp > 1) {
-					me.redout_red.setDoubleValue(0);
-					me.redout_alpha.setDoubleValue((g_damp * 0.6667) - 2.3333);
-				} elsif (g_damp < -1) {
-					me.redout_red.setDoubleValue(1);
-					me.redout_alpha.setDoubleValue((g_damp * -0.5) - 1.5);
-				} else {
-					me.redout_red.setDoubleValue(0);
-				}
-		}
 
 #		 print(sprintf("pilot_g_damped in=%0.5f, out=%0.5f, alpha=%0.5f",
 #			  g, g_damp, me.redout_alpha.getValue()));
@@ -316,6 +292,9 @@ PilotG = {
 			var x_accel_fps_sec = "x-accel-fps_sec";
 			var y_accel_fps_sec = "y-accel-fps_sec";
 			var z_accel_fps_sec = "z-accel-fps_sec";
+#			var old_xDivergence_damp = 0;
+#			var old_yDivergence_damp = 0;
+#			var old_zDivergence_damp = 0;
 			x_max_m = "x-max-m";
 			x_min_m = "x-min-m";
 			y_max_m = "y-max-m";
@@ -361,7 +340,9 @@ PilotG = {
 		obj.zConfigNode = obj.config.getChild(z_config, 0, 1);
 		obj.seat_vertical_adjust_Node = props.globals.getNode("/controls/seat/vertical-adjust", 1);
 		obj.seat_vertical_adjust_Node.setDoubleValue(0);
-		
+		obj.xViewAxisNode = props.globals.getNode("/sim/current-view/z-offset-m");
+		obj.yViewAxisNode = props.globals.getNode("/sim/current-view/x-offset-m");
+		obj.zViewAxisNode = props.globals.getNode("/sim/current-view/y-offset-m");
 		print (obj.name);
 		return obj;
 	},
@@ -370,20 +351,20 @@ PilotG = {
 		# There are two coordinate systems here, one used for accelerations, 
 		# and one used for the viewpoint.
 		# We will be using the one for accelerations.
-	
+
 		var x_config = "z-offset-m";
 		var y_config = "x-offset-m";
 		var z_config = "y-offset-m";
-		
-		var xConfig = me.xConfigNode.getValue();
-		var yConfig = me.yConfigNode.getValue();
-		var zConfig = me.zConfigNode.getValue();
 
-#		print ("xconfig ", xConfig);
+#		var xConfig = me.xConfigNode.getValue();
+#       var yConfig = me.yConfigNode.getValue();
+#		var yConfig = me.xViewAxisNode.getValue();
+#		var zConfig = me.zConfigNode.getValue();
+		#print ("yConfig ", yConfig);
 
 		var n = pilot_g.get_g_timeratio(); 
 		var seat_vertical_adjust = me.seat_vertical_adjust_Node.getValue();
-		
+
 		var xMax = me.xMaxNode.getValue();
 		var xMin = me.xMinNode.getValue();
 		var yMax = me.yMaxNode.getValue();
@@ -483,13 +464,19 @@ PilotG = {
 #		print (sprintf("z total=%0.5f, z min=%0.5f, z div damped=%0.5f", 
 #											zDivergence_total, zMin , zDivergence_damp));
 	
-		setprop("sim/current-view/z-offset-m", xConfig + xDivergence_damp);
-		setprop("sim/current-view/x-offset-m", yConfig + yDivergence_damp);
-		setprop("sim/current-view/y-offset-m", zConfig + zDivergence_damp 
-																+ seat_vertical_adjust);
-	#	me.z_offset = xDivergence_damp;
-	#	me.x_offset = yDivergence_damp;
-	#	me.y_offset = zDivergence_damp + seat_vertical_adjust;
+# Now apply the divergence to the curent viewpoint
+		
+		var origin_z = me.xViewAxisNode.getValue() - old_xDivergence_damp;
+		var origin_x = me.yViewAxisNode.getValue() - old_yDivergence_damp;
+		var origin_y = me.zViewAxisNode.getValue() - old_zDivergence_damp;
+
+		me.xViewAxisNode.setDoubleValue(origin_z + xDivergence_damp );
+		me.yViewAxisNode.setDoubleValue(origin_x + yDivergence_damp );
+		me.zViewAxisNode.setDoubleValue(origin_y + zDivergence_damp + seat_vertical_adjust );
+
+		old_xDivergence_damp = xDivergence_damp;
+		old_yDivergence_damp = yDivergence_damp;
+		old_zDivergence_damp = zDivergence_damp + seat_vertical_adjust;
 		},
 	};
 
