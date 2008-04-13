@@ -14,16 +14,13 @@ var pilot_view_limiter = {
 		var currViewNumb = me.currViewNumbN.getValue();
 		var updateHdg = 0;
 		var updateXaxis = 0;
-		
-		# Current view number is the sequence number, but we need to use the index
-        var curr = view.index ;
 
 		# set min/max heading view degree.
 		var headingMax = view.current.getNode("config/heading-normdeg-max").getValue();
 		var headingMin = view.current.getNode("config/heading-normdeg-min").getValue();
 
 		#set the static x offset
-		var norm_offset = view.views[curr].getNode("config/x-offset-m").getValue();
+		var norm_offset = view.current.getNode("config/x-offset-m").getValue();
 
 		if((headingMax != nil) and (hdg > headingMax)) {
 			hdg = headingMax;
@@ -78,8 +75,8 @@ view.panViewDir = func(step) {
 	var viewValSlew = viewVal + delta;
 	viewValSlew = view.normdeg(viewValSlew);
 	var currViewNumb = getprop("sim/current-view/view-number");
-	var headingMax = getprop("sim/view["~currViewNumb~"]/config/heading-normdeg-max");
-	var headingMin = getprop("sim/view["~currViewNumb~"]/config/heading-normdeg-min");
+	var headingMax = view.current.getNode("config/heading-normdeg-max");
+	var headingMin = view.current.getNode("config/heading-normdeg-min");
 	if((headingMax != nil) and (viewValSlew > headingMax))
 		viewValSlew = headingMax;
 	elsif((headingMin != nil) and (viewValSlew < headingMin))
