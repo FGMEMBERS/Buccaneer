@@ -97,6 +97,9 @@ Ver 0.0.1
 				<controls>
 					<recuperator_check_safety type="float">0</recuperator_check_safety>
 				</controls>
+				<config>
+					<show-pilot type="bool">true</show-pilot>
+				</config>
 			</buccaneer>
 		</model>
 		<view n="0">
@@ -107,11 +110,10 @@ Ver 0.0.1
 				<z-offset-m archive="y">3.99331</z-offset-m>
 				<pitch-offset-deg>-20</pitch-offset-deg>
 				<default-field-of-view-deg>70</default-field-of-view-deg>
-				<x-trans-m type="double">0.2</x-trans-m>
-				<x-trans-heading-normdeg-min type="double">-65</x-trans-heading-normdeg-min>
-				<x-trans-heading-normdeg-max type="double">65</x-trans-heading-normdeg-max>
-				<heading-normdeg-min type="double">-140</heading-normdeg-min>
-				<heading-normdeg-max type="double">140</heading-normdeg-max>
+				<limits>
+					<enabled type="bool">true</enabled>
+					<x-offset-max-m type="double">0.20</x-offset-max-m>
+				</limits>
 			</config>
 		</view>
 		<view n="1">
@@ -165,11 +167,14 @@ Ver 0.0.1
 										type="double">5.2269</z-offset-m>
 				<pitch-offset-deg>-15</pitch-offset-deg>
 				<default-field-of-view-deg>70</default-field-of-view-deg>
-				<x-trans-m type="double">0.2</x-trans-m>
-				<x-trans-heading-normdeg-min type="double">-65</x-trans-heading-normdeg-min>
-				<x-trans-heading-normdeg-max type="double">65</x-trans-heading-normdeg-max>
-				<heading-normdeg-min type="double">-140</heading-normdeg-min>
-				<heading-normdeg-max type="double">140</heading-normdeg-max>
+				<limits>
+					<enabled type="bool">true</enabled>
+					<heading-min-deg type="double">-140</heading-min-deg>
+					<heading-max-deg type="double">140</heading-max-deg>
+					<x-offset-max-m type="double">0.20</x-offset-max-m>
+					<x-offset-heading-min-deg type="double">-65</x-offset-heading-min-deg>
+					<x-offset-heading-max-deg type="double">65</x-offset-heading-max-deg>
+				</limits>
 			</config>
 		</view>
 		<view n="101">
@@ -307,7 +312,7 @@ Ver 0.0.1
 		</aoa-indexer>
 
 		<headshake>
-			<enabled type="bool">0</enabled>
+			<enabled type="bool">1</enabled>
 		</headshake>
 
 		<remote>
@@ -950,10 +955,6 @@ Ver 0.0.1
 		<model-cockpit-view>
 			<file>Aircraft/Buccaneer/Nasal/model-cockpit-view.nas</file>
 		</model-cockpit-view>
-		<view-limiter>
-			<file>Aircraft/Buccaneer/Nasal/view-limiter.nas</file>
-		</view-limiter>
-
 	</nasal>
 
 	<environment>
