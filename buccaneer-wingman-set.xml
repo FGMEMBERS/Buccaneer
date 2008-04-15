@@ -112,8 +112,12 @@ Ver 0.0.1
 				<default-field-of-view-deg>70</default-field-of-view-deg>
 				<limits>
 					<enabled type="bool">true</enabled>
-					<x-offset-max-m type="double">0.20</x-offset-max-m>
-				</limits>
+					<left>
+						<x-offset-max-m type="double">0.20</x-offset-max-m>
+					</left>
+					<right>
+						<x-offset-max-m type="double">0.20</x-offset-max-m>
+					</right>				</limits>
 			</config>
 		</view>
 		<view n="1">
@@ -170,11 +174,16 @@ Ver 0.0.1
 				<dynamic-view type="bool">true</dynamic-view>
 				<limits>
 					<enabled type="bool">true</enabled>
-					<heading-min-deg type="double">-140</heading-min-deg>
-					<heading-max-deg type="double">140</heading-max-deg>
-					<x-offset-max-m type="double">0.20</x-offset-max-m>
-					<x-offset-heading-min-deg type="double">-65</x-offset-heading-min-deg>
-					<x-offset-heading-max-deg type="double">65</x-offset-heading-max-deg>
+					<left>
+						<heading-max-deg type="double">140</heading-max-deg>
+						<x-offset-max-m type="double">0.20</x-offset-max-m>
+						<x-offset-threshold-deg type="double">65</x-offset-threshold-deg>
+					</left>
+					<right>
+						<heading-max-deg type="double">140</heading-max-deg>
+						<x-offset-max-m type="double">0.20</x-offset-max-m>
+						<x-offset-threshold-deg type="double">65</x-offset-threshold-deg>
+					</right>
 				</limits>
 			</config>
 		</view>
