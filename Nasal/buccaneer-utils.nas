@@ -115,6 +115,10 @@ initialize = func {
 #	setlistener("engines/engine/cranking", func {smoke.updateSmoking(); 
 #												  });
 
+	setlistener("/sim/signals/fdm-initialized", func {
+	dynamic_view.view_manager.calculate = dynamic_view.view_manager.default_plane; 
+	});
+
 	setlistener("/sim/formation/variant", func {
 	var index = getprop("/sim/formation/variant");
 #	print("set formation index ", getprop("/sim/formation/variant"));
