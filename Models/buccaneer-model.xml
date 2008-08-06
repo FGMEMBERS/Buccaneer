@@ -143,31 +143,35 @@
 
 
 	<!-- ***************** Cockpit *************************** -->
-	<!--
-	-->
-	<!-- Front hotspots -->
-	<!--
+	<rear-panel>
+		<offsets>
+			<x-m>4.6</x-m>
+			<z-m>0.65</z-m>
+		</offsets>
+	</rear-panel>
+
 	<panel>
-		<path>Aircraft/Hunter/Models/hunter-panel-hotspots.xml</path>
+		<path>Aircraft/Buccaneer/Panels/radar-panel.xml</path>
 		<bottom-left>
-			<x-m>-4.83</x-m>
-			<y-m>-0.50</y-m>
-			<z-m>-0.30</z-m>
+			<x-m alias="../../../rear-panel/offsets/x-m"/>
+			<!--<x-m>4.8</x-m>-->
+			<y-m>-0.4</y-m>
+			<z-m>0.65</z-m>
 		</bottom-left>
 		<bottom-right>
-			<x-m>-4.83</x-m>
-			<y-m> 0.50</y-m>
-			<z-m>-0.30</z-m>
+			<!--<x-m alias="../../../rear-panel/offsets/x-m"/>-->
+			<x-m>4.40</x-m>
+			<y-m>-0.15</y-m>
+			<z-m>0.65</z-m>
 		</bottom-right>
 		<top-left>
-			<x-m>-4.83</x-m>
-			<y-m>-0.50</y-m>
-			<z-m> 0.62</z-m>
+			<x-m alias="../../../rear-panel/offsets/x-m"/>
+			<!--<x-m>4.8</x-m>-->
+			<y-m>-0.4</y-m>
+			<z-m> 0.9</z-m>
 		</top-left>
 	</panel>
 
-
-	-->
 	<!-- **************** Instruments ********************* -->
 
 	<!-- **************** Over Glare Shield********** -->
@@ -176,18 +180,6 @@
 			<x-m>3.36104</x-m>
 		</offsets>
 	</over-main-panel>
-
-	<!--<model>
-		<path>Aircraft/Buccaneer/Instruments/aoa_indexer.xml</path>
-		<offsets>
-			<x-m>3.36104</x-m>
-			<y-m>-0.143849</y-m>
-			<z-m>0.9</z-m>
-			<roll-deg>8</roll-deg>
-			<pitch-deg>-15</pitch-deg>
-			<heading-deg>5</heading-deg>
-		</offsets>
-	</model>-->
 
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/asi.xml</path>
@@ -2613,6 +2605,7 @@
 		<property-base>sim/model/livery/material/Markings-Wing-Outer-Ser-No-Stbd</property-base>
 		<texture-prop>texture</texture-prop>
 	</animation>
+	
 	<animation>
 		<type>material</type>
 		<!--global type="bool">true</global-->
@@ -2669,7 +2662,7 @@
 		<lighting>false</lighting>
 
 		<offsets>
-			<x-m>11</x-m>
+			<x-m>11.5</x-m>
 			<y-m>0</y-m>
 			<z-m>0</z-m>
 			<!--<pitch-deg>90</pitch-deg>-->
@@ -2725,7 +2718,7 @@
 						<value>1</value>
 					</blue>
 					<alpha>
-						<value>0.025</value>
+						<value>0.020</value>
 					</alpha>
 				</color>
 				<size>
@@ -2744,7 +2737,7 @@
 						<value>1</value>
 					</blue>
 					<alpha>
-						<value>0.005</value>
+						<value>0.010</value>
 					</alpha>
 				</color>
 				<size>
@@ -2752,7 +2745,7 @@
 				</size>
 			</end>
 			<life-sec>
-				<value>2.0</value>
+				<value>20.0</value>
 			</life-sec>
 			<mass-kg>0.1</mass-kg>
 			<radius-m>0.3</radius-m>
@@ -2784,7 +2777,7 @@
 			<and>
 				<equals>
 					<property>engines/engine/smoking</property>
-					<value>true</value>
+					<value>1</value>
 				</equals>
 				<less-than>
 					<property>position/altitude-agl-ft</property>
@@ -2894,7 +2887,7 @@
 			<x-m>16</x-m>
 			<y-m>-1</y-m>
 			<z-m>0</z-m>
-			<!--<pitch-deg>90</pitch-deg>-->
+		<!--<pitch-deg>90</pitch-deg>-->
 		</offsets>
 
 		<condition>
@@ -2998,10 +2991,10 @@
 			<wind>true</wind>
 		</program>
 
-	</particlesystem>
+	</particlesystem>-->
 
 	<!-- particle system -->
-	<particlesystem>
+	<!--<particlesystem>
 		<name>fuel</name>
 		<texture>particle.rgb</texture>
 		<emissive>false</emissive>
@@ -3011,7 +3004,7 @@
 			<x-m>16</x-m>
 			<y-m>-0.3</y-m>
 			<z-m>0</z-m>
-			<!--<pitch-deg>90</pitch-deg>-->
+			--><!--<pitch-deg>90</pitch-deg>--><!--
 		</offsets>
 
 		<condition>
@@ -3113,7 +3106,7 @@
 			<wind>true</wind>
 		</program>
 
-	</particlesystem>
+	</particlesystem>-->
 
 
 
