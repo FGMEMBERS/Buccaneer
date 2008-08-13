@@ -619,6 +619,42 @@
 		</condition>
 	</animation>
 
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Head</object-name>
+		<property>controls/flight/rudder</property>
+		<factor>25</factor>
+		<center>
+			<!--4.07546		0.0499988-->
+			<!--4.08807,0.102067,0.92268-->
+			<x-m>4.07546</x-m>
+			<y-m>-0.0499988</y-m>
+			<z-m>0.920013</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Head</object-name>
+		<property>controls/flight/elevator</property>
+		<factor> -15 </factor>
+		<center>
+			<x-m>4.07546</x-m>
+			<y-m>-0.0499988</y-m>
+			<z-m>0.920013</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
 	<!-- Pitch -->
 	<!--
 	-->
@@ -2605,7 +2641,7 @@
 		<property-base>sim/model/livery/material/Markings-Wing-Outer-Ser-No-Stbd</property-base>
 		<texture-prop>texture</texture-prop>
 	</animation>
-	
+
 	<animation>
 		<type>material</type>
 		<!--global type="bool">true</global-->
@@ -2655,458 +2691,46 @@
 	</animation>
 
 	<!--particle system-->
-	<particlesystem>
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
 		<name>haze</name>
-		<texture>smoke.rgb</texture>
-		<emissive>false</emissive>
-		<lighting>false</lighting>
-
 		<offsets>
-			<x-m>11.5</x-m>
-			<y-m>0</y-m>
-			<z-m>0</z-m>
-			<!--<pitch-deg>90</pitch-deg>-->
+			<x-m>  0 </x-m>
+			<y-m>  0 </y-m>
+			<z-m>  0 </z-m>
 		</offsets>
+	</model>
 
-		<attach>world</attach>
-
-		<placer>
-			<type>point</type>
-		</placer>
-
-		<shooter>
-			<theta-min-deg>84</theta-min-deg>
-			<theta-max-deg>86</theta-max-deg>
-			<phi-min-deg>-1.5</phi-min-deg>
-			<phi-max-deg>1.5</phi-max-deg>
-			<speed-mps>
-				<property>/engines/engine/n1</property>
-				<factor>6</factor>
-				<!--<value>800</value>-->
-				<!--<offset>0</offset>-->
-				<spread>10</spread>
-			</speed-mps>
-			<rotation-speed>
-				<x-max-deg-sec>30.0</x-max-deg-sec>
-				<x-min-deg-sec>10.0</x-min-deg-sec>
-				<y-max-deg-sec>0</y-max-deg-sec>
-				<y-min-deg-sec>0</y-min-deg-sec>
-				<z-max-deg-sec>0</z-max-deg-sec>
-				<z-min-deg-sec>0</z-min-deg-sec>
-			</rotation-speed>
-		</shooter>
-
-		<counter>
-			<particles-per-sec>
-				<value>50</value>
-				<spread>20</spread>
-			</particles-per-sec>
-		</counter>
-
-		<align>billboard</align>
-
-		<particle>
-			<start>
-				<color>
-					<red>
-						<value>1</value>
-					</red>
-					<green>
-						<value>1</value>
-					</green>
-					<blue>
-						<value>1</value>
-					</blue>
-					<alpha>
-						<value>0.020</value>
-					</alpha>
-				</color>
-				<size>
-					<value>2</value>
-				</size>
-			</start>
-			<end>
-				<color>
-					<red>
-						<value>1</value>
-					</red>
-					<green>
-						<value>1</value>
-					</green>
-					<blue>
-						<value>1</value>
-					</blue>
-					<alpha>
-						<value>0.010</value>
-					</alpha>
-				</color>
-				<size>
-					<value>15</value>
-				</size>
-			</end>
-			<life-sec>
-				<value>20.0</value>
-			</life-sec>
-			<mass-kg>0.1</mass-kg>
-			<radius-m>0.3</radius-m>
-		</particle>
-
-		<program>
-			<fluid>air</fluid>
-			<gravity>true</gravity>
-			<wind>true</wind>
-		</program>
-
-	</particlesystem>
-
-	<!--particle system-->
-	<particlesystem>
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
 		<name>smoke-s</name>
-		<texture>smoke.rgb</texture>
-		<emissive>false</emissive>
-		<lighting>false</lighting>
-
 		<offsets>
-			<x-m>16</x-m>
+			<x-m>0</x-m>
 			<y-m>1</y-m>
 			<z-m>0</z-m>
-			<!--<pitch-deg>90</pitch-deg>-->
 		</offsets>
+	</model>
 
-		<condition>
-			<and>
-				<equals>
-					<property>engines/engine/smoking</property>
-					<value>1</value>
-				</equals>
-				<less-than>
-					<property>position/altitude-agl-ft</property>
-					<value>12000</value>
-				</less-than>
-			</and>
-		</condition>
-
-		<attach>world</attach>
-
-		<placer>
-			<type>point</type>
-		</placer>
-
-		<shooter>
-			<theta-min-deg>84</theta-min-deg>
-			<theta-max-deg>86</theta-max-deg>
-			<phi-min-deg>-1.5</phi-min-deg>
-			<phi-max-deg>1.5</phi-max-deg>
-			<speed-mps>
-				<property>engines/engine/n1</property>
-				<factor>6</factor>
-				<offset>50</offset>
-				<spread>50</spread>
-			</speed-mps>
-			<rotation-speed>
-				<x-max-deg-sec>30.0</x-max-deg-sec>
-				<x-min-deg-sec>10.0</x-min-deg-sec>
-				<y-max-deg-sec>0</y-max-deg-sec>
-				<y-min-deg-sec>0</y-min-deg-sec>
-				<z-max-deg-sec>0</z-max-deg-sec>
-				<z-min-deg-sec>0</z-min-deg-sec>
-			</rotation-speed>
-		</shooter>
-
-		<counter>
-			<particles-per-sec>
-				<value>50</value>
-				<spread>20</spread>
-			</particles-per-sec>
-		</counter>
-
-		<align>billboard</align>
-
-		<particle>
-			<start>
-				<color>
-					<red>
-						<value>0.3</value>
-					</red>
-					<green>
-						<value>0.25</value>
-					</green>
-					<blue>
-						<value>0.25</value>
-					</blue>
-					<alpha>
-						<value>0.03</value>
-					</alpha>
-				</color>
-				<size>
-					<value>2</value>
-				</size>
-			</start>
-			<end>
-				<color>
-					<red>
-						<value>0.3</value>
-					</red>
-					<green>
-						<value>0.25</value>
-					</green>
-					<blue>
-						<value>0.25</value>
-					</blue>
-					<alpha>
-						<value>0.003</value>
-					</alpha>
-				</color>
-				<size>
-					<value>15</value>
-				</size>
-			</end>
-			<life-sec>
-				<value>2.0</value>
-			</life-sec>
-			<mass-kg>0.1</mass-kg>
-			<radius-m>0.3</radius-m>
-		</particle>
-
-		<program>
-			<fluid>air</fluid>
-			<gravity>true</gravity>
-			<wind>true</wind>
-		</program>
-
-	</particlesystem>
-
-	<!--particle system-->
-	<particlesystem>
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
 		<name>smoke-p</name>
-		<texture>smoke.rgb</texture>
-		<emissive>false</emissive>
-		<lighting>false</lighting>
-
 		<offsets>
-			<x-m>16</x-m>
+			<x-m> 0</x-m>
 			<y-m>-1</y-m>
-			<z-m>0</z-m>
-		<!--<pitch-deg>90</pitch-deg>-->
+			<z-m> 0</z-m>
 		</offsets>
+	</model>
 
-		<condition>
-			<and>
-				<equals>
-					<property>engines/engine/smoking</property>
-					<value>true</value>
-				</equals>
-				<less-than>
-					<property>position/altitude-agl-ft</property>
-					<value>12000</value>
-				</less-than>
-			</and>
-		</condition>
-
-		<attach>world</attach>
-
-		<placer>
-			<type>point</type>
-		</placer>
-
-		<shooter>
-			<theta-min-deg>84</theta-min-deg>
-			<theta-max-deg>86</theta-max-deg>
-			<phi-min-deg>-1.5</phi-min-deg>
-			<phi-max-deg>1.5</phi-max-deg>
-			<speed-mps>
-				<property>engines/engine/n1</property>
-				<factor>6</factor>
-				<offset>50</offset>
-				<spread>50</spread>
-			</speed-mps>
-			<rotation-speed>
-				<x-max-deg-sec>-30.0</x-max-deg-sec>
-				<x-min-deg-sec>-10.0</x-min-deg-sec>
-				<y-max-deg-sec>0</y-max-deg-sec>
-				<y-min-deg-sec>0</y-min-deg-sec>
-				<z-max-deg-sec>0</z-max-deg-sec>
-				<z-min-deg-sec>0</z-min-deg-sec>
-			</rotation-speed>
-		</shooter>
-
-		<counter>
-			<particles-per-sec>
-				<value>50</value>
-				<spread>20</spread>
-			</particles-per-sec>
-		</counter>
-
-		<align>billboard</align>
-
-		<particle>
-			<start>
-				<color>
-					<red>
-						<value>0.3</value>
-					</red>
-					<green>
-						<value>0.25</value>
-					</green>
-					<blue>
-						<value>0.25</value>
-					</blue>
-					<alpha>
-						<value>0.03</value>
-					</alpha>
-				</color>
-				<size>
-					<value>2</value>
-				</size>
-			</start>
-			<end>
-				<color>
-					<red>
-						<value>0.3</value>
-					</red>
-					<green>
-						<value>0.25</value>
-					</green>
-					<blue>
-						<value>0.25</value>
-					</blue>
-					<alpha>
-						<value>0.003</value>
-					</alpha>
-				</color>
-				<size>
-					<value>15</value>
-				</size>
-			</end>
-			<life-sec>
-				<value>2.0</value>
-			</life-sec>
-			<mass-kg>0.1</mass-kg>
-			<radius-m>0.3</radius-m>
-		</particle>
-
-		<program>
-			<fluid>air</fluid>
-			<gravity>true</gravity>
-			<wind>true</wind>
-		</program>
-
-	</particlesystem>-->
-
-	<!-- particle system -->
-	<!--<particlesystem>
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/fuel.xml</path>
 		<name>fuel</name>
-		<texture>particle.rgb</texture>
-		<emissive>false</emissive>
-		<lighting>false</lighting>
-
 		<offsets>
-			<x-m>16</x-m>
-			<y-m>-0.3</y-m>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
 			<z-m>0</z-m>
-			--><!--<pitch-deg>90</pitch-deg>--><!--
 		</offsets>
+	</model>
 
-		<condition>
-			<or>
-				<greater-than>
-					<property>consumables/fuel/tank[8]/dump-rate-lbs-hr</property>
-					<value>0.1</value>
-				</greater-than>
-				<greater-than>
-					<property>consumables/fuel/tank[9]/dump-rate-lbs-hr</property>
-					<value>0.1</value>
-				</greater-than>
-			</or>
-		</condition>
-
-		<attach>world</attach>
-
-		<placer>
-			<type>point</type>
-		</placer>
-
-		<shooter>
-			<theta-min-deg>84</theta-min-deg>
-			<theta-max-deg>86</theta-max-deg>
-			<phi-min-deg>-1.5</phi-min-deg>
-			<phi-max-deg>1.5</phi-max-deg>
-			<speed-mps>
-				<value>10</value>
-				<spread>2.5</spread>
-			</speed-mps>
-			<rotation-speed>
-				<x-max-deg-sec>0</x-max-deg-sec>
-				<x-min-deg-sec>0</x-min-deg-sec>
-				<y-max-deg-sec>0</y-max-deg-sec>
-				<y-min-deg-sec>0</y-min-deg-sec>
-				<z-max-deg-sec>0</z-max-deg-sec>
-				<z-min-deg-sec>0</z-min-deg-sec>
-			</rotation-speed>
-		</shooter>
-
-		<counter>
-			<particles-per-sec>
-				<value>500</value>
-				<spread>50</spread>
-			</particles-per-sec>
-		</counter>
-
-		<align>billboard</align>
-
-		<particle>
-			<start>
-				<color>
-					<red>
-						<value>0.9</value>
-					</red>
-					<green>
-						<value>0.9</value>
-					</green>
-					<blue>
-						<value>0.9</value>
-					</blue>
-					<alpha>
-						<value>0.15</value>
-					</alpha>
-				</color>
-				<size>
-					<value>0.25</value>
-				</size>
-			</start>
-			<end>
-				<color>
-					<red>
-						<value>1</value>
-					</red>
-					<green>
-						<value>1</value>
-					</green>
-					<blue>
-						<value>1</value>
-					</blue>
-					<alpha>
-						<value>0.020</value>
-					</alpha>
-				</color>
-				<size>
-					<value>2</value>
-				</size>
-			</end>
-			<life-sec>
-				<value>5</value>
-			</life-sec>
-			<mass-kg>0.025</mass-kg>
-			<radius-m>0.1</radius-m>
-		</particle>
-
-		<program>
-			<fluid>air</fluid>
-			<gravity>true</gravity>
-			<wind>true</wind>
-		</program>
-
-	</particlesystem>-->
 
 
 
