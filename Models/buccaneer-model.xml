@@ -150,27 +150,27 @@
 		</offsets>
 	</rear-panel>
 
-	<panel>
+	<!--<panel>
 		<path>Aircraft/Buccaneer/Panels/radar-panel.xml</path>
 		<bottom-left>
 			<x-m alias="../../../rear-panel/offsets/x-m"/>
-			<!--<x-m>4.8</x-m>-->
+			--><!--<x-m>4.8</x-m>--><!--
 			<y-m>-0.4</y-m>
 			<z-m>0.65</z-m>
 		</bottom-left>
 		<bottom-right>
-			<!--<x-m alias="../../../rear-panel/offsets/x-m"/>-->
+			--><!--<x-m alias="../../../rear-panel/offsets/x-m"/>--><!--
 			<x-m>4.40</x-m>
 			<y-m>-0.15</y-m>
 			<z-m>0.65</z-m>
 		</bottom-right>
 		<top-left>
 			<x-m alias="../../../rear-panel/offsets/x-m"/>
-			<!--<x-m>4.8</x-m>-->
+			--><!--<x-m>4.8</x-m>--><!--
 			<y-m>-0.4</y-m>
 			<z-m> 0.9</z-m>
 		</top-left>
-	</panel>
+	</panel>-->
 
 	<!-- **************** Instruments ********************* -->
 
