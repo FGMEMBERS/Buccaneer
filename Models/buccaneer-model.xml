@@ -2731,7 +2731,15 @@
 		</offsets>
 	</model>
 
-
+<model>
+		<path>Aircraft/Buccaneer/Models/Effects/tiptrail-stbd.xml</path>
+		<name>tiptrail-s</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>6.54678</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
 
 
 	<!-- *** LoD for the whole model *** -->
