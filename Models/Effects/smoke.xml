@@ -3,8 +3,8 @@
 <PropertyList>
 
 	<particlesystem>
-		<name>smoke-s</name>
-		<texture>noise2.png</texture>
+		<name>smoke</name>
+		<texture>noise3.png</texture>
 		<emissive>false</emissive>
 		<lighting>false</lighting>
 
@@ -21,7 +21,7 @@
 					<value>1</value>
 				</equals>
 				<less-than>
-					<property>position/altitude-agl-ft</property>
+					<property>/position/altitude-agl-ft</property>
 					<value>12000</value>
 				</less-than>
 			</and>
@@ -41,10 +41,10 @@
 			<speed-mps>
 				<property>engines/engine/n1</property>
 				<factor>6</factor>
-				
-	<!--<offset>50</offset>
+
+				<!--<offset>50</offset>
 				<spread>50</spread>-->
-	
+
 			</speed-mps>
 			<rotation-speed>
 				<x-max-deg-sec>60</x-max-deg-sec>
@@ -59,17 +59,17 @@
 
 		<counter>
 			<particles-per-sec>
-				<property>/engines/engine/n1</property>
+				<property>engines/engine/n1</property>
 				<factor>1</factor>
-	<!--  <offset>-4</offset>-->
-	<!--	<spread>20</spread>-->
+				<!--  <offset>-4</offset>-->
+				<spread>20</spread>
 			</particles-per-sec>
-			
-	<!--<particles-per-sec>
+
+			<!--<particles-per-sec>
 				<value>50</value>
 				<spread>20</spread>
 			</particles-per-sec>-->
-	
+
 		</counter>
 
 		<align>billboard</align>
@@ -78,16 +78,16 @@
 			<start>
 				<color>
 					<red>
-						<value>0.95</value>
+						<value>0.98</value>
 					</red>
 					<green>
-						<value>0.9</value>
+						<value>0.97</value>
 					</green>
 					<blue>
-						<value>0.9</value>
+						<value>0.95</value>
 					</blue>
 					<alpha>
-						<value>0.01</value>
+						<value>0.025</value>
 					</alpha>
 				</color>
 				<size>
@@ -100,13 +100,13 @@
 						<value>0.95</value>
 					</red>
 					<green>
-						<value>0.90</value>
+						<value>0.95</value>
 					</green>
 					<blue>
-						<value>0.90</value>
+						<value>0.95</value>
 					</blue>
 					<alpha>
-						<value>0.05</value>
+						<value>0.0125</value>
 					</alpha>
 				</color>
 				<size>

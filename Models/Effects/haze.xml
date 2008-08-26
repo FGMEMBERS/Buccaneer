@@ -5,12 +5,12 @@
 	<particlesystem>
 		<type>normal</type>
 		<name>haze</name>
-		<texture>noise2.png</texture>
+		<texture>noise3.png</texture>
 		<emissive>false</emissive>
 		<lighting>false</lighting>
 
 		<offsets>
-			<x-m>13.5</x-m>
+			<x-m>13.0</x-m>
 			<y-m>0</y-m>
 			<z-m>0</z-m>
 		</offsets>
@@ -27,7 +27,7 @@
 			<phi-min-deg>-1.5</phi-min-deg>
 			<phi-max-deg>1.5</phi-max-deg>
 			<speed-mps>
-				<property>/engines/engine/n1</property>
+				<property>engines/engine/n1</property>
 				<factor>6</factor>
 				<!--<value>800</value>
 				<offset>0</offset>
@@ -45,10 +45,10 @@
 
 		<counter>
 			<particles-per-sec>
-				<property>/engines/engine/n1</property>
+				<property>engines/engine/n1</property>
 				<factor>1</factor>
-				<!--<offset>-4</offset>
-				<spread>20</spread>-->
+				<!--<offset>-4</offset>-->
+				<spread>20</spread>
 			</particles-per-sec>
 
 			<!--<particles-per-sec>
@@ -78,7 +78,7 @@
 						<value>1.0</value>
 					</blue>
 					<alpha>
-						<value>0.0175</value>
+						<value>0.03</value>
 					</alpha>
 				</color>
 				<size>
@@ -97,7 +97,7 @@
 						<value>1.0</value>
 					</blue>
 					<alpha>
-						<value>0.0025</value>
+						<value>0.003</value>
 					</alpha>
 				</color>
 				<size>
