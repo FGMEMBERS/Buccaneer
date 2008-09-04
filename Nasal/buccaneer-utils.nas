@@ -49,6 +49,26 @@ tgt_x_offset_2_Node = props.globals.getNode("ai/models/wingman[2]/position/tgt-x
 tgt_y_offset_2_Node = props.globals.getNode("ai/models/wingman[2]/position/tgt-y-offset",1);
 tgt_z_offset_2_Node = props.globals.getNode("ai/models/wingman[2]/position/tgt-z-offset",1);
 
+BLC_Node = props.globals.getNode("controls/flight/BLC",1);
+BLC_Node.setBoolValue(1);
+
+aileron_blowing_Node = props.globals.getNode("controls/flight/aileron-blowing",1);
+aileron_droop_Node   = props.globals.getNode("controls/flight/aileron-droop",1);
+aileron_droop_blowing_Node = props.globals.getNode("controls/flight/aileron-droop-blowing",1);
+aileron_right_Node   = props.globals.getNode("surface-positions/right-aileron-pos-norm",1);
+aileron_left_Node    = props.globals.getNode("surface-positions/left-aileron-pos-norm",1);
+
+flap_blowing_Node = props.globals.getNode("controls/flight/flaps-blowing",1);
+flap_Node         = props.globals.getNode("controls/flight/flaps",1);
+flaps_Node        = props.globals.getNode("surface-positions/flap-pos-norm",1);
+
+elevator_blowing_Node = props.globals.getNode("controls/flight/elevator-blowing",1);
+elevator_Node   = props.globals.getNode("surface-positions/elevator-pos-norm",1);
+
+wing_blowing_Node = props.globals.getNode("controls/flight/wing-blowing",1);
+
+blc_control_valve_Node = props.globals.getNode("controls/pneumatic/BLC",1);
+
 controls.fullBrakeTime = 0;
 
 pilot_g = nil;
@@ -56,6 +76,7 @@ pilot_headshake = nil;
 observer_headshake = nil;
 smoke_0 = nil;
 smoke_1 = nil;
+wing_blow = nil;
 
 var old_n1 = 0;
 var time = 0;
@@ -74,6 +95,7 @@ var old_xDivergence_damp = 0;
 var old_yDivergence_damp = 0;
 var old_zDivergence_damp = 0;
 
+var static = 0;
 
 var lever_sum = 0;
 var direction = 0 ;
@@ -109,6 +131,7 @@ initialize = func {
 	observer_headshake = HeadShake.new("observer", 100);
 	smoke_0 = Smoke.new(0);
 	smoke_1 = Smoke.new(1);
+    wing_blow = WingBlow.new();
 
 	#set listeners
 
@@ -165,6 +188,69 @@ initialize = func {
 	},
 	1);
 
+    setlistener("controls/flight/aileron-droop", func {
+		var blc = getprop("controls/flight/BLC");
+        var droop = getprop("controls/flight/aileron-droop");
+        static = 0;
+        
+# if (droop != 0)
+#            blc = 1;
+#       else 
+#           blc = 0;
+        
+        if ( blc and droop != 0 ){ 
+            blc_control_valve_Node.setValue(1);
+    		aileron_droop_blowing_Node.setValue(droop);
+            wing_blowing_Node.setValue(1);
+        } else {
+            aileron_droop_blowing_Node.setValue(0);
+            wing_blowing_Node.setValue(0);
+            blc_control_valve_Node.setValue(0);
+        }
+        
+	},
+	1);
+
+    setlistener("controls/flight/flaps", func {
+		var blc = getprop("controls/flight/BLC");
+        var flaps = getprop("controls/flight/flaps");
+        static = 0;
+        if ( blc ){ 
+            flap_blowing_Node.setValue(flaps);
+        }
+	},
+	1);
+    
+    setlistener("controls/flight/BLC", func {
+        var blc = getprop("controls/flight/BLC");
+        var flaps_raw = getprop("surface-positions/flap-pos-raw-norm");
+        static = 1;
+        if ( !blc ){
+            aileron_droop_blowing_Node.setValue(0);
+            flap_blowing_Node.setValue(0);
+            wing_blowing_Node.setValue(0);
+            elevator_blowing_Node.setValue(0);
+        } else {
+            flap_blowing_Node.setValue(flap_Node.getValue());
+            aileron_droop_blowing_Node.setValue(aileron_droop_Node.getValue());
+            wing_blowing_Node.setValue(1);
+        }
+	},
+	0, 0);
+    
+    setlistener("surface-positions/flap-pos-raw-norm", func {
+        var blc = getprop("controls/flight/BLC");
+		var flaps_raw = getprop("surface-positions/flap-pos-raw-norm");
+        if (static or flaps_raw == nil) return;
+        if ( blc ){ 
+            flaps_Node.setValue(flaps_raw/2);
+       } else {
+            flaps_Node.setValue(flaps_raw);
+        }
+	},
+	1);
+    
+
 	# set it running on the next update cycle
 	settimer(update, 0);
 
@@ -180,12 +266,12 @@ initialize = func {
 # ==== this is the Main Loop which keeps everything updated ========================
 ##
 var update = func {
-    
 
     pilot_g.update();
     pilot_g.gmeter_update();
     smoke_0.updateSmoking();
     smoke_1.updateSmoking();
+    wing_blow.update();
 
 	if (enabledNode.getValue() and view_name_Node.getValue() == "Cockpit View" ) { 
 		pilot_headshake.update();
@@ -202,7 +288,60 @@ var update = func {
 # ============================== end Main Loop ===============================
 
 # ============================== specify classes ===========================
+# Class that updates wing blowing functions 
+# 
+WingBlow = {
+    new : func(name = "wing blowing"){
+        var obj = {parents : [WingBlow] };
+        obj.blc_valve = props.globals.getNode("controls/pneumatic/BLC",1);
+		obj.aileron_right_raw = props.globals.getNode("surface-positions/right-aileron-pos-raw-norm",1);
+        obj.aileron_left_raw = props.globals.getNode("surface-positions/left-aileron-pos-raw-norm",1);
+        obj.elevator_raw = props.globals.getNode("surface-positions/elevator-pos-raw-norm",1);
+        obj.elevator_raw.setValue(0);
+        obj.aileron_right_raw.setValue(0);
+        obj.aileron_left_raw.setValue(0);
+        obj.name = name;
+        print (obj.name);
+		return obj;
+    },
+    update: func (){
+        # print("static: ", static);
+        var blc_valve = me.blc_valve.getValue();
+        var aileron_right_raw = me.aileron_right_raw.getValue();
+        var aileron_left_raw = me.aileron_left_raw.getValue();
+        var elevator_raw = me.elevator_raw.getValue();
 
+        if (!static) {
+
+            if ( blc_valve ){
+                aileron_blowing_Node.setValue(getprop("controls/flight/aileron"));
+                elevator_blowing_Node.setValue(getprop("controls/flight/elevator"));
+                aileron_right_Node.setValue(aileron_right_raw - aileron_right_raw * 0.35);
+                aileron_left_Node.setValue(aileron_left_raw - aileron_left_raw * 0.35);
+                elevator_Node.setValue(elevator_raw - elevator_raw * 0.25); 
+            } else {
+#               print ("elevator_raw ", elevator_raw);
+                aileron_blowing_Node.setValue(0);
+                elevator_blowing_Node.setValue(0);
+                aileron_right_Node.setValue(aileron_right_raw);
+                aileron_left_Node.setValue(aileron_left_raw);
+                elevator_Node.setValue(elevator_raw);
+            }
+            
+        } else {
+
+            if ( blc_valve ){
+                aileron_blowing_Node.setValue(getprop("controls/flight/aileron"));
+                elevator_blowing_Node.setValue(getprop("controls/flight/elevator"));
+            } else {
+                aileron_blowing_Node.setValue(0);
+                elevator_blowing_Node.setValue(0);
+            }
+
+        }
+    },
+
+};
 
 
 # =================================== fuel tank stuff ===================================

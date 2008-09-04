@@ -9,7 +9,6 @@ on the Hawker Hunter/
 Ver 0.0.1
 
 
-
 ************************************************************************
 -->
 <PropertyList>
@@ -20,7 +19,7 @@ Ver 0.0.1
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<flight-model>yasim</flight-model>
 		<aero>buccaneer-yasim</aero>
-		<fuel-fraction>1.0</fuel-fraction>
+		<fuel-fraction>0.2</fuel-fraction>
 		<systems>
 			<autopilot>
 				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
@@ -121,7 +120,8 @@ Ver 0.0.1
 						<heading-max-deg type="double">140</heading-max-deg>
 						<x-offset-max-m type="double">0.20</x-offset-max-m>
 						<x-offset-threshold-deg type="double">65</x-offset-threshold-deg>
-					</right>				</limits>
+					</right>
+				</limits>
 			</config>
 		</view>
 		<view n="1">
@@ -175,6 +175,7 @@ Ver 0.0.1
 										type="double">5.2269</z-offset-m>
 				<pitch-offset-deg>-15</pitch-offset-deg>
 				<default-field-of-view-deg>70</default-field-of-view-deg>
+				<dynamic-view type="bool">false</dynamic-view>
 				<limits>
 					<enabled type="bool">true</enabled>
 					<left>
@@ -305,7 +306,7 @@ Ver 0.0.1
 			<setting>0.5</setting>
 			<setting>0.6667</setting>
 			<setting>0.8333</setting>
-			<setting>0.8333</setting>
+			<setting>1.0</setting>
 		</aileron-droop>
 		<airbrake>
 			<setting>0.00</setting>
@@ -490,6 +491,7 @@ Ver 0.0.1
 			<flaps-alternate-extension type="double">1</flaps-alternate-extension>
 			<aileron-droop type="double">0</aileron-droop>
 			<tail-flaps type="double">0</tail-flaps>
+			<BLC type="bool">1</BLC>
 		</flight>
 		<fuel>
 			<indicator-supply-swap type="bool">0</indicator-supply-swap>
@@ -521,6 +523,7 @@ Ver 0.0.1
 		<air-ground-radar>
 			<serviceable type="bool">true</serviceable>
 			<switch type="string">ON</switch>
+			<threshold>0.18</threshold>
 			<mode-control type="int">5</mode-control>
 			<scan-sec type="double">1</scan-sec>
 			<display-controls>
@@ -530,7 +533,7 @@ Ver 0.0.1
 				<symbol type="bool">false</symbol>
 			</display-controls>
 			<range type="int">30</range>
-			<mode type="string">WX</mode>
+			<mode type="string">SV</mode>
 			<lightning type="bool">false</lightning>
 			<display-mode type="string">arc</display-mode>
 			<minimized type="bool">false</minimized>
@@ -542,9 +545,9 @@ Ver 0.0.1
 			</antenna>
 			<terrain-warning>
 				<elev-limit-deg type="double">2</elev-limit-deg>
-				<elev-step-deg type="double">1</elev-step-deg>
+				<elev-step-deg type="double">2</elev-step-deg>
 				<az-limit-deg type="double">1</az-limit-deg>
-				<az-step-deg type="double">0.5</az-step-deg>
+				<az-step-deg type="double">1</az-step-deg>
 				<max-range-m type="double">4000</max-range-m>
 				<min-range-m type="double">250</min-range-m>
 				<tilt type="double">-2</tilt>
@@ -552,13 +555,14 @@ Ver 0.0.1
 					<roll type="bool">true</roll>
 					<pitch type="bool">false</pitch>
 				</stabilisation>
-				<scan-sec type="double">1</scan-sec>
+				<scan-sec type="double">0</scan-sec>
+				<beamwidth-deg>1</beamwidth-deg>
 			</terrain-warning>
 			<surveillance>
-				<elev-limit-deg type="double">1</elev-limit-deg>
-				<elev-step-deg type="double">0.5</elev-step-deg>
+				<elev-limit-deg type="double">1.25</elev-limit-deg>
+				<elev-step-deg type="double">0.125</elev-step-deg>
 				<az-limit-deg type="double">45</az-limit-deg>
-				<az-step-deg type="double">5</az-step-deg>
+				<az-step-deg type="double">2.5</az-step-deg>
 				<max-range-m type="double">120000</max-range-m>
 				<min-range-m type="double">1000</min-range-m>
 				<tilt type="double">-2.5</tilt>
@@ -566,8 +570,9 @@ Ver 0.0.1
 					<roll type="bool">true</roll>
 					<pitch type="bool">true</pitch>
 				</stabilisation>
-				<scan-sec type="double">3</scan-sec>
-				<persistance-sec type="double">3</persistance-sec>
+				<scan-sec type="double">0.001</scan-sec>
+				<persistance-sec type="double">18</persistance-sec>
+				<beamwidth-deg>5</beamwidth-deg>
 			</surveillance>
 		</air-ground-radar>
 		<radar-altimeter>
@@ -580,6 +585,7 @@ Ver 0.0.1
 			</antenna>
 			<set-height-ft>1000</set-height-ft>
 			<set-excursion-percent>5</set-excursion-percent>
+			<beamwidth-deg>10</beamwidth-deg>
 		</radar-altimeter>
 	</instrumentation>
 
@@ -649,7 +655,7 @@ Ver 0.0.1
 				<binding>
 					<command>property-assign</command>
 					<property>/controls/flight/wing-fold</property>
-					<value type="bool">1.0</value>
+					<value type="bool">1</value>
 				</binding>
 			</key>
 			<key n="102">
@@ -658,7 +664,7 @@ Ver 0.0.1
 				<binding>
 					<command>property-assign</command>
 					<property>/controls/flight/wing-fold</property>
-					<value type="bool">0.0</value>
+					<value type="bool">0</value>
 				</binding>
 			</key>
 			<!-- map keys for no action  -->
