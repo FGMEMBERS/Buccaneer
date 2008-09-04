@@ -15,6 +15,11 @@
 		<x-m>0</x-m>
 	</offsets>
 
+	<animation>
+		<type>select</type>
+		<object-name>Markings</object-name>
+	</animation>
+
 	<!-- **** non-panel models **** -->
 
 	<model>
@@ -48,99 +53,6 @@
 			<z-m>-0.370128</z-m>
 		</offsets>
 	</model>
-
-	<!--<model>
-		<path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
-		<name>Haze</name>
-		<offsets>
-			<x-m>0</x-m>
-			<y-m>0</y-m>
-			<z-m>0</z-m>
-		</offsets>
-	</model>-->
-
-	<!--<model>
-		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
-		<name>Smoke-Stbd</name>
-		<offsets>
-			<x-m>0</x-m>
-			<y-m>1</y-m>
-			<z-m>0</z-m>
-		</offsets>
-	</model>
-
-	<animation>
-		<type>select</type>
-		<object-name>Smoke-Stbd</object-name>
-		<condition>
-			<and>
-				<equals>
-					<property>engines/engine[1]/smoking</property>
-					<value>true</value>
-				</equals>
-				<less-than>
-					<property>position/altitude-agl-ft</property>
-					<value>12000</value>
-				</less-than>
-			</and>
-		</condition>
-	</animation>-->
-
-	<!--<model>
-		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
-		<name>Smoke-Port</name>
-		<offsets>
-			<x-m>0</x-m>
-			<y-m>-1</y-m>
-			<z-m>0</z-m>
-		</offsets>
-	</model>
-
-	<animation>
-		<type>select</type>
-		<object-name>Smoke-Port</object-name>
-		<condition>
-			<and>
-				<equals>
-					<property>engines/engine/smoking</property>
-					<value>true</value>
-				</equals>
-				<less-than>
-					<property>position/altitude-agl-ft</property>
-					<value>12000</value>
-				</less-than>
-			</and>
-		</condition>
-	</animation>-->
-
-	<!--<model>
-		<path>Aircraft/Buccaneer/Models/Effects/fuel.xml</path>
-		<name>Fuel-Port</name>
-		<offsets>
-			<x-m>0</x-m>
-			<y-m>-0.3</y-m>
-			<z-m>0</z-m>
-		</offsets>
-	</model>-->
-
-	<!--<animation>
-		<type>select</type>
-		<object-name>Fuel-Port</object-name>
-		<condition>
-			<or>
-				<greater-than>
-					<property>consumables/fuel/tank[8]/dump-rate-lbs-hr</property>
-					<value>0.1</value>
-				</greater-than>
-				<greater-than>
-					<property>consumables/fuel/tank[9]/dump-rate-lbs-hr</property>
-					<value>0.1</value>
-				</greater-than>
-			</or>
-		</condition>
-	</animation>-->
-
-
 
 	<!-- ***************** Cockpit *************************** -->
 	<rear-panel>
@@ -199,6 +111,18 @@
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/blowing_press.xml</path>
+		<offsets>
+			<x-m>3.38</x-m>
+			<y-m>0.28</y-m>
+			<z-m>0.88</z-m>
+			<roll-deg>-12.5</roll-deg>
+			<pitch-deg>-10</pitch-deg>
+			<heading-deg>-25</heading-deg>
+		</offsets>
+	</model>
+
 	<!-- *********** Port Coaming Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/port_coaming_panel.xml</path>
@@ -213,7 +137,6 @@
 	<!-- *********** Throttle Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/throttle_panel.xml</path>
-		<!--<path>Aircraft/Buccaneer/Instruments/throttle_panel.ac</path>-->
 		<offsets>
 			<x-m>3.83186</x-m>
 			<y-m>-0.45</y-m>
@@ -264,9 +187,6 @@
 
 
 	<!--	
-
-	
-
 	<model>
 		<path>Aircraft/Hunter/Models/flaps.xml</path>
 		<offsets>
@@ -365,29 +285,7 @@
 
 	-->
 	<!-- ************* Right Lower Side Panel ******* -->
-	<!--
 
-	<model>
-		<path>Aircraft/Hunter/Models/fuel-left.xml</path>
-		<offsets>
-			<x-m>-4.65</x-m>
-			<y-m>0.30</y-m>
-			<z-m>0.145</z-m>
-			<pitch-deg>-60</pitch-deg>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/Hunter/Models/fuel-right.xml</path>
-		<offsets>
-			<x-m>-4.65</x-m>
-			<y-m>0.38</y-m>
-			<z-m>0.145</z-m>
-			<pitch-deg>-60</pitch-deg>
-		</offsets>
-	</model>
-
-	-->
 	<!-- Gear Indicator Panel-->
 	<!--
 
@@ -419,17 +317,6 @@
 			<x-m>3.140</x-m>
 			<y-m>-0.59</y-m>
 			<z-m> 0.828</z-m>
-		</offsets>
-	</model>
-
-
-	<model>
-		<path>Aircraft/Hunter/Models/blackout.xml</path>
-		<name>Blackout</name>
-		<offsets>
-			<x-m>-4.23661</x-m>
-			<y-m>0</y-m>
-			<z-m>0.765417</z-m>
 		</offsets>
 	</model>
 
@@ -631,8 +518,6 @@
 		<property>controls/flight/rudder</property>
 		<factor>25</factor>
 		<center>
-			<!--4.07546		0.0499988-->
-			<!--4.08807,0.102067,0.92268-->
 			<x-m>4.07546</x-m>
 			<y-m>-0.0499988</y-m>
 			<z-m>0.920013</z-m>
@@ -1501,8 +1386,6 @@
 	</animation>
 
 	<!-- ********************* Elevators ***************** -->
-	<!--
-	-->
 	<!-- Tail Plane-->
 	<animation>
 		<type>rotate</type>
@@ -1913,65 +1796,8 @@
 		</axis>
 	</animation>
 
-	<!--
-	<animation>
-		<type>translate</type>
-		<object-name>F-Lower-Leg</object-name>
-		<property>gear/gear[0]/compression-norm</property>
-		<factor>0.3</factor>
-		<axis>
-			<x>0</x>
-			<y>0</y>
-			<z>1</z>
-		</axis>
-	</animation>
 
-	<animation>
-		<type>rotate</type>
-		<object-name>F-Arm</object-name>
-		<object-name>F-Wheel</object-name>
-		<property>gear/gear[0]/compression-norm</property>
-		<offset-deg>-10</offset-deg>
-		<factor>-50</factor>
-		<min-deg>-35</min-deg>
-		<center>
-			<x-m>-5.45</x-m>
-			<y-m>0</y-m>
-			<z-m>-0.97</z-m>
-		</center>
-		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>select</type>
-		<object-name>F-Leg-Assembly</object-name>
-		<condition>
-			<greater-than>
-				<property>gear/gear[0]/position-norm</property>
-				<value>0.02</value>
-			</greater-than>
-		</condition>
-	</animation>
-
-	<animation>
-		<type>select</type>
-		<object-name>F-Wheel</object-name>
-		<condition>
-			<greater-than>
-				<property>gear/gear[0]/position-norm</property>
-				<value>0.02</value>
-			</greater-than>
-		</condition>
-	</animation>
-
-	-->
 	<!-- Main U/C Left-->
-	<!--
-	-->
 	<!-- Extend/Retract -->
 	<animation>
 		<type>rotate</type>
@@ -2139,8 +1965,6 @@
 	</animation>
 
 	<!-- Main U/C - Right -->
-	<!--
-	-->
 	<!-- Extend/Retract -->
 	<animation>
 		<type>rotate</type>
@@ -2307,54 +2131,7 @@
 		</condition>
 	</animation>
 
-	<!--
-	<animation>
-		<type>translate</type>
-		<object-name>UC-R-Lower-Leg</object-name>
-		<object-name>UC-R-Hub</object-name>
-		<object-name>UC-R-Tyre</object-name>
-		<property>gear/gear[2]/compression-norm</property>
-		<factor>0.19</factor>
-		<axis>
-			<x>0.02</x>
-			<y>-0.01</y>
-			<z>0.2</z>
-		</axis>
-	</animation>
-	<animation>
-		<type>translate</type>
-		<object-name>Door2-R</object-name>
-		<property>gear/gear[2]/compression-norm</property>
-		<factor>0.2</factor>
-		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-	<animation>
-		<type>translate</type>
-		<object-name>noshadow.SerNo-Door2-R</object-name>
-		<property>gear/gear[2]/compression-norm</property>
-		<factor>0.2</factor>
-		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-	<animation>
-		<type>select</type>
-		<object-name>UC-Main-R-Assembly</object-name>
-		<condition>
-			<greater-than>
-				<property>gear/gear[0]/position-norm</property>
-				<value>0.02</value>
-			</greater-than>
-		</condition>
-	</animation>
 
-	-->
 	<!-- spin wheels -->
 	<!--
 	<animation>
@@ -2498,23 +2275,42 @@
 
 	-->
 	<!-- ***************** Canopy *********************** -->
-	<!--
+
 	<animation>
 		<type>translate</type>
-		<object-name>Main</object-name>
+		<object-name>Frame-Main</object-name>
+		<object-name>Frame-Centre</object-name>
+		<object-name>Canopy-Fragments</object-name>
 		<property>canopy/position-norm</property>
-		<factor>0.6</factor>
+		<factor>1.8</factor>
 		<axis>
 			<x>1</x>
 			<y>0</y>
+			<z>0.175</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Frame-Main</object-name>
+		<object-name>Frame-Centre</object-name>
+		<object-name>Canopy-Fragments</object-name>
+		<property>canopy/position-norm</property>
+		<factor>2.75</factor>
+		<center>
+			<x-m>3.69211</x-m>
+			<y-m>0</y-m>
+			<z-m>0.738542</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
 			<z>0</z>
 		</axis>
 	</animation>
 
-	-->
+
 	<!-- ************************ arrestor hook ********************** -->
-	<!--
-	-->
 	<!-- lower/raise -->
 	<animation>
 		<type>rotate</type>
@@ -2742,7 +2538,7 @@
 		<name>tiptrail-s</name>
 		<offsets>
 			<x-m>0</x-m>
-			<y-m>6.54678</y-m>
+			<y-m>0</y-m>
 			<z-m>0</z-m>
 		</offsets>
 	</model>
@@ -2752,7 +2548,27 @@
 		<name>tiptrail-p</name>
 		<offsets>
 			<x-m>0</x-m>
-			<y-m>-6.54678</y-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/tiptrail-tail-stbd.xml</path>
+		<name>tiptrail-t-s</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>2.13948</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Buccaneer/Models/Effects/tiptrail-tail-port.xml</path>
+		<name>tiptrail-t-p</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>-2.13948</y-m>
 			<z-m>0</z-m>
 		</offsets>
 	</model>
