@@ -7,7 +7,7 @@
 		<name>haze</name>
 		<texture>noise3.png</texture>
 		<emissive>false</emissive>
-		<lighting>false</lighting>
+		<lighting>true</lighting>
 
 		<offsets>
 			<x-m>13.0</x-m>

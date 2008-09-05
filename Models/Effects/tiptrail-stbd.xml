@@ -7,11 +7,11 @@
 		<type>normal</type>
 		<texture>smoke.png</texture>
 		<emissive>false</emissive>
-		<lighting>false</lighting>
+		<lighting>true</lighting>
 
 		<offsets>
 			<x-m>13.2422</x-m>
-			<y-m>0</y-m>
+			<y-m>6.54678</y-m>
 			<z-m>0.26987</z-m>
 		</offsets>
 
@@ -19,11 +19,15 @@
 			<and>
 				<greater-than>
 					<property>/environment/relative-humidity</property>
-					<value>40</value>
+					<value>98</value>
 				</greater-than>
 				<greater-than>
-						<property>/velocities/airspeed-kt</property>
-						<value>10</value>
+					<property>/environment/temperature-degc</property>
+					<value>0</value>
+				</greater-than>
+				<greater-than>
+					<property>velocities/airspeed-kt</property>
+					<value>180</value>
 				</greater-than>
 				<or>
 					<less-than>
@@ -54,8 +58,8 @@
 				<spread>0</spread>
 			</speed-mps>
 			<rotation-speed>
-				<x-max-deg-sec>20</x-max-deg-sec>
-				<x-min-deg-sec>15</x-min-deg-sec>
+				<x-max-deg-sec>0</x-max-deg-sec>
+				<x-min-deg-sec>0</x-min-deg-sec>
 				<y-max-deg-sec>0</y-max-deg-sec>
 				<y-min-deg-sec>0</y-min-deg-sec>
 				<z-max-deg-sec>0</z-max-deg-sec>

@@ -6,7 +6,7 @@
 		<name>smoke</name>
 		<texture>noise3.png</texture>
 		<emissive>false</emissive>
-		<lighting>false</lighting>
+		<lighting>true</lighting>
 
 		<offsets>
 			<x-m>16</x-m>
@@ -47,8 +47,8 @@
 
 			</speed-mps>
 			<rotation-speed>
-				<x-max-deg-sec>60</x-max-deg-sec>
-				<x-min-deg-sec>-60</x-min-deg-sec>
+				<x-max-deg-sec>0</x-max-deg-sec>
+				<x-min-deg-sec>0</x-min-deg-sec>
 				<y-max-deg-sec>0</y-max-deg-sec>
 				<y-min-deg-sec>0</y-min-deg-sec>
 				<z-max-deg-sec>0</z-max-deg-sec>
