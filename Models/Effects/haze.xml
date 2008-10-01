@@ -105,7 +105,7 @@
 				</size>
 			</end>
 			<life-sec>
-				<value>5.0</value>
+				<value>1.0</value>
 			</life-sec>
 			<mass-kg>0.05</mass-kg>
 			<radius-m>0.3</radius-m>
