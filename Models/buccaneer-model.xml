@@ -15,11 +15,6 @@
 		<x-m>0</x-m>
 	</offsets>
 
-	<animation>
-		<type>select</type>
-		<object-name>Markings</object-name>
-	</animation>
-
 	<!-- **** non-panel models **** -->
 
 	<model>
@@ -53,6 +48,7 @@
 			<z-m>-0.370128</z-m>
 		</offsets>
 	</model>
+
 
 	<!-- ***************** Cockpit *************************** -->
 	<rear-panel>
@@ -137,6 +133,7 @@
 	<!-- *********** Throttle Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/throttle_panel.xml</path>
+		<!--<path>Aircraft/Buccaneer/Instruments/throttle_panel.ac</path>-->
 		<offsets>
 			<x-m>3.83186</x-m>
 			<y-m>-0.45</y-m>
@@ -285,7 +282,29 @@
 
 	-->
 	<!-- ************* Right Lower Side Panel ******* -->
+	<!--
 
+	<model>
+		<path>Aircraft/Hunter/Models/fuel-left.xml</path>
+		<offsets>
+			<x-m>-4.65</x-m>
+			<y-m>0.30</y-m>
+			<z-m>0.145</z-m>
+			<pitch-deg>-60</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Hunter/Models/fuel-right.xml</path>
+		<offsets>
+			<x-m>-4.65</x-m>
+			<y-m>0.38</y-m>
+			<z-m>0.145</z-m>
+			<pitch-deg>-60</pitch-deg>
+		</offsets>
+	</model>
+
+	-->
 	<!-- Gear Indicator Panel-->
 	<!--
 
@@ -317,6 +336,17 @@
 			<x-m>3.140</x-m>
 			<y-m>-0.59</y-m>
 			<z-m> 0.828</z-m>
+		</offsets>
+	</model>
+
+
+	<model>
+		<path>Aircraft/Hunter/Models/blackout.xml</path>
+		<name>Blackout</name>
+		<offsets>
+			<x-m>-4.23661</x-m>
+			<y-m>0</y-m>
+			<z-m>0.765417</z-m>
 		</offsets>
 	</model>
 
@@ -371,22 +401,21 @@
 	<!--
 	-->
 	<!-- order objects -->
-	<!--
+
 
 	<animation>
 		<type>select</type>
-		<object-name>Fuselage</object-name>
-		<object-name>Tail</object-name>
-		<object-name>Tailplane-R</object-name>
-		<object-name>Tailplane-L</object-name>
-		<object-name>Elevator-R</object-name>
-		<object-name>Elevator-L</object-name>
-		<object-name>Flap-R</object-name>
-		<object-name>Flap-L</object-name>
-		<object-name>UC-Nose</object-name>
-		<object-name>UC-Main-L</object-name>
-		<object-name>UC-Main-R</object-name>
-		<object-name>noshadow.Exhausts</object-name>
+		<object-name>Spine Assembly</object-name>
+		<object-name>Airbrake-Port</object-name>
+		<object-name>Airbrake-Stbd</object-name>
+		<object-name>Drag-Link-Port</object-name>
+		<object-name>Drag-Link-Stbd</object-name>
+		<object-name>NACA-Duct</object-name>
+		<object-name>Rudder</object-name>
+		<object-name>Cat-Strop-Hook</object-name>
+		<object-name>Tail-Pipe-Port</object-name>
+		<object-name>Tail-Pipe-Stbd</object-name>
+		<object-name>Fuselage-Markings</object-name>
 		<condition>
 			<not>
 				<equals>
@@ -397,49 +426,66 @@
 		</condition>
 	</animation>
 
-	-->
-	<!-- make sure that all the rest of the aircraft is visible
- through the exhausts. -->
-	<!--
-
 	<animation>
-		<object-name>Pilot</object-name>
-		<object-name>Wing-R</object-name>
-		<object-name>Wing-L</object-name>
-		<object-name>Aileron-R</object-name>
-		<object-name>Aileron-L</object-name>
-		<object-name>Intake-R</object-name>
-		<object-name>Intake-L</object-name>
-		<object-name>Port-Light</object-name>
-		<object-name>Stbd-Light</object-name>
-		<object-name>Tail-Light</object-name>
-		<object-name>noshadow.Markings</object-name>
-	</animation>
-
-	<animation>
-		<object-name>Turn</object-name>
-		<object-name>Gunsight</object-name>
-		<object-name>Undercarriage-Control</object-name>
-		<object-name>Gear-Indicator</object-name>
-		<object-name>Port-Nav-Lt-Cover</object-name>
-		<object-name>Stbd-Nav-Lt-Cover</object-name>
-		<object-name>Tail-Cone</object-name>
-		<object-name>Canopy</object-name>
-		<object-name>Blackout</object-name>
-		<object-name>noshadow.Exhausts</object-name>
-	</animation>
-
-	<animation>
-		<type>select</type>
-		<object-name>noshadow.Exhausts</object-name>
+		<object-name>AHook-assmbly</object-name>
+		<object-name>Tail-Bumper</object-name>
+		<object-name>Pivot</object-name>
+		<object-name>A-Hook-Bearing</object-name>
+		<object-name>Wheel-Well-Main-Port</object-name>
+		<object-name>Wheel-Well-Main-Stbd</object-name>
+		<object-name>Gear-Main-Port</object-name>
+		<object-name>Gear-Main-Stbd</object-name>
+		<object-name>Door-Main-Port</object-name>
+		<object-name>Door-Main-Stbd</object-name>
+		<object-name>Gun-Camera</object-name>
 		<condition>
-			<equals>
-				<property>sim/ai/aircraft/exhaust</property>
-				<value>0</value>
-			</equals>
+			<not>
+				<equals>
+					<property>sim/current-view/view-number</property>
+					<value>0</value>
+				</equals>
+			</not>
 		</condition>
 	</animation>
-	-->
+
+	<animation>
+		<object-name>Wheel-Well-Front</object-name>
+		<object-name>Door-Front</object-name>
+		<object-name>Gear-Nose</object-name>
+		<object-name>Holdback</object-name>
+		<object-name>Fan-Port</object-name>
+		<object-name>Fan-Stbd</object-name>
+		<!--<object-name>Gear-Main-Port</object-name>
+		<object-name>Gear-Main-Stbd</object-name>
+		<object-name>Door-Main-Port</object-name>
+		<object-name>Door-Main-Stbd</object-name>
+		<object-name>Gun-Camera</object-name>-->
+		<condition>
+			<not>
+				<equals>
+					<property>sim/current-view/view-number</property>
+					<value>0</value>
+				</equals>
+			</not>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>smoke-p</object-name>
+		<object-name>smoke-s</object-name>
+		<object-name>haze</object-name>
+		<object-name>Canopy-Side</object-name>
+		<object-name>Canopy-Side</object-name>
+		<object-name>Canopy-Fragments</object-name>
+		<condition>
+			<not>
+				<equals>
+					<property>sim/current-view/view-number</property>
+					<value>0</value>
+				</equals>
+			</not>
+		</condition>
+	</animation>
 
 	<animation>
 		<type>select</type>
@@ -518,6 +564,8 @@
 		<property>controls/flight/rudder</property>
 		<factor>25</factor>
 		<center>
+			<!--4.07546		0.0499988-->
+			<!--4.08807,0.102067,0.92268-->
 			<x-m>4.07546</x-m>
 			<y-m>-0.0499988</y-m>
 			<z-m>0.920013</z-m>
@@ -1358,7 +1406,7 @@
 		<type>rotate</type>
 		<object-name>Aileron-Port</object-name>
 		<property>surface-positions/left-aileron-pos-norm</property>
-		<factor>-30</factor>
+		<factor>-45</factor>
 		<axis>
 			<x1-m>11.1886</x1-m>
 			<y1-m>-2.9227</y1-m>
@@ -1374,7 +1422,7 @@
 		<type>rotate</type>
 		<object-name>Aileron-Stbd</object-name>
 		<property>surface-positions/right-aileron-pos-norm</property>
-		<factor>30</factor>
+		<factor>45</factor>
 		<axis>
 			<x1-m>11.1886</x1-m>
 			<y1-m>2.9227</y1-m>
@@ -1386,6 +1434,8 @@
 	</animation>
 
 	<!-- ********************* Elevators ***************** -->
+	<!--
+	-->
 	<!-- Tail Plane-->
 	<animation>
 		<type>rotate</type>
@@ -1796,8 +1846,65 @@
 		</axis>
 	</animation>
 
+	<!--
+	<animation>
+		<type>translate</type>
+		<object-name>F-Lower-Leg</object-name>
+		<property>gear/gear[0]/compression-norm</property>
+		<factor>0.3</factor>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
 
+	<animation>
+		<type>rotate</type>
+		<object-name>F-Arm</object-name>
+		<object-name>F-Wheel</object-name>
+		<property>gear/gear[0]/compression-norm</property>
+		<offset-deg>-10</offset-deg>
+		<factor>-50</factor>
+		<min-deg>-35</min-deg>
+		<center>
+			<x-m>-5.45</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.97</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>F-Leg-Assembly</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.02</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>F-Wheel</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.02</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	-->
 	<!-- Main U/C Left-->
+	<!--
+	-->
 	<!-- Extend/Retract -->
 	<animation>
 		<type>rotate</type>
@@ -1965,6 +2072,8 @@
 	</animation>
 
 	<!-- Main U/C - Right -->
+	<!--
+	-->
 	<!-- Extend/Retract -->
 	<animation>
 		<type>rotate</type>
@@ -2131,7 +2240,54 @@
 		</condition>
 	</animation>
 
+	<!--
+	<animation>
+		<type>translate</type>
+		<object-name>UC-R-Lower-Leg</object-name>
+		<object-name>UC-R-Hub</object-name>
+		<object-name>UC-R-Tyre</object-name>
+		<property>gear/gear[2]/compression-norm</property>
+		<factor>0.19</factor>
+		<axis>
+			<x>0.02</x>
+			<y>-0.01</y>
+			<z>0.2</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>translate</type>
+		<object-name>Door2-R</object-name>
+		<property>gear/gear[2]/compression-norm</property>
+		<factor>0.2</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>translate</type>
+		<object-name>noshadow.SerNo-Door2-R</object-name>
+		<property>gear/gear[2]/compression-norm</property>
+		<factor>0.2</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>select</type>
+		<object-name>UC-Main-R-Assembly</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.02</value>
+			</greater-than>
+		</condition>
+	</animation>
 
+	-->
 	<!-- spin wheels -->
 	<!--
 	<animation>
@@ -2308,9 +2464,9 @@
 			<z>0</z>
 		</axis>
 	</animation>
-
-
 	<!-- ************************ arrestor hook ********************** -->
+	<!--
+	-->
 	<!-- lower/raise -->
 	<animation>
 		<type>rotate</type>
