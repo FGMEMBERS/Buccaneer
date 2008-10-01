@@ -19,7 +19,7 @@ Ver 0.0.1
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<flight-model>yasim</flight-model>
 		<aero>buccaneer-yasim</aero>
-		<fuel-fraction>0.2</fuel-fraction>
+		<fuel-fraction>1.0</fuel-fraction>
 		<systems>
 			<autopilot>
 				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
@@ -294,9 +294,11 @@ Ver 0.0.1
 
 		<flaps>
 			<setting>0.00</setting>
-			<setting>0.25</setting>
+			<setting>0.1667</setting>
+			<setting>0.3333</setting>
 			<setting>0.5</setting>
-			<setting>0.75</setting>
+			<setting>0.6667</setting>
+			<setting>0.8333</setting>
 			<setting>1.00</setting>
 		</flaps>
 		<aileron-droop>
@@ -306,7 +308,7 @@ Ver 0.0.1
 			<setting>0.5</setting>
 			<setting>0.6667</setting>
 			<setting>0.8333</setting>
-			<setting>1.0</setting>
+			<setting>1.00</setting>
 		</aileron-droop>
 		<airbrake>
 			<setting>0.00</setting>
@@ -491,7 +493,6 @@ Ver 0.0.1
 			<flaps-alternate-extension type="double">1</flaps-alternate-extension>
 			<aileron-droop type="double">0</aileron-droop>
 			<tail-flaps type="double">0</tail-flaps>
-			<BLC type="bool">1</BLC>
 		</flight>
 		<fuel>
 			<indicator-supply-swap type="bool">0</indicator-supply-swap>
@@ -655,7 +656,7 @@ Ver 0.0.1
 				<binding>
 					<command>property-assign</command>
 					<property>/controls/flight/wing-fold</property>
-					<value type="bool">1</value>
+					<value type="bool">1.0</value>
 				</binding>
 			</key>
 			<key n="102">
@@ -664,7 +665,7 @@ Ver 0.0.1
 				<binding>
 					<command>property-assign</command>
 					<property>/controls/flight/wing-fold</property>
-					<value type="bool">0</value>
+					<value type="bool">0.0</value>
 				</binding>
 			</key>
 			<!-- map keys for no action  -->
@@ -947,19 +948,22 @@ Ver 0.0.1
 	<!-- nasal stuff -->
 	<nasal>
 		<buccaneer>
-			<file>Aircraft/Buccaneer/Nasal/buccaneer-utils.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/buccaneer-utils-new.nas</file>
 			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
 		</buccaneer>
 		<buccaneer-electrical>
 			<file>Aircraft/Buccaneer/Systems/buccaneer-electrical.nas</file>
 		</buccaneer-electrical>
+		<buccaneer-air-bleed>
+			<file>Aircraft/Buccaneer/Systems/buccaneer-air-bleed.nas</file>
+		</buccaneer-air-bleed>
 		<!--<buccaneer-autopilot>
 			<file>Aircraft/Buccaneer/Systems/autopilot.nas</file>
 		</buccaneer-autopilot>-->
 		<gunview>
 			<file>Aircraft/Buccaneer/Nasal/gunview.nas</file>
 		</gunview>
-		<dual_control_tools>
+		<!--<dual_control_tools>
 			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
 		</dual_control_tools>
 		<aircraft_dual_control>
@@ -967,13 +971,13 @@ Ver 0.0.1
 		</aircraft_dual_control>
 		<dual_control_copilot>
 			<file>Aircraft/Buccaneer/Nasal/pilot-dual-control.nas</file>
-		</dual_control_copilot>
-		<model-view>
+		</dual_control_copilot>-->
+		<!--<model-view>
 			<file>Aircraft/Buccaneer/Nasal/model-view.nas</file>
 		</model-view>
 		<model-cockpit-view>
 			<file>Aircraft/Buccaneer/Nasal/model-cockpit-view.nas</file>
-		</model-cockpit-view>
+		</model-cockpit-view>-->
 	</nasal>
 
 	<environment>
