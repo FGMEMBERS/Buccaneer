@@ -9,18 +9,18 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>needle1</object-name>
-		<property>engines/engine/n1</property>
+		<property>engines/engine[0]/bleed-air-pressure-psi</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
-				<dep>-135</dep>
+				<dep>-120</dep>
 			</entry>
-			<entry>
+			<!--<entry>
 				<ind>83</ind>
 				<dep>0</dep>
-			</entry>
+			</entry>-->
 			<entry>
-				<ind>100</ind>
+				<ind>120</ind>
 				<dep>120</dep>
 			</entry>
 		</interpolation>
@@ -39,18 +39,18 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>needle2</object-name>
-		<property>engines/engine[1]/n1</property>
+		<property>engines/engine[1]/bleed-air-pressure-psi</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
-				<dep>-135</dep>
+				<dep>-120</dep>
 			</entry>
-			<entry>
+			<!--<entry>
 				<ind>83</ind>
 				<dep>0</dep>
-			</entry>
+			</entry>-->
 			<entry>
-				<ind>100</ind>
+				<ind>120</ind>
 				<dep>120</dep>
 			</entry>
 		</interpolation>
