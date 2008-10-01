@@ -75,7 +75,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind1-p</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[0]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
@@ -110,7 +110,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind2-p</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[0]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
@@ -144,7 +144,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind3-p</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[0]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
@@ -179,7 +179,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind4-p</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[0]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
@@ -218,7 +218,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind1-s</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[1]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
@@ -252,7 +252,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind2-s</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[1]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
@@ -287,7 +287,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind3-s</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[1]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
@@ -322,7 +322,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>blind4-s</object-name>
-		<property>engines/engine[0]/oilp-norm</property>
+		<property>systems/air-bleed/shut-off-valves/shut-off-valve[1]/pos-norm</property>
 		<interpolation>
 			<entry>
 				<ind>0.20</ind>
