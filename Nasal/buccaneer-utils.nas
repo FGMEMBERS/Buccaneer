@@ -72,11 +72,20 @@ observer_headshake = nil;
 smoke_0 = nil;
 smoke_1 = nil;
 wing_blow = nil;
+tyresmoke_0 = nil;
+tyresmoke_1 = nil;
+tyresmoke_2 = nil;
+
 
 var old_n1 = 0;
 var time = 0;
 var dt = 0;
 var last_time = 0.0;
+var lp = aircraft.lowpass.new(2);
+var run_tyresmoke0 = 0;
+var run_tyresmoke1 = 0;
+var run_tyresmoke2 = 0;
+#var filtered_rollspeed = 0;
 
 var xDivergence_damp = 0;
 var yDivergence_damp = 0;
@@ -127,6 +136,10 @@ initialize = func {
 	smoke_0 = Smoke.new(0);
 	smoke_1 = Smoke.new(1);
 	wing_blow = WingBlow.new();
+	tyresmoke_0 = TyreSmoke.new(0);
+	tyresmoke_1 = TyreSmoke.new(1);
+	tyresmoke_2 = TyreSmoke.new(2);
+
 
 	#set listeners
 
@@ -217,7 +230,46 @@ initialize = func {
 
 	},
 	1);
-	
+
+	setlistener("gear/gear[0]/position-norm", func {
+		var gear = getprop("gear/gear[0]/position-norm");
+		
+		if (gear == 1 ){
+			run_tyresmoke0 = 1;
+		}else{
+			run_tyresmoke0 = 0;
+		}
+
+		},
+		1,
+		0);
+
+	setlistener("gear/gear[1]/position-norm", func {
+		var gear = getprop("gear/gear[1]/position-norm");
+		
+		if (gear == 1 ){
+			run_tyresmoke1 = 1;
+		}else{
+			run_tyresmoke1 = 0;
+		}
+
+		},
+		1,
+		0);
+
+	setlistener("gear/gear[2]/position-norm", func {
+		var gear = getprop("gear/gear[2]/position-norm");
+		
+		if (gear == 1 ){
+			run_tyresmoke2 = 1;
+		}else{
+			run_tyresmoke2 = 0;
+		}
+
+		},
+		1,
+		0);
+
 
 	# set it running on the next update cycle
 	settimer(update, 0);
@@ -240,6 +292,17 @@ var update = func {
 	smoke_0.updateSmoking();
 	smoke_1.updateSmoking();
 	wing_blow.update();
+
+#print ("run_tyresmoke ",run_tyresmoke);
+	
+	if (run_tyresmoke0)
+		tyresmoke_0.update();
+
+	if (run_tyresmoke1)
+		tyresmoke_1.update();
+
+	if (run_tyresmoke2)
+		tyresmoke_2.update();
 
 	if (enabledNode.getValue() and view_name_Node.getValue() == "Cockpit View" ) { 
 		pilot_headshake.update();
@@ -625,6 +688,68 @@ Smoke = {
 
 # =============================== end smoke stuff ================================
 
+# =========================== tyre smoke stuff ====================================
+# Class that specifies tyre smoke functions 
+#
+
+TyreSmoke = {
+	new : func (number,
+				){
+		var obj = {parents : [TyreSmoke] };
+		obj.name = "tyre-smoke " ~ number;
+		obj.wow = props.globals.getNode("gear/gear[" ~ number ~"]/wow", 1);
+		obj.tyresmoke = props.globals.getNode("gear/gear[" ~ number ~"]/tyre-smoke", 1);
+		obj.tyresmoke.setBoolValue(0);
+		obj.vertical_speed = props.globals.getNode("velocities/vertical-speed-fps", 1);
+		obj.speed = props.globals.getNode("velocities/groundspeed-kt", 1);
+		obj.friction_factor = props.globals.getNode("gear/gear[" ~ number ~"]/ground-friction-factor", 1);
+		obj.friction_factor.setValue(1);
+		obj.rollspeed = props.globals.getNode("gear/gear[" ~ number ~"]/rollspeed-ms", 1);
+		obj.rollspeed.setValue(0);
+		obj.old_rollspeed = 0;
+#		print (obj.name, " ", number, " ", obj.tyresmoke.getValue()," ",obj.old_rollspeed);
+		return obj;
+	},
+
+	update: func {    # set the smoke value according to the conditions
+
+		var vert_speed = me.vertical_speed.getValue();
+		var groundspeed = me.speed.getValue();
+		var friction_factor = me.friction_factor.getValue();
+		var wow = me.wow.getValue();
+		var rollspeed = me.rollspeed.getValue();
+		var filtered_rollspeed = lp.filter(me.rollspeed.getValue());
+		
+		var diff_norm = 0;
+
+#       print (me.name, " rollspeed ", rollspeed, " filtered_rollspeed ",filtered_rollspeed);
+
+		diff = math.abs(rollspeed - filtered_rollspeed);
+
+		if (diff > 0)
+			diff_norm = diff/rollspeed;
+		else
+			diff_norm = 0;
+
+		if (wow == nil or diff_norm == nil or rollspeed == nil)
+			return;
+
+		if (wow and vert_speed < -0.05 and diff_norm > 0.05 
+				and friction_factor > 0.7 and groundspeed > 50){
+			me.tyresmoke.setValue(1);
+		}
+		else{
+			me.tyresmoke.setValue(0);
+		}
+
+#		print("updating ", me.name, " diff ", diff,
+#			 " diff_norm ", diff_norm, " ", me.tyresmoke.getValue());
+
+	 }, # end function
+
+}; #
+
+# =============================== end smoke stuff ================================
 
 
 # Fire it up

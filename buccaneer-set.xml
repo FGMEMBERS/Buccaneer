@@ -948,7 +948,7 @@ Ver 0.0.1
 	<!-- nasal stuff -->
 	<nasal>
 		<buccaneer>
-			<file>Aircraft/Buccaneer/Nasal/buccaneer-utils-new.nas</file>
+			<file>Aircraft/Buccaneer/Nasal/buccaneer-utils.nas</file>
 			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
 		</buccaneer>
 		<buccaneer-electrical>
