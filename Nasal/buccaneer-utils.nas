@@ -72,20 +72,23 @@ observer_headshake = nil;
 smoke_0 = nil;
 smoke_1 = nil;
 wing_blow = nil;
-tyresmoke_0 = nil;
-tyresmoke_1 = nil;
-tyresmoke_2 = nil;
+#tyresmoke_0 = nil;
+#tyresmoke_1 = nil;
+#tyresmoke_2 = nil;
 
 
 var old_n1 = 0;
 var time = 0;
 var dt = 0;
 var last_time = 0.0;
-var lp = aircraft.lowpass.new(2);
+
 var run_tyresmoke0 = 0;
 var run_tyresmoke1 = 0;
 var run_tyresmoke2 = 0;
-#var filtered_rollspeed = 0;
+
+var tyresmoke_0 = aircraft.tyresmoke.new(0);
+var tyresmoke_1 = aircraft.tyresmoke.new(1);
+var tyresmoke_2 = aircraft.tyresmoke.new(2);
 
 var xDivergence_damp = 0;
 var yDivergence_damp = 0;
@@ -98,8 +101,6 @@ var last_zDivergence = 0;
 var old_xDivergence_damp = 0;
 var old_yDivergence_damp = 0;
 var old_zDivergence_damp = 0;
-
-var static = 0;
 
 var lever_sum = 0;
 var direction = 0 ;
@@ -136,9 +137,9 @@ initialize = func {
 	smoke_0 = Smoke.new(0);
 	smoke_1 = Smoke.new(1);
 	wing_blow = WingBlow.new();
-	tyresmoke_0 = TyreSmoke.new(0);
-	tyresmoke_1 = TyreSmoke.new(1);
-	tyresmoke_2 = TyreSmoke.new(2);
+	var tyresmoke_0 = aircraft.tyresmoke.new(0);
+	var tyresmoke_1 = aircraft.tyresmoke.new(1);
+	var tyresmoke_2 = aircraft.tyresmoke.new(2);
 
 
 	#set listeners
@@ -692,7 +693,7 @@ Smoke = {
 # Class that specifies tyre smoke functions 
 #
 
-TyreSmoke = {
+var TyreSmoke = {
 	new : func (number,
 				){
 		var obj = {parents : [TyreSmoke] };
@@ -704,9 +705,10 @@ TyreSmoke = {
 		obj.speed = props.globals.getNode("velocities/groundspeed-kt", 1);
 		obj.friction_factor = props.globals.getNode("gear/gear[" ~ number ~"]/ground-friction-factor", 1);
 		obj.friction_factor.setValue(1);
-		obj.rollspeed = props.globals.getNode("gear/gear[" ~ number ~"]/rollspeed-ms", 1);
+		obj.rollspeed = props.globals.getNode("gear/gear["~ number ~"]/rollspeed-ms", 1);
 		obj.rollspeed.setValue(0);
-		obj.old_rollspeed = 0;
+		obj.lp = aircraft.lowpass.new(2);
+
 #		print (obj.name, " ", number, " ", obj.tyresmoke.getValue()," ",obj.old_rollspeed);
 		return obj;
 	},
@@ -718,7 +720,7 @@ TyreSmoke = {
 		var friction_factor = me.friction_factor.getValue();
 		var wow = me.wow.getValue();
 		var rollspeed = me.rollspeed.getValue();
-		var filtered_rollspeed = lp.filter(me.rollspeed.getValue());
+		var filtered_rollspeed = me.lp.filter(me.rollspeed.getValue());
 		
 		var diff_norm = 0;
 
