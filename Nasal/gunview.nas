@@ -9,8 +9,8 @@ var loop = func(id) {
 	settimer(func { loop(id) }, 0);
 }
 
-setlistener("/sim/current-view/view-number", func {
+setlistener("/sim/current-view/view-number", func(n) {
 	loopid += 1;
-	if (cmdarg().getValue() == gunview)
+	if (n.getValue() == gunview)
 		loop(loopid);
 }, 1);
