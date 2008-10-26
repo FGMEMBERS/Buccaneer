@@ -181,18 +181,16 @@
 		</offsets>
 	</model>
 
-
-
-	<!--	
 	<model>
-		<path>Aircraft/Hunter/Models/flaps.xml</path>
+		<path>Aircraft/Buccaneer/Instruments/stick.xml</path>
 		<offsets>
-			<x-m>-4.83</x-m>
-			<y-m>-0.201</y-m>
-			<z-m>0.342</z-m>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
 		</offsets>
 	</model>
 
+	<!--	
 	<model>
 		<path>Aircraft/Hunter/Models/turn.xml</path>
 		<name>Turn</name>
@@ -2730,7 +2728,7 @@
 	</model>
 
 	<model>
-		<path>Aircraft/Buccaneer/Models/Effects/tyre-smoke-nose.xml</path>
+		<path>Aircraft/Generic/Effects/tyre-smoke-nose.xml</path>
 		<name>tyre-smoke-n</name>
 		<offsets>
 			<x-m>3.53124</x-m>
@@ -2740,7 +2738,7 @@
 	</model>
 
 	<model>
-		<path>Aircraft/Buccaneer/Models/Effects/tyre-smoke-port.xml</path>
+		<path>Aircraft/Generic/Effects/tyre-smoke-port.xml</path>
 		<name>tyre-smoke-p</name>
 		<offsets>
 			<x-m>9.79934</x-m>
@@ -2750,7 +2748,7 @@
 	</model>
 	
 	<model>
-		<path>Aircraft/Buccaneer/Models/Effects/tyre-smoke-stbd.xml</path>
+		<path>Aircraft/Generic/Effects/tyre-smoke-stbd.xml</path>
 		<name>tyre-smoke-s</name>
 		<offsets>
 			<x-m>9.79934</x-m>
@@ -2759,6 +2757,46 @@
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Generic/Effects/rain-nose.xml</path>
+		<name>rain-n</name>
+		<offsets>
+			<x-m>3.53124</x-m>
+			<y-m>0</y-m>
+			<z-m>-2.01736</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Generic/Effects/rain-port.xml</path>
+		<name>rain-p</name>
+		<offsets>
+			<x-m>9.79934</x-m>
+			<y-m>-1.84531</y-m>
+			<z-m>-1.72734</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/Generic/Effects/rain-stbd.xml</path>
+		<name>rain-s</name>
+		<offsets>
+			<x-m>9.79934</x-m>
+			<y-m>1.84531</y-m>
+			<z-m>-1.72734</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Generic/Effects/rain-tail.xml</path>
+		<name>rain-n</name>
+		<offsets>
+			<x-m>20</x-m>
+			<y-m>0</y-m>
+			<z-m>-1.6</z-m>
+		</offsets>
+	</model>
+	
 	<!-- *** LoD for the whole model *** -->
 	<!--
 	<animation>
