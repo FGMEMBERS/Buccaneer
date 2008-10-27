@@ -80,10 +80,11 @@
 		<type>rotate</type>
 		<object-name>fna2-lever</object-name>
 		<property>controls/fuel/FNA-2</property>
+		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
-			<y>1</y>
+			<y>-1</y>
 			<z>0</z>
 		</axis>
 		<center>
@@ -109,10 +110,11 @@
 		<type>rotate</type>
 		<object-name>fna6-lever</object-name>
 		<property>controls/fuel/FNA-6</property>
+		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
-			<y>1</y>
+			<y>-1</y>
 			<z>0</z>
 		</axis>
 		<center>
@@ -138,10 +140,11 @@
 		<type>rotate</type>
 		<object-name>fna3-lever</object-name>
 		<property>controls/fuel/FNA-3</property>
+		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
-			<y>1</y>
+			<y>-1</y>
 			<z>0</z>
 		</axis>
 		<center>
@@ -167,10 +170,11 @@
 		<type>rotate</type>
 		<object-name>fna5-lever</object-name>
 		<property>controls/fuel/FNA-5</property>
+		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
-			<y>1</y>
+			<y>-1</y>
 			<z>0</z>
 		</axis>
 		<center>
