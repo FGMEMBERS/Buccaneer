@@ -403,7 +403,7 @@
 
 	<animation>
 		<type>select</type>
-		<object-name>Spine Assembly</object-name>
+		<object-name>Spine-Assmbly</object-name>
 		<object-name>Airbrake-Port</object-name>
 		<object-name>Airbrake-Stbd</object-name>
 		<object-name>Drag-Link-Port</object-name>
@@ -416,15 +416,25 @@
 		<object-name>Fuselage-Markings</object-name>
 		<condition>
 			<not>
-				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
-				</equals>
+				<property>sim/current-view/internal</property>
 			</not>
 		</condition>
 	</animation>
 
 	<animation>
+		<type>select</type>
+		<object-name>Gun-Camera</object-name>
+		<object-name>Fan-Port</object-name>
+		<object-name>Fan-Stbd</object-name>
+		<condition>
+			<not>
+				<property>sim/current-view/internal</property>
+			</not>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
 		<object-name>AHook-assmbly</object-name>
 		<object-name>Tail-Bumper</object-name>
 		<object-name>Pivot</object-name>
@@ -435,51 +445,38 @@
 		<object-name>Gear-Main-Stbd</object-name>
 		<object-name>Door-Main-Port</object-name>
 		<object-name>Door-Main-Stbd</object-name>
-		<object-name>Gun-Camera</object-name>
-		<condition>
-			<not>
-				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
-				</equals>
-			</not>
-		</condition>
-	</animation>
-
-	<animation>
 		<object-name>Wheel-Well-Front</object-name>
 		<object-name>Door-Front</object-name>
 		<object-name>Gear-Nose</object-name>
 		<object-name>Holdback</object-name>
-		<object-name>Fan-Port</object-name>
-		<object-name>Fan-Stbd</object-name>
-		<!--<object-name>Gear-Main-Port</object-name>
-		<object-name>Gear-Main-Stbd</object-name>
-		<object-name>Door-Main-Port</object-name>
-		<object-name>Door-Main-Stbd</object-name>
-		<object-name>Gun-Camera</object-name>-->
 		<condition>
 			<not>
-				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
-				</equals>
+				<property>sim/current-view/internal</property>
 			</not>
 		</condition>
 	</animation>
 
 	<animation>
-		<object-name>smoke-p</object-name>
-		<object-name>smoke-s</object-name>
-		<object-name>haze</object-name>
+		<type>select</type>
 		<object-name>Canopy-Side</object-name>
 		<object-name>Canopy-Side</object-name>
 		<object-name>Canopy-Fragments</object-name>
 		<condition>
 			<not>
+				<property>sim/current-view/internal</property>
+			</not>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>Screen-Port</object-name>
+		<object-name>Screen-Stbd</object-name>
+		<condition>
+			<not>
 				<equals>
-					<property>sim/current-view/view-number</property>
-					<value>0</value>
+					<property>/sim/current-view/name</property>
+					<value>Back Seat View</value>
 				</equals>
 			</not>
 		</condition>
