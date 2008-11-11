@@ -167,86 +167,7 @@ init_electrical = func {
 ##
 
 # 28VDC outputs
-	boost_pump_1_port = Output.new	("boost-pump",
-					"controls/fuel/tank/boost-pump",
-					1,
-					"28VDC",
-					29);
-	boost_pump_1_stbd = Output.new	("boost-pump-1",
-					"controls/fuel/tank[1]/boost-pump",
-					1,
-					"28VDC",
-					29);
-	boost_pump_2_port = Output.new	("boost-pump-2",
-					"controls/fuel/tank[4]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	boost_pump_2_stbd = Output.new	("boost-pump-3",
-					"controls/fuel/tank[5]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	boost_pump_3_port = Output.new	("boost-pump-4",
-					"controls/fuel/tank[6]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	boost_pump_3_stbd = Output.new	("boost-pump-5",
-					"controls/fuel/tank[7]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	boost_pump_4_port = Output.new	("boost-pump-6",
-					"controls/fuel/tank[8]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	boost_pump_4_stbd = Output.new	("boost-pump-7",
-					"controls/fuel/tank[9]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	boost_pump_pin_port = Output.new("boost-pump-8",
-					"controls/fuel/tank[10]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	boost_pump_pin_stbd = Output.new("boost-pump-9",
-					"controls/fuel/tank[11]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	auxiliary_pump_2_port = Output.new("auxiliary-pump-2",
-					"controls/fuel/tank[4]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	auxiliary_pump_2_stbd = Output.new("auxiliary-pump-3",
-					"controls/fuel/tank[5]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	auxiliary_pump_3_port = Output.new("auxiliary-pump-4",
-					"controls/fuel/tank[6]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	auxiliary_pump_3_stbd = Output.new("auxiliary-pump-5",
-					"controls/fuel/tank[7]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	auxiliary_pump_4_port = Output.new("auxiliary-pump-6",
-					"controls/fuel/tank[8]/boost-pump",
-					0,
-					"28VDC",
-					17);
-	auxiliary_pump_4_stbd = Output.new("auxiliary-pump-7",
-					"controls/fuel/tank[9]/boost-pump",
-					0,
-					"28VDC",
-					17);
+	
 	inverter_type_108_supply = Output.new("inverter-type-108",
 					"controls/electric/inverter",
 					1,
@@ -269,7 +190,12 @@ init_electrical = func {
 					7.5);	
 	cockpit_lighting = Output.new	("instrument-lighting",
 					"controls/lighting/instrument-lights",
-					1,
+					0.75,
+					"28VDC",
+					4.5);
+	panel_lighting = Output.new	("panel-floodlighting",
+					"controls/lighting/panel-floodlights",
+					0.1,
 					"28VDC",
 					4.5);
 	taxi_lighting = Output.new	("taxi-lights",
@@ -370,46 +296,6 @@ init_electrical = func {
 					
 # 24VDC - emergency outputs
 
-	boost_pump_3_port_mg = Output.new("boost-pump-emergency",
-					"controls/fuel/tank[6]/boost-pump",
-					1,
-					"28VDC-Emergency",
-					17);
-	boost_pump_3_stbd_mg = Output.new("boost-pump-emergency-1",
-					"controls/fuel/tank[7]/boost-pump",
-					1,
-					"28VDC-Emergency",
-					17);
-	auxiliary_pump_2_port_mg = Output.new("auxiliary-pump-emergency-1",
-					"controls/fuel/tank[4]/boost-pump[1]",
-					0,
-					"28VDC",
-					3.5);
-	auxiliary_pump_2_stbd_mg = Output.new("auxiliary-pump-emergency-2",
-					"controls/fuel/tank[5]/boost-pump[1]",
-					0,
-					"28VDC-Emergency",
-					3.5);
-	auxiliary_pump_3_port_mg = Output.new("auxiliary-pump-emergency-3",
-					"controls/fuel/tank[6]/boost-pump[1]",
-					0,
-					"28VDC-Emergency",
-					3.5);
-	auxiliary_pump_3_stbd_mg = Output.new("auxiliary-pump-emergency-4",
-					"controls/fuel/tank[7]/boost-pump[1]",
-					0,
-					"28VDC-Emergency",
-					3.5);
-	auxiliary_pump_4_port_mg = Output.new("auxiliary-pump-emergency-5",
-					"controls/fuel/tank[8]/boost-pump[1]",
-					0,
-					"28VDC-Emergency",
-					3.5);
-	auxiliary_pump_4_stbd_mg = Output.new("auxiliary-pump-emergency-6",
-					"controls/fuel/tank[9]/boost-pump[1]",
-					0,
-					"28VDC-Emergency",
-					3.5);
 	inverter_type_DA1_mg = Output.new("inverter-type-DA1",
 					,
 					,
@@ -644,7 +530,7 @@ Output = {
 		obj.prop = props.globals.getNode("systems/electrical/outputs", 1).getChild(prop,0,1);
 		if (control != nil){
 		obj.control = props.globals.getNode(control,1);
-		obj.control.setBoolValue(switch);
+		obj.control.setValue(switch);
 		} else {
 		obj.control = "";
 		}
@@ -660,7 +546,7 @@ Output = {
 	update : func (volts) {
 		if ( me.control != "" ) {
 			if (me.control.getValue()){
-				me.volts = volts;
+				me.volts = volts * me.control.getValue();
 				me.load = me.volts / me.resistance;
 			} else {
 				me.volts = 0;
@@ -939,6 +825,7 @@ update_electrical = func {
 ###
 # Setup a timer based call to initialized the electrical system as
 # soon as possible.
-settimer(init_electrical, 0);
+#settimer(init_electrical, 0);
+setlistener("/sim/signals/fdm-initialized",init_electrical);
 
 

@@ -1,0 +1,569 @@
+<?xml version="1.0"?>
+
+<!-- Buccaneer Autopilot Configuration -->
+
+<!-- Each component is evaluated in the order specified.  You can make up -->
+<!-- property names to pass the result of one component on to a subsequent -->
+<!-- component. -->
+
+
+<PropertyList>
+
+
+	<!-- =============================================================== -->
+	<!-- Auto Stab Modes                                                 -->
+	<!-- =============================================================== -->
+
+	<!-- Autostab Yaw Channel-->
+	<pid-controller>
+		<name>Yaw Damper High Speed (Master Reference Gyro based)</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/yaw-stab</prop>
+			<value>yaw-stab-high-speed</value>
+		</enable>
+		<input>
+			<prop>instrumentation/master-reference-gyro/indicated-hdg-rate-degps</prop>
+		</input>
+		<reference>
+			<value>0</value>
+		</reference>
+		<output>
+			<prop>controls/flight/rudder-autostab</prop>
+		</output>
+		<config>
+			<Kp>0.01</Kp>
+			<beta>-1</beta>
+			<alpha>0.1</alpha>
+			<gamma>0.0</gamma>
+			<Ti>10.0</Ti>
+			<Td>0.00001</Td>
+			<u_min>-0.3</u_min>
+			<u_max>0.3</u_max>
+		</config>
+	</pid-controller>
+
+	<!-- Autostab Pitch Channel -->
+	<pid-controller>
+		<name>Pitch Damper High Speed</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/pitch-stab</prop>
+			<value>pitch-stab-high-speed</value>
+		</enable>
+		<input>
+			<prop>instrumentation/master-reference-gyro/indicated-pitch-deg</prop>
+			<!--<prop>instrumentation/master-reference-gyro/indicated-pitch-rate-degps</prop>-->
+		</input>
+		<reference>
+			<value>0.05</value>
+			<!--<prop>autopilot/internal/pitch-filtered</prop>-->
+		</reference>
+		<output>
+			<prop>controls/flight/elevator-autostab</prop>
+		</output>
+		<config>
+			<Kp>-0.01</Kp>			<!-- proportional gain -->
+			<beta>1.0</beta>		<!-- input value weighing factor -->
+			<alpha>0.1</alpha>	<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>	<!-- input value weighing factor for -->
+													<!-- unfiltered derivative error -->
+			<Ti>5.0</Ti>				<!-- integrator time -->
+			<Td>0.1</Td>				<!-- derivator time -->
+			<u_min>-0.25</u_min>	<!-- minimum output clamp -->
+			<u_max>0.25</u_max>	<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- Autostab Roll Channel -->
+	<pid-controller>
+		<name>Roll Damper High Speed</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/roll-stab</prop>
+			<value>roll-stab-high-speed</value>
+		</enable>
+		<input>
+			<!--<prop>autopilot/internal/roll-deg-filtered</prop>-->
+			<!--<prop>instrumentation/master-reference-gyro/indicated-roll-rate-degps</prop>-->
+			<prop>instrumentation/master-reference-gyro/indicated-roll-deg</prop>
+		</input>
+		<reference>
+			<value>0</value>
+			<!--<prop>autopilot/internal/roll-deg-filtered</prop>-->
+		</reference>
+		<output>
+			<prop>controls/flight/aileron-autostab</prop>
+		</output>
+		<config>
+			<Kp>0.005</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>10.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-0.1</u_min>
+			<!-- minimum output clamp -->
+			<u_max>0.1</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- Autostab Yaw Channel-->
+	<pid-controller>
+		<name>Yaw Damper Approach (Master Reference Gyro based)</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/yaw-stab</prop>
+			<value>yaw-stab-approach</value>
+		</enable>
+		<input>
+			<prop>instrumentation/master-reference-gyro/indicated-hdg-rate-degps</prop>
+		</input>
+		<reference>
+			<value>0</value>
+		</reference>
+		<output>
+			<prop>controls/flight/rudder-autostab</prop>
+		</output>
+		<config>
+			<Kp>0.01</Kp>
+			<beta>-1</beta>
+			<alpha>0.1</alpha>
+			<gamma>0.0</gamma>
+			<Ti>10.0</Ti>
+			<Td>0.00001</Td>
+			<u_min>-0.3</u_min>
+			<u_max>0.3</u_max>
+		</config>
+	</pid-controller>
+
+	<!-- Autostab Pitch Channel -->
+	<pid-controller>
+		<name>Pitch Damper Approach</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/pitch-stab</prop>
+			<value>pitch-stab-approach</value>
+		</enable>
+		<input>
+			<prop>instrumentation/master-reference-gyro/indicated-pitch-deg</prop>
+			<!--<prop>instrumentation/master-reference-gyro/indicated-pitch-rate-degps</prop>-->
+		</input>
+		<reference>
+			<value>1.0</value>
+			<!--<prop>autopilot/internal/pitch-filtered</prop>-->
+		</reference>
+		<output>
+			<prop>controls/flight/elevator-autostab</prop>
+		</output>
+		<config>
+			<Kp>-0.02</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>5.0</Ti>
+			<!-- integrator time -->
+			<Td>0.1</Td>
+			<!-- derivator time -->
+			<u_min>-0.5</u_min>
+			<!-- minimum output clamp -->
+			<u_max>0.5</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- Autostab Roll Channel -->
+	<pid-controller>
+		<name>Roll Damper Approach</name>		
+		<enable>
+			<prop>autopilot/locks/roll-stab</prop>
+			<value>roll-stab-approach</value>
+		</enable>
+		<input>
+			<!--<prop>autopilot/internal/roll-deg-filtered</prop>-->
+			<!--<prop>instrumentation/master-reference-gyro/indicated-roll-rate-degps</prop>-->
+			<prop>instrumentation/master-reference-gyro/indicated-roll-deg</prop>
+		</input>
+		<reference>
+			<value>0</value>
+			<!--<prop>autopilot/internal/roll-deg-filtered</prop>-->
+		</reference>
+		<output>
+			<prop>controls/flight/aileron-autostab</prop>
+		</output>
+		<config>
+			<Kp>0.01</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>10.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-0.15</u_min>
+			<!-- minimum output clamp -->
+			<u_max>0.15</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- =============================================================== -->
+	<!-- Roll Axis Modes                                                 -->
+	<!-- =============================================================== -->
+
+	<!-- Heading Bug Hold.  2 stage cascade controller. -->
+
+	<!-- Stage #1 sets target roll based on diff between current heading -->
+	<!-- and heading bug. -->
+	<pid-controller>
+		<name>Heading Bug Hold (DG based) Stage 1</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/heading</prop>
+			<value>dg-heading-hold</value>
+		</enable>
+		<input>
+			<prop>instrumentation/master-reference-gyro/heading-bug-error-deg</prop>
+		</input>
+		<reference>
+			<value>0.0</value>
+		</reference>
+		<output>
+			<prop>autopilot/internal/target-roll-deg</prop>
+		</output>
+		<config>
+			<Kp>-8.0</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>4.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-30.0</u_min>
+			<!-- minimum output clamp -->
+			<u_max>30.0</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- Stage #2 drives the ailerons to achieve the desired roll deg. -->
+	<pid-controller>
+		<name>Heading Bug Hold (DG based) Stage 2</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/heading</prop>
+			<value>dg-heading-hold</value>
+		</enable>
+		<input>
+			<prop>instrumentation/master-reference-gyro/indicated-roll-deg</prop>
+		</input>
+		<reference>
+			<prop>autopilot/internal/target-roll-deg</prop>
+		</reference>
+		<output>
+			<prop>controls/flight/aileron-auto</prop>
+		</output>
+		<config>
+			<Kp>0.005</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>10.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-0.3</u_min>
+			<!-- minimum output clamp -->
+			<u_max>0.3</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- =============================================================== -->
+	<!-- Pitch Axis Modes                                                -->
+	<!-- =============================================================== -->
+
+	<!-- Stage #1 sets target rate of climb based on diff between current alt -->
+	<!-- and target altitude. -->
+	<pid-controller>
+		<name>Altitude Hold (Altimeter based) Stage 1</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/altitude</prop>
+			<value>altitude-hold-baro</value>
+		</enable>
+		<input>
+			<prop>instrumentation/altimeter/indicated-altitude-ft</prop>
+		</input>
+		<reference>
+			<prop>autopilot/settings/target-altitude-ft</prop>
+		</reference>
+		<output>
+			<prop>autopilot/internal/target-climb-rate-fps</prop>
+		</output>
+		<config>
+			<Kp>0.5</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.01</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>20.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-60.0</u_min>
+			<!-- minimum output clamp -->
+			<u_max>60.0</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- Stage #2 drives the elevator-trim to achieve the desired climb rate. -->
+	<pid-controller>
+		<name>Altitude Hold (Altimeter based) Stage 2</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/altitude</prop>
+			<value>altitude-hold-baro</value>
+		</enable>
+		<input>
+			<prop>velocities/vertical-speed-fps</prop>
+		</input>
+		<reference>
+			<prop>autopilot/internal/target-climb-rate-fps</prop>
+		</reference>
+		<output>
+			<prop>controls/flight/elevator-auto</prop>
+		</output>
+		<config>
+			<Kp>-0.005</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>20.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-1.0</u_min>
+			<!-- minimum output clamp -->
+			<u_max>1.0</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- AGL hold.  2 stage cascade controller. -->
+	<filter>
+		<name>RadAlt filter</name>
+		<debug>false</debug>
+		<type>exponential</type>
+		<input>instrumentation/radar-altimeter/radar-altitude-ft</input>
+		<output>autopilot/internal/radar-altitude-ft-filtered</output>
+		<filter-time>0.001</filter-time>
+	</filter>
+
+	<!-- Stage #1 sets target rate of climb based on diff between current agl -->
+	<!-- and target agl. -->
+	<pid-controller>
+		<name>AGL Hold (RadAlt based) Stage 1</name>
+		<debug>true</debug>
+		<enable>
+			<prop>autopilot/locks/altitude</prop>
+			<value>altitude-hold-radio</value>
+		</enable>
+		<input>
+			<prop>autopilot/internal/radar-altitude-ft-filtered</prop>
+		</input>
+		<reference>
+			<prop>autopilot/settings/target-agl-ft</prop>
+		</reference>
+		<output>
+			<prop>autopilot/internal/target-climb-rate-fps</prop>
+		</output>
+		<config>
+			<Kp>0.2</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.01</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>2.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-100.0</u_min>
+			<!-- minimum output clamp -->
+			<u_max>200.0</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- Stage #2 drives the elevator-trim to achieve the desired climb rate. -->
+	<pid-controller>
+		<name>Altitude Hold (RadAlt based) Stage 2</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/altitude</prop>
+			<value>altitude-hold-radio</value>
+		</enable>
+		<input>
+			<prop>velocities/vertical-speed-fps</prop>
+		</input>
+		<reference>
+			<prop>autopilot/internal/target-climb-rate-fps</prop>
+		</reference>
+		<output>
+			<prop>controls/flight/elevator-auto</prop>
+		</output>
+		<config>
+			<Kp>-0.005</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>20.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-1.0</u_min>
+			<!-- minimum output clamp -->
+			<u_max>1.0</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- =============================================================== -->
+	<!-- Velocity Modes                                                  -->
+	<!-- =============================================================== -->
+
+
+	<!-- ==========================================================-->
+	<!-- Custom Controllers -->
+	<!-- ==========================================================-->
+
+	<!--
+			Modified Altitude hold.  2 stage cascade controller.
+			Mach lock
+			Stage #1 sets target rate of climb based on diff between
+			current mach and target mach.
+-->
+	<pid-controller>
+		<name>Mach Lock Climb Stage 1</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/altitude</prop>
+			<value>mach-climb</value>
+		</enable>
+		<input>
+			<prop>autopilot/settings/target-mach</prop>
+		</input>
+		<reference>
+			<prop>velocities/mach</prop>
+		</reference>
+		<output>
+			<prop>autopilot/internal/target-climb-rate-fps</prop>
+		</output>
+		<config>
+			<Kp>6400.0</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.01</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>30.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-200.0</u_min>
+			<!-- minimum output clamp -->
+			<u_max>200.0</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+	<!-- Stage #2 drives the elevator-trim to achieve the desired climb rate. -->
+	<pid-controller>
+		<name>Mach lock Climb Stage 2</name>
+		<debug>false</debug>
+		<enable>
+			<prop>autopilot/locks/altitude</prop>
+			<value>mach-climb</value>
+		</enable>
+		<input>
+			<prop>velocities/vertical-speed-fps</prop>
+		</input>
+		<reference>
+			<prop>autopilot/internal/target-climb-rate-fps</prop>
+		</reference>
+		<output>
+			<prop>controls/flight/elevator-auto</prop>
+		</output>
+		<config>
+			<Kp>-0.0015</Kp>
+			<!-- proportional gain -->
+			<beta>1.0</beta>
+			<!-- input value weighing factor -->
+			<alpha>0.1</alpha>
+			<!-- low pass filter weighing factor -->
+			<gamma>0.0</gamma>
+			<!-- input value weighing factor for -->
+			<!-- unfiltered derivative error -->
+			<Ti>30.0</Ti>
+			<!-- integrator time -->
+			<Td>0.00001</Td>
+			<!-- derivator time -->
+			<u_min>-1.0</u_min>
+			<!-- minimum output clamp -->
+			<u_max>1.0</u_max>
+			<!-- maximum output clamp -->
+		</config>
+	</pid-controller>
+
+</PropertyList>

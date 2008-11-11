@@ -22,8 +22,8 @@ Ver 0.0.1
 		<fuel-fraction>1.0</fuel-fraction>
 		<systems>
 			<autopilot>
-				<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>
-				<!--<path>Aircraft/Buccaneer/Systems/autopilot.xml</path>-->
+				<!--<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>-->
+				<path>Aircraft/Buccaneer/Systems/buccaneer-autopilot.xml</path>
 			</autopilot>
 			<electrical>
 				<path></path>
@@ -95,6 +95,9 @@ Ver 0.0.1
 				</config>
 				<controls>
 					<recuperator_check_safety type="float">0</recuperator_check_safety>
+					<autostab-yaw type="int">-1</autostab-yaw>
+					<autostab-roll type="int">-1</autostab-roll>
+					<autostab-pitch type="int">-1</autostab-pitch>
 				</controls>
 				<config>
 					<show-pilot type="bool">true</show-pilot>
@@ -499,18 +502,24 @@ Ver 0.0.1
 		</fuel>
 		<lighting>
 			<navigation-lights type="bool">true</navigation-lights>
-			<instrument-lights type="bool">true</instrument-lights>
+			<instrument-lights type="double">0.75</instrument-lights>
+			<panel-floodlights type="double">0.3</panel-floodlights>
 		</lighting>
 		<switches>
 			<auto-stabs>
-				<yaw-channel>true</yaw-channel>
-				<pitch-channel>false</pitch-channel>
-				<roll-channel>false</roll-channel>
+				<yaw-channel type="int">-1</yaw-channel>
+				<pitch-channel type="int">-1</pitch-channel>
+				<roll-channel type="int">-1</roll-channel>
 			</auto-stabs>
 		</switches>
 	</controls>
-
-
+	<autopilot>
+		<locks>
+			<yaw-stab type="string">yaw-stab-hs</yaw-stab>
+			<pitch-stab type="string">pitch-stab-hs</pitch-stab>
+			<roll-stab type="string">roll-stab-hs</roll-stab>
+		</locks>
+	</autopilot>
 
 	<!-- hsi heading bug and source select-->
 	<instrumentation>
