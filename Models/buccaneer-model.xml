@@ -130,6 +130,16 @@
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/stbd_coaming_panel.xml</path>
+		<offsets>
+			<x-m>3.556</x-m>
+			<y-m>0.311199</y-m>
+			<z-m>0.785</z-m>
+			<heading-deg>-40</heading-deg>
+		</offsets>
+	</model>
+
 	<!-- *********** Throttle Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/throttle_panel.xml</path>
@@ -467,7 +477,7 @@
 			</not>
 		</condition>
 	</animation>
-	
+
 	<animation>
 		<type>select</type>
 		<object-name>Screen-Port</object-name>
@@ -488,15 +498,23 @@
 	</animation>
 
 	<!-- **************************** Pilot ******************************* -->
-	<!--
-	-->
 	<!--  conceal Pilot if user so chooses -->
 	<animation>
 		<type>select</type>
 		<object-name>Pilot</object-name>
 		<object-name>Parachute-Harness</object-name>
 		<condition>
-			<property>/sim/model/buccaneer/config/show-pilot</property>
+			<or>
+				<not>
+					<property>/sim/model/buccaneer/config/show-pilot</property>
+				</not>
+				<not>
+					<equals>
+						<property>/sim/current-view/name</property>
+						<value>Cockpit View</value>
+					</equals>
+				</not>
+			</or>
 		</condition>
 	</animation>
 
@@ -2743,7 +2761,7 @@
 			<z-m>-1.72734</z-m>
 		</offsets>
 	</model>
-	
+
 	<model>
 		<path>Aircraft/Generic/Effects/tyre-smoke-stbd.xml</path>
 		<name>tyre-smoke-s</name>
@@ -2773,7 +2791,7 @@
 			<z-m>-1.72734</z-m>
 		</offsets>
 	</model>
-	
+
 	<model>
 		<path>Aircraft/Generic/Effects/rain-stbd.xml</path>
 		<name>rain-s</name>
@@ -2793,7 +2811,7 @@
 			<z-m>-1.6</z-m>
 		</offsets>
 	</model>
-	
+
 	<!-- *** LoD for the whole model *** -->
 	<!--
 	<animation>
