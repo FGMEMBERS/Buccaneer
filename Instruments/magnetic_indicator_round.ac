@@ -1,10 +1,14 @@
 AC3Db
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0 0 0  shi 10  trans 0
 OBJECT world
+kids 1
+OBJECT group
+name "panel-lighting-group"
+loc -4.2414e-005 0.00218083 0.00470472
 kids 2
 OBJECT poly
 name "ball"
-loc 0.000307232 0 0
+loc 0.000349646 -0.00218083 -0.00470472
 texture "mag_indicator_round.png"
 crease 45.000000
 numvert 79
@@ -883,7 +887,7 @@ refs 3
 kids 0
 OBJECT poly
 name "housing"
-loc -0.00039206 0.00436166 0.00940943
+loc -0.000349646 0.00218083 0.00470472
 texture "mag_indicator_housing_black.png"
 crease 45.000000
 numvert 76

@@ -20,14 +20,15 @@
 		</condition>
 	</animation>
 
+	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
-		<object-name>body</object-name>
+		<object-name>panel-lighting-group</object-name>
 		<emission>
-			<factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
-			<red>0.75</red>
-			<green>0.25</green>
-			<blue>0.25</blue>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
 		</emission>
 	</animation>
 

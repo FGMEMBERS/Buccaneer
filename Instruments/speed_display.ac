@@ -2,55 +2,7 @@ AC3Db
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0 0 0  shi 10  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 10  trans 0
 OBJECT world
-kids 6
-OBJECT poly
-name "needle"
-loc -0.00175545 -7.45058e-009 0.0907822
-texture "speed_display_scale.png"
-crease 45.000000
-numvert 4
-0 0.000926032 0.0575166
-0 -0.000926018 0.0575166
-0 -0.000926018 0.045823
-0 0.000926033 0.045823
-numsurf 2
-SURF 0x10
-mat 0
-refs 3
-3 0.361108 0.61713
-1 0.355878 0.826351
-2 0.355878 0.61713
-SURF 0x10
-mat 0
-refs 3
-1 0.355878 0.826351
-3 0.361108 0.61713
-0 0.361108 0.826351
-kids 0
-OBJECT poly
-name "scale_background"
-loc -0.000438111 0.0126494 0
-texture "speed_display_scale.png"
-crease 45.000000
-numvert 4
--0.00138025 -0.029135 -0.147997
--0.00138025 0.00667837 -0.147997
--0.00138025 -0.029135 0.144303
--0.00138025 0.00667837 0.144303
-numsurf 2
-SURF 0x0
-mat 1
-refs 3
-1 0.507424 0.894888
-2 0.475288 0.879404
-0 0.507424 0.879404
-SURF 0x0
-mat 1
-refs 3
-2 0.475288 0.879404
-1 0.507424 0.894888
-3 0.475288 0.894888
-kids 0
+kids 2
 OBJECT poly
 name "housing"
 loc 0 -0.0613607 0.118605
@@ -539,9 +491,37 @@ refs 3
 39 0.998634 0.940461
 34 0.946887 0.730134
 kids 0
+OBJECT group
+name "lighting-group"
+loc -0.00130039 0.00109813 0.00061567
+kids 3
+OBJECT poly
+name "scale_background"
+loc -0.000517974 0.00247757 0.00123134
+texture "speed-bar.png"
+crease 45.000000
+numvert 4
+0 -0.0100923 -0.146448
+0 0.00294087 -0.146448
+0 -0.0100923 0.136829
+0 0.00294087 0.136829
+numsurf 2
+SURF 0x0
+mat 1
+refs 3
+1 0.5 0.794
+2 1 0.294
+0 0.5 0.294
+SURF 0x0
+mat 1
+refs 3
+2 1 0.294
+1 0.5 0.794
+3 1 0.794
+kids 0
 OBJECT poly
 name "mach_scale"
-loc -0.00114065 -0.0105155 -4.65661e-010
+loc 0.000159736 -0.0116136 -0.00061567
 texture "speed_display_scale.png"
 crease 45.000000
 numvert 4
@@ -565,7 +545,7 @@ refs 3
 kids 0
 OBJECT poly
 name "fixed_scale"
-loc -0.000942147 0.0102342 -4.65661e-010
+loc 0.000358239 0.00913607 -0.00061567
 texture "speed_display_scale.png"
 crease 45.000000
 numvert 6
@@ -600,28 +580,4 @@ refs 3
 1 0.000894001 0.592581
 2 0.999037 1.07349
 0 0.000894001 1.07349
-kids 0
-OBJECT poly
-name "needle"
-loc -0.00144695 0 0.136752
-texture "speed_display_scale.png"
-crease 45.000000
-numvert 4
-0 -0.0058468 -0.000926033
-0 -0.0058468 0.000926018
-0 0.0058468 0.000926018
-0 0.0058468 -0.000926033
-numsurf 2
-SURF 0x10
-mat 0
-refs 3
-3 0.361108 0.826351
-1 0.355878 0.61713
-0 0.361108 0.61713
-SURF 0x10
-mat 0
-refs 3
-1 0.355878 0.61713
-3 0.361108 0.826351
-2 0.355878 0.826351
 kids 0

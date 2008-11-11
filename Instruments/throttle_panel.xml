@@ -103,18 +103,27 @@
 	<!-- Tailplane Position -->
 	<animation>
 		<condition>
-				<greater-than>
+			<greater-than>
 				<property>systems/electrical/outputs/flight-instruments</property>
 				<value>113</value>
-				</greater-than>
+			</greater-than>
 		</condition>
 		<type>rotate</type>
 		<object-name>tailplane_pointer</object-name>
 		<property>surface-positions/elevator-pos-norm</property>
 		<interpolation>
-			<entry><ind>-1</ind><dep>130</dep></entry>
-			<entry><ind>0</ind><dep>0</dep></entry>
-			<entry><ind>1</ind><dep>-50</dep></entry>
+			<entry>
+				<ind>-1</ind>
+				<dep>130</dep>
+			</entry>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>-50</dep>
+			</entry>
 		</interpolation>
 		<axis>
 			<x1-m>-0.351192</x1-m>
@@ -134,10 +143,10 @@
 	<!-- Rudder Trim -->
 	<animation>
 		<condition>
-				<greater-than>
+			<greater-than>
 				<property>systems/electrical/outputs/flight-instruments</property>
 				<value>113</value>
-				</greater-than>
+			</greater-than>
 		</condition>
 		<type>rotate</type>
 		<object-name>rudder_trim_needle</object-name>
@@ -158,10 +167,10 @@
 	<!-- Aileron Trim -->
 	<animation>
 		<condition>
-				<greater-than>
+			<greater-than>
 				<property>systems/electrical/outputs/flight-instruments</property>
 				<value>113</value>
-				</greater-than>
+			</greater-than>
 		</condition>
 		<type>rotate</type>
 		<object-name>aileron_trim_needle</object-name>
@@ -184,10 +193,10 @@
 		<type>select</type>
 		<object-name>blind-off</object-name>
 		<condition>
-				<less-than>
+			<less-than>
 				<property>systems/electrical/outputs/flight-instruments</property>
 				<value>113</value>
-				</less-than>
+			</less-than>
 		</condition>
 	</animation>
 
@@ -196,9 +205,18 @@
 		<object-name>blind1</object-name>
 		<property>sim/model/buccaneer/armament/bomb-door-pos</property>
 		<interpolation>
-			<entry><ind>0</ind><dep>-120</dep></entry>
-			<entry><ind>0.01</ind><dep>0</dep></entry>
-			<entry><ind>1</ind><dep>120</dep></entry>
+			<entry>
+				<ind>0</ind>
+				<dep>-120</dep>
+			</entry>
+			<entry>
+				<ind>0.01</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>120</dep>
+			</entry>
 		</interpolation>
 		<axis>
 			<x1-m>-0.208352</x1-m>
@@ -214,9 +232,18 @@
 		<object-name>blind2</object-name>
 		<property>sim/model/buccaneer/armament/bomb-door-pos</property>
 		<interpolation>
-			<entry><ind>0</ind><dep>-120</dep></entry>
-			<entry><ind>0.01</ind><dep>0</dep></entry>
-			<entry><ind>1</ind><dep>120</dep></entry>
+			<entry>
+				<ind>0</ind>
+				<dep>-120</dep>
+			</entry>
+			<entry>
+				<ind>0.01</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>120</dep>
+			</entry>
 		</interpolation>
 		<axis>
 			<x1-m>-0.208352</x1-m>
@@ -232,9 +259,18 @@
 		<object-name>blind3</object-name>
 		<property>sim/model/buccaneer/armament/bomb-door-pos</property>
 		<interpolation>
-			<entry><ind>0</ind><dep>-120</dep></entry>
-			<entry><ind>0.01</ind><dep>0</dep></entry>
-			<entry><ind>1</ind><dep>120</dep></entry>
+			<entry>
+				<ind>0</ind>
+				<dep>-120</dep>
+			</entry>
+			<entry>
+				<ind>0.01</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>120</dep>
+			</entry>
 		</interpolation>
 		<axis>
 			<x1-m>-0.208352</x1-m>
@@ -250,9 +286,18 @@
 		<object-name>blind4</object-name>
 		<property>sim/model/buccaneer/armament/bomb-door-pos</property>
 		<interpolation>
-			<entry><ind>0</ind><dep>-120</dep></entry>
-			<entry><ind>0.01</ind><dep>0</dep></entry>
-			<entry><ind>1</ind><dep>120</dep></entry>
+			<entry>
+				<ind>0</ind>
+				<dep>-120</dep>
+			</entry>
+			<entry>
+				<ind>0.01</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>120</dep>
+			</entry>
 		</interpolation>
 		<axis>
 			<x1-m>-0.208352</x1-m>
@@ -273,9 +318,81 @@
 			<button>0</button>
 			<repeatable>false</repeatable>
 			<binding>
+				<condition>
+					<greater-than>
+						<property>sim/model/buccaneer/controls/autopilot-selector</property>
+						<value>0</value>
+					</greater-than>
+				</condition>
 				<command>property-assign</command>
 				<property>controls/autoflight/autopilot/engage</property>
 				<value type="bool">1</value>
+			</binding>
+			<binding>
+				<condition>
+					<equals>
+						<property>sim/model/buccaneer/controls/autopilot-selector</property>
+						<value>1</value>
+					</equals>
+				</condition>
+				<command>property-assign</command>
+				<property>autopilot/locks/altitude</property>
+				<value type="string">mach-climb</value>
+			</binding>
+			<binding>
+				<condition>
+					<equals>
+						<property>sim/model/buccaneer/controls/autopilot-selector</property>
+						<value>1</value>
+					</equals>
+				</condition>
+				<command>property-assign</command>
+				<property>/autopilot/settings/target-mach</property>
+				<property>velocities/mach</property>
+			</binding>
+			<binding>
+				<condition>
+					<equals>
+						<property>sim/model/buccaneer/controls/autopilot-selector</property>
+						<value>2</value>
+					</equals>
+				</condition>
+				<command>property-assign</command>
+				<property>autopilot/locks/altitude</property>
+				<value>altitude-hold-baro</value>
+			</binding>
+			<binding>
+				<condition>
+					<equals>
+						<property>sim/model/buccaneer/controls/autopilot-selector</property>
+						<value>2</value>
+					</equals>
+				</condition>
+				<command>property-assign</command>
+				<property>autopilot/settings/target-altitude-ft</property>
+				<property>instrumentation/altimeter/indicated-altitude-ft</property>
+			</binding>
+			<binding>
+				<condition>
+					<equals>
+						<property>sim/model/buccaneer/controls/autopilot-selector</property>
+						<value>3</value>
+					</equals>
+				</condition>
+				<command>property-assign</command>
+				<property>autopilot/locks/altitude</property>
+				<value>altitude-hold-radio</value>
+			</binding>
+			<binding>
+				<condition>
+					<equals>
+						<property>sim/model/buccaneer/controls/autopilot-selector</property>
+						<value>3</value>
+					</equals>
+				</condition>
+				<command>property-assign</command>
+				<property>autopilot/settings/target-agl-ft</property>
+				<property>instrumentation/radar-altimeter/radar-altitude-ft</property>
 			</binding>
 		</action>
 	</animation>
@@ -376,6 +493,9 @@
 			<button>0</button>
 			<repeatable>false</repeatable>
 			<binding>
+				<condition>
+					<property>controls/autoflight/autopilot/engage</property>
+				</condition>
 				<command>property-cycle</command>
 				<property>autopilot/locks/heading</property>
 				<value>dg-heading-hold</value>
@@ -386,6 +506,21 @@
 				<property>sim/model/buccaneer/controls/ap-heading-select</property>
 				<value>1</value>
 				<value>0</value>
+			</binding>
+			<binding>
+				<command>property-cycle</command>
+				<property>controls/flight/aileron-autostab</property>
+				<value></value>
+				<value>0</value>
+			</binding>
+			<binding>
+				<condition>
+					<property>controls/autoflight/autopilot/engage</property>
+				</condition>
+				<command>property-cycle</command>
+				<prop>/autopilot/locks/roll-stab</prop>
+				<value>roll-stab-high-speed</value>
+				<value></value>
 			</binding>
 		</action>
 	</animation>
@@ -424,8 +559,20 @@
 	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
+		<object-name>panel-lighting-group</object-name>
 		<emission>
-			<factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 			<red>0.03125</red>
 			<green>0.0089</green>
 			<blue>0.0089</blue>

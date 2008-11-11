@@ -57,7 +57,30 @@
 		</transform>
 	</animation>
 
+	<!-- Panel Lighting -->
 	<animation>
+		<type>material</type>
+		<object-name>panel-lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+	
+	<!--<animation>
 		<type>material</type>
 		<emission>
 			<factor-prop>sim/model/buccaneer/controls/ILS_day_night_switch</factor-prop>
@@ -65,7 +88,8 @@
 			<green>0.0089</green>
 			<blue>0.0089</blue>
 		</emission>
-	</animation>
+	</animation>-->
+
 
 	<!-- *** LoD *** -->
 	<animation>

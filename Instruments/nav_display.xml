@@ -3,9 +3,9 @@
 <!-- Nav Display -->
 
 <PropertyList>
-	
+
 	<path>nav_display.ac</path>
-	
+
 	<animation>
 		<condition>
 			<not>
@@ -13,7 +13,55 @@
 			</not>
 		</condition>
 		<type>rotate</type>
-		<object-name>mag_compass_card</object-name>
+		<property>instrumentation/master-reference-gyro/indicated-hdg-deg</property>
+		<object-name>compass_card</object-name>
+		<object-name>heading_pointer</object-name>
+		<object-name>disk-dg</object-name>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>360</ind>
+				<dep>360</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>disk-compass</object-name>
+		<condition>
+			<property>instrumentation/heading-indicator/heading-source</property>
+		</condition>
+	</animation>
+	<!--
+	<animation>
+		<type>select</type>
+		<object-name>compass_DG_flag</object-name>
+		<condition>
+			<not>
+				<property>instrumentation/heading-indicator/heading-source</property>
+			</not>
+		</condition>
+	</animation>
+-->
+	<!--<animation>
+		<condition>
+			<not>
+				<property>sim/model/buccaneer/controls/compass_lock</property>
+			</not>
+		</condition>
+		<type>rotate</type>
+		<object-name>dg_compass_card</object-name>
+		<object-name>heading_pointer1</object-name>
+		<object-name>disk-dg</object-name>
 		<property>instrumentation/master-reference-gyro/indicated-hdg-deg</property>
 		<interpolation>
 			<entry>
@@ -30,54 +78,62 @@
 			<y>0</y>
 			<z>0</z>
 		</axis>
-	</animation>
-	
-	<animation>
-		<type>select</type>
-		<object-name>mag_compass_card</object-name>
-		<condition>
-			<property>instrumentation/heading-indicator/heading-source</property>
-		</condition>
-	</animation>
-<!--
-	<animation>
-		<type>select</type>
-		<object-name>compass_DG_flag</object-name>
-		<condition>
-			<not>
-				<property>instrumentation/heading-indicator/heading-source</property>
-			</not>
-		</condition>
-	</animation>
--->
-	<animation>
-		<condition>
-			<not>
-				<property>sim/model/buccaneer/controls/compass_lock</property>
-			</not>
-		</condition>
-		<type>rotate</type>
-		<object-name>dg_compass_card</object-name>
-		<property>instrumentation/heading-indicator-dg/indicated-heading-deg</property>
-		<interpolation>
-			<entry>
-				<ind>0</ind>
-				<dep>0</dep>
-			</entry>
-			<entry>
-				<ind>360</ind>
-				<dep>360</dep>
-			</entry>
-		</interpolation>
+	</animation>-->
+
+	<!--<animation>
+		<type>texrotate</type>
+		<object-name>disk-dg</object-name>
+		<property>instrumentation/master-reference-gyro/indicated-hdg-deg</property>
+		<factor>1</factor>
+		<min>-360.0</min>
+		<max>360.0</max>
+		<center>
+			<x>0.5</x>
+			<y>0.5</y>
+		</center>
 		<axis>
-			<x>1</x>
+			<x>0</x>
 			<y>0</y>
-			<z>0</z>
+			<z>1</z>
 		</axis>
+	</animation>-->
+
+	<animation>
+		<type>texmultiple</type>
+		<object-name>disk-dg</object-name>
+		<transform>
+			<property>instrumentation/tacan/indicated-distance-nm</property>
+			<subtype>textranslate</subtype>
+			<factor>0.003571</factor>
+			<max>0.425</max>
+			<min>-0.425</min>
+			<axis>
+				<x>0</x>
+				<y>1</y>
+				<z>0</z>
+			</axis>
+		</transform>
+		<transform>
+			<property>instrumentation/tacan/indicated-bearing-true-deg</property>
+			<subtype>texrotate</subtype>
+			<factor>1</factor>
+			<min>-360</min>
+			<max>360.0</max>
+			<center>
+				<x>0.5</x>
+				<y>0.5</y>
+			</center>
+			<axis>
+				<x>0</x>
+				<y>0</y>
+				<z>1</z>
+			</axis>
+		</transform>
 	</animation>
+
 	<animation>
 		<type>select</type>
-		<object-name>dg_compass_card</object-name>
+		<object-name>disk-dg</object-name>
 		<condition>
 			<not>
 				<property>instrumentation/heading-indicator/heading-source</property>
@@ -98,7 +154,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>heading_pointer</object-name>
-		<property>instrumentation/heading-indicator/heading-bug-deg</property>
+		<property>autopilot/settings/heading-bug-deg</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
@@ -125,7 +181,7 @@
 			<repeatable>true</repeatable>
 			<binding>
 				<command>property-adjust</command>
-				<property>instrumentation/heading-indicator/heading-bug-deg</property>
+				<property>autopilot/settings/heading-bug-deg</property>
 				<step>5</step>
 				<min>0</min>
 				<max>359</max>
@@ -142,7 +198,7 @@
 			<repeatable>true</repeatable>
 			<binding>
 				<command>property-adjust</command>
-				<property>instrumentation/heading-indicator/heading-bug-deg</property>
+				<property>autopilot/settings/heading-bug-deg</property>
 				<step>-5</step>
 				<min>0</min>
 				<max>359</max>
@@ -150,11 +206,11 @@
 			</binding>
 		</action>
 	</animation>
-	
+
 	<animation>
 		<type>rotate</type>
 		<object-name>hdg_knob</object-name>
-		<property>instrumentation/heading-indicator/heading-bug-deg</property>
+		<property>autopilot/settings/heading-bug-deg</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
@@ -178,7 +234,7 @@
 	</animation>
 
 	<!-- DG select button -->
-	
+
 	<animation>
 		<type>pick</type>
 		<object-name>dg_select</object-name>
@@ -188,6 +244,12 @@
 			<binding>
 				<command>property-cycle</command>
 				<property>instrumentation/heading-indicator/heading-source</property>
+				<value>0</value>
+				<value>1</value>
+			</binding>
+			<binding>
+				<command>property-cycle</command>
+				<property>instrumentation/master-reference-gyro/heading-source</property>
 				<value>0</value>
 				<value>1</value>
 			</binding>
@@ -248,9 +310,22 @@
 	<!-- TACAN Range -->
 	<animation>
 		<type>textranslate</type>
-		<object-name>distance_1</object-name>
+		<object-name>distance_100</object-name>
 		<property>instrumentation/tacan/indicated-distance-nm</property>
-		<factor>0.1</factor>
+		<factor>0.001</factor>
+		<step>100</step>
+		<scroll>1</scroll>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>textranslate</type>
+		<object-name>distance_10</object-name>
+		<property>instrumentation/tacan/indicated-distance-nm</property>
+		<factor>0.01</factor>
 		<step>10</step>
 		<scroll>1</scroll>
 		<axis>
@@ -261,20 +336,10 @@
 	</animation>
 	<animation>
 		<type>textranslate</type>
-		<object-name>distance_2</object-name>
+		<object-name>distance_1</object-name>
 		<property>instrumentation/tacan/indicated-distance-nm</property>
-		<factor>1</factor>
-		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-	<animation>
-		<type>textranslate</type>
-		<object-name>distance_3</object-name>
-		<property>instrumentation/tacan/indicated-distance-nm</property>
-		<factor>10</factor>
+		<factor>0.1</factor>
+		<step>1</step>
 		<axis>
 			<x>0</x>
 			<y>1</y>
@@ -283,18 +348,29 @@
 	</animation>
 
 	<!-- Panel Lighting -->
-	
+
 	<animation>
 		<type>material</type>
+		<object-name>panel-lighting-group</object-name>
 		<emission>
-			<factor-prop>sim/model/buccaneer/controls/ILS_day_night_switch</factor-prop>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
 			<red>0.03125</red>
 			<green>0.0089</green>
 			<blue>0.0089</blue>
 		</emission>
 	</animation>
 
-
+	<!-- Instrument Lighting -->
+	<animation>
+		<type>material</type>
+		<object-name>lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
 
 
 	<!-- Flags are always lit so long as MRG power available -->
