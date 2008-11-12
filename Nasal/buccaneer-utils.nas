@@ -116,21 +116,21 @@ initialize = func {
 
 	# initialise dialogs 
 	aircraft.data.add("sim/model/formation/variant");
-	formation_dialog = gui.OverlaySelector.new("Select Formation",
-		"Aircraft/Buccaneer/Formations",
-		"sim/model/formation/variant", nil, func(no) {
-			formation_variant_Node.setIntValue(no);
-			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
-			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
-			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
-			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
-			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
-			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
-			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
-			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
-			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
-		}
-	);
+#	formation_dialog = gui.OverlaySelector.new("Select Formation",
+#		"Aircraft/Buccaneer/Formations",
+#		"sim/model/formation/variant", nil, func(no) {
+#			formation_variant_Node.setIntValue(no);
+#			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
+#			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
+#			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
+#			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
+#			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
+#			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
+#			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
+#			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
+#			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
+#		}
+#	);
 	
 	aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 		"sim/model/livery/variant",
