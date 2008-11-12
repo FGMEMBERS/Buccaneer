@@ -5939,7 +5939,6 @@ kids 0
 OBJECT poly
 name "backing_box"
 loc 0 0.00364768 -0.0390823
-texture "mag-indicator-ap.png"
 crease 45.000000
 numvert 8
 -3.45989e-012 0.00761602 -0.00761602
