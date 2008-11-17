@@ -95,9 +95,9 @@ Ver 0.0.1
 				</config>
 				<controls>
 					<recuperator_check_safety type="float">0</recuperator_check_safety>
-					<autostab-yaw type="int">-1</autostab-yaw>
-					<autostab-roll type="int">-1</autostab-roll>
-					<autostab-pitch type="int">-1</autostab-pitch>
+					<autostab-yaw type="int">0</autostab-yaw>
+					<autostab-roll type="int">0</autostab-roll>
+					<autostab-pitch type="int">0</autostab-pitch>
 				</controls>
 				<config>
 					<show-pilot type="bool">true</show-pilot>
@@ -507,17 +507,17 @@ Ver 0.0.1
 		</lighting>
 		<switches>
 			<auto-stabs>
-				<yaw-channel type="int">-1</yaw-channel>
-				<pitch-channel type="int">-1</pitch-channel>
-				<roll-channel type="int">-1</roll-channel>
+				<yaw-channel type="int">0</yaw-channel>
+				<pitch-channel type="int">0</pitch-channel>
+				<roll-channel type="int">0</roll-channel>
 			</auto-stabs>
 		</switches>
 	</controls>
 	<autopilot>
 		<locks>
-			<yaw-stab type="string">yaw-stab-hs</yaw-stab>
-			<pitch-stab type="string">pitch-stab-hs</pitch-stab>
-			<roll-stab type="string">roll-stab-hs</roll-stab>
+			<yaw-stab type="string"></yaw-stab>
+			<pitch-stab type="string"></pitch-stab>
+			<roll-stab type="string"></roll-stab>
 		</locks>
 	</autopilot>
 
