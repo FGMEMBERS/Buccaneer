@@ -466,17 +466,106 @@
 		</condition>
 	</animation>
 
-	<!--<animation>
+	<animation>
 		<type>select</type>
 		<object-name>Canopy-Side-Port</object-name>
 		<object-name>Canopy-Side-Stbd</object-name>
-		<object-name>Canopy-Fragments</object-name>
+		<!--<object-name>Canopy-Fragments</object-name>-->
 		<condition>
 			<not>
 				<property>sim/current-view/internal</property>
 			</not>
 		</condition>
-	</animation>-->
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Front-Rain</object-name>
+		<condition>
+			<greater-than>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Front</object-name>
+		<condition>
+			<less-than-equals>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</less-than-equals>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Side-Stbd-Rain</object-name>
+		<condition>
+			<greater-than>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</greater-than>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Side-Stbd</object-name>
+		<condition>
+			<less-than-equals>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</less-than-equals>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Side-Port-Rain</object-name>
+		<condition>
+			<greater-than>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Side-Port</object-name>
+		<condition>
+			<less-than-equals>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</less-than-equals>
+		</condition>
+	</animation>
+
+
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Main-Rain</object-name>
+		<condition>
+			<greater-than>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Canopy-Fragments</object-name>
+		<condition>
+			<less-than-equals>
+				<property>environment/metar/rain-norm</property>
+				<value>0.25</value>
+			</less-than-equals>
+		</condition>
+	</animation>
 
 	<animation>
 		<type>select</type>
@@ -2814,7 +2903,7 @@
 
 	<animation>
 		<type>textranslate</type>
-		<object-name>Canopy-Front</object-name>
+		<object-name>Canopy-Front-Rain</object-name>
 		<property>sim/time/elapsed-sec</property>
 		<factor>0.1</factor>
 		<axis>
@@ -2826,7 +2915,7 @@
 
 	<animation>
 		<type>textranslate</type>
-		<object-name>Canopy-Side-Stbd</object-name>
+		<object-name>Canopy-Side-Stbd-Rain</object-name>
 		<property>sim/time/elapsed-sec</property>
 		<factor>0.1</factor>
 		<axis>
@@ -2835,10 +2924,10 @@
 			<z>0</z>
 		</axis>
 	</animation>
-	
+
 	<animation>
 		<type>textranslate</type>
-		<object-name>Canopy-Side-Port</object-name>
+		<object-name>Canopy-Side-Port-Rain</object-name>
 		<property>sim/time/elapsed-sec</property>
 		<factor>0.1</factor>
 		<axis>
@@ -2847,6 +2936,19 @@
 			<z>0</z>
 		</axis>
 	</animation>
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>Canopy-Main-Rain</object-name>
+		<property>sim/time/elapsed-sec</property>
+		<factor>0.1</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
 
 	<!-- *** LoD for the whole model *** -->
 	<!--
