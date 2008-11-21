@@ -484,7 +484,7 @@
 		<condition>
 			<greater-than>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</greater-than>
 		</condition>
 	</animation>
@@ -495,7 +495,7 @@
 		<condition>
 			<less-than-equals>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</less-than-equals>
 		</condition>
 	</animation>
@@ -506,7 +506,7 @@
 		<condition>
 			<greater-than>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</greater-than>
 		</condition>
 	</animation>
@@ -517,7 +517,7 @@
 		<condition>
 			<less-than-equals>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</less-than-equals>
 		</condition>
 	</animation>
@@ -528,7 +528,7 @@
 		<condition>
 			<greater-than>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</greater-than>
 		</condition>
 	</animation>
@@ -539,7 +539,7 @@
 		<condition>
 			<less-than-equals>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</less-than-equals>
 		</condition>
 	</animation>
@@ -551,7 +551,7 @@
 		<condition>
 			<greater-than>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</greater-than>
 		</condition>
 	</animation>
@@ -562,7 +562,7 @@
 		<condition>
 			<less-than-equals>
 				<property>environment/metar/rain-norm</property>
-				<value>0.25</value>
+				<value>0.01</value>
 			</less-than-equals>
 		</condition>
 	</animation>
@@ -2914,6 +2914,18 @@
 	</animation>
 
 	<animation>
+		<type>material</type>
+		<object-name>Canopy-Front-Rain</object-name>
+		<transparency>
+			<alpha-prop>environment/metar/rain-norm</alpha-prop>
+			<factor>1</factor>
+			<offset>0</offset>
+			<max>0.6</max>
+		</transparency>
+		<!--<threshold>0.001</threshold>-->
+	</animation>
+
+	<animation>
 		<type>textranslate</type>
 		<object-name>Canopy-Side-Stbd-Rain</object-name>
 		<property>sim/time/elapsed-sec</property>
@@ -2948,6 +2960,40 @@
 			<z>0</z>
 		</axis>
 	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>Canopy-Front-Rain</object-name>
+		<object-name>Canopy-Main-Rain</object-name>
+		<object-name>Canopy-Side-Port-Rain</object-name>
+		<object-name>Canopy-Side-Stbd-Rain</object-name>
+		<transparency>
+			<alpha-prop>environment/metar/rain-norm</alpha-prop>
+			<factor>1</factor>
+			<offset>0</offset>
+			<max>0.6</max>
+		</transparency>
+		<!--<threshold>0.001</threshold>-->
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Wiper</object-name>
+		<property>sim/model/buccaneer/wiper/position-norm</property>
+		<factor>30</factor>
+		<!--2.66532	0.761275	-0.15131
+		2.77257	0.589673	-0.151309-->
+
+		<axis>
+			<x1-m>2.66532</x1-m>
+			<y1-m>0.15131</y1-m>
+			<z1-m>0.761275</z1-m>
+			<x2-m>2.77257</x2-m>
+			<y2-m>0.151309</y2-m>
+			<z2-m>0.589673</z2-m>
+		</axis>
+	</animation>
+
 
 
 	<!-- *** LoD for the whole model *** -->
