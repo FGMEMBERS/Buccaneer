@@ -483,7 +483,7 @@
 		<object-name>Canopy-Front-Rain</object-name>
 		<condition>
 			<greater-than>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</greater-than>
 		</condition>
@@ -494,7 +494,7 @@
 		<object-name>Canopy-Front</object-name>
 		<condition>
 			<less-than-equals>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</less-than-equals>
 		</condition>
@@ -505,7 +505,7 @@
 		<object-name>Canopy-Side-Stbd-Rain</object-name>
 		<condition>
 			<greater-than>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</greater-than>
 		</condition>
@@ -516,7 +516,7 @@
 		<object-name>Canopy-Side-Stbd</object-name>
 		<condition>
 			<less-than-equals>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</less-than-equals>
 		</condition>
@@ -527,7 +527,7 @@
 		<object-name>Canopy-Side-Port-Rain</object-name>
 		<condition>
 			<greater-than>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</greater-than>
 		</condition>
@@ -538,7 +538,7 @@
 		<object-name>Canopy-Side-Port</object-name>
 		<condition>
 			<less-than-equals>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</less-than-equals>
 		</condition>
@@ -550,7 +550,7 @@
 		<object-name>Canopy-Main-Rain</object-name>
 		<condition>
 			<greater-than>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</greater-than>
 		</condition>
@@ -561,7 +561,7 @@
 		<object-name>Canopy-Fragments</object-name>
 		<condition>
 			<less-than-equals>
-				<property>environment/metar/rain-norm</property>
+				<property>sim/model/buccaneer/raining</property>
 				<value>0.01</value>
 			</less-than-equals>
 		</condition>
@@ -2968,7 +2968,7 @@
 		<object-name>Canopy-Side-Port-Rain</object-name>
 		<object-name>Canopy-Side-Stbd-Rain</object-name>
 		<transparency>
-			<alpha-prop>environment/metar/rain-norm</alpha-prop>
+			<alpha-prop>sim/model/buccaneer/raining</alpha-prop>
 			<factor>1</factor>
 			<offset>0</offset>
 			<max>0.6</max>

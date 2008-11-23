@@ -12,9 +12,20 @@ view_number_Node = props.globals.getNode("sim/current-view/view-number",1);
 view_number_Node.setDoubleValue(0);
 
 view_name_Node = props.globals.getNode("sim/current-view/name",1);
+view_internal_Node = props.globals.getNode("sim/current-view/internal",1);
+view_internal_Node.setBoolValue(1);
 
 enabledNode = props.globals.getNode("sim/headshake/enabled", 1);
 enabledNode.setBoolValue(1);
+
+rainingNode =props.globals.getNode("sim/model/buccaneer/raining", 1);
+rainingNode.setValue(0);
+
+precipitationenabledNode = props.globals.getNode("sim/rendering/precipitation-aircraft-enable", 1);
+precipitationenabledNode.setBoolValue(0);
+
+precipitationcontrolNode = props.globals.getNode("sim/rendering/precipitation-gui-enable", 1);
+precipitationcontrolNode.setBoolValue(0);
 
 n1_node = props.globals.getNode("engines/engine/n1", 1);
 smoke_node = props.globals.getNode("engines/engine/smoking", 1);
@@ -27,10 +38,10 @@ fuel_dump_lever_pos_Node.setDoubleValue(0);
 fuel_dump_Node = props.globals.getNode("controls/fuel/dump-valve", 1);
 fuel_dump_lever_Node.setBoolValue(0);
 
-model_variant_Node = props.globals.getNode("sim/model/variant", 1);
+model_variant_Node = props.globals.getNode("sim/model/livery/variant", 1);
 model_variant_Node.setIntValue(0);
 
-model_index_Node = props.globals.getNode("sim/model/index", 1);
+model_index_Node = props.globals.getNode("sim/model/livery/index", 1);
 model_index_Node.setIntValue(0);
 
 formation_variant_Node = props.globals.getNode("sim/formation/variant", 1);
@@ -81,6 +92,7 @@ var old_n1 = 0;
 var time = 0;
 var dt = 0;
 var last_time = 0.0;
+var raining = 0;
 
 var run_tyresmoke0 = 0;
 var run_tyresmoke1 = 0;
@@ -107,6 +119,8 @@ var direction = 0 ;
 
 var formation_dialog = nil;
 
+var wiper = nil;
+
 initialize = func {
 
 	print("Initializing Buccaneer utilities ...");
@@ -116,21 +130,21 @@ initialize = func {
 
 	# initialise dialogs 
 	aircraft.data.add("sim/model/formation/variant");
-#	formation_dialog = gui.OverlaySelector.new("Select Formation",
-#		"Aircraft/Buccaneer/Formations",
-#		"sim/model/formation/variant", nil, func(no) {
-#			formation_variant_Node.setIntValue(no);
-#			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
-#			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
-#			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
-#			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
-#			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
-#			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
-#			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
-#			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
-#			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
-#		}
-#	);
+	formation_dialog = gui.OverlaySelector.new("Select Formation",
+		"Aircraft/Buccaneer/Formations",
+		"sim/model/formation/variant", nil, func(no) {
+			formation_variant_Node.setIntValue(no);
+			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
+			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
+			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
+			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
+			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
+			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
+			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
+			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
+			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
+		}
+	);
 	
 	aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 		"sim/model/livery/variant",
@@ -148,7 +162,9 @@ initialize = func {
 	var tyresmoke_1 = aircraft.tyresmoke.new(1);
 	var tyresmoke_2 = aircraft.tyresmoke.new(2);
 
+	wiper = aircraft.door.new("sim/model/buccaneer/wiper", 2);
 
+	print ("wiper init ", wiper.getpos());
 	#set listeners
 
 #	setlistener("engines/engine/cranking", func {smoke.updateSmoking(); 
@@ -249,10 +265,59 @@ initialize = func {
 		1,
 		0);
 
+	setlistener("environment/metar/rain-norm", func (n){
+		var rain = n.getValue();
+		var enabled = precipitationcontrolNode.getValue();
+#		print("rain ", rain, " ", enabled);
+		if(enabled){
+			rainingNode.setValue(rain);
+		} else {
+			rainingNode.setValue(0);
+		}
+	},
+	1,
+	0);
+
+	setlistener("sim/rendering/precipitation-gui-enable", func (n){
+		var enabled = n.getValue();
+		var rain = getprop("environment/metar/rain-norm");
+		var internal = view_internal_Node.getValue();
+#		print("rain ", rain, " ", enabled);
+		if(enabled and internal){
+			rainingNode.setValue(rain);
+			precipitationenabledNode.setBoolValue(0);
+		} elsif (enabled){
+			rainingNode.setValue(rain);
+			precipitationenabledNode.setBoolValue(1);
+		} else {
+			rainingNode.setValue(0);
+			precipitationenabledNode.setBoolValue(0);
+		}
+
+	},
+	1,
+	0);
+
+	setlistener("sim/current-view/internal", func (n){
+		var internal = n.getValue();
+		enabled = precipitationcontrolNode.getValue();
+		var rain = getprop("environment/metar/rain-norm");
+#		print("precipitation-control",enabled, " internal ", internal, " rain ",rain );
+		if(internal){
+			precipitationenabledNode.setBoolValue(0);
+		} elsif(enabled) {
+			precipitationenabledNode.setBoolValue(1);
+			rainingNode.setValue(rain);
+		}
+
+	},
+	1,
+	0);
+
 
 	# set it running on the next update cycle
 	settimer(update, 0);
-
+wiper.open();
 	print("running Buccaneer utilities");
 
 } # end func
@@ -271,6 +336,15 @@ var update = func {
 	smoke_0.updateSmoking();
 	smoke_1.updateSmoking();
 	wing_blow.update();
+
+	if(rainingNode.getValue()){
+		if(wiper.getpos() == 1 or wiper.getpos() == 0){
+			wiper.toggle();
+		}
+	} else {
+		wiper.close();
+	}
+
 
 #print ("run_tyresmoke ",run_tyresmoke);
 	
