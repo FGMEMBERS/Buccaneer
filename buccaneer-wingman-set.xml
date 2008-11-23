@@ -558,7 +558,7 @@ Ver 0.0.1
 				<desc>Show configuration dialog</desc>
 				<binding>
 					<command>nasal</command>
-					<script>aircraft.formation.dialog.toggle()</script>
+					<script>buccaneer.formation_dialog.toggle()</script>
 				</binding>
 			</key>
 			<!-- map keys for arrester hook -->
