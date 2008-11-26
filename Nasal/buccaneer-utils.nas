@@ -18,7 +18,7 @@ view_internal_Node.setBoolValue(1);
 enabledNode = props.globals.getNode("sim/headshake/enabled", 1);
 enabledNode.setBoolValue(1);
 
-rainingNode =props.globals.getNode("sim/model/buccaneer/raining", 1);
+rainingNode = props.globals.getNode("sim/model/buccaneer/raining", 1);
 rainingNode.setValue(0);
 
 precipitationenabledNode = props.globals.getNode("sim/rendering/precipitation-aircraft-enable", 1);
@@ -86,6 +86,7 @@ wing_blow = nil;
 #tyresmoke_0 = nil;
 #tyresmoke_1 = nil;
 #tyresmoke_2 = nil;
+flow = nil;
 
 
 var old_n1 = 0;
@@ -158,9 +159,11 @@ initialize = func {
 	smoke_0 = Smoke.new(0);
 	smoke_1 = Smoke.new(1);
 	wing_blow = WingBlow.new();
-	var tyresmoke_0 = aircraft.tyresmoke.new(0);
-	var tyresmoke_1 = aircraft.tyresmoke.new(1);
-	var tyresmoke_2 = aircraft.tyresmoke.new(2);
+	tyresmoke_0 = aircraft.tyresmoke.new(0);
+	tyresmoke_1 = aircraft.tyresmoke.new(1);
+	tyresmoke_2 = aircraft.tyresmoke.new(2);
+	flow = Flow.new();
+	var lp = aircraft.lowpass.new(5);
 
 	wiper = aircraft.door.new("sim/model/buccaneer/wiper", 2);
 
@@ -268,11 +271,12 @@ initialize = func {
 	setlistener("environment/metar/rain-norm", func (n){
 		var rain = n.getValue();
 		var enabled = precipitationcontrolNode.getValue();
-#		print("rain ", rain, " ", enabled);
+		print("rain metar", rain, " gui enabled ", enabled);
 		if(enabled){
 			rainingNode.setValue(rain);
 		} else {
 			rainingNode.setValue(0);
+			print("rain metar 2", rain, " gui enabled ", enabled, " rain ",rainingNode.getValue());
 		}
 	},
 	1,
@@ -282,7 +286,7 @@ initialize = func {
 		var enabled = n.getValue();
 		var rain = getprop("environment/metar/rain-norm");
 		var internal = view_internal_Node.getValue();
-#		print("rain ", rain, " ", enabled);
+		print("rain gui ", rain, " gui enabled ", enabled );
 		if(enabled and internal){
 			rainingNode.setValue(rain);
 			precipitationenabledNode.setBoolValue(0);
@@ -302,7 +306,7 @@ initialize = func {
 		var internal = n.getValue();
 		enabled = precipitationcontrolNode.getValue();
 		var rain = getprop("environment/metar/rain-norm");
-#		print("precipitation-control",enabled, " internal ", internal, " rain ",rain );
+		print("precipitation-control-gui-internal",enabled, " internal ", internal, " rain ",rain );
 		if(internal){
 			precipitationenabledNode.setBoolValue(0);
 		} elsif(enabled) {
@@ -331,13 +335,19 @@ wiper.open();
 ##
 var update = func {
 
+	time = getprop("sim/time/elapsed-sec");
+	dt = time - last_time;
+	last_time = time;
+
+
 	pilot_g.update();
 	pilot_g.gmeter_update();
 	smoke_0.updateSmoking();
 	smoke_1.updateSmoking();
 	wing_blow.update();
+	var ias = flow.updateFlow(dt);
 
-	if(rainingNode.getValue()){
+	if(rainingNode.getValue() and ias < 300){
 		if(wiper.getpos() == 1 or wiper.getpos() == 0){
 			wiper.toggle();
 		}
@@ -803,8 +813,55 @@ var TyreSmoke = {
 
 }; #
 
-# =============================== end smoke stuff ================================
+# =============================== end tyre smoke stuff ================================
+# Class that specifies raindrop flow rate functions
+#
 
+Flow = {
+	new : func ()
+	{
+		var obj = {parents : [Flow] };
+		obj.name = "flow";
+		obj.ias = props.globals.getNode("velocities/airspeed-kt", 1);
+		obj.elapsed_time = props.globals.getNode("sim/time/elapsed-sec", 1);
+		obj.flow = props.globals.getNode("sim/model/buccaneer/flow", 1);
+		obj.precipation_level = props.globals.getNode("environment/params/precipitation-level-ft", 1);
+		obj.altitude = props.globals.getNode("position/altitude-ft", 1);
+		obj.rain = props.globals.getNode("environment/metar/rain-norm", 1);
+		obj.flow.setDoubleValue(0);
+#		print (obj.name, " ", number, " ", obj.old_n1);
+		return obj;
+	},
+
+	updateFlow: func (dt){
+#		print("updating: ", me.name," dt ",dt );
+		
+		var ias = me.ias.getValue();
+		var elapsed_time = me.elapsed_time.getValue();
+		var altitude = me.altitude.getValue();
+		var precipation_level = me.precipation_level.getValue();
+		var rain = me.rain.getValue();
+		var enabled = precipitationcontrolNode.getValue();
+
+		if (ias < 15){
+			me.flow.setDoubleValue(0);
+		} else {
+			me.flow.setDoubleValue((elapsed_time * 0.5) + (ias * 1852 * dt/(60*60)));
+		}
+		
+		if (altitude > precipation_level or !enabled){
+			rainingNode.setValue(0);
+		} else {
+			rainingNode.setValue(rain);
+		}
+#		print("updating: ", me.name," dt ",dt, " flow ", me.flow.getValue() );
+		return ias;
+
+	 }, # end function
+
+}; #
+
+# =============================== end rain stuff ================================
 
 # Fire it up
 

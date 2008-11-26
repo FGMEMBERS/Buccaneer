@@ -510,7 +510,7 @@
 			</greater-than>
 		</condition>
 	</animation>
-	
+
 	<animation>
 		<type>select</type>
 		<object-name>Canopy-Side-Stbd</object-name>
@@ -2904,8 +2904,8 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>Canopy-Front-Rain</object-name>
-		<property>sim/time/elapsed-sec</property>
-		<factor>0.1</factor>
+		<property>sim/model/buccaneer/flow</property>
+		<factor>1</factor>
 		<axis>
 			<x>0</x>
 			<y>-1</y>
@@ -2914,22 +2914,11 @@
 	</animation>
 
 	<animation>
-		<type>material</type>
-		<object-name>Canopy-Front-Rain</object-name>
-		<transparency>
-			<alpha-prop>environment/metar/rain-norm</alpha-prop>
-			<factor>1</factor>
-			<offset>0</offset>
-			<max>0.6</max>
-		</transparency>
-		<!--<threshold>0.001</threshold>-->
-	</animation>
-
-	<animation>
 		<type>textranslate</type>
 		<object-name>Canopy-Side-Stbd-Rain</object-name>
-		<property>sim/time/elapsed-sec</property>
-		<factor>0.1</factor>
+		<property>sim/model/buccaneer/flow</property>
+		<factor>1</factor>
+		<offset>0.33</offset>
 		<axis>
 			<x>-1</x>
 			<y>-0.5</y>
@@ -2940,8 +2929,9 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>Canopy-Side-Port-Rain</object-name>
-		<property>sim/time/elapsed-sec</property>
-		<factor>0.1</factor>
+		<property>sim/model/buccaneer/flow</property>
+		<factor>1</factor>
+		<offset>0.66</offset>
 		<axis>
 			<x>-1</x>
 			<y>0.5</y>
@@ -2952,8 +2942,8 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>Canopy-Main-Rain</object-name>
-		<property>sim/time/elapsed-sec</property>
-		<factor>0.1</factor>
+		<property>sim/model/buccaneer/flow</property>
+		<factor>1</factor>
 		<axis>
 			<x>-1</x>
 			<y>0</y>
@@ -2968,10 +2958,27 @@
 		<object-name>Canopy-Side-Port-Rain</object-name>
 		<object-name>Canopy-Side-Stbd-Rain</object-name>
 		<transparency>
+			<alpha-prop>velocities/airspeed-kt</alpha-prop>
+			<factor>-0.00333</factor>
+			<offset>1</offset>
+			<max>0.3</max>
+			<min>0.0075</min>
+		</transparency>
+		<!--<threshold>0.001</threshold>-->
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>Canopy-Front-Rain</object-name>
+		<object-name>Canopy-Main-Rain</object-name>
+		<object-name>Canopy-Side-Port-Rain</object-name>
+		<object-name>Canopy-Side-Stbd-Rain</object-name>
+		<transparency>
 			<alpha-prop>sim/model/buccaneer/raining</alpha-prop>
-			<factor>1</factor>
+			<factor>0.7</factor>
 			<offset>0</offset>
-			<max>0.6</max>
+			<max>0.3</max>
+			<min>0.0075</min>
 		</transparency>
 		<!--<threshold>0.001</threshold>-->
 	</animation>
