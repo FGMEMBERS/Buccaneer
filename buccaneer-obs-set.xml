@@ -2,7 +2,7 @@
 <!--
 ************************************************************************
 
-This config is based on work by Anders
+This config is based on work by Anders Gidenstam
 
 Ver 0.0.1
 
@@ -13,7 +13,7 @@ Ver 0.0.1
 <PropertyList>
 	<sim include="help-obs.xml">
 		<description type="string" >Blackburn Buccaneer S2(Observer)</description>
-		<author type="string">Vivian Meazza</author>
+		<author type="string">Vivian Meazza, Anders Gidenstam</author>
 		<status type="string">alpha</status>
 		<aircraft-version>0.1</aircraft-version>
 
@@ -37,9 +37,18 @@ Ver 0.0.1
 		</sound>
 
 		<view n="0">
+			<name>Back Seat View</name>
 			<internal archive="y">true</internal>
 			<config>
-				<from-model type="bool">true</from-model>
+				<from-model type="bool">false</from-model>
+				<from-model-idx type="int">0</from-model-idx>
+				<eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
+				<eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
+				<eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+				<eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
+				<eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+				<eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+
 				<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
 				<x-offset-m archive="y"
 										type="double">0.05</x-offset-m>
@@ -88,24 +97,6 @@ Ver 0.0.1
 													 type="double">7</target-z-offset-m>
 			</config>
 		</view>
-		<view n="100">
-			<name>Back Seat View</name>
-			<internal archive="y">true</internal>
-			<type>lookfrom</type>
-			<config>
-				<from-model type="bool">true</from-model>
-				<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-				<x-offset-m archive="y"
-										type="double">0.05</x-offset-m>
-				<y-offset-m archive="y"
-										type="double">1.30165</y-offset-m>
-				<z-offset-m archive="y"
-										type="double">5.2269</z-offset-m>
-				<pitch-offset-deg>-15</pitch-offset-deg>
-				<default-field-of-view-deg>60</default-field-of-view-deg>
-				<dynamic-view type="bool">true</dynamic-view>
-			</config>
-		</view>
 		<view n="101">
 			<name>Gun Camera View</name>
 			<type>lookfrom</type>
@@ -124,70 +115,6 @@ Ver 0.0.1
 				<!--Back-->
 			</config>
 		</view>
-		<view n="197">
-			<name>Observer View</name>
-			<type>lookfrom</type>
-			<config>
-				<from-model type="bool">false</from-model>
-				<from-model-idx type="int">0</from-model-idx>
-
-				<at-model type="bool">false</at-model>
-				<at-model-idx type="int">0</at-model-idx>
-
-				<eye-lat-deg-path>/sim/viewer/eye/latitude-deg</eye-lat-deg-path>
-				<eye-lon-deg-path>/sim/viewer/eye/longitude-deg</eye-lon-deg-path>
-				<eye-alt-ft-path>/sim/viewer/eye/altitude-ft</eye-alt-ft-path>
-				<eye-heading-deg-path>/sim/viewer/eye/heading-deg</eye-heading-deg-path>
-				<eye-pitch-deg-path>/sim/viewer/eye/pitch-deg</eye-pitch-deg-path>
-				<eye-roll-deg-path>/sim/viewer/eye/roll-deg</eye-roll-deg-path>
-
-				<ground-level-nearplane-m type="double">0.2f</ground-level-nearplane-m>
-				<default-field-of-view-deg type="double">65.0</default-field-of-view-deg>
-
-				<x-offset-m type="double">0.05</x-offset-m>
-				<y-offset-m
-					type="double">1.30165</y-offset-m>
-				<z-offset-m
-					type="double">5.2269</z-offset-m>
-				<heading-offset-deg>0</heading-offset-deg>
-				<pitch-offset-deg>0</pitch-offset-deg>
-				<roll-offset-deg>0</roll-offset-deg>
-			</config>
-		</view>
-		<view n="198">
-			<name>Model View</name>
-			<type>lookat</type>
-			<config>
-				<from-model type="bool">false</from-model>
-				<from-model-idx type="int">0</from-model-idx>
-				<eye-lat-deg-path>/sim/viewer/eye/latitude-deg</eye-lat-deg-path>
-				<eye-lon-deg-path>/sim/viewer/eye/longitude-deg</eye-lon-deg-path>
-				<eye-alt-ft-path>/sim/viewer/eye/altitude-ft</eye-alt-ft-path>
-				<eye-heading-deg-path>/sim/viewer/eye/heading-deg</eye-heading-deg-path>
-				<eye-pitch-deg-path>/sim/viewer/eye/pitch-deg</eye-pitch-deg-path>
-				<eye-roll-deg-path>/sim/viewer/eye/roll-deg</eye-roll-deg-path>
-				<at-model type="bool">false</at-model>
-				<at-model-idx type="int">0</at-model-idx>
-				<target-lat-deg-path>/sim/viewer/target/latitude-deg</target-lat-deg-path>
-				<target-lon-deg-path>/sim/viewer/target/longitude-deg</target-lon-deg-path>
-				<target-alt-ft-path>/sim/viewer/target/altitude-ft</target-alt-ft-path>
-				<target-heading-deg-path>/sim/viewer/target/heading-deg</target-heading-deg-path>
-				<target-pitch-deg-path>/sim/viewer/target/pitch-deg</target-pitch-deg-path>
-				<target-roll-deg-path>/sim/viewer/target/roll-deg</target-roll-deg-path>
-				<target-x-offset-m type="double">0</target-x-offset-m>
-				<target-y-offset-m type="double">0</target-y-offset-m>
-				<target-z-offset-m type="double">0</target-z-offset-m>
-				<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-				<default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
-				<x-offset-m type="double">0</x-offset-m>
-				<y-offset-m type="double">0</y-offset-m>
-				<z-offset-m type="double">100</z-offset-m>
-				<heading-offset-deg>0</heading-offset-deg>
-				<pitch-offset-deg>0</pitch-offset-deg>
-				<roll-offset-deg>0</roll-offset-deg>
-			</config>
-		</view>
-
 		<viewer>
 			<eye>
 				<latitude-deg type="double">0</latitude-deg>
@@ -216,6 +143,35 @@ Ver 0.0.1
 			<connected type="bool">false</connected>
 		</remote>
 
+		<menubar>
+			<default>
+				<menu n="1000">
+					<label>Buccaneer</label>
+					<enabled type="bool">true</enabled>
+					<item>
+						<label>Select MP-pilot</label>
+						<binding>
+							<command>nasal</command>
+							<script>dual_control_tools.copilot_dialog.show(aircraft_dual_control.pilot_type)</script>
+						</binding>
+					</item>
+					<item>
+						<label>Toggle pilot model</label>
+						<binding>
+							<command>property-toggle</command>
+							<property>/sim/model/buccaneer/config/show-pilot</property>
+						</binding>
+					</item>
+					<item>
+						<label>Toggle G-induced head movement</label>
+						<binding>
+							<command>property-toggle</command>
+							<property>/sim/headshake/enabled</property>
+						</binding>
+					</item>
+				</menu>
+			</default>
+		</menubar>
 	</sim>
 
 	<accelerations>
@@ -236,12 +192,11 @@ Ver 0.0.1
 		<keyboard>
 			<key n="22">
 				<name>Ctrl-V</name>
-				<desc>Select initial view ("Observer View").</desc>
+				<desc>Select initial view ("Back Seat View").</desc>
 				<binding>
 					<command>nasal</command>
 					<script>
-						setprop("/sim/current-view/view-number", view.indexof("Observer View"));
-						globals["observer-view"].model_view_handler.next(1)
+						setprop("/sim/current-view/view-number", view.indexof("Back Seat View"));
 					</script>
 				</binding>
 			</key>
@@ -259,7 +214,7 @@ Ver 0.0.1
 					<condition>
 						<equals>
 							<property>/sim/current-view/name</property>
-							<value>Observer View</value>
+							<value>Back Seat View</value>
 						</equals>
 					</condition>
 					<command>property-assign</command>
@@ -281,7 +236,7 @@ Ver 0.0.1
 					<condition>
 						<equals>
 							<property>/sim/current-view/name</property>
-							<value>Observer View</value>
+							<value>Back Seat View</value>
 						</equals>
 					</condition>
 					<command>property-adjust</command>
@@ -305,7 +260,7 @@ Ver 0.0.1
 					<condition>
 						<equals>
 							<property>/sim/current-view/name</property>
-							<value>Observer View</value>
+							<value>Back Seat View</value>
 						</equals>
 					</condition>
 					<command>property-adjust</command>
@@ -313,29 +268,6 @@ Ver 0.0.1
 					<step type="double">0.01</step>
 					<min type="double">1.25165</min>
 					<max type="double">1.35165</max>
-				</binding>
-			</key>
-
-			<key n="81">
-				<name>Q</name>
-				<desc>Switch to previous model</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-								globals["model-view"].model_view_handler.next(-1);
-								globals["observer-view"].model_view_handler.next(-1)
-					</script>
-				</binding>
-			</key>
-			<key n="113">
-				<name>q</name>
-				<desc>Switch to next model</desc>
-				<binding>
-					<command>nasal</command>
-					<script>
-								globals["model-view"].model_view_handler.next(1);
-								globals["observer-view"].model_view_handler.next(1)
-					</script>
 				</binding>
 			</key>
 		</keyboard>
@@ -347,20 +279,14 @@ Ver 0.0.1
 			<file>Aircraft/Buccaneer/Nasal/buccaneer-obs-utils.nas</file>
 		</buccaneer>
 		<dual_control_tools>
-			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
+			<file>Aircraft/ZLT-NT/DualControl/dual-control-tools.nas</file>
 		</dual_control_tools>
 		<aircraft_dual_control>
 			<file>Aircraft/Buccaneer/Nasal/buccaneer-dual-control.nas</file>
 		</aircraft_dual_control>
-		<dual_control_copilot>
-			<file>Aircraft/Buccaneer/Nasal/copilot-dual-control.nas</file>
-		</dual_control_copilot>
-		<model-view>
-			<file>Aircraft/Buccaneer/Nasal/model-view.nas</file>
-		</model-view>
-		<observer-view>
-			<file>Aircraft/Buccaneer/Nasal/observer-view.nas</file>	
-		</observer-view>
+		<dual_control>
+			<file>Aircraft/ZLT-NT/DualControl/copilot-dual-control.nas</file>
+		</dual_control>
 	</nasal>
 
 	<environment>
