@@ -248,11 +248,11 @@
 				<property>sim/model/buccaneer/controls/autostab-pitch</property>
 				<value>-1</value>
 			</binding>
-			<binding>
+			<!--<binding>
 				<command>property-assign</command>
 				<property>controls/flight/elevator-autostab</property>
 				<value>0</value>
-			</binding>
+			</binding>-->
 		</action>
 	</animation>
 

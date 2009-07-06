@@ -54,37 +54,53 @@
 	<rear-panel>
 		<offsets>
 			<x-m>4.6</x-m>
+			<y-m>-0.4</y-m>
 			<z-m>0.65</z-m>
 		</offsets>
 	</rear-panel>
 
-	<!--<panel>
+	<panel>
 		<path>Aircraft/Buccaneer/Panels/radar-panel.xml</path>
+		<name>Radar-Panel</name>
 		<bottom-left>
-			<x-m alias="../../../rear-panel/offsets/x-m"/>
-			-->
-	<!--<x-m>4.8</x-m>-->
-	<!--
+			<x-m>4.6</x-m>
+			<!--<x-m alias="../../../rear-panel/offsets/x-m"/>-->
 			<y-m>-0.4</y-m>
+			<!--<y-m alias="../../../rear-panel/offsets/y-m"/>-->
 			<z-m>0.65</z-m>
+			<!--<z-m alias="../../../rear-panel/offsets/z-m"/>-->
 		</bottom-left>
 		<bottom-right>
-			-->
-	<!--<x-m alias="../../../rear-panel/offsets/x-m"/>-->
-	<!--
 			<x-m>4.40</x-m>
+			<!--<x-m alias="../../../rear-panel/offsets/x-m"/>-->
 			<y-m>-0.15</y-m>
 			<z-m>0.65</z-m>
+			<!--<z-m alias="../../../rear-panel/offsets/z-m"/>-->
 		</bottom-right>
 		<top-left>
-			<x-m alias="../../../rear-panel/offsets/x-m"/>
-			-->
-	<!--<x-m>4.8</x-m>-->
-	<!--
+			<x-m>4.6</x-m>
+			<!--<x-m alias="../../../rear-panel/offsets/x-m"/>-->
 			<y-m>-0.4</y-m>
+			<!--<y-m alias="../../../rear-panel/offsets/y-m"/>-->
 			<z-m> 0.9</z-m>
 		</top-left>
-	</panel>-->
+	</panel>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Radar-Panel</object-name>
+		<offset>45</offset>
+		<center>
+			<x-m>4.07546</x-m>
+			<y-m>-0.0499988</y-m>
+			<z-m>0.920013</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
 
 	<!-- **************** Instruments ********************* -->
 
@@ -410,6 +426,13 @@
 	-->
 	<!-- order objects -->
 
+	<animation>
+		<type>select</type>
+		<object-name>Radar-Panel</object-name>
+		<condition>
+				<property>sim/current-view/internal</property>
+		</condition>
+	</animation>
 
 	<animation>
 		<type>select</type>
@@ -1834,6 +1857,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Pivot-Bracket</object-name>
+		<!--<object-name>Wheel-Fork-Pivot</object-name>-->
 		<property>gear/gear/caster-angle-deg</property>
 		<factor>1</factor>
 		<axis>

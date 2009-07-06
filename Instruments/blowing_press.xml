@@ -9,7 +9,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>needle1</object-name>
-		<property>engines/engine[0]/bleed-air-pressure-psi</property>
+		<property>systems/air-bleed/outputs/main-plane-blowing-stbd</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
@@ -39,7 +39,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>needle2</object-name>
-		<property>engines/engine[1]/bleed-air-pressure-psi</property>
+		<property>systems/air-bleed/outputs/main-plane-blowing-port</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
