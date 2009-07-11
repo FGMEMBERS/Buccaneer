@@ -22,7 +22,6 @@ Ver 0.0.1
 		<fuel-fraction>1.0</fuel-fraction>
 		<systems>
 			<autopilot>
-				<!--<path>Aircraft/Hunter/Systems/hunter-autopilot.xml</path>-->
 				<path>Aircraft/Buccaneer/Systems/buccaneer-autopilot.xml</path>
 			</autopilot>
 			<electrical>
@@ -242,7 +241,7 @@ Ver 0.0.1
 				<roll-offset-deg>0</roll-offset-deg>
 			</config>
 		</view>
-		<view n="198">
+		<!--<view n="198">
 			<name>Model View</name>
 			<type>lookat</type>
 			<config>
@@ -274,7 +273,7 @@ Ver 0.0.1
 				<pitch-offset-deg>0</pitch-offset-deg>
 				<roll-offset-deg>0</roll-offset-deg>
 			</config>
-		</view>
+		</view>-->
 
 		<viewer>
 			<eye>
@@ -340,6 +339,12 @@ Ver 0.0.1
 
 
 	</sim>
+
+	<systems>
+		<refuel>
+			<type>probe</type>
+		</refuel>
+	</systems>
 
 	<!--we use these properties for "aliasing" multiplayer properties-->
 	<rotors>
@@ -491,6 +496,9 @@ Ver 0.0.1
 		<gear>
 			<brake-parking>1</brake-parking>
 			<tailwheel-lock>false</tailwheel-lock>
+			<launchbar>
+				<acceleration-norm type="float">0.75</acceleration-norm>
+			</launchbar>
 		</gear>
 		<flight>
 			<flaps-alternate-extension type="double">1</flaps-alternate-extension>
@@ -530,11 +538,13 @@ Ver 0.0.1
 		<heading-indicator>
 			<heading-bug-deg type="double">45</heading-bug-deg>
 		</heading-indicator>
+		
+		<!-- Radar parameters -->
 		<air-ground-radar>
 			<serviceable type="bool">true</serviceable>
 			<switch type="string">ON</switch>
 			<threshold>0.18</threshold>
-			<mode-control type="int">5</mode-control>
+			<mode-control type="int">6</mode-control>
 			<scan-sec type="double">1</scan-sec>
 			<display-controls>
 				<WX type="bool">false</WX>
@@ -543,7 +553,7 @@ Ver 0.0.1
 				<symbol type="bool">false</symbol>
 			</display-controls>
 			<range type="int">30</range>
-			<mode type="string">SV</mode>
+			<!--<mode type="string">SV</mode>-->
 			<lightning type="bool">false</lightning>
 			<display-mode type="string">arc</display-mode>
 			<minimized type="bool">false</minimized>
@@ -554,9 +564,9 @@ Ver 0.0.1
 				<z-offset-m type="double">0</z-offset-m>
 			</antenna>
 			<terrain-warning>
-				<elev-limit-deg type="double">2</elev-limit-deg>
-				<elev-step-deg type="double">2</elev-step-deg>
-				<az-limit-deg type="double">1</az-limit-deg>
+				<elev-limit-deg type="double">2.5</elev-limit-deg>
+				<elev-step-deg type="double">0.5</elev-step-deg>
+				<az-limit-deg type="double">0</az-limit-deg>
 				<az-step-deg type="double">1</az-step-deg>
 				<max-range-m type="double">4000</max-range-m>
 				<min-range-m type="double">250</min-range-m>
@@ -565,13 +575,15 @@ Ver 0.0.1
 					<roll type="bool">true</roll>
 					<pitch type="bool">false</pitch>
 				</stabilisation>
-				<scan-sec type="double">0</scan-sec>
-				<beamwidth-deg>1</beamwidth-deg>
+				<scan-sec type="double">0.2222</scan-sec>
+				<beamwidth-horz-deg type="double">2.5</beamwidth-horz-deg>
+				<beamwidth-vert-deg type="double">1</beamwidth-vert-deg>
+				<persistance-sec type="double">3</persistance-sec>
 			</terrain-warning>
 			<surveillance>
-				<elev-limit-deg type="double">1.25</elev-limit-deg>
-				<elev-step-deg type="double">0.125</elev-step-deg>
-				<az-limit-deg type="double">45</az-limit-deg>
+				<elev-limit-deg type="double">0</elev-limit-deg>
+				<elev-step-deg type="double">0.25</elev-step-deg>
+				<az-limit-deg type="double">50</az-limit-deg>
 				<az-step-deg type="double">2.5</az-step-deg>
 				<max-range-m type="double">120000</max-range-m>
 				<min-range-m type="double">1000</min-range-m>
@@ -580,11 +592,32 @@ Ver 0.0.1
 					<roll type="bool">true</roll>
 					<pitch type="bool">true</pitch>
 				</stabilisation>
-				<scan-sec type="double">0.001</scan-sec>
-				<persistance-sec type="double">18</persistance-sec>
-				<beamwidth-deg>5</beamwidth-deg>
+				<scan-sec type="double">0.2222</scan-sec>
+				<persistance-sec type="double">6</persistance-sec>
+				<beamwidth-horz-deg type="double">5</beamwidth-horz-deg>
+				<beamwidth-vert-deg type="double">2.5</beamwidth-vert-deg>
 			</surveillance>
+			<acquisition>
+				<elev-limit-deg type="double">0</elev-limit-deg>
+				<elev-step-deg type="double">0.25</elev-step-deg>
+				<az-limit-deg type="double">10</az-limit-deg>
+				<az-step-deg type="double">2.5</az-step-deg>
+				<max-range-m type="double">120000</max-range-m>
+				<min-range-m type="double">1000</min-range-m>
+				<tilt type="double">-1.0</tilt>
+				<stabilisation>
+					<roll type="bool">true</roll>
+					<pitch type="bool">true</pitch>
+				</stabilisation>
+				<scan-sec type="double">0.2222</scan-sec>
+				<persistance-sec type="double">2</persistance-sec>
+				<beamwidth-horz-deg type="double">5</beamwidth-horz-deg>
+				<beamwidth-vert-deg type="double">2.5</beamwidth-vert-deg>
+				<display-mode type="string">arc</display-mode>
+			</acquisition>
 		</air-ground-radar>
+		
+		<!-- Radar Altimeter parameters -->
 		<radar-altimeter>
 			<switch type="string">ON</switch>
 			<serviceable type="bool">true</serviceable>
