@@ -530,6 +530,8 @@ axial flow engine, dry wt 2471 lbs -->
 									 control="LEXTEND"/>
 		<control-speed control="LEXTEND"
 									 transition-time="1"/>
+		<control-input axis="/controls/gear/launchbar/acceleration-norm"
+									 control="LACCEL"/>
 	</launchbar>
 
 	<!-- The tank locations and contents are accurately modelled: if the rear tanks are filled
