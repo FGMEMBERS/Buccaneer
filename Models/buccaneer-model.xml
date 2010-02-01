@@ -2775,6 +2775,18 @@
 	</animation>
 
 	<!--particle system-->
+  <model>
+    <path>Aircraft/Buccaneer/Models/Effects/light-cone.xml</path>
+    <name>light</name>
+    <nopreview/>
+    <offsets>
+      <x-m>  3.25 </x-m>
+      <y-m>  0       </y-m>
+      <z-m>  -1.00295 </z-m>
+      <pitch-deg>-7.5</pitch-deg>
+    </offsets>
+  </model>
+  
 	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
 		<name>haze</name>
