@@ -609,6 +609,50 @@
     <object-name>Place-Holders</object-name>
   </animation>
 
+  <model>
+    <path>Aircraft/Buccaneer/Models/Effects/light-cone.xml</path>
+    <offsets>
+      <x-m>  3.25 </x-m>
+      <y-m>  0       </y-m>
+      <z-m>  -1.00295 </z-m>
+      <pitch-deg>-7.5</pitch-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <nopreview/>
+    <type>select</type>
+    <condition>
+      <equals>
+        <property>gear/gear/position-norm</property>
+        <value>1</value>
+      </equals>
+      <equals>
+        <property>controls/lighting/taxi-light</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <object-name>Light</object-name>
+    <object-name>Cone-texture</object-name>
+    <object-name>Cone</object-name>
+    <name>Taxi-Light</name>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Taxi-Light</object-name>
+    <property>gear/gear/caster-angle-deg</property>
+    <factor>-1</factor>
+    <axis>
+      <x1-m>  0    </x1-m>
+      <y1-m>  0       </y1-m>
+      <z1-m>  -1.00295</z1-m>
+      <x2-m>  0    </x2-m>
+      <y2-m>  0       </y2-m>
+      <z2-m>  1.00295 </z2-m>
+    </axis>
+  </animation>
+
   <!-- **************************** Pilot ******************************* -->
   <!--  conceal Pilot if user so chooses -->
   <animation>
@@ -1845,6 +1889,9 @@
     <object-name>Assmbly-Lower-Nose</object-name>
     <object-name>F-Arm</object-name>
     <object-name>F-DArm</object-name>
+    <!--<object-name>Light</object-name>
+    <object-name>Cone-texture</object-name>
+    <object-name>Cone</object-name>-->
     <property>gear/gear/caster-angle-deg</property>
     <factor>1</factor>
     <axis>
@@ -2778,34 +2825,6 @@
   </animation>
 
   <!--particle system-->
-  <model>
-    <path>Aircraft/Buccaneer/Models/Effects/light-cone.xml</path>
-    <offsets>
-      <x-m>  3.25 </x-m>
-      <y-m>  0       </y-m>
-      <z-m>  -1.00295 </z-m>
-      <pitch-deg>-7.5</pitch-deg>
-    </offsets>
-  </model>
-
-  <animation>
-    <nopreview/>
-    <type>select</type>
-    <condition>
-      <equals>
-        <property>gear/gear/position-norm</property>
-        <value>1</value>
-      </equals>
-      <equals>
-        <property>controls/lighting/taxi-light</property>
-        <value>1</value>
-      </equals>
-    </condition>
-    <object-name>Cone-texture</object-name>
-    <object-name>Cone</object-name>
-    <object-name>Light</object-name>
-  </animation>
-
   <model>
     <path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
     <name>haze</name>
