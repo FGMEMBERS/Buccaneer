@@ -6,7 +6,7 @@
 	<!-- Proportioner mag indicators -->
 	<animation>
 		<type>textranslate</type>
-		<property>consumables/fuel/tank[8]/running</property>
+		<property>/consumables/fuel/tank[8]/running</property>
 		<object-name>proportioner-port</object-name>
 		<factor>0.5</factor>
 		<axis>
@@ -19,7 +19,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>proportioner-stbd</object-name>
-		<property>consumables/fuel/tank[9]/running</property>
+		<property>/consumables/fuel/tank[9]/running</property>
 		<factor>0.5</factor>
 		<axis>
 			<x>0</x>
@@ -31,7 +31,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>cross-feed-indicator</object-name>
-		<property>controls/fuel/cross-connect</property>
+		<property>/controls/fuel/cross-connect</property>
 		<factor>90</factor>
 		<axis>
 			<x>0</x>
@@ -48,7 +48,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>cross-feed-sw</object-name>
-		<property>controls/fuel/cross-connect</property>
+		<property>/controls/fuel/cross-connect</property>
 		<factor>60</factor>
 		<axis>
 			<x>-1</x>
@@ -70,7 +70,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/cross-connect</property>
+				<property>/controls/fuel/cross-connect</property>
 			</binding>
 		</action>
 	</animation>
@@ -78,7 +78,7 @@
 <animation>
 		<type>rotate</type>
 		<object-name>tank_tx_sw</object-name>
-		<property>controls/fuel/TX-fwd</property>
+		<property>/controls/fuel/TX-fwd</property>
 		<factor>60</factor>
 		<offset-deg>-30</offset-deg>
 		<axis>
@@ -101,11 +101,11 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/TX-fwd</property>
+				<property>/controls/fuel/TX-fwd</property>
 			</binding>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/TX-aft</property>
+				<property>/controls/fuel/TX-aft</property>
 			</binding>
 		</action>
 	</animation>
@@ -114,7 +114,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna2-lever</object-name>
-		<property>controls/fuel/FNA-2</property>
+		<property>/controls/fuel/FNA-2</property>
 		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
@@ -136,7 +136,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/FNA-2</property>
+				<property>/controls/fuel/FNA-2</property>
 			</binding>
 		</action>
 	</animation>
@@ -144,7 +144,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna6-lever</object-name>
-		<property>controls/fuel/FNA-6</property>
+		<property>/controls/fuel/FNA-6</property>
 		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
@@ -166,7 +166,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/FNA-6</property>
+				<property>/controls/fuel/FNA-6</property>
 			</binding>
 		</action>
 	</animation>
@@ -174,7 +174,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna3-lever</object-name>
-		<property>controls/fuel/FNA-3</property>
+		<property>/controls/fuel/FNA-3</property>
 		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
@@ -196,7 +196,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/FNA-3</property>
+				<property>/controls/fuel/FNA-3</property>
 			</binding>
 		</action>
 	</animation>
@@ -204,7 +204,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fna5-lever</object-name>
-		<property>controls/fuel/FNA-5</property>
+		<property>/controls/fuel/FNA-5</property>
 		<offset-deg>-60</offset-deg>
 		<factor>60</factor>
 		<axis>
@@ -226,7 +226,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/FNA-5</property>
+				<property>/controls/fuel/FNA-5</property>
 			</binding>
 		</action>
 	</animation>
@@ -235,7 +235,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>fuel_ind_sw</object-name>
-		<property>controls/fuel/indicator-supply-swap</property>
+		<property>/controls/fuel/indicator-supply-swap</property>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>
@@ -257,7 +257,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/fuel/indicator-supply-swap</property>
+				<property>/controls/fuel/indicator-supply-swap</property>
 			</binding>
 		</action>
 	</animation>
@@ -279,7 +279,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>handbrake_handle</object-name>
-		<property>controls/gear/brake-parking</property>
+		<property>/controls/gear/brake-parking</property>
 		<factor>90</factor>
 		<axis>
 			<x>0</x>
@@ -295,7 +295,7 @@
 	<animation>
 		<type>translate</type>
 		<object-name>handbrake_handle</object-name>
-		<property>controls/gear/brake-parking</property>
+		<property>/controls/gear/brake-parking</property>
 		<factor>0.03</factor>
 		<axis>
 			<x>0</x>
@@ -322,7 +322,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>proportioner_test_lid</object-name>
-		<property>sim/model/buccaneer/controls/recuperator_check_safety</property>
+		<property>/sim/model/buccaneer/controls/recuperator_check_safety</property>
 		<factor>90</factor>
 		<axis>
 			<x>-1</x>
@@ -343,18 +343,18 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-assign</command>
-				<property>controls/fuel/recuperator-check</property>
+				<property>/controls/fuel/recuperator-check</property>
 				<value>1</value>
 			</binding>
 			<mod-up>
 				<binding>
 					<command>property-assign</command>
-					<property>controls/fuel/recuperator-check</property>
+					<property>/controls/fuel/recuperator-check</property>
 					<value>0</value>
 				</binding>
 				<binding>
 					<command>property-assign</command>
-					<property>sim/model/buccaneer/controls/recuperator_check_safety</property>
+					<property>/sim/model/buccaneer/controls/recuperator_check_safety</property>
 					<value>0</value>
 				</binding>
 			</mod-up>
@@ -363,7 +363,7 @@
 	<animation>
 		<type>translate</type>
 		<object-name>proportioner_test_button</object-name>
-		<property>controls/fuel/recuperator-check</property>
+		<property>/controls/fuel/recuperator-check</property>
 		<factor>0.008</factor>
 		<axis>
 			<x>0</x>
@@ -376,7 +376,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Knob</object-name>
-		<property>controls/fuel/dump-valve-lever-pos</property>
+		<property>/controls/fuel/dump-valve-lever-pos</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
@@ -405,7 +405,7 @@
 	<animation>
 		<type>translate</type>
 		<object-name>Knob</object-name>
-		<property>controls/fuel/dump-valve-lever-pos</property>
+		<property>/controls/fuel/dump-valve-lever-pos</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
@@ -436,7 +436,7 @@
 			<interval-sec>0.1</interval-sec>
 			<binding>
 				<command>property-assign</command>
-				<property>controls/fuel/dump-valve-lever</property>
+				<property>/controls/fuel/dump-valve-lever</property>
 				<value>1</value>
 			</binding>
 		</action>
@@ -447,12 +447,23 @@
 		<type>material</type>
 		<object-name>panel-lighting-group</object-name>
 		<emission>
-			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<factor-prop>/systems/electrical/outputs/panel-floodlighting</factor-prop>
 			<red>0.03125</red>
 			<green>0.0089</green>
 			<blue>0.0089</blue>
 		</emission>
 	</animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>lighting-group</object-name>
+    <emission>
+      <factor-prop>/systems/electrical/outputs/instrument-lighting</factor-prop>
+      <red>0.03125</red>
+      <green>0.0089</green>
+      <blue>0.0089</blue>
+    </emission>
+  </animation>
 
 	<!-- Noshadow -->
 	<animation>

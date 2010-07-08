@@ -67,7 +67,7 @@
 	</animation>
 
 	<!-- Panel Lighting -->
-	<animation>
+	<!--<animation>
 		<type>material</type>
 		<object-name>panel-lighting-group</object-name>
 		<emission>
@@ -76,7 +76,7 @@
 			<green>0.0089</green>
 			<blue>0.0089</blue>
 		</emission>
-	</animation>
+	</animation>-->
 
 	<animation>
 		<type>material</type>
