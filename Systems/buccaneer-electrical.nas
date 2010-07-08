@@ -190,12 +190,12 @@ init_electrical = func {
 					7.5);	
 	cockpit_lighting = Output.new	("instrument-lighting",
 					"controls/lighting/instrument-lights",
-					0.75,
+					1,
 					"28VDC",
 					4.5);
 	panel_lighting = Output.new	("panel-floodlighting",
 					"controls/lighting/panel-floodlights",
-					0.1,
+					0.25,
 					"28VDC",
 					4.5);
 	taxi_lighting = Output.new	("taxi-lights",

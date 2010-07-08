@@ -83,6 +83,7 @@ var FNA_2 = 0;
 var FNA_3 = 0;
 var FNA_5 = 0;
 var FNA_6 = 0;
+var lever_sum = 0;
 
 ##
 # Initialize the fuel system
@@ -225,7 +226,7 @@ var init_fuel_system = func {
 	);
 
 	setlistener("controls/fuel/dump-valve-lever", func {
-		var lever= fuel_dump_lever_Node.getValue();
+		var lever = fuel_dump_lever_Node.getValue();
 		if(lever_sum >=2) direction = -1;
 		if(lever_sum <=0) direction = 1;
 		lever_sum += lever * direction;
