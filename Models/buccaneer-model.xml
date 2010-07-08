@@ -422,15 +422,21 @@
 	
 	-->
   <!-- hide all of the model not visible from the cockpit -->
-  <!--
-	-->
   <!-- order objects -->
 
   <animation>
     <type>select</type>
     <object-name>Radar-Panel</object-name>
     <condition>
+      <and>
       <property>sim/current-view/internal</property>
+      <not>
+      <equals>
+        <property>sim/current-view/name</property>
+        <value>Model Cockpit View</value>
+      </equals>
+      </not>
+      </and>
     </condition>
   </animation>
 
@@ -448,9 +454,17 @@
     <object-name>Tail-Pipe-Stbd</object-name>
     <object-name>Fuselage-Markings</object-name>
     <condition>
+      <or>
       <not>
         <property>sim/current-view/internal</property>
       </not>
+      <!--<not>-->
+        <equals>
+          <property>sim/current-view/name</property>
+          <value>Model Cockpit View</value>
+        </equals>
+      <!--</not>-->
+      </or>
     </condition>
   </animation>
 
@@ -460,9 +474,15 @@
     <object-name>Fan-Port</object-name>
     <object-name>Fan-Stbd</object-name>
     <condition>
+      <or>
       <not>
         <property>sim/current-view/internal</property>
       </not>
+        <equals>
+          <property>sim/current-view/name</property>
+          <value>Model Cockpit View</value>
+        </equals>
+      </or>
     </condition>
   </animation>
 
@@ -483,9 +503,17 @@
     <object-name>Gear-Nose</object-name>
     <object-name>Holdback</object-name>
     <condition>
-      <not>
-        <property>sim/current-view/internal</property>
-      </not>
+      <or>
+        <not>
+          <property>sim/current-view/internal</property>
+        </not>
+        <!--<not>-->
+        <equals>
+          <property>sim/current-view/name</property>
+          <value>Model Cockpit View</value>
+        </equals>
+        <!--</not>-->
+      </or>
     </condition>
   </animation>
 
@@ -497,6 +525,12 @@
     <condition>
       <not>
         <property>sim/current-view/internal</property>
+      </not>
+      <not>
+        <equals>
+          <property>sim/current-view/name</property>
+          <value>Model Cockpit View</value>
+        </equals>
       </not>
     </condition>
   </animation>
@@ -701,7 +735,7 @@
     </condition>
   </animation>
 
-  <animation>
+  <!--<animation>
     <type>select</type>
     <object-name>Observer-Head</object-name>
     <condition>
@@ -712,7 +746,7 @@
         </equals>
       </not>
     </condition>
-  </animation>
+  </animation>-->
 
   <animation>
     <type>select</type>
