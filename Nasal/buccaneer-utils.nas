@@ -176,14 +176,28 @@ initialize = func {
 	setlistener("/sim/signals/fdm-initialized", func {
 	dynamic_view.view_manager.calculate = dynamic_view.view_manager.default_plane; 
 	});
-
-	setlistener("sim/model/variant", func {
-		var index = getprop("sim/model/variant");
-		print("set model index", getprop("/sim/model/variant"));
-		aircraft.livery.set(index);
-	},
-	1);
 	
+	setlistener("/sim/model/formation/variant", func {
+		tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
+		tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
+		tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
+		tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
+		tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
+		tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
+		tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
+		tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
+		tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
+		},
+	1,
+	1);
+
+#	setlistener("sim/model/variant", func {
+#		var index = getprop("sim/model/variant");
+#		print("set model index", getprop("/sim/model/variant"));
+#		aircraft.livery.set(index);
+#	},
+#	1);
+
 	setlistener("/sim/model/livery/variant", func {
 		var name = getprop("sim/model/livery/variant");
 		forindex (var i; aircraft.livery.data){
