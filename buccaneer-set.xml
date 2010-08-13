@@ -211,7 +211,7 @@ Ver 0.0.1
 				<!--Back-->
 			</config>
 		</view>
-		<view n="197">
+		<!--<view n="197">
 			<name>Model Cockpit View</name>
 			<type>lookfrom</type>
 			<config>
@@ -240,7 +240,7 @@ Ver 0.0.1
 				<pitch-offset-deg>0</pitch-offset-deg>
 				<roll-offset-deg>0</roll-offset-deg>
 			</config>
-		</view>
+		</view>-->
 		<!--<view n="198">
 			<name>Model View</name>
 			<type>lookat</type>
@@ -275,7 +275,7 @@ Ver 0.0.1
 			</config>
 		</view>-->
 
-		<viewer>
+		<!--<viewer>
 			<eye>
 				<latitude-deg type="double">0</latitude-deg>
 				<longitude-deg type="double">0</longitude-deg>
@@ -292,7 +292,7 @@ Ver 0.0.1
 				<pitch-deg type="double">0</pitch-deg>
 				<roll-deg type="double">0</roll-deg>
 			</target>
-		</viewer>
+		</viewer>-->
 
 		<flaps>
 			<setting>0.00</setting>

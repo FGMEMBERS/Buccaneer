@@ -9,11 +9,11 @@ start : func {
 	   me.models = {};
 	   var ai = props.globals.getNode("/ai/models", 1);
 	   foreach (var m; [props.globals]
-	   ~ ai.getChildren("aircraft")
-		   ~ ai.getChildren("carrier")
-		   ~ ai.getChildren("multiplayer")
-		   ~ ai.getChildren("tanker"))
-		   me.models[m.getPath()] = m;
+	        ~ ai.getChildren("aircraft")
+		    ~ ai.getChildren("carrier")
+		    ~ ai.getChildren("multiplayer")
+		    ~ ai.getChildren("tanker"))
+		    me.models[m.getPath()] = m;
 
 	   me.lnr = [];
 	   append(me.lnr, setlistener("/ai/models/model-added", func(n) {

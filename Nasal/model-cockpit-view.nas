@@ -9,19 +9,19 @@ init : func {
 start : func {
 	   me.models = {};
 	   var ai = props.globals.getNode("/ai/models", 1);
-	   foreach (var m; [props.globals]	   
-	   ~ ai.getChildren("wingman"))
-		   me.models[m.getPath()] = m;
+	   foreach (var m; [props.globals]
+            ~ ai.getChildren("wingman"))
+            me.models[m.getPath()] = m;
 
 	   me.lnr = [];
-	   append(me.lnr, setlistener("/ai/models/model-added", func(n) {
-		   var m = props.globals.getNode(n.getValue(), 1);
-		   me.models[m.getPath()] = m;
-	   }));
-	   append(me.lnr, setlistener("/ai/models/model-removed", func(n) {
-		   var m = props.globals.getNode(n.getValue(), 1);
-		   delete(me.models, m.getPath());
-	   }));
+#	   append(me.lnr, setlistener("/ai/models/model-added", func(n) {
+#		   var m = props.globals.getNode(n.getValue(), 1);
+#		   me.models[m.getPath()] = m;
+#	   }));
+#	   append(me.lnr, setlistener("/ai/models/model-removed", func(n) {
+#		   var m = props.globals.getNode(n.getValue(), 1);
+#		   delete(me.models, m.getPath());
+#	   }));
 	   append(me.lnr, setlistener("/devices/status/mice/mouse/mode", func(n) {
 		   me.mouse_mode = n.getValue();
 	   }, 1));
@@ -117,8 +117,8 @@ next : func(v) {
 
 	   if (type == "wingman" and getprop("/sim/current-view/view-number") == 10){
 		   setprop("/sim/current-view/x-offset-m", -0.05);
-		   setprop("/sim/current-view/y-offset-m", 1.124);
-		   setprop("/sim/current-view/z-offset-m", me.offs = -5.5);
+		   setprop("/sim/current-view/y-offset-m", 3.124);
+		   setprop("/sim/current-view/z-offset-m", me.offs = -5.6);
 		   setprop("/sim/current-view/pitch-offset-deg", -20);
 #		   print("model cockpit view stuff");
 	   }
