@@ -98,7 +98,9 @@ Ver 0.0.1
 			<livery>
 				<variant type="string" >Side No 322</variant>
 			</livery>
-			<!--<variant type="int" >1</variant>-->
+			<formation>
+				<variant type="string">Diamond</variant>
+			</formation>
 			<buccaneer>
 				<controls>
 					<recuperator_check_safety type="float">0</recuperator_check_safety>
@@ -904,9 +906,6 @@ Ver 0.0.1
 			<file>Aircraft/Buccaneer/Nasal/buccaneer-utils.nas</file>
 			<file>Aircraft/Buccaneer/Systems/fuel-system.nas</file>
 		</buccaneer>
-		<!--<seavixen-instrumentation>
-			<file>Aircraft/SeaVixen/Systems/instrumentation.nas</file>
-		</seavixen-instrumentation>-->
 		<buccaneer-electrical>
 			<file>Aircraft/Buccaneer/Systems/buccaneer-electrical.nas</file>
 		</buccaneer-electrical>
@@ -922,9 +921,6 @@ Ver 0.0.1
 		<dual_control_copilot>
 			<file>Aircraft/Buccaneer/Nasal/pilot-dual-control.nas</file>
 		</dual_control_copilot>
-		<!--<model-view>
-      <file>Aircraft/Buccaneer/Nasal/model-view.nas</file>
-    </model-view>-->
 		<model_cockpit_view>
 			<file>Aircraft/Buccaneer/Nasal/model-cockpit-view.nas</file>
 		</model_cockpit_view>
