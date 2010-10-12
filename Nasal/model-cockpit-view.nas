@@ -118,7 +118,7 @@ next : func(v) {
 	   if (type == "wingman" and getprop("/sim/current-view/view-number") == 10){
 		   setprop("/sim/current-view/x-offset-m", -0.05);
 		   setprop("/sim/current-view/y-offset-m", 1.05);
-		   setprop("/sim/current-view/z-offset-m", me.offs = -5.5);
+		   setprop("/sim/current-view/z-offset-m", me.offs = 4.025);
 		   setprop("/sim/current-view/pitch-offset-deg", -20);
 #		   print("model cockpit view stuff");
 	   }
