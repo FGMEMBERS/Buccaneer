@@ -504,6 +504,9 @@ Ver 0.0.1
 		<gear>
 			<brake-parking>1</brake-parking>
 			<tailwheel-lock>false</tailwheel-lock>
+			<launchbar>
+				<acceleration-norm type="float">0.75</acceleration-norm>
+			</launchbar>
 		</gear>
 		<flight>
 			<flaps-alternate-extension type="double">1</flaps-alternate-extension>
@@ -517,6 +520,7 @@ Ver 0.0.1
 			<navigation-lights type="bool">true</navigation-lights>
 			<instrument-lights type="bool">true</instrument-lights>
 			<panel-floodlights type="double">0.25</panel-floodlights>
+			<taxi-light type="double">0</taxi-light>
 		</lighting>
 	</controls>
 
@@ -545,7 +549,7 @@ Ver 0.0.1
 	</systems>
 
 	<accelerations>
-		<pilot_g_damped type="double">1</pilot_g_damped>
+		<pilot-g-damped type="double">1</pilot-g-damped>
 	</accelerations>
 
 
@@ -582,7 +586,7 @@ Ver 0.0.1
 				<desc>Show configuration dialog</desc>
 				<binding>
 					<command>nasal</command>
-					<script>buccaneer.formation_dialog.toggle()</script>
+					<script>formation.formation_dialog.toggle()</script>
 				</binding>
 			</key>
 			<!-- map keys for arrester hook -->
@@ -909,9 +913,9 @@ Ver 0.0.1
 		<buccaneer-electrical>
 			<file>Aircraft/Buccaneer/Systems/buccaneer-electrical.nas</file>
 		</buccaneer-electrical>
-		<gunview>
-			<file>Aircraft/Buccaneer/Nasal/gunview.nas</file>
-		</gunview>
+		<buccaneer-air-bleed>
+			<file>Aircraft/Buccaneer/Systems/buccaneer-air-bleed.nas</file>
+		</buccaneer-air-bleed>
 		<dual_control_tools>
 			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
 		</dual_control_tools>
@@ -921,10 +925,15 @@ Ver 0.0.1
 		<dual_control_copilot>
 			<file>Aircraft/Buccaneer/Nasal/pilot-dual-control.nas</file>
 		</dual_control_copilot>
+		<gunview>
+			<file>Aircraft/Buccaneer/Nasal/gunview.nas</file>
+		</gunview>
 		<model_cockpit_view>
 			<file>Aircraft/Buccaneer/Nasal/model-cockpit-view.nas</file>
 		</model_cockpit_view>
-
+		<formation>
+			<file>Aircraft/Generic/formation.nas</file>
+		</formation>
 	</nasal>
 
 	<environment>
