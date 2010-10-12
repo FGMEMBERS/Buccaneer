@@ -111,6 +111,16 @@
     </offsets>
   </over-main-panel>
 
+	<!-- E2b -->
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/e2b.xml</path>
+		<offsets>
+			<x-m>3.52034</x-m>
+			<y-m>0</y-m>
+			<z-m>1.17373</z-m>
+		</offsets>
+	</model>
+
   <model>
     <path>Aircraft/Buccaneer/Instruments/asi.xml</path>
     <offsets>
@@ -2920,7 +2930,7 @@
   </model>
 
   <model>
-    <path>Aircraft/Buccaneer/Models/Effects/tiptrail-tail-stbd.xml</path>
+    <path>Aircraft/Buccaneer/Models/Effects/tiptrail-tail-port.xml</path>
     <name>tiptrail-t-s</name>
     <offsets>
       <x-m>0</x-m>
