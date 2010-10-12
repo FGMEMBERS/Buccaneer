@@ -512,6 +512,7 @@ Ver 0.0.1
 			<navigation-lights type="bool">true</navigation-lights>
 			<instrument-lights type="double">0.75</instrument-lights>
 			<panel-floodlights type="double">0.3</panel-floodlights>
+			<taxi-light type="double">0</taxi-light>
 		</lighting>
 		<switches>
 			<auto-stabs>
