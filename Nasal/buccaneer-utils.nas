@@ -138,22 +138,22 @@ initialize = func {
 	aircraft.steering.init();
 
 	# initialise dialogs 
-	aircraft.data.add("sim/model/formation/variant");
-	formation_dialog = gui.OverlaySelector.new("Select Formation",
-		"Aircraft/Buccaneer/Formations",
-		"sim/model/formation/variant", nil, func(no) {
-			formation_variant_Node.setIntValue(no);
-			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
-			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
-			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
-			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
-			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
-			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
-			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
-			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
-			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
-		}
-	);
+#aircraft.data.add("sim/model/formation/variant");
+#	formation_dialog = gui.OverlaySelector.new("Select Formation",
+#		"Aircraft/Buccaneer/Formations",
+#		"sim/model/formation/variant", nil, func(no) {
+#			formation_variant_Node.setIntValue(no);
+#			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
+#			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
+#			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
+#			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
+#			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
+#			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
+#			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
+#			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
+#			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
+#		}
+#	);
 	
 	aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 		"sim/model/livery/variant",
@@ -185,27 +185,27 @@ initialize = func {
 	dynamic_view.view_manager.calculate = dynamic_view.view_manager.default_plane; 
 	});
 	
-	setlistener("/sim/model/formation/variant", func {
-		print("formation listener: ", getprop("/sim/model/formation/position/x-offset"));
-		if (tgt_x_offset_Node != nil){
-			print("formation listener getting", getprop("/sim/model/formation/position/x-offset"));
-			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
-			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
-			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
-		}
-		if (tgt_x_offset_1_Node != nil){
-			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
-			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
-			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
-		}
-		if (tgt_x_offset_2_Node != nil){
-			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
-			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
-			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
-		}
-		},
-	0,
-	1);
+#	setlistener("/sim/model/formation/variant", func {
+#		print("formation listener: ", getprop("/sim/model/formation/position/x-offset"));
+#		if (tgt_x_offset_Node != nil){
+#			print("formation listener getting", getprop("/sim/model/formation/position/x-offset"));
+#			tgt_x_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/x-offset"));
+#			tgt_y_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/y-offset"));
+#			tgt_z_offset_Node.setDoubleValue(getprop("/sim/model/formation/position/z-offset"));
+#		}
+#		if (tgt_x_offset_1_Node != nil){
+#			tgt_x_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/x-offset"));
+#			tgt_y_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/y-offset"));
+#			tgt_z_offset_1_Node.setDoubleValue(getprop("/sim/model/formation/position[1]/z-offset"));
+#		}
+#		if (tgt_x_offset_2_Node != nil){
+#			tgt_x_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/x-offset"));
+#			tgt_y_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/y-offset"));
+#			tgt_z_offset_2_Node.setDoubleValue(getprop("/sim/model/formation/position[2]/z-offset"));
+#		}
+#		},
+#	0,
+#	1);
 
 #	setlistener("sim/model/variant", func {
 #		var index = getprop("sim/model/variant");
