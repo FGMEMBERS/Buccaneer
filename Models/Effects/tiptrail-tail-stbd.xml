@@ -4,11 +4,12 @@
 
 	<particlesystem>
 		<name>tiptrail-tail-s</name>
-		<type>normal</type>
-		<texture>smoke.png</texture>
+		<type>trail</type>
+		<texture>continous_smoke.rgb</texture>
 		<emissive>false</emissive>
 		<lighting>true</lighting>
-
+		<pass>true</pass>
+		
 		<offsets>
 			<x-m>17.4199</x-m>
 			<y-m>0</y-m>
@@ -119,7 +120,7 @@
 					</alpha>
 				</color>
 				<size>
-					<value>1.0</value>
+					<value>0.5</value>
 				</size>
 			</end>
 			<life-sec>
