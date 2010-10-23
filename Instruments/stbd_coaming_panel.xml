@@ -367,14 +367,14 @@
 		<object-name>blind-off</object-name>
 		<condition>
 			<or>
-			<less-than-equals>
-				<property>systems/electrical/outputs/flight-instruments</property>
-				<value>113</value>
-			</less-than-equals>
-			<less-than>
-				<property>sim/model/buccaneer/controls/autopilot-selector</property>
-				<value>1</value>
-			</less-than>
+				<less-than-equals>
+					<property>systems/electrical/outputs/flight-instruments</property>
+					<value>113</value>
+				</less-than-equals>
+				<less-than>
+					<property>sim/model/buccaneer/controls/autopilot-selector</property>
+					<value>1</value>
+				</less-than>
 			</or>
 		</condition>
 	</animation>
@@ -412,8 +412,8 @@
 			<z2-m>-0.0104611</z2-m>
 		</axis>
 	</animation>
-	
-	
+
+
 	<animation>
 		<type>rotate</type>
 		<condition>
@@ -439,13 +439,13 @@
 			</entry>
 		</interpolation>
 		<axis>
-		<x1-m>0.00165862</x1-m>
-		<y1-m>0.0374315</y1-m>
-		<z1-m>0.0104611</z1-m>
-		<x2-m>0.00165862</x2-m>
-		<y2-m>0.0374315</y2-m>
-		<z2-m>-0.0104611</z2-m>
-	</axis>
+			<x1-m>0.00165862</x1-m>
+			<y1-m>0.0374315</y1-m>
+			<z1-m>0.0104611</z1-m>
+			<x2-m>0.00165862</x2-m>
+			<y2-m>0.0374315</y2-m>
+			<z2-m>-0.0104611</z2-m>
+		</axis>
 	</animation>
 
 	<animation>
@@ -472,14 +472,14 @@
 				<dep>-120</dep>
 			</entry>
 		</interpolation>
-			<axis>
-				<x1-m>0.00165862</x1-m>
-				<y1-m>0.0408455</y1-m>
-				<z1-m>0.0104611</z1-m>
-				<x2-m>0.00165862</x2-m>
-				<y2-m>0.0408455</y2-m>
-				<z2-m>-0.0104611</z2-m>
-			</axis>
+		<axis>
+			<x1-m>0.00165862</x1-m>
+			<y1-m>0.0408455</y1-m>
+			<z1-m>0.0104611</z1-m>
+			<x2-m>0.00165862</x2-m>
+			<y2-m>0.0408455</y2-m>
+			<z2-m>-0.0104611</z2-m>
+		</axis>
 	</animation>
 	<animation>
 		<type>rotate</type>
@@ -506,13 +506,127 @@
 			</entry>
 		</interpolation>
 		<axis>
-		<x1-m>0.00165862</x1-m>
-		<y1-m>0.0442775</y1-m>
-		<z1-m>0.0104611</z1-m>
-		<x2-m>0.00165862</x2-m>
-		<y2-m>0.0442775</y2-m>
-		<z2-m>-0.0104611</z2-m>
-	</axis>
+			<x1-m>0.00165862</x1-m>
+			<y1-m>0.0442775</y1-m>
+			<z1-m>0.0104611</z1-m>
+			<x2-m>0.00165862</x2-m>
+			<y2-m>0.0442775</y2-m>
+			<z2-m>-0.0104611</z2-m>
+		</axis>
+	</animation>
+
+	<!-- Instinctive Cut Out -->
+
+	<animation>
+		<type>translate</type>
+		<object-name>ButtonICO</object-name>
+		<property>sim/model/buccaneer/controls/button-ico</property>
+		<factor>0.005</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>ButtonICO</object-name>
+		<visible>true</visible>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>controls/autoflight/autopilot/ico</property>
+				<value type="double">0</value>
+			</binding>
+			<binding>
+				<command>property-assign</command>
+				<property>sim/model/buccaneer/controls/button-ico</property>
+				<value type="double">1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>sim/model/buccaneer/controls/button-ico</property>
+					<value type="double">0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<!-- Rain Clear -->
+
+	<animation>
+		<type>select</type>
+		<object-name>lamp-rain-clr</object-name>
+		<condition>
+			<property>sim/model/buccaneer/controls/light-rain-clear</property>
+			<greater-than>
+				<property>systems/electrical/outputs/radar</property>
+				<value>23</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>light-rain-clr</object-name>
+		<condition>
+				<greater-than>
+					<property>systems/electrical/outputs/radar</property>
+					<value>23</value>
+				</greater-than>
+		</condition>
+
+		<emission>
+			<factor-prop>sim/model/buccaneer/controls/light-rain-clear</factor-prop>
+			<offset-prop>systems/electrical/outputs/panel-floodlighting</offset-prop>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<transparency>
+			<alpha-prop>sim/model/buccaneer/controls/light-rain-clear</alpha-prop>
+			<factor>-1.0</factor>
+			<offset>1</offset>-->
+			<max>0.99</max>
+			<min>0.9</min>
+		</transparency>
+	</animation>
+
+
+	<animation>
+		<type>pick</type>
+		<object-name>light-rain-clr</object-name>
+		<visible>true</visible>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<!--<binding>
+				<command>property-assign</command>
+				<property>controls/autoflight/autopilot/ico</property>
+				<value type="double">0</value>
+			</binding>-->
+			<binding>
+				<command>property-assign</command>
+				<property>sim/model/buccaneer/controls/light-rain-clear</property>
+				<value type="double">1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>sim/model/buccaneer/controls/light-rain-clear</property>
+					<value type="double">0</value>
+				</binding>
+			</mod-up>
+		</action>
 	</animation>
 
 	<!-- Panel Lighting -->
