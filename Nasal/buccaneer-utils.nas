@@ -44,6 +44,8 @@ for(var i = 0; i < 3; i = i + 1){
     setprop("/sim/model/formation/position[" ~ i ~ "]/z-offset", 0);
 }
 
+setprop("/controls/autoflight/autopilot/ico", 0);
+
 model_variant_Node = props.globals.getNode("sim/model/livery/variant", 1);
 model_variant_Node.setIntValue(0);
 
@@ -348,6 +350,104 @@ initialize = func {
 	1,
 	0);
 
+setlistener("/controls/gear/brake-left", func (n){
+		var brake = n.getValue();
+		var wow1 = getprop("/gear/gear[1]/wow");
+        var wow2 = getprop("/gear/gear[2]/wow");
+
+        if (!wow1 and !wow2 and brake != 0){
+            setprop("/controls/autoflight/autopilot/ico", 1);
+            print ("/controls/autoflight/autopilot/ico", 1);
+        } else {
+            print ("/controls/autoflight/autopilot/ico", 0);
+        }
+
+	},
+	1,
+	0);
+
+    setlistener("/controls/gear/brake-right", func (n){
+		var brake = n.getValue();
+		var wow1 = getprop("/gear/gear[1]/wow");
+        var wow2 = getprop("/gear/gear[2]/wow");
+
+        if (!wow1 and !wow2 and brake != 0){
+            setprop("/controls/autoflight/autopilot/ico", 1);
+            print ("/controls/autoflight/autopilot/ico", 1);
+        } else {
+            print ("/controls/autoflight/autopilot/ico", 0);
+        }
+
+	},
+	1,
+	0);
+
+
+    setlistener("autopilot/locks/altitude", func (n){
+        var lock1 = "altitude-hold-baro";
+        var lock2 = "altitude-hold-radio";
+        var lock3 = "mach-climb";
+        var ico = getprop("/controls/autoflight/autopilot/ico");
+
+        pitchloopid += 1;
+
+        if (n.getValue() == lock1 or n.getValue() == lock2 or n.getValue() == lock3 
+            and ico == 0){
+            print("utils pitch loopid lock", pitchloopid);
+            pitchloop(pitchloopid);
+        } else {
+            print("utils pitch loopid unlock", pitchloopid);
+            pitchloopid = 0;
+        }
+
+    },
+        1,
+        0);
+
+    setlistener("/autopilot/locks/heading", func (n){
+        var lock = "dg-heading-hold";
+        var ico = getprop("/controls/autoflight/autopilot/ico");
+
+        rollloopid += 1;
+
+        if (n.getValue() == lock and ico == 0){
+            print("utils loopid lock", rollloopid);
+            rollloop(rollloopid);
+        } else {
+            print("utils loopid unlock", rollloopid);
+            rollloopid = 0;
+        }
+
+    },
+        1,
+        0);
+
+    setlistener("/controls/autoflight/autopilot/ico", func (n){
+        var lock = getprop("/autopilot/locks/heading");
+        var lock1 = getprop("/autopilot/locks/altitude");
+        rollloopid += 1;
+        pitchloopid += 1;
+
+        if (n.getValue() == 1 ){
+            print("utils ico unlock", rollloopid);
+            rollloopid = 0;
+            pitchloopid = 0;
+        } else {
+
+            if(lock == "dg-heading-hold"){
+                print("utils ico lock", rollloopid);
+            rollloop(rollloopid);
+            }
+
+            if(lock1 == "altitude-hold-baro" or lock1 == "altitude-hold-radio"
+            or lock1 == "mach-climb"){
+                pitchloop(pitchloopid);
+            }
+        }
+
+    },
+        1,
+        0);
 
 	# set it running on the next update cycle
 	settimer(update, 0);
@@ -892,6 +992,24 @@ Flow = {
 }; #
 
 # =============================== end rain stuff ================================
+# ===== functions which keep the ailerons/elevators zeroised ====================
+#
+
+var rollloopid = 0;
+
+     var rollloop = func(id) {
+         id != rollloopid and return;
+         setprop("/controls/flight/aileron", 0);
+         settimer(func { rollloop(id) }, 0);
+     }
+
+     var pitchloopid = 0;
+
+     var pitchloop = func(id) {
+         id != pitchloopid and return;
+         setprop("/controls/flight/elevator", 0);
+         settimer(func { pitchloop(id) }, 0);
+     }
 
 # Fire it up
 
