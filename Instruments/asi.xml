@@ -201,8 +201,6 @@
 		<object-name>terrain_light</object-name>
 		<condition>
 			<property>sim/alarms/terrain-warning</property>
-		</condition>
-		<condition>
 			<greater-than>
 				<property>systems/electrical/outputs/radar</property>
 				<value>23</value>
