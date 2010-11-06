@@ -45,6 +45,10 @@ for(var i = 0; i < 3; i = i + 1){
 }
 
 setprop("/controls/autoflight/autopilot/ico", 0);
+setprop("sim/alarms/gear-up", 0);
+setprop("velocities/mach",0);
+setprop("gear/gear[0]/position-norm",0);
+setprop("sim/alarms/gear-up-test",0);
 
 model_variant_Node = props.globals.getNode("sim/model/livery/variant", 1);
 model_variant_Node.setIntValue(0);
@@ -104,6 +108,8 @@ var time = 0;
 var dt = 0;
 var last_time = 0.0;
 var raining = 0;
+var mach = 0;
+var gear = 0;
 
 var run_tyresmoke0 = 0;
 var run_tyresmoke1 = 0;
@@ -157,10 +163,10 @@ initialize = func {
 #		}
 #	);
 	
-	aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
-		"sim/model/livery/variant",
-		"sim/model/livery/index"
-	);
+aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
+	"sim/model/livery/variant",
+	"sim/model/livery/index"
+);
 
 	# initialize objects
 	pilot_g = PilotG.new();
@@ -209,12 +215,12 @@ initialize = func {
 #	0,
 #	1);
 
-#	setlistener("sim/model/variant", func {
-#		var index = getprop("sim/model/variant");
-#		print("set model index", getprop("/sim/model/variant"));
-#		aircraft.livery.set(index);
-#	},
-#	1);
+	setlistener("sim/model/variant", func {
+		var index = getprop("sim/model/variant");
+		print("set model index", getprop("/sim/model/variant"));
+		aircraft.livery.set(index);
+	},
+	1);
 
 	setlistener("/sim/model/livery/variant", func {
 		var name = getprop("sim/model/livery/variant");
@@ -465,7 +471,7 @@ wiper.open();
 ##
 var update = func {
 
-	time = getprop("sim/time/elapsed-sec");
+	var time = getprop("sim/time/elapsed-sec");
 	dt = time - last_time;
 	last_time = time;
 
@@ -485,6 +491,14 @@ var update = func {
 		wiper.close();
 	}
 
+    mach = getprop("velocities/mach");
+    gear = getprop("gear/gear[0]/position-norm");
+    test = getprop("sim/alarms/gear-up-test");
+
+    if ( (mach < 0.25 and gear == 0) or test == 1)
+        setprop("sim/alarms/gear-up", 1);
+    else
+        setprop("sim/alarms/gear-up", 0);
 
 #print ("run_tyresmoke ",run_tyresmoke);
 	
