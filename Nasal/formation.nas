@@ -1,6 +1,6 @@
 #####################################################################################
 #                                                                                   #
-#  this script runs the foramation selection utility                                #
+#  this script runs the formation selection utility                                #
 #                                                                                   #
 #####################################################################################
 
