@@ -195,7 +195,7 @@ init_electrical = func {
 					4.5);
 	panel_lighting = Output.new	("panel-floodlighting",
 					"controls/lighting/panel-floodlights",
-					0.25,
+					0.4,
 					"28VDC",
 					4.5);
 	taxi_lighting = Output.new	("taxi-lights",
