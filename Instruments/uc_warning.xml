@@ -6,18 +6,65 @@
 
 	<animation>
 		<type>select</type>
-		<object-name>light</object-name>
 		<object-name>lamp</object-name>
 		<condition>
-			<less-than>
-				<property>velocities/mach</property>
-				<value>0.25</value>
-			</less-than>
+			<and>
+				<greater-than>
+					<property>systems/electrical/outputs/radar</property>
+					<value>23</value>
+				</greater-than>
 				<equals>
-					<property>gear/gear[0]/position-norm</property>
-					<value>0</value>
+					<property>sim/alarms/gear-up</property>
+					<value>1</value>
 				</equals>
+			</and>
 		</condition>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>light</object-name>
+		<condition>
+			<greater-than>
+				<property>systems/electrical/outputs/radar</property>
+				<value>23</value>
+			</greater-than>
+		</condition>
+		<emission>
+			<factor-prop>sim/alarms/gear-up</factor-prop>
+			<offset-prop>systems/electrical/outputs/panel-floodlighting</offset-prop>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<transparency>
+			<alpha-prop>sim/alarms/gear-up</alpha-prop>
+			<factor>-1.0</factor>
+			<offset>1</offset>
+			<max>0.95</max>
+			<min>0.75</min>
+	</transparency>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>light_body</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>sim/alarms/gear-up-test</property>
+				<value>1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>sim/alarms/gear-up-test</property>
+					<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
 	</animation>
 
 	<!-- Panel Lighting -->
@@ -30,10 +77,6 @@
 			<green>0.0089</green>
 			<blue>0.0089</blue>
 		</emission>
-	</animation>
-
-	<animation>
-		<type>noshadow</type>
 	</animation>
 
 	<!-- *** LoD *** -->

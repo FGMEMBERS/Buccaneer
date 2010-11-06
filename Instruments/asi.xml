@@ -118,39 +118,6 @@
 		</axis>
 	</animation>
 
-	<animation>
-		<type>material</type>
-		<object-name>face</object-name>
-		<emission>
-			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
-			<red>0.03125</red>
-			<green>0.0089</green>
-			<blue>0.0089</blue>
-		</emission>
-	</animation>
-
-	<animation>
-		<type>material</type>
-		<object-name>Needle1</object-name>
-		<emission>
-			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
-			<red>0.03125</red>
-			<green>0.0089</green>
-			<blue>0.0089</blue>
-		</emission>
-	</animation>
-	
-	<animation>
-		<type>material</type>
-		<object-name>Needle2</object-name>
-		<emission>
-			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
-			<red>0.03125</red>
-			<green>0.0089</green>
-			<blue>0.0089</blue>
-		</emission>
-	</animation>
-
 	<!-- AoA Indexer -->
 
 	<animation>
@@ -198,7 +165,7 @@
 
 	<animation>
 		<type>select</type>
-		<object-name>terrain_light</object-name>
+		<object-name>terrain_lamp</object-name>
 		<condition>
 			<property>sim/alarms/terrain-warning</property>
 			<greater-than>
@@ -207,6 +174,33 @@
 			</greater-than>
 		</condition>
 	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>terrain_light</object-name>
+		<condition>
+			<greater-than>
+				<property>systems/electrical/outputs/radar</property>
+				<value>23</value>
+			</greater-than>
+		</condition>
+
+		<emission>
+			<factor-prop>sim/alarms/terrain-warning</factor-prop>
+			<offset-prop>systems/electrical/outputs/panel-floodlighting</offset-prop>
+			<red>1</red>
+			<green>0.20</green>
+			<blue>0</blue>
+		</emission>
+		<transparency>
+			<alpha-prop>sim/alarms/terrain-warning</alpha-prop>
+			<factor>-1.0</factor>
+			<offset>1</offset>
+			<max>0.99</max>
+			<min>0.75</min>
+		</transparency>
+	</animation>
+	
 	<animation>
 		<type>pick</type>
 		<object-name>light_body</object-name>
@@ -226,6 +220,29 @@
 				</binding>
 			</mod-up>
 		</action>
+	</animation>
+
+	<!-- Panel Lighting -->
+	<animation>
+		<type>material</type>
+		<object-name>panel-lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
 	</animation>
 
 	<!-- *** LoD *** -->

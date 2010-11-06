@@ -584,7 +584,6 @@
 					<value>23</value>
 				</greater-than>
 		</condition>
-
 		<emission>
 			<factor-prop>sim/model/buccaneer/controls/light-rain-clear</factor-prop>
 			<offset-prop>systems/electrical/outputs/panel-floodlighting</offset-prop>
@@ -595,9 +594,9 @@
 		<transparency>
 			<alpha-prop>sim/model/buccaneer/controls/light-rain-clear</alpha-prop>
 			<factor>-1.0</factor>
-			<offset>1</offset>-->
-			<max>0.99</max>
-			<min>0.9</min>
+			<offset>1</offset>
+			<max>0.95</max>
+			<min>0.75</min>
 		</transparency>
 	</animation>
 
