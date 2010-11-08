@@ -49,6 +49,12 @@ setprop("sim/alarms/gear-up", 0);
 setprop("velocities/mach",0);
 setprop("gear/gear[0]/position-norm",0);
 setprop("sim/alarms/gear-up-test",0);
+setprop("sim/model/buccaneer/controls/lp_rotating",0);
+setprop("sim/model/buccaneer/controls/lp_ospeed",0);
+setprop("sim/model/buccaneer/controls/lp_ospeed_test",0);
+setprop("sim/model/buccaneer/controls/lp_ospeed[1]",0);
+setprop("sim/model/buccaneer/controls/lp_ospeed_test[1]",0);
+
 
 model_variant_Node = props.globals.getNode("sim/model/livery/variant", 1);
 model_variant_Node.setIntValue(0);
@@ -110,6 +116,8 @@ var last_time = 0.0;
 var raining = 0;
 var mach = 0;
 var gear = 0;
+var n1 = 0;
+var n2 = 0;
 
 var run_tyresmoke0 = 0;
 var run_tyresmoke1 = 0;
@@ -499,6 +507,31 @@ var update = func {
         setprop("sim/alarms/gear-up", 1);
     else
         setprop("sim/alarms/gear-up", 0);
+
+    n1 = getprop("engines/engine[0]/n1");
+    n2 = getprop("engines/engine[0]/n2");
+    n11 = getprop("engines/engine[0]/n1");
+    n21 = getprop("engines/engine[0]/n2");
+
+
+    if (n1 >= 5 or n2 >= 5 or n11 >= 5 or n21 >= 5)
+        setprop("sim/model/buccaneer/controls/lp_rotating",1);
+    else
+        setprop("sim/model/buccaneer/controls/lp_rotating",0);
+
+    test_lp_ospeed  = getprop("sim/model/buccaneer/controls/lp_ospeed_test");
+    test_lp_ospeed1 = getprop("sim/model/buccaneer/controls/lp_ospeed_test[1]");
+
+    if ( n2 > 98 or test_lp_ospeed == 1)
+        setprop("sim/model/buccaneer/controls/lp_ospeed", 1);
+    else
+        setprop("sim/model/buccaneer/controls/lp_ospeed", 0);
+
+    if ( n21 > 98 or test_lp_ospeed1 == 1)
+        setprop("sim/model/buccaneer/controls/lp_ospeed[1]", 1);
+    else
+        setprop("sim/model/buccaneer/controls/lp_ospeed[1]", 0);
+
 
 #print ("run_tyresmoke ",run_tyresmoke);
 	
