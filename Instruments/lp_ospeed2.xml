@@ -6,23 +6,80 @@
 
 	<animation>
 		<type>select</type>
+		<object-name>lamp</object-name>
+		<condition>
+			<and>
+				<property>sim/model/buccaneer/controls/lp_ospeed[1]</property>
+				<value>1</value>
+				<greater-than>
+					<property>systems/electrical/outputs/radar</property>
+					<value>23</value>
+				</greater-than>
+			</and>
+		</condition>
+
+	</animation>
+
+	<animation>
+		<type>material</type>
 		<object-name>light</object-name>
 		<condition>
 			<greater-than>
-				<property>engines/engine[1]/n2</property>
-				<value>98</value>
+				<property>systems/electrical/outputs/radar</property>
+				<value>23</value>
 			</greater-than>
 		</condition>
+		<emission>
+			<factor-prop>sim/model/buccaneer/controls/lp_ospeed[1]</factor-prop>
+			<offset-prop>systems/electrical/outputs/panel-floodlighting</offset-prop>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<transparency>
+			<alpha-prop>sim/model/buccaneer/controls/lp_ospeed</alpha-prop>
+			<factor>-1.0</factor>
+			<offset>1</offset>
+			<max>0.95</max>
+			<min>0.75</min>
+		</transparency>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>light</object-name>
+		<visible>true</visible>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<!--<binding>
+				<command>property-assign</command>
+				<property>controls/autoflight/autopilot/ico</property>
+				<value type="double">0</value>
+			</binding>-->
+			<binding>
+				<command>property-assign</command>
+				<property>sim/model/buccaneer/controls/lp_ospeed_test[1]</property>
+				<value type="double">1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>sim/model/buccaneer/controls/lp_ospeed_test[1]</property>
+					<value type="double">0</value>
+				</binding>
+			</mod-up>
+		</action>
 	</animation>
 
 	<animation>
 		<type>material</type>
 		<object-name>body</object-name>
 		<emission>
-			<factor-prop>controls/lighting/panel-norm</factor-prop>
-			<red>0.75</red>
-			<green>0.25</green>
-			<blue>0.25</blue>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
 		</emission>
 	</animation>
 
