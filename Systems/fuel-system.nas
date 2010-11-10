@@ -48,6 +48,8 @@ PortEngine		= props.globals.getNode("engines").getChild("engine", 0);
 StbdEngine		= props.globals.getNode("engines").getChild("engine", 1);
 PortFuel		= PortEngine.getNode("fuel-consumed-lbs", 1);
 StbdFuel		= StbdEngine.getNode("fuel-consumed-lbs", 1);
+PortFuelFlow	= PortEngine.getNode("fuel-flow-gph", 1);
+StbdFuelFlow	= StbdEngine.getNode("fuel-flow-gph", 1);
 DumpValve		= props.globals.getNode("controls/fuel/dump-valve", 1);
 CrossConnect	= props.globals.getNode("controls/fuel/cross-connect", 1);
 TransferFwd		= props.globals.getNode("controls/fuel/TX-fwd", 1);
@@ -55,9 +57,11 @@ TransferAft		= props.globals.getNode("controls/fuel/TX-aft", 1);
 TotalFuelLbs	= props.globals.getNode("consumables/fuel/total-fuel-lbs", 1);
 TotalFuelGals	= props.globals.getNode("consumables/fuel/total-fuel-gals", 1);
 TotalFuelNorm	= props.globals.getNode("consumables/fuel/total-fuel-norm", 1);
+TotalFuelRate	= props.globals.getNode("consumables/fuel/total-fuel-rate-lbsph", 1);
+
 
 PortEngine.getNode("out-of-fuel", 1);
-StbdEngine.getNode("out-of-fuel", 1); 
+StbdEngine.getNode("out-of-fuel", 1);
 
 #variables 
 var amount_stbd = amount_port = 0;
@@ -266,6 +270,10 @@ var fuel_update = func {
 	#print("dt " , dt);
 	last_time = time;
 
+    #calculate fuel flow rate
+    var total_flow_rate_gph = PortFuelFlow.getValue() + PortFuelFlow.getValue();
+    print ("total_flow_rate_gph ", total_flow_rate_gph);
+
 	#calculate total fuel in tanks (not including small amount in proportioners)
 	total_gals = total_lbs = 0;
 
@@ -277,6 +285,7 @@ var fuel_update = func {
 	TotalFuelLbs.setValue(total_lbs);
 	TotalFuelGals.setValue(total_gals);
 	TotalFuelNorm.setValue(total_gals / (total_cap_port + total_cap_stbd));
+    TotalFuelRate.setValue(total_flow_rate_gph * 6.3);
 
 	# if total fuel is less than 4000 lbs, close the dunp valve
 	if(TotalFuelLbs.getValue() < 4000) {
