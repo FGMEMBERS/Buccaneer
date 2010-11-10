@@ -270,9 +270,8 @@ var fuel_update = func {
 	#print("dt " , dt);
 	last_time = time;
 
-    #calculate fuel flow rate
-    var total_flow_rate_gph = PortFuelFlow.getValue() + PortFuelFlow.getValue();
-    print ("total_flow_rate_gph ", total_flow_rate_gph);
+	#calculate fuel flow rate
+	var total_flow_rate_gph = PortFuelFlow.getValue() + PortFuelFlow.getValue();
 
 	#calculate total fuel in tanks (not including small amount in proportioners)
 	total_gals = total_lbs = 0;
@@ -285,7 +284,7 @@ var fuel_update = func {
 	TotalFuelLbs.setValue(total_lbs);
 	TotalFuelGals.setValue(total_gals);
 	TotalFuelNorm.setValue(total_gals / (total_cap_port + total_cap_stbd));
-    TotalFuelRate.setValue(total_flow_rate_gph * 6.3);
+	TotalFuelRate.setValue(total_flow_rate_gph * 6.3);
 
 	# if total fuel is less than 4000 lbs, close the dunp valve
 	if(TotalFuelLbs.getValue() < 4000) {
