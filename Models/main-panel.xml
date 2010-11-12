@@ -149,6 +149,16 @@
 	</model>
 
 	<model>
+		<path>Aircraft/Buccaneer/Instruments/fuel-used-total.xml</path>
+		<offsets>
+			<x-m alias="../../../main-panel/offsets/x-m"/>
+			<y-m>0.33659</y-m>
+			<z-m>0.489736</z-m>
+		</offsets>
+	</model>
+
+
+	<model>
 		<path>Aircraft/Buccaneer/Instruments/mag_indicator_oilp-2.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>

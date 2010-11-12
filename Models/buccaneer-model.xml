@@ -648,10 +648,10 @@
     </condition>
   </animation>
 
-  <animation>
+  <!--<animation>
     <type>select</type>
     <object-name>Place-Holders</object-name>
-  </animation>
+  </animation>-->
 
   <model>
     <path>Aircraft/Buccaneer/Models/Effects/light-cone.xml</path>

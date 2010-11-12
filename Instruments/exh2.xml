@@ -39,9 +39,18 @@
 	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
-		<object-name>face</object-name>
-		<object-name>bezelinside</object-name>
-		<object-name>jpt-Needle1</object-name>
+		<object-name>panel-lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>lighting-group</object-name>
 		<emission>
 			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 			<red>0.03125</red>

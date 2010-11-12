@@ -28,7 +28,7 @@
 		</axis>
 	</animation>
 	<animation>
-	<type>rotate</type>
+		<type>rotate</type>
 		<object-name>rpm-Needle2</object-name>
 		<property>engines/engine/n1</property>
 		<factor>36</factor>
@@ -47,6 +47,18 @@
 	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
+		<object-name>panel-lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>lighting-group</object-name>
 		<emission>
 			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 			<red>0.03125</red>

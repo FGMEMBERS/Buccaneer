@@ -58,6 +58,7 @@ TotalFuelLbs	= props.globals.getNode("consumables/fuel/total-fuel-lbs", 1);
 TotalFuelGals	= props.globals.getNode("consumables/fuel/total-fuel-gals", 1);
 TotalFuelNorm	= props.globals.getNode("consumables/fuel/total-fuel-norm", 1);
 TotalFuelRate	= props.globals.getNode("consumables/fuel/total-fuel-rate-lbsph", 1);
+TotalFuelUsed	= props.globals.getNode("consumables/fuel/total-used-lbs", 1);
 
 
 PortEngine.getNode("out-of-fuel", 1);
@@ -69,6 +70,7 @@ var amount_2 = amount_6 = 0;
 var amount_3 = amount_5 = 0;
 var total_cap_port = total_cap_stbd = 0;
 var prop_2 = prop_3 = prop_5 = prop_6 = 0;
+var total_fuel_used = 0;
 
 var dumprate_lbs_hr = 620 * 60; #1240 lbs / min total
 var flowrate_lbs_hr = dumprate_lbs_hr * 1.1;
@@ -271,7 +273,10 @@ var fuel_update = func {
 	last_time = time;
 
 	#calculate fuel flow rate
-	var total_flow_rate_gph = PortFuelFlow.getValue() + PortFuelFlow.getValue();
+	var total_flow_rate_gph = PortFuelFlow.getValue() + StbdFuelFlow.getValue();
+
+    #calculate fuel used total
+    total_fuel_used += (PortFuel.getValue() + StbdFuel.getValue());
 
 	#calculate total fuel in tanks (not including small amount in proportioners)
 	total_gals = total_lbs = 0;
@@ -285,7 +290,7 @@ var fuel_update = func {
 	TotalFuelGals.setValue(total_gals);
 	TotalFuelNorm.setValue(total_gals / (total_cap_port + total_cap_stbd));
 	TotalFuelRate.setValue(total_flow_rate_gph * 6.3);
-
+    TotalFuelUsed.setValue(total_fuel_used);
 	# if total fuel is less than 4000 lbs, close the dunp valve
 	if(TotalFuelLbs.getValue() < 4000) {
 		DumpValve.setBoolValue(0);

@@ -348,7 +348,6 @@
 	</animation>
 
 	<!-- Panel Lighting -->
-
 	<animation>
 		<type>material</type>
 		<object-name>panel-lighting-group</object-name>
