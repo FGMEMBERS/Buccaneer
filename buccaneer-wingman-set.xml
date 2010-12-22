@@ -917,13 +917,13 @@ Ver 0.0.1
 			<file>Aircraft/Buccaneer/Systems/buccaneer-air-bleed.nas</file>
 		</buccaneer-air-bleed>
 		<dual_control_tools>
-			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
+			<file>Aircraft/Generic/DualControl/dual-control-tools.nas</file>
 		</dual_control_tools>
 		<aircraft_dual_control>
 			<file>Aircraft/Buccaneer/Nasal/buccaneer-dual-control.nas</file>
 		</aircraft_dual_control>
 		<dual_control_copilot>
-			<file>Aircraft/Buccaneer/Nasal/pilot-dual-control.nas</file>
+			<file>Aircraft/Generic/DualControl/pilot-dual-control.nas</file>
 		</dual_control_copilot>
 		<gunview>
 			<file>Aircraft/Buccaneer/Nasal/gunview.nas</file>
