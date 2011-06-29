@@ -511,7 +511,7 @@
 	<!-- and target agl. -->
 	<pid-controller>
 		<name>AGL Hold (RadAlt based) Stage 1</name>
-		<debug>true</debug>
+		<debug>false</debug>
 		<enable>
 			<condition>
 				<and>
