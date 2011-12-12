@@ -224,7 +224,7 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 #	1);
 
 	setlistener("sim/model/variant", func {
-		var index = getprop("sim/model/variant");
+		var index = getprop("sim/model/variant") or 0;
 		print("set model index", getprop("/sim/model/variant"));
 		aircraft.livery.set(index);
 	},
