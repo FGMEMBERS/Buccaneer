@@ -9,12 +9,12 @@
 		<lighting>true</lighting>
 
 		<offsets>
-			<x-m>16</x-m>
+			<x-m>16</x-m>01
 			<y-m>0</y-m>
 			<z-m>0</z-m>
 		</offsets>
 
-		<condition>
+		<!--<condition>
 			<and>
 				<equals>
 					<property>engines/engine/smoking</property>
@@ -25,7 +25,7 @@
 					<value>12000</value>
 				</less-than>
 			</and>
-		</condition>
+		</condition>-->
 
 		<attach>world</attach>
 
