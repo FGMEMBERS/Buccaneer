@@ -2870,18 +2870,30 @@
 
 	<!--particle system-->
 	<model>
-		<path>Aircraft/Buccaneer/Models/Effects/haze.xml</path>
-		<name>haze</name>
+		<path>Aircraft/Buccaneer/Models/Effects/exhaust.xml</path>
+		<name>haze-stbd</name>
 		<offsets>
-			<x-m>  0 </x-m>
-			<y-m>  0 </y-m>
-			<z-m>  0 </z-m>
+			<x-m> 16</x-m>
+			<y-m>  0</y-m>
+			<z-m>  0</z-m>
 		</offsets>
 	</model>
 
 	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
 		<name>smoke-s</name>
+		<condition>
+			<and>
+				<equals>
+					<property>engines/engine[1]/smoking</property>
+					<value>1</value>
+				</equals>
+				<less-than>
+					<property>/position/altitude-agl-ft</property>
+					<value>12000</value>
+				</less-than>
+			</and>
+		</condition>
 		<offsets>
 			<x-m>0</x-m>
 			<y-m>1</y-m>
@@ -2892,6 +2904,18 @@
 	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
 		<name>smoke-p</name>
+				<condition>
+			<and>
+				<equals>
+					<property>engines/engine[0]/smoking</property>
+					<value>1</value>
+				</equals>
+				<less-than>
+					<property>/position/altitude-agl-ft</property>
+					<value>12000</value>
+				</less-than>
+			</and>
+		</condition>
 		<offsets>
 			<x-m> 0</x-m>
 			<y-m>-1</y-m>
@@ -3119,31 +3143,100 @@
 		</axis>
 	</animation>
 
-	<effect>
+	<!--<effect>
 		<inherits-from>Effects/buccaneerreflect-uber</inherits-from>
 		<parameters>
-			<!-- Reflection -->
-			<reflection-correction type="float">0.0</reflection-correction>
+			--><!-- Reflection --><!--
+			<reflection-correction type="float">0.2</reflection-correction>
 			<ambient-correction type="float">0.2</ambient-correction>
 		</parameters>
 		<object-name>Intakes</object-name>
 		<object-name>Probe-Tip</object-name>
-	</effect>
+	</effect>-->
 
 	<effect>
 		<inherits-from>Effects/buccaneerreflect-uber</inherits-from>
 		<object-name>Fuselage</object-name>
-		<object-name>Tail-Assmbly</object-name>
-		<object-name>Wing-Port-Outer</object-name>
-		<object-name>Wing-Port-Inner</object-name>
-		<object-name>Wing-Stbd-Outer</object-name>
-		<object-name>Wing-Stbd-Inner</object-name>
+		<object-name>Spine</object-name>
+		<object-name>Intake-Tail</object-name>
+		<object-name>Rudder</object-name>
+		<object-name>Nose-Cone</object-name>
+		<object-name>Nose</object-name>
+		<object-name>Nacelle-Stbd</object-name>
+		<object-name>Nacelle-Port</object-name>
+		<object-name>Drag-Link-Stbd</object-name>
+		<object-name>Drag-Link-Port</object-name>
+		<object-name>Body-Stbd</object-name>
+		<object-name>Body-Port</object-name>
+		<object-name>Strake-Lower-Stbd</object-name>
+		<object-name>Strake-Lower-Port</object-name>
+		<object-name>Strake-Upper-Stbd</object-name>
+		<object-name>Strake-upper-Port</object-name>
+		<object-name>Cat-Strop-Hook</object-name>
+		<object-name>NACA-Duct</object-name>
+		<object-name>Probe</object-name>
 		<object-name>Door-Main-Port</object-name>
 		<object-name>Door-Main-Stbd</object-name>
 		<object-name>Door-Front</object-name>
-		<object-name>Probe</object-name>
+	</effect>
+
+	<effect>
+		<inherits-from>Effects/buccaneerreflect-uber</inherits-from>
+		<!--<object-name>Tail-Assmbly</object-name>-->
+		<object-name>Tail-Plane</object-name>
+		<object-name>Flap-Tail-Stbd</object-name>
+		<object-name>Flap-Tail-Port</object-name>
+		<object-name>Bullet-Aft</object-name>
+		<object-name>Bullet-Forward</object-name>
+		<object-name>Tail-Fairing-Top</object-name>
+
+		<!--<object-name>Wing-Port-Outer</object-name>-->
+		<object-name>Wing-Outer-Surface-Port</object-name>
+		<object-name>Aileron-Port</object-name>
+		<object-name>Body-Port</object-name>
+		<object-name>Pitot-Fairing</object-name>
+
+		<!--<object-name>Wing-Port-Inner</object-name>-->
+		<object-name>Wing-Inner-Surface-Port</object-name>
+		<object-name>Flap-Port-Surface</object-name>
+
+		<!--<object-name>Wing-Stbd-Outer</object-name>-->
+		<object-name>Wing-Outer-Surface-Stbd</object-name>
+		<object-name>Aileron-Stbd</object-name>
+		<object-name>Body-Stbd</object-name>
+
+		<!--<object-name>Wing-Stbd-Inner</object-name>-->
+		<object-name>Wing-Inner-Surface-Stbd</object-name>
+		<object-name>Flap-Stbd-Surface</object-name>
+
 		<object-name>Frame-Main</object-name>
 		<object-name>Frame-Front</object-name>
+		<object-name>Frame-Centre</object-name>
+	</effect>
+
+	<effect>
+		<inherits-from>Effects/buccaneerreflect-uber</inherits-from>
+		<parameters>
+			<reflection-fresnel type="float">0.1</reflection-fresnel>
+			<reflection-rainbow type="float">0.05</reflection-rainbow>
+			<reflection-noise type="float">0.1</reflection-noise>
+			<ambient-correction type="float">0.1</ambient-correction>
+			<reflection-correction type="float">0.2</reflection-correction>
+		</parameters>
+		<object-name>Intakes</object-name>
+		<object-name>Probe-Tip</object-name>
+		<object-name>Pitot-Head</object-name>
+	</effect>
+
+	<effect>
+		<inherits-from>Effects/buccaneerglass-uber</inherits-from>
+		<parameters>
+			<reflection-fresnel type="float">0.05</reflection-fresnel>
+			<reflection-rainbow type="float">0.05</reflection-rainbow>
+			<reflection-noise type="float">0.05</reflection-noise>
+			<ambient-correction type="float">0.1</ambient-correction>
+			<reflection-correction type="float">0.2</reflection-correction>
+		</parameters>
 		<object-name>Visor-Pilot</object-name>
 		<object-name>Visor-Observer</object-name>
 	</effect>
@@ -3155,7 +3248,23 @@
 		<object-name>Canopy-Front</object-name>
 		<object-name>Canopy-Main</object-name>
 		<object-name>Screen-Port</object-name>
-			<object-name>Screen-Stbd</object-name>
+		<object-name>Screen-Stbd</object-name>
+	</effect>
+
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>Wiper-Arc</object-name>
+		<!--<object-name>Nav-Light-Cover-Port</object-name>
+		<object-name>Nav-Light-Cover-Stbd</object-name>
+		<object-name>Tail-Lt-Cover</object-name>-->
+	</effect>
+
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>Canopy-Front-Rain</object-name>
+		<object-name>Canopy-Main-Rain</object-name>
+		<object-name>Canopy-Side-Port-Rain</object-name>
+		<object-name>Canopy-Side-Stbd-Rain</object-name>
 	</effect>
 
 	<!-- *** LoD for the whole model *** -->

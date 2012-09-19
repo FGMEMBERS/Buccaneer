@@ -163,6 +163,11 @@
 
 	<!-- Terrain Warning -->
 
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>terrain_light</object-name>
+	</effect>
+
 	<animation>
 		<type>select</type>
 		<object-name>terrain_lamp</object-name>

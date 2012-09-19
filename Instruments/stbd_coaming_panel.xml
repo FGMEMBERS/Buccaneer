@@ -563,6 +563,11 @@
 
 	<!-- Rain Clear -->
 
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>light-rain-clr</object-name>
+	</effect>
+
 	<animation>
 		<type>select</type>
 		<object-name>lamp-rain-clr</object-name>
@@ -608,11 +613,6 @@
 		<action>
 			<button>0</button>
 			<repeatable>false</repeatable>
-			<!--<binding>
-				<command>property-assign</command>
-				<property>controls/autoflight/autopilot/ico</property>
-				<value type="double">0</value>
-			</binding>-->
 			<binding>
 				<command>property-assign</command>
 				<property>sim/model/buccaneer/controls/light-rain-clear</property>
