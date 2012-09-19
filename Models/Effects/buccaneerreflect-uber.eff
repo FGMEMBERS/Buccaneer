@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PropertyList>
 	<name>buccaneerreflect-uber</name>
-	<inherits-from>/Effects/model-combined</inherits-from>
+	<inherits-from>/Effects/model-combined-deferred</inherits-from>
 
 	<parameters>
 		<!-- Reflection -->
@@ -12,8 +12,12 @@
 		<reflection-fresnel type="float">0.1</reflection-fresnel>
 		<reflection-rainbow type="float">0.05</reflection-rainbow>
 		<reflection-noise type="float">0.1</reflection-noise>
-		<reflection-correction type="float">0.0</reflection-correction>
-		<ambient-correction type="float">0.2</ambient-correction>
+		<ambient-correction>
+			<use>/sim/rendering/ambient-correction</use>
+		</ambient-correction>
+		<reflection-correction>
+			<use>/sim/rendering/refl-correction</use>
+		</reflection-correction>
 
 	</parameters>
 

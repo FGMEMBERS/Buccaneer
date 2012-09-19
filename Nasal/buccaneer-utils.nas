@@ -334,11 +334,7 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 		var internal = view_internal_Node.getValue();
 		print("rain gui ", rain, " gui enabled ", enabled );
 		if(enabled and internal){
-			rainingNode.setValue(rain);
-			precipitationenabledNode.setBoolValue(0);
-		} elsif (enabled){
-			rainingNode.setValue(rain);
-			precipitationenabledNode.setBoolValue(1);
+			rainingNitationenabledNode.setBoolValue(1);
 		} else {
 			rainingNode.setValue(0);
 			precipitationenabledNode.setBoolValue(0);
@@ -911,7 +907,7 @@ Smoke = {
 		diff = math.abs(n1 - me.old_n1);
 #		print("diff ", diff);
 		
-		if (n1 <= 65 or diff > 0.1) {
+		if (n1 >= 65 and n1 <= 95 or diff > 0.1) {
 			smoke = 1;
 		} else {
 			smoke = 0;
@@ -920,7 +916,7 @@ Smoke = {
 		me.smoking.setBoolValue(smoke);
 		me.old_n1 = n1;
 		
-#		print("smoke ", smoke);
+#		print("smoke ", smoke );
 
 	 }, # end function
 

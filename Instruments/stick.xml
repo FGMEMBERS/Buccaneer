@@ -40,7 +40,32 @@
 		</axis>
 	</animation>
 
-	<animation>
+	<effect>
+		<inherits-from>Aircraft/Buccaneer/Models/Effects/buccaneerreflect-uber</inherits-from>
+		<parameters>
+			<reflection-fresnel type="float">0.1</reflection-fresnel>
+			<reflection-rainbow type="float">0.05</reflection-rainbow>
+			<reflection-noise type="float">0.1</reflection-noise>
+			<ambient-correction type="float">0.1</ambient-correction>
+			<reflection-correction type="float">0.2</reflection-correction>
+		</parameters>
+		<object-name>control_column_shaft</object-name>
+	</effect>
+
+	<effect>
+		<inherits-from>Aircraft/Buccaneer/Models/Effects/buccaneerreflect-uber</inherits-from>
+		<parameters>
+			<reflection-fresnel type="float">0.2</reflection-fresnel>
+			<reflection-rainbow type="float">0.05</reflection-rainbow>
+			<reflection-noise type="float">0.2</reflection-noise>
+			<ambient-correction type="float">0.0</ambient-correction>
+			<reflection-correction type="float">0.0</reflection-correction>
+		</parameters>
+		<object-name>plastic.png</object-name>
+	</effect>
+
+
+	<!--<animation>
 		<type>shader</type>
 		<shader>chrome</shader>
 		<texture>dirty_chrome.png</texture>
@@ -52,7 +77,7 @@
 		<shader>chrome</shader>
 		<texture>plastic.png</texture>
 		<object-name>lamp_body</object-name>
-	</animation>
+	</animation>-->
 
 	<!-- *** LoD *** -->
 	<animation>

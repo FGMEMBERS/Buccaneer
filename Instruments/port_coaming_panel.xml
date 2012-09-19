@@ -70,8 +70,8 @@
 			</less-than>
 		</condition>
 	</animation>
-	
-	 <!--Blow Indicator Port-->
+
+	<!--Blow Indicator Port-->
 	<animation>
 		<type>rotate</type>
 		<object-name>blind1-p</object-name>
@@ -212,8 +212,6 @@
 		</axis>
 	</animation>
 
-	
-
 	<!--Blow Indicator Stbd-->
 	<animation>
 		<type>rotate</type>
@@ -237,7 +235,7 @@
 				<dep>120</dep>
 			</entry>
 		</interpolation>
-<!-- -0.0073183	0.00060291	-0.00124129-->
+		<!-- -0.0073183	0.00060291	-0.00124129-->
 		<center>
 			<x-m>-0.0073183</x-m>
 			<y-m>0.00124129</y-m>
@@ -354,7 +352,7 @@
 			<z>-1</z>
 		</axis>
 	</animation>
-	
+
 	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
