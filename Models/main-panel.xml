@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- Buccaneer main panel -->
 <!-- Vivian Meazza 2007/11/6 vivian.meazza@lineone.net -->
-<!-- Ver 0.1.0 -->
+<!-- Ver 0.1.1 -->
 
 <PropertyList>
 
@@ -9,16 +9,17 @@
 
 	<main-panel>
 		<offsets>
-			<x-m>3.4850</x-m>
+			<x-m>3.3760</x-m>
 		</offsets>
 	</main-panel>
 
 	<model>
 		<path>Aircraft/Buccaneer/Models/aoa.xml</path>
 		<offsets>
+			<!--3.48634	0.758945	0.273916-->
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>-0.275026</y-m>
-			<z-m> 0.745282</z-m>
+			<z-m> 0.72</z-m>
 		</offsets>
 	</model>
 

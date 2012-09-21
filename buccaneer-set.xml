@@ -306,20 +306,14 @@ Ver 0.0.1
 
 		<flaps>
 			<setting>0.00</setting>
-			<setting>0.1667</setting>
-			<setting>0.3333</setting>
-			<setting>0.5</setting>
-			<setting>0.6667</setting>
-			<setting>0.8333</setting>
+			<setting>0.333</setting>
+			<setting>0.667</setting>
 			<setting>1.00</setting>
 		</flaps>
 		<aileron-droop>
 			<setting>0.00</setting>
-			<setting>0.1667</setting>
-			<setting>0.3333</setting>
-			<setting>0.5</setting>
-			<setting>0.6667</setting>
-			<setting>0.8333</setting>
+			<setting>0.4</setting>
+			<setting>0.80</setting>
 			<setting>1.00</setting>
 		</aileron-droop>
 		<airbrake>
@@ -825,8 +819,14 @@ Ver 0.0.1
 						<script>controls.flapsDown(0)</script>
 					</binding>
 				</mod-up>
-
+				<binding>
+					<command>property-interpolate</command>
+					<property>/controls/flight/flap-lever</property>
+					<property>/controls/flight/flaps</property>
+					<time>1.0</time>
+				</binding>
 			</key>
+
 			<key n="93">
 				<name>]</name>
 				<desc>Increase aileron droop.</desc>
@@ -844,8 +844,14 @@ Ver 0.0.1
 						</script>
 					</binding>
 				</mod-up>
-
+				<binding>
+					<command>property-interpolate</command>
+					<property>/controls/flight/aileron-droop-lever</property>
+					<property>/controls/flight/aileron-droop</property>
+					<time>1.0</time>
+				</binding>
 			</key>
+
 			<key n="123">
 				<name>{</name>
 				<desc>Decrease flap lever.</desc>
@@ -861,7 +867,14 @@ Ver 0.0.1
 						<script>controls.flapsDown(0)</script>
 					</binding>
 				</mod-up>
+				<binding>
+					<command>property-interpolate</command>
+					<property>/controls/flight/flap-lever</property>
+					<property>/controls/flight/flaps</property>
+					<time>1.0</time>
+				</binding>
 			</key>
+
 			<key n="125">
 				<name>}</name>
 				<desc>Decrease aileron droop.</desc>
@@ -877,7 +890,14 @@ Ver 0.0.1
 						<script>controls.stepProps("/controls/flight/aileron-droop","/sim/aileron-droop",0);</script>
 					</binding>
 				</mod-up>
+				<binding>
+					<command>property-interpolate</command>
+					<property>/controls/flight/aileron-droop-lever</property>
+					<property>/controls/flight/aileron-droop</property>
+					<time>1.0</time>
+				</binding>
 			</key>
+
 			<!-- map keys for jettison stores  -->
 			<!-- not used right now -->
 			<key n="74">

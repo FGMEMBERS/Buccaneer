@@ -5,6 +5,17 @@
 <PropertyList>
 
 	<path>nav_display.ac</path>
+	<effect>
+		<inherits-from>Aircraft/Buccaneer/Models/Effects/buccaneerreflect-uber</inherits-from>
+		<parameters>
+			<reflection-fresnel type="float">0.1</reflection-fresnel>
+			<reflection-rainbow type="float">0.05</reflection-rainbow>
+			<reflection-noise type="float">0.1</reflection-noise>
+			<ambient-correction type="float">0.1</ambient-correction>
+			<reflection-correction type="float">0.2</reflection-correction>
+		</parameters>
+		<object-name>dg_select</object-name>
+	</effect>
 
 	<animation>
 		<condition>

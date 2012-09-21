@@ -169,10 +169,9 @@
 	<!-- *********** Throttle Panel ********** -->
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/throttle_panel.xml</path>
-		<!--<path>Aircraft/Buccaneer/Instruments/throttle_panel.ac</path>-->
 		<offsets>
 			<x-m>3.83186</x-m>
-			<y-m>-0.45</y-m>
+			<y-m>-0.455</y-m>
 			<z-m>0.347693</z-m>
 		</offsets>
 	</model>
@@ -183,7 +182,7 @@
 		<offsets>
 			<x-m>0</x-m>
 			<y-m>0</y-m>
-			<z-m>0.060</z-m>
+			<z-m>0.049</z-m>
 		</offsets>
 	</model>
 
@@ -209,9 +208,9 @@
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/fuel_panel.xml</path>
 		<offsets>
-			<x-m>3.73</x-m>
+			<x-m>3.65</x-m>
 			<y-m>0.361662</y-m>
-			<z-m>0.43</z-m>
+			<z-m>0.40</z-m>
 			<pitch-deg alias="../../../stbd-panel/offsets/pitch-deg"/>
 			<roll-deg alias="../../../stbd-panel/offsets/roll-deg"/>
 		</offsets>
@@ -220,9 +219,9 @@
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/stick.xml</path>
 		<offsets>
-			<x-m>0</x-m>
+			<x-m>-0.05</x-m>
 			<y-m>0</y-m>
-			<z-m>0</z-m>
+			<z-m>-0.05</z-m>
 		</offsets>
 	</model>
 
@@ -1619,7 +1618,7 @@
 		<type>rotate</type>
 		<object-name>Aileron-Port</object-name>
 		<property>surface-positions/left-aileron-pos-norm</property>
-		<factor>-45</factor>
+		<factor>-42.5</factor>
 		<axis>
 			<x1-m>11.1886</x1-m>
 			<y1-m>-2.9227</y1-m>
@@ -1635,7 +1634,7 @@
 		<type>rotate</type>
 		<object-name>Aileron-Stbd</object-name>
 		<property>surface-positions/right-aileron-pos-norm</property>
-		<factor>45</factor>
+		<factor>42.5</factor>
 		<axis>
 			<x1-m>11.1886</x1-m>
 			<y1-m>2.9227</y1-m>

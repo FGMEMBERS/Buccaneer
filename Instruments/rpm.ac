@@ -10,7 +10,7 @@ loc 0.00166701 0.00679823 0.00116681
 kids 3
 OBJECT poly
 name "rpm-Needle2"
-loc -0.00105889 0.00810307 0.00353783
+loc 0.000387335 0.00810307 0.00353783
 texture "rpm.png"
 crease 45.000000
 numvert 6
@@ -48,7 +48,7 @@ refs 3
 kids 0
 OBJECT poly
 name "rpm-Needle1"
-loc -0.00105889 0.00592117 -0.0011668
+loc 0.000387335 0.00592117 -0.0011668
 texture "rpm.png"
 crease 45.000000
 numvert 35
@@ -265,7 +265,7 @@ refs 3
 kids 0
 OBJECT poly
 name "face"
-loc 0.00106052 -0.00701212 -0.00120423
+loc 0.00250675 -0.00701212 -0.00120423
 texture "rpm.png"
 crease 45.000000
 numvert 17
@@ -390,7 +390,7 @@ loc 0.00284208 0.00168596 0.00091811
 kids 2
 OBJECT poly
 name "bezelinside"
-loc -0.000117804 -0.00189985 -0.0009181
+loc 0.00153503 -0.00189985 -0.0009181
 crease 45.000000
 numvert 64
 -0.00425914 0.00637095 0.0310166
@@ -845,7 +845,7 @@ refs 3
 kids 0
 OBJECT poly
 name "bezeloutside"
-loc 0.00284208 0.00168596 0.00091811
+loc 0.00449491 0.00168596 0.00091811
 texture "rpm.png"
 crease 45.000000
 numvert 96

@@ -6,6 +6,22 @@
 
 	<path>throttle_panel.ac</path>
 
+	<main-panel>
+		<offsets>
+			<heading-deg>22.5</heading-deg>
+		</offsets>
+	</main-panel>
+
+	<model>
+		<path>Aircraft/Buccaneer/Models/flaps_droop.xml</path>
+		<offsets>
+			<x-m>-0.390</x-m>>
+			<y-m>0.0427227</y-m>
+			<z-m>0.14987</z-m>
+			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
+		</offsets>
+	</model>
+
 	<!-- Throttles -->
 	<animation>
 		<type>rotate</type>

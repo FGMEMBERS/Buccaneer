@@ -6,7 +6,7 @@ OBJECT world
 kids 2
 OBJECT group
 name "lighting-group"
-loc 0.00166783 0.00625276 -1.8705e-005
+loc 0.00202811 0.0066327 5.80658e-005
 kids 2
 OBJECT poly
 name "Needle1"
@@ -227,7 +227,7 @@ refs 3
 kids 0
 OBJECT poly
 name "face"
-loc 0.00105971 -0.00646665 -1.8715e-005
+loc 0.00217495 -0.00646665 -1.8715e-005
 texture "fuel-flow-rate.png"
 crease 45.000000
 numvert 17
@@ -348,11 +348,11 @@ refs 3
 kids 0
 OBJECT group
 name "panel-lighting-group"
-loc 0.00420422 0.00157902 0.000918115
+loc 0.0124684 0.00157904 0.000918145
 kids 2
 OBJECT poly
 name "bezelinside"
-loc -0.00147994 -0.00179291 -0.000918105
+loc -0.00871107 -0.00179291 -0.000918105
 crease 45.000000
 numvert 64
 -0.00118185 0.000124156 -0.0317077
@@ -807,7 +807,7 @@ refs 3
 kids 0
 OBJECT poly
 name "bezeloutside"
-loc 0.00147994 0.00179291 0.000918105
+loc -0.00575119 0.00179291 0.000918105
 texture "rpm.png"
 crease 45.000000
 numvert 96

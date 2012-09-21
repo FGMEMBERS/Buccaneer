@@ -2,6 +2,12 @@
 <!-- Attitude -->
 <PropertyList>
 	<path>attitude_rb.ac</path>
+
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>slip_skid_tube</object-name>
+	</effect>
+
 	<animation>
 		<type>rotate</type>
 		<object-name>roll_marker</object-name>
