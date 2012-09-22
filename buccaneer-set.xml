@@ -55,10 +55,10 @@ Ver 0.0.1
 		</panel>
 
 		<!-- no HUD -->
-		<hud>
+		<!--<hud>
 			<path>Huds/Default/default.xml</path>
 			<visibility>false</visibility>
-		</hud>
+		</hud>-->
 
 		<rendering>
 			<redout>
@@ -523,6 +523,9 @@ Ver 0.0.1
 				<pitch-channel type="int">0</pitch-channel>
 				<roll-channel type="int">0</roll-channel>
 			</auto-stabs>
+			<gear>
+				<lamps type="bool">0</lamps>
+			</gear>
 		</switches>
 	</controls>
 	<autopilot>
@@ -1044,6 +1047,10 @@ Ver 0.0.1
 		<gunview>
 			<file>Aircraft/Buccaneer/Nasal/gunview.nas</file>
 		</gunview>
+		<canvas_HUD>
+			<file>Aircraft/Buccaneer/Systems/TSR2-canvas-HUD.nas</file>
+		</canvas_HUD>
+
 		<!--<dual_control_tools>
 			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>
 		</dual_control_tools>

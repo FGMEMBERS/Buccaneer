@@ -22,6 +22,16 @@
 		</offsets>
 	</model>
 
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/gear.xml</path>
+		<offsets>
+			<x-m>-0.390</x-m>>
+			<y-m>0.0423894</y-m>
+			<z-m>0.0781087</z-m>
+			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
+		</offsets>
+	</model>
+	
 	<!-- Throttles -->
 	<animation>
 		<type>rotate</type>
