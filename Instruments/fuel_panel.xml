@@ -3,6 +3,15 @@
 <PropertyList>
 	<path>fuel_panel.ac</path>
 
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/fuel_gauges.xml</path>
+		<offsets>
+			<x-m>-0.140952</x-m>
+			<y-m>0</y-m>
+			<z-m>0.00775151</z-m>
+		</offsets>
+	</model>
+
 	<!-- Proportioner mag indicators -->
 	<animation>
 		<type>textranslate</type>

@@ -103,6 +103,8 @@
 	</animation>
 
 	<!-- **************** Instruments ********************* -->
+ 
+
 
 	<!-- **************** Over Glare Shield********** -->
 	<over-main-panel>
@@ -149,20 +151,20 @@
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/port_coaming_panel.xml</path>
 		<offsets>
-			<x-m>3.556</x-m>
+			<x-m>3.6</x-m>
 			<y-m>-0.311199</y-m>
 			<z-m>0.778272</z-m>
-			<heading-deg>20</heading-deg>
+			<heading-deg>22.5</heading-deg>
 		</offsets>
 	</model>
 
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/stbd_coaming_panel.xml</path>
 		<offsets>
-			<x-m>3.556</x-m>
+			<x-m>3.6</x-m>
 			<y-m>0.311199</y-m>
 			<z-m>0.785</z-m>
-			<heading-deg>-40</heading-deg>
+			<heading-deg>-22.5</heading-deg>
 		</offsets>
 	</model>
 
@@ -182,7 +184,7 @@
 		<offsets>
 			<x-m>0</x-m>
 			<y-m>0</y-m>
-			<z-m>0.049</z-m>
+			<z-m>0.00</z-m>
 		</offsets>
 	</model>
 
@@ -194,8 +196,8 @@
 		</offsets>
 	</stbd-panel>
 
-	<model>
-		<path>Aircraft/Buccaneer/Instruments/fuel_gauges.xml</path>
+	<!--<model>
+		<path>AI/Aircraft/Buccaneer/Instruments/fuel_gauges.xml</path>
 		<offsets>
 			<x-m>3.602</x-m>
 			<y-m>0.35</y-m>
@@ -203,7 +205,7 @@
 			<pitch-deg alias="../../../stbd-panel/offsets/pitch-deg"/>
 			<roll-deg alias="../../../stbd-panel/offsets/roll-deg"/>
 		</offsets>
-	</model>
+	</model>-->
 
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/fuel_panel.xml</path>
@@ -215,6 +217,7 @@
 			<roll-deg alias="../../../stbd-panel/offsets/roll-deg"/>
 		</offsets>
 	</model>
+
 
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/stick.xml</path>
@@ -3245,17 +3248,10 @@
 		<object-name>Canopy-Side-Port</object-name>
 		<object-name>Canopy-Side-Stbd</object-name>
 		<object-name>Canopy-Front</object-name>
-		<object-name>Canopy-Main</object-name>
+		<object-name>Canopy-Main-Port</object-name>
+		<object-name>Canopy-Main-Stbd</object-name>
 		<object-name>Screen-Port</object-name>
 		<object-name>Screen-Stbd</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Effects/model-transparent</inherits-from>
-		<object-name>Wiper-Arc</object-name>
-		<!--<object-name>Nav-Light-Cover-Port</object-name>
-		<object-name>Nav-Light-Cover-Stbd</object-name>
-		<object-name>Tail-Lt-Cover</object-name>-->
 	</effect>
 
 	<effect>
@@ -3265,7 +3261,23 @@
 		<object-name>Canopy-Side-Port-Rain</object-name>
 		<object-name>Canopy-Side-Stbd-Rain</object-name>
 	</effect>
+	
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>Wiper-Arc</object-name>
+	</effect>
 
+	<!--************* Strike Sight ************************-->
+	<model>
+		<path>Aircraft/Buccaneer/Instruments/Canvas-HUD.xml</path>
+		<!--3.3518	0.895731	0.383018
+		3.3518	0.895731	-0.383018-->
+		<offsets>
+			<x-m>3.3518</x-m>
+			<y-m>-0.05</y-m>
+			<z-m>1.0</z-m>
+		</offsets>
+	</model>
 	<!-- *** LoD for the whole model *** -->
 	<!--
 	<animation>
