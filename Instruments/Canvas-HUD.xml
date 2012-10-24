@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>Canvas-HUD.ac</path>
+
+	<offsets>
+		<heading-deg>90</heading-deg>
+		<roll-deg>90</roll-deg>
+		<pitch-deg>0</pitch-deg>
+		<x-m>0.0 </x-m>
+		<y-m>0.0 </y-m>
+		<z-m>0.0 </z-m>
+	</offsets>
+
+	<animation>
+		<type>material</type>
+		<object-name>HUD-canvas</object-name>
+		<emission>
+			<!--<factor-prop>/controls/lighting/panel-norm</factor-prop>-->
+			<factor>0.75</factor>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<shininess>100</shininess>
+	</animation>
+
+</PropertyList>

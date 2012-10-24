@@ -15,7 +15,7 @@ Ver 0.0.1
 	<sim include="help.xml">
 		<description type="string" >Blackburn Buccaneer S2(YASim)</description>
 		<author type="string">Vivian Meazza, AJ MacLeod. Melchior Franz</author>
-		<status type="string">alpha</status>
+		<status type="string">beta</status>
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<flight-model>yasim</flight-model>
 		<aero>buccaneer-yasim</aero>
@@ -102,7 +102,8 @@ Ver 0.0.1
 			<variant type="int" >1</variant>
 			<buccaneer>
 				<config>
-					<show-pilot type="bool">true</show-pilot>
+					<show-pilot type="bool"
+											archive="y">true</show-pilot>
 				</config>
 				<controls>
 					<recuperator_check_safety type="float">0</recuperator_check_safety>
@@ -523,6 +524,11 @@ Ver 0.0.1
 				<pitch-channel type="int">0</pitch-channel>
 				<roll-channel type="int">0</roll-channel>
 			</auto-stabs>
+			<HUD_rotation_speed type="float">3</HUD_rotation_speed>
+			<HUD_brightness type="float">0.75</HUD_brightness>
+			<HUD_director type="float">0</HUD_director>
+			<HUD_height type="float">0</HUD_height>
+			<HUD_speed type="float">1</HUD_speed>
 			<gear>
 				<lamps type="bool">0</lamps>
 			</gear>
@@ -1050,6 +1056,9 @@ Ver 0.0.1
 		<canvas_HUD>
 			<file>Aircraft/Buccaneer/Systems/TSR2-canvas-HUD.nas</file>
 		</canvas_HUD>
+		<!--<canvas_HUD>
+			<file>Aircraft/Buccaneer/Systems/canvas-HUD.nas</file>
+		</canvas_HUD>-->
 
 		<!--<dual_control_tools>
 			<file>Aircraft/Buccaneer/Nasal/dual-control-tools.nas</file>

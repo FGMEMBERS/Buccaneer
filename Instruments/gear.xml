@@ -512,16 +512,15 @@
 	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
-		<object-name>bezelinside</object-name>
-		<object-name>face</object-name>
+		<object-name>lighting-group</object-name>
 		<emission>
-			<factor-prop>systems/electrical/outputs/instr-lights-port</factor-prop>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 			<red>0.03125</red>
 			<green>0.0089</green>
 			<blue>0.0089</blue>
 		</emission>
 	</animation>
-
+	
 	<!-- Noshadow -->
 	<animation>
 		<type>noshadow</type>

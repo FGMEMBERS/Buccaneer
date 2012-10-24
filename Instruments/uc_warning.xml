@@ -48,7 +48,7 @@
 			<offset>1</offset>
 			<max>0.95</max>
 			<min>0.75</min>
-	</transparency>
+		</transparency>
 	</animation>
 
 	<animation>
@@ -94,6 +94,7 @@
 			<blue>0.0089</blue>
 		</emission>
 	</animation>
+
 
 	<!-- *** LoD *** -->
 	<animation>

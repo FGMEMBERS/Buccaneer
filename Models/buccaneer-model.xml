@@ -5,11 +5,6 @@
 <PropertyList>
 	<path>buccaneer.ac</path>
 
-	<nasal>
-		<load>
-			cmdarg().getNode("sim/model/ac-type", 1).setValue("buccaneer");
-		</load>
-	</nasal>
 
 	<offsets>
 		<x-m>0</x-m>
@@ -103,7 +98,7 @@
 	</animation>
 
 	<!-- **************** Instruments ********************* -->
- 
+
 
 
 	<!-- **************** Over Glare Shield********** -->
@@ -736,6 +731,29 @@
 
 	<animation>
 		<type>select</type>
+		<object-name>Pilot-Hand-R-Grip</object-name>
+		<condition>
+			<less-than-equals>
+				<property>sim/model/buccaneer/pilot-arm/elev-norm</property>
+				<value>0.5</value>
+			</less-than-equals>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+    <object-name>Pilot-Hand-R-Bent</object-name>
+		<condition>
+			<greater-than>
+				<property>sim/model/buccaneer/pilot-arm/elev-norm</property>
+				<value>0.5</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+
+	<animation>
+		<type>select</type>
 		<object-name>Observer-Head</object-name>
 		<condition>
 			<not>
@@ -776,8 +794,8 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Pilot-Head</object-name>
-		<property>controls/flight/rudder</property>
-		<factor>25</factor>
+		<property>sim/model/buccaneer/pilot-head/rel-brg-deg</property>
+		<factor>1</factor>
 		<center>
 			<!--4.07546		0.0499988-->
 			<!--4.08807,0.102067,0.92268-->
@@ -795,17 +813,282 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Pilot-Head</object-name>
-		<property>controls/flight/elevator</property>
-		<factor> -15 </factor>
+		<property>sim/model/buccaneer/pilot-head/elev-deg</property>
+		<factor>1</factor>
 		<center>
 			<x-m>4.07546</x-m>
 			<y-m>-0.0499988</y-m>
 			<z-m>0.920013</z-m>
 		</center>
 		<axis>
-			<x>1</x>
-			<y>0</y>
+			<x>0</x>
+			<y>1</y>
 			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Visor-Pilot</object-name>
+		<property>sim/model/buccaneer/pilot-head/visor-pos-norm</property>
+		<factor>40</factor>
+		<center>
+			<x-m>4.05315</x-m>
+			<y-m>-0.150731</y-m>
+			<z-m>1.100</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Arm-Right</object-name>
+		<property>sim/model/buccaneer/pilot-arm/elev-norm</property>
+		<factor>44</factor>
+		<!--4.07514	0.871764	-0.0683585-->
+		<center>
+			<x-m>4.07514</x-m>
+			<y-m>0.0683585</y-m>
+			<z-m>0.871764</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Arm-Right</object-name>
+		<property>sim/model/buccaneer/pilot-arm/rel-brg-norm</property>
+		<factor>-36</factor>
+		<!--5.33373	1.08296	-0.168359-->
+		<center>
+			<x-m>4.07514</x-m>
+			<y-m>0.0683585</y-m>
+			<z-m>0.871764</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Arm-Lower-Right</object-name>
+		<property>sim/model/buccaneer/pilot-arm/elev-norm</property>
+		<factor>-60</factor>
+		<!--3.94932	0.575498	-0.136395
+		3.73287	0.628507	-0.0151799-->
+		<axis>
+			<x1-m>3.94932</x1-m>
+			<y1-m>0.136395</y1-m>
+			<z1-m>0.575498</z1-m>
+			<x2-m>3.73287</x2-m>
+			<y2-m>0.0151799</y2-m>
+			<z2-m>0.628507</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Arm-Lower-Right</object-name>
+		<property>sim/model/buccaneer/pilot-arm/elev-norm</property>
+		<factor>10</factor>
+		<!--		5.1821	0.794147	-0.221496 
+		3.92352	0.582947	-0.121496-->
+		<center>
+			<x-m>3.92352</x-m>
+			<y-m>0.1214966</y-m>
+			<z-m>0.582947</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Arm-Lower-Right</object-name>
+		<property>sim/model/buccaneer/pilot-arm/rel-brg-norm</property>
+		<factor>15</factor>
+		<!--		5.1821	0.794147	-0.221496 
+		3.92352	0.582947	-0.121496-->
+		<center>
+			<x-m>3.92352</x-m>
+			<y-m>0.1214966</y-m>
+			<z-m>0.582947</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pilot-Hand-R</object-name>
+		<property>sim/model/buccaneer/pilot-arm/elev-norm</property>
+		<factor>10</factor>
+		<!--		4.97094	0.846324	-0.114112 -->
+		<center>
+			<x-m>4.97094</x-m>
+			<y-m>0.114112</y-m>
+			<z-m>0.846324</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>1</y>
+			<z>-0.1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Visor-Observer</object-name>
+		<property>sim/model/buccaneer/observer-head/visor-pos-norm</property>
+		<factor>40</factor>
+		<!--5.31167	1.31919	0.0507311-->
+		<center>
+			<x-m>5.31175</x-m>
+			<y-m>-0.0507311</y-m>
+			<z-m>1.31910</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Observer-Head</object-name>
+		<property>sim/model/buccaneer/observer-head/rel-brg-deg</property>
+		<center>
+			<!--4.07546		0.0499988-->
+			<!--4.08807,0.102067,0.92268-->
+			<x-m>5.334126</x-m>
+			<y-m>0.0504371</y-m>
+			<z-m>1.13113</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Observer-Head</object-name>
+		<property>sim/model/buccaneer/observer-head/elev-deg</property>
+		<center>
+			<x-m>5.33412</x-m>
+			<y-m>0.0504371</y-m>
+			<z-m>1.13113</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Observer-Arm-Right</object-name>
+		<property>sim/model/buccaneer/observer-arm/elev-norm</property>
+		<factor>50.9</factor>
+			<!--5.33373	1.08296	-0.168359-->
+		<center>
+			<x-m>5.33373</x-m>
+			<y-m>0.168359</y-m>
+			<z-m>1.08296</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Observer-Arm-Right</object-name>
+		<property>sim/model/buccaneer/observer-arm/rel-brg-norm</property>
+		<factor>-16.5</factor>
+		<!--5.33373	1.08296	-0.168359-->
+		<center>
+			<x-m>5.33373</x-m>
+			<y-m>0.168359</y-m>
+			<z-m>1.08296</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Observer-Arm-Lower-Right</object-name>
+		<property>sim/model/buccaneer/observer-arm/elev-norm</property>
+		<factor>-75</factor>
+		<axis>
+			<x1-m>5.1821</x1-m>
+			<y1-m>0.221496</y1-m>
+			<z1-m>0.794147</z1-m>
+			<x2-m>4.99208</x2-m>
+			<y2-m>0.114133</y2-m>
+			<z2-m>0.842884</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Observer-Arm-Lower-Right</object-name>
+		<property>sim/model/buccaneer/observer-arm/elev-norm</property>
+		<factor>-1.85</factor>
+		<!--		5.1821	0.794147	-0.221496 -->
+		<center>
+			<x-m>5.1821</x-m>
+			<y-m>0.221496</y-m>
+			<z-m>0.794147</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Observer-Hand-R</object-name>
+		<property>sim/model/buccaneer/observer-arm/elev-norm</property>
+		<factor>10</factor>
+		<!--		4.97094	0.846324	-0.114112 -->
+		<center>
+			<x-m>4.97094</x-m>
+			<y-m>0.114112</y-m>
+			<z-m>0.846324</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>1</y>
+			<z>-0.1</z>
 		</axis>
 	</animation>
 
@@ -1939,6 +2222,7 @@
     <object-name>Cone-texture</object-name>
     <object-name>Cone</object-name>-->
 		<property>gear/gear/caster-angle-deg</property>
+		<!--		<property>gear/gear[0]/steering-norm</property>-->
 		<factor>1</factor>
 		<axis>
 			<x1-m>3.374</x1-m>
@@ -1955,6 +2239,7 @@
 		<object-name>Pivot-Bracket</object-name>
 		<!--<object-name>Wheel-Fork-Pivot</object-name>-->
 		<property>gear/gear/caster-angle-deg</property>
+		<!--<property>gear/gear[0]/steering-norm</property>-->
 		<factor>1</factor>
 		<axis>
 			<x1-m>3.374</x1-m>
@@ -2906,7 +3191,7 @@
 	<model>
 		<path>Aircraft/Buccaneer/Models/Effects/smoke.xml</path>
 		<name>smoke-p</name>
-				<condition>
+		<condition>
 			<and>
 				<equals>
 					<property>engines/engine[0]/smoking</property>
@@ -3148,7 +3433,9 @@
 	<!--<effect>
 		<inherits-from>Effects/buccaneerreflect-uber</inherits-from>
 		<parameters>
-			--><!-- Reflection --><!--
+			-->
+	<!-- Reflection -->
+	<!--
 			<reflection-correction type="float">0.2</reflection-correction>
 			<ambient-correction type="float">0.2</ambient-correction>
 		</parameters>
@@ -3261,7 +3548,7 @@
 		<object-name>Canopy-Side-Port-Rain</object-name>
 		<object-name>Canopy-Side-Stbd-Rain</object-name>
 	</effect>
-	
+
 	<effect>
 		<inherits-from>Effects/model-transparent</inherits-from>
 		<object-name>Wiper-Arc</object-name>

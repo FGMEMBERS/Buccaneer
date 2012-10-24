@@ -13,11 +13,21 @@
 	</main-panel>
 
 	<model>
+		<path>Aircraft/Buccaneer/Models/gear-control.xml</path>
+		<offsets>
+			<x-m>-0.378263</x-m>>
+			<y-m>-0.00563818</y-m>
+			<z-m>0.144669</z-m>
+			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
+		</offsets>
+	</model>
+
+	<model>
 		<path>Aircraft/Buccaneer/Models/flaps_droop.xml</path>
 		<offsets>
-			<x-m>-0.390</x-m>>
-			<y-m>0.0427227</y-m>
-			<z-m>0.14987</z-m>
+			<x-m>-0.3999</x-m>>
+			<y-m>0.0460643</y-m>
+			<z-m>0.144669</z-m>
 			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
 		</offsets>
 	</model>
@@ -25,13 +35,13 @@
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/gear.xml</path>
 		<offsets>
-			<x-m>-0.390</x-m>>
-			<y-m>0.0423894</y-m>
-			<z-m>0.0781087</z-m>
+			<x-m>-0.3999</x-m>>
+			<y-m>0.0460643</y-m>
+			<z-m>0.0730707</z-m>
 			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
 		</offsets>
 	</model>
-	
+
 	<!-- Throttles -->
 	<animation>
 		<type>rotate</type>

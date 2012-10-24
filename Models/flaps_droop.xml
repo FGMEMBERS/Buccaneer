@@ -5,8 +5,8 @@
 <PropertyList>
 
 	<path>flap.ac</path>
-	
-<!-- =========== flaps ========== -->
+
+	<!-- =========== flaps ========== -->
 	<animation>
 		<type>pick</type>
 		<object-name>pick-flaps-up</object-name>
@@ -120,7 +120,7 @@
 	</animation>
 
 
-<!-- =========== droop ========== -->
+	<!-- =========== droop ========== -->
 
 	<animation>
 		<type>pick</type>
@@ -256,7 +256,7 @@
 		</center>
 	</animation>
 
-	
+
 	<!-- ========= both ==========-->
 	<animation>
 		<type>pick</type>
@@ -357,8 +357,9 @@
 	<!-- Panel Lighting -->
 	<animation>
 		<type>material</type>
+		<object-name>lighting-group</object-name>
 		<emission>
-			<factor-prop>systems/electrical/outputs/instr-lights-port</factor-prop>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
 			<red>0.03125</red>
 			<green>0.0089</green>
 			<blue>0.0089</blue>

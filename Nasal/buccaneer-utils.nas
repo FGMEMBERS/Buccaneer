@@ -4,6 +4,11 @@
 #                                                                                   #
 #####################################################################################
 
+# ==================================== Definiions ===========================================
+
+#does what it says on the tin
+var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
+
 # ================================ Initalize ====================================== 
 # Make sure all needed properties are present and accounted 
 # for, and that they have sane default values.
@@ -95,6 +100,33 @@ wing_blowing_Node.setValue(0);
 blc_control_valve_Node = props.globals.getNode("controls/pneumatic/BLC",1);
 blc_control_valve_Node.setValue(0);
 
+var observer_head_brg_node = props.globals.getNode("sim/model/buccaneer/observer-head/rel-brg-deg", 1);
+var observer_head_elev_node = props.globals.getNode("sim/model/buccaneer/observer-head/elev-deg", 1);
+var observer_head_look_node = props.globals.getNode("sim/model/buccaneer/observer-head/look", 1);
+var observer_head_visor_node = props.globals.getNode("sim/model/buccaneer/observer-head/visor-pos-norm", 1);
+var pilot_head_brg_node = props.globals.getNode("sim/model/buccaneer/pilot-head/rel-brg-deg", 1);
+var pilot_head_elev_node = props.globals.getNode("sim/model/buccaneer/pilot-head/elev-deg", 1);
+var pilot_head_look_node = props.globals.getNode("sim/model/buccaneer/pilot-head/look", 1);
+var pilot_head_visor_node = props.globals.getNode("sim/model/buccaneer/pilot-head/visor-pos-norm", 1);
+var ht_agl_node = props.globals.getNode("position/altitude-ft",1);
+var current_view_elev_node =  props.globals.getNode("sim/current-view/pitch-offset-deg",1);
+var current_view_brg_node =  props.globals.getNode("sim/current-view/heading-offset-deg",1);
+var wow_node = props.globals.getNode("gear/gear/wow",1);
+var caster_node = props.globals.getNode("gear/gear/caster-angle-deg",1);
+
+observer_head_brg_node.setDoubleValue(0);
+observer_head_elev_node.setDoubleValue(0);
+observer_head_look_node.setValue("ahead");
+observer_head_visor_node.setDoubleValue(0);
+pilot_head_brg_node.setDoubleValue(0);
+pilot_head_elev_node.setDoubleValue(0);
+pilot_head_look_node.setValue("ahead");
+pilot_head_visor_node.setDoubleValue(0);
+wow_node.setDoubleValue(1);
+caster_node.setDoubleValue(0);
+
+var ht_agl = 0;
+
 controls.fullBrakeTime = 0;
 
 pilot_g = nil;
@@ -107,7 +139,8 @@ wing_blow = nil;
 #tyresmoke_1 = nil;
 #tyresmoke_2 = nil;
 flow = nil;
-
+pilot_head = nil;
+observer_head = nil;
 
 var old_n1 = 0;
 var time = 0;
@@ -188,6 +221,8 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 	tyresmoke_2 = aircraft.tyresmoke.new(2);
 	flow = Flow.new();
 	var lp = aircraft.lowpass.new(5);
+	pilot_head = HeadMove.new("pilot");
+	observer_head = HeadMove.new("observer");
 
 	wiper = aircraft.door.new("sim/model/buccaneer/wiper", 2);
 
@@ -460,8 +495,10 @@ setlistener("/controls/gear/brake-left", func (n){
         0);
 
 	# set it running on the next update cycle
-	settimer(update, 0);
-wiper.open();
+	update();
+	wiper.open();
+	slow_update_1();
+	slow_update_2();
 	print("running Buccaneer utilities");
 
 } # end func
@@ -504,10 +541,10 @@ var update = func {
     else
         setprop("sim/alarms/gear-up", 0);
 
-    n1 = getprop("engines/engine[0]/n1");
-    n2 = getprop("engines/engine[0]/n2");
-    n11 = getprop("engines/engine[0]/n1");
-    n21 = getprop("engines/engine[0]/n2");
+    n1 = getprop("engines/engine[0]/n1") or 0;
+    n2 = getprop("engines/engine[0]/n2") or 0;
+    n11 = getprop("engines/engine[0]/n1") or 0;
+    n21 = getprop("engines/engine[0]/n2") or 0;
 
 
     if (n1 >= 5 or n2 >= 5 or n11 >= 5 or n21 >= 5)
@@ -548,11 +585,31 @@ var update = func {
 #       print ( view_name_Node.getValue());
 	}
 
+
 	settimer(update, 0); 
 
 }# end main loop func
 
 # ============================== end Main Loop ===============================
+# ============================== Slow Loop ===============================
+
+var slow_update_1 = func {
+
+	var interval_p = pilot_head.update();
+#	print ("interval_1 ",interval_p);
+	settimer(slow_update_1, interval_p);
+
+	}
+
+	var slow_update_2 = func {
+
+	var interval_o = observer_head.update();
+#	print ("interval_2 ",interval_o);
+	settimer(slow_update_2, interval_o);
+
+	}
+
+# ============================== end Slow Loop ===============================
 
 # ============================== specify classes ===========================
 # Class that updates wing blowing functions 
@@ -892,6 +949,7 @@ Smoke = {
 		obj.n1 = props.globals.getNode("engines/engine[" ~ number ~"]/n1", 1);
 		obj.smoking = props.globals.getNode("engines/engine[" ~ number ~"]/smoking", 1);
 		obj.smoking.setBoolValue(0);
+		obj.n1.setValue(0);
 		obj.old_n1 = 0;
 #		print (obj.name, " ", number, " ", obj.old_n1);
 		return obj;
@@ -990,7 +1048,7 @@ var TyreSmoke = {
 # Class that specifies raindrop flow rate functions
 #
 
-Flow = {
+var Flow = {
 	new : func ()
 	{
 		var obj = {parents : [Flow] };
@@ -1053,6 +1111,127 @@ var rollloopid = 0;
          setprop("/controls/flight/elevator", 0);
          settimer(func { pitchloop(id) }, 0);
      }
+
+# =============================== end ailerons/elevators zeroised ================================
+# Class that specifies observer and pilot head movements functions
+#
+
+	var HeadMove = {
+	new : func (name)
+	{
+		var obj = {parents : [HeadMove] };
+		obj.name = name;
+		obj.head_brg_node   = props.globals.getNode("sim/model/buccaneer/" ~ name ~"-head/rel-brg-deg", 1);
+		obj.head_elev_node  = props.globals.getNode("sim/model/buccaneer/" ~ name ~"-head/elev-deg", 1);
+		obj.head_look_node  = props.globals.getNode("sim/model/buccaneer/" ~ name ~"-head/look", 1);
+		obj.head_visor_node = props.globals.getNode("sim/model/buccaneer/" ~ name ~"-head/visor-pos-norm", 1);
+		obj.arm_brg_node = props.globals.getNode("sim/model/buccaneer/" ~ name ~"-arm/rel-brg-norm", 1);
+		obj.arm_elev_node = props.globals.getNode("sim/model/buccaneer/" ~ name ~"-arm/elev-norm", 1);
+		obj.launchbar_node = props.globals.getNode("gear/launchbar/state", 1);
+
+		setlistener("gear/gear/wow", func (n){
+
+		var wow = n.getValue();
+		var launchbar = obj.launchbar_node.getValue();
+		var name = obj.name;
+
+		print("listener ", name, " wow ", wow, " launchbar ", launchbar );
+
+		if ((wow or launchbar == "Engaged" or launchbar == "Launching") and name == "observer")
+			{
+			interpolate(obj.arm_brg_node, 1, 1);
+			interpolate(obj.arm_elev_node, 1, 1);
+			print("listener obs ", name, " wow ", wow, " launchbar ", launchbar );
+			}
+		elsif ((launchbar == "Engaged" or launchbar == "Launching") and name == "pilot")
+			{
+			interpolate(obj.arm_brg_node, 1, 1);
+			interpolate(obj.arm_elev_node, 1, 1);
+			print("listener pilot ", name, " wow ", wow, " launchbar ", launchbar );
+			}
+		else
+			{
+			interpolate(obj.arm_brg_node, 0, 1);
+			interpolate(obj.arm_elev_node, 0, 1);
+			print("listener else ", name, " wow ", wow, " launchbar ", launchbar );
+			}
+
+		},
+		1,
+		0);
+
+		print (obj.name);
+		return obj;
+		},
+		update: func (){
+
+		me.visor();
+
+		var view_num = sprintf("%i", rand() * 10);
+		var rel_brg = clamp(180 - current_view_brg_node.getValue(), -180, 180);
+		var elev = clamp(current_view_elev_node.getValue(), -15, 15);
+
+		if(!wow_node.getValue() 
+			and me.launchbar_node.getValue() == "Engaged" or me.launchbar_node.getValue() == "Launching")
+			{
+			interpolate(me.head_elev_node, 7.5, 1);
+			interpolate(me.head_brg_node, 0, 1);
+			me.head_look_node.setValue("on catapult");
+			return 0 + rand();
+			}
+		elsif(wow_node.getValue() and me.name == "pilot")
+			{
+			interpolate(me.head_elev_node, -2, 1);
+			interpolate(me.head_brg_node, caster_node.getValue(), 1);
+			me.head_look_node.setValue("caster");
+			return 0 + rand();
+			}
+		elsif (view_num <= 3 )
+			{
+			interpolate(me.head_brg_node, 20 - rand() * 40 , 1);
+			interpolate(me.head_elev_node, 5 - rand() * 10 , 1);
+			me.head_look_node.setValue("leader");
+			return 5 + (rand() * 10);
+			}
+		elsif (view_num > 3 and view_num < 7)
+			{
+			if (rel_brg < -80 or rel_brg > 80)
+				{
+				return 0;
+				}
+			else
+				{
+				interpolate(me.head_brg_node, clamp(rel_brg, -45, 45), 1);
+				interpolate(me.head_elev_node, elev , 1);
+				me.head_look_node.setValue("camera");
+				return 2  + (rand() * 10);
+				}
+			}
+		else
+			{
+			interpolate(me.head_elev_node,  1 - rand() * 2, 1);
+			interpolate(me.head_brg_node, 5 - rand() * 10 , 1);
+			me.head_look_node.setValue("ahead");
+			return 10 + (rand() * 10);
+			}
+
+		print("updating ", me.name," ", view_num, " ", rel_brg);
+		},
+		visor: func (){
+#			print("updating visor ", me.name);
+
+			if (ht_agl_node.getValue != nil) return;
+
+			if (ht_agl_node.getValue >= 7500 + (rand() * 1000))
+				{
+				me.head_visor_node.setDoubleValue(1);
+				}
+			else
+				{
+				me.head_visor_node.setDoubleValue(0);
+				}
+		},
+	}; #
 
 # Fire it up
 

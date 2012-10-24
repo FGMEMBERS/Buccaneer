@@ -353,12 +353,12 @@ axial flow engine, dry wt 2471 lbs -->
 									 square="false"
 									 src0="-1"
 									 src1="1"
-									 dst0="-0.75"
-									 dst1="0.75"/>
+									 dst0="-0.95"
+									 dst1="0.95"/>
 		<control-output control="STEER"
 										prop="/gear/gear[0]/steering-norm"/>
 		<control-speed control="STEER"
-									 transition-time="2"/>
+									 transition-time="4"/>
 		<control-input axis="/controls/gear/gear-down"
 									 control="EXTEND"/>
 		<control-output control="EXTEND"
