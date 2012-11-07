@@ -28,6 +28,7 @@
 		<object-name>main_moving_parts</object-name>
 		<property>controls/flight/elevator</property>
 		<factor>0.05</factor>
+		<offset-m>-0.05</offset-m>
 		<center>
 			<x-m>3.57185</x-m>
 			<y-m>-0.0536737</y-m>

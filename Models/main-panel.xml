@@ -13,6 +13,12 @@
 		</offsets>
 	</main-panel>
 
+	<nav-panel>
+		<offsets>
+			<z-m>0.5497</z-m>
+		</offsets>
+	</nav-panel>
+
 	<model>
 		<path>Aircraft/Buccaneer/Models/aoa.xml</path>
 		<offsets>
@@ -29,7 +35,7 @@
 		<!--3.37874	0.555297	0.350617-->
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
-			<y-m>-0.355</y-m>
+			<y-m>-0.350</y-m>
 			<z-m>0.5520</z-m>
 		</offsets>
 	</model>
@@ -38,11 +44,10 @@
 		<path>Aircraft/Buccaneer/Instruments/altimeter_vsi.xml</path>
 		<!--3.37874	0.505457	0.277457
 		3.37874	0.590568	0.277457-->
-
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
-			<y-m>-0.277457</y-m>
-			<z-m>0.548259</z-m>
+			<y-m>-0.270</y-m>
+			<z-m alias="../../../nav-panel/offsets/z-m"/>
 		</offsets>
 	</model>
 
@@ -61,8 +66,8 @@
 		<path>Aircraft/Buccaneer/Instruments/attitude_rb.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
-			<y-m>-0.131885</y-m>
-			<z-m>0.548259</z-m>
+			<y-m>-0.1290</y-m>
+			<z-m alias="../../../nav-panel/offsets/z-m"/>
 		</offsets>
 	</model>
 
@@ -70,8 +75,8 @@
 		<path>Aircraft/Buccaneer/Instruments/nav_display.xml</path>
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
-			<y-m>0.0627623</y-m>
-			<z-m>0.548259</z-m>
+			<y-m>0.0595</y-m>
+			<z-m alias="../../../nav-panel/offsets/z-m"/>
 		</offsets>
 	</model>
 
@@ -81,7 +86,7 @@
 		<offsets>
 			<x-m alias="../../../main-panel/offsets/x-m"/>
 			<y-m>-0.165474</y-m>
-			<z-m>0.682022</z-m>
+			<z-m>0.69</z-m>
 		</offsets>
 	</model>
 

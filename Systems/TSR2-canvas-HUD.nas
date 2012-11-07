@@ -1,7 +1,7 @@
 # ==============================================================================
-# TSR2 canvas HUD.nas
+# Buccaneer canvas HUD.nas
 # ==============================================================================
-print("TSR2 canvas HUD.nas");
+print("Buccaneer canvas HUD.nas");
 # ==============================================================================
 # Head up display
 # ==============================================================================
@@ -30,7 +30,6 @@ var HUD = {
 		parents: [HUD],
 	canvas: canvas.new(HUD.canvas_settings),
 	text_style: {
-#       'font': "LiberationFonts/LiberationMono-Regular.ttf",
 			'font': "LiberationFonts/LiberationSerif-Regular.ttf",
 			'character-size': 18,
 			'character-aspect-ration': 0.9
@@ -238,6 +237,11 @@ var HUD = {
 
 		return m;
 		},
+	setColorBackground: func () { 
+		me.texture.getNode('background', 1).setValue(_getColor(arg)); 
+		me; 
+		},
+
 	update: func()
 			{
 #			print("hud updating");

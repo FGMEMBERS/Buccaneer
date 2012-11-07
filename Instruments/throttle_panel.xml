@@ -15,8 +15,9 @@
 	<model>
 		<path>Aircraft/Buccaneer/Models/gear-control.xml</path>
 		<offsets>
-			<x-m>-0.378263</x-m>>
-			<y-m>-0.00563818</y-m>
+			<!---0.407949	0.115789	-0.00020486-->
+			<x-m>-0.407949</x-m>>
+			<y-m>0.00020486</y-m>
 			<z-m>0.144669</z-m>
 			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
 		</offsets>
@@ -25,8 +26,10 @@
 	<model>
 		<path>Aircraft/Buccaneer/Models/flaps_droop.xml</path>
 		<offsets>
-			<x-m>-0.3999</x-m>>
-			<y-m>0.0460643</y-m>
+			<!---0.431914	0.115789	-0.0578349-->
+
+			<x-m>-0.431914</x-m>>
+			<y-m>0.0578349</y-m>
 			<z-m>0.144669</z-m>
 			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
 		</offsets>
@@ -35,9 +38,9 @@
 	<model>
 		<path>Aircraft/Buccaneer/Instruments/gear.xml</path>
 		<offsets>
-			<x-m>-0.3999</x-m>>
-			<y-m>0.0460643</y-m>
-			<z-m>0.0730707</z-m>
+			<x-m>-0.431914</x-m>>
+			<y-m>0.0578349</y-m>
+			<z-m>0.076</z-m>
 			<heading-deg alias="../../../main-panel/offsets/heading-deg"/>
 		</offsets>
 	</model>
@@ -55,9 +58,10 @@
 			<z>0</z>
 		</axis>
 		<center>
-			<x-m>-0.251288</x-m>
-			<y-m>-0.0532531</y-m>
-			<z-m>-0.135353</z-m>
+			<!---0.28008	-0.123466	0.0505517-->
+			<x-m>-0.28008</x-m>
+			<y-m>-0.0505517</y-m>
+			<z-m>-0.123466</z-m>
 		</center>
 	</animation>
 	<animation>
@@ -72,9 +76,9 @@
 			<z>0</z>
 		</axis>
 		<center>
-			<x-m>-0.251288</x-m>
-			<y-m>0.0196106</y-m>
-			<z-m>-0.135353</z-m>
+			<x-m>-0.28008</x-m>
+			<y-m>-0.0505517</y-m>
+			<z-m>-0.123466</z-m>
 		</center>
 	</animation>
 
@@ -162,18 +166,20 @@
 			</entry>
 		</interpolation>
 		<axis>
-			<x1-m>-0.351192</x1-m>
-			<y1-m>0.0500194</y1-m>
-			<z1-m>0.0297126</z1-m>
-			<x2-m>-0.34964</x2-m>
-			<y2-m>0.0507147</y2-m>
-			<z2-m>0.0395669</z2-m>
+			<!---0.378824	0.0443268	-0.0588166
+			-0.378388	0.0492321	-0.0596816-->
+			<x1-m>-0.37882</x1-m>
+			<y1-m>0.0588166</y1-m>
+			<z1-m>0.0443268</z1-m>
+			<x2-m>-0.378388</x2-m>
+			<y2-m>0.0596816</y2-m>
+			<z2-m>0.0492321</z2-m>
 		</axis>
-		<center>
+		<!--<center>
 			<x-m>-0.34964</x-m>
 			<y-m>0.0507228</y-m>
 			<z-m>0.0397182</z-m>
-		</center>
+		</center>-->
 	</animation>
 
 	<!-- Rudder Trim -->
@@ -446,9 +452,10 @@
 			<z>0</z>
 		</axis>
 		<center>
-			<x-m>-0.119213</x-m>
-			<y-m>0.0767524</y-m>
-			<z-m>-0.0668141</z-m>
+			<!---0.148	-0.0549278	-0.0844489-->
+			<x-m>-0.148</x-m>
+			<y-m>0.0844489</y-m>
+			<z-m>-0.0549278</z-m>
 		</center>
 	</animation>
 	<animation>
@@ -517,9 +524,10 @@
 			<z>0</z>
 		</axis>
 		<center>
-			<x-m>-0.113114</x-m>
-			<y-m>0.0540666</y-m>
-			<z-m>-0.0659022</z-m>
+			<!---0.141868	-0.0543994	-0.0617611-->
+			<x-m>-0.141868</x-m>
+			<y-m>0.0617611</y-m>
+			<z-m>-0.0543994</z-m>
 		</center>
 	</animation>
 	<animation>

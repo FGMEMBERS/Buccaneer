@@ -13,6 +13,8 @@ var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 # Make sure all needed properties are present and accounted 
 # for, and that they have sane default values.
 
+props.globals.initNode("controls/autoflight/autopilot/ico", 0, "BOOL");
+
 view_number_Node = props.globals.getNode("sim/current-view/view-number",1);
 view_number_Node.setDoubleValue(0);
 
@@ -226,8 +228,10 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 
 	wiper = aircraft.door.new("sim/model/buccaneer/wiper", 2);
 
-	print ("wiper init ", wiper.getpos());
-	#set listeners
+#	print ("wiper init ", wiper.getpos());
+	
+	##########################################
+	### set listeners
 
 #	setlistener("engines/engine/cranking", func {smoke.updateSmoking(); 
 #												  });
@@ -260,7 +264,7 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 
 	setlistener("sim/model/variant", func {
 		var index = getprop("sim/model/variant") or 0;
-		print("set model index", getprop("/sim/model/variant"));
+#		print("set model index", getprop("/sim/model/variant"));
 		aircraft.livery.set(index);
 	},
 	1);
@@ -268,7 +272,7 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 	setlistener("/sim/model/livery/variant", func {
 		var name = getprop("sim/model/livery/variant");
 		forindex (var i; aircraft.livery.data){
-			print("variant index: ", aircraft.livery.data[i][0]," [1] ",aircraft.livery.data[i][1]);
+#			print("variant index: ", aircraft.livery.data[i][0]," [1] ",aircraft.livery.data[i][1]);
 			if(aircraft.livery.data[i][0]== name)
 				model_variant_Node.setIntValue(i);
 		}
@@ -352,12 +356,12 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 	setlistener("environment/metar/rain-norm", func (n){
 		var rain = n.getValue();
 		var enabled = precipitationcontrolNode.getValue();
-		print("rain metar", rain, " gui enabled ", enabled);
+#		print("rain metar", rain, " gui enabled ", enabled);
 		if(enabled){
 			rainingNode.setValue(rain);
 		} else {
 			rainingNode.setValue(0);
-			print("rain metar 2", rain, " gui enabled ", enabled, " rain ",rainingNode.getValue());
+#			print("rain metar 2", rain, " gui enabled ", enabled, " rain ", rainingNode.getValue());
 		}
 	},
 	1,
@@ -367,7 +371,7 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 		var enabled = n.getValue();
 		var rain = getprop("environment/metar/rain-norm");
 		var internal = view_internal_Node.getValue();
-		print("rain gui ", rain, " gui enabled ", enabled );
+#		print("rain gui ", rain, " gui enabled ", enabled );
 		if(enabled and internal){
 			rainingNitationenabledNode.setBoolValue(1);
 		} else {
@@ -383,7 +387,7 @@ aircraft.livery.init("Aircraft/Buccaneer/Models/Liveries",
 		var internal = n.getValue();
 		enabled = precipitationcontrolNode.getValue();
 		var rain = getprop("environment/metar/rain-norm");
-		print("precipitation-control-gui-internal",enabled, " internal ", internal, " rain ",rain );
+#		print("precipitation-control-gui-internal",enabled, " internal ", internal, " rain ",rain );
 		if(internal){
 			precipitationenabledNode.setBoolValue(0);
 		} elsif(enabled) {
@@ -400,12 +404,11 @@ setlistener("/controls/gear/brake-left", func (n){
 		var wow1 = getprop("/gear/gear[1]/wow");
         var wow2 = getprop("/gear/gear[2]/wow");
 
-        if (!wow1 and !wow2 and brake != 0){
+        if (!wow1 and !wow2 and brake != 0)
+			{
             setprop("/controls/autoflight/autopilot/ico", 1);
-            print ("/controls/autoflight/autopilot/ico", 1);
-        } else {
-            print ("/controls/autoflight/autopilot/ico", 0);
-        }
+            print ("/controls/autoflight/autopilot/ico", getprop("/controls/autoflight/autopilot/ico") );
+			}
 
 	},
 	1,
@@ -418,11 +421,9 @@ setlistener("/controls/gear/brake-left", func (n){
 
         if (!wow1 and !wow2 and brake != 0){
             setprop("/controls/autoflight/autopilot/ico", 1);
-            print ("/controls/autoflight/autopilot/ico", 1);
-        } else {
-            print ("/controls/autoflight/autopilot/ico", 0);
+            print ("/controls/autoflight/autopilot/ico ", getprop("/controls/autoflight/autopilot/ico"));
         }
-
+		
 	},
 	1,
 	0);
@@ -432,67 +433,71 @@ setlistener("/controls/gear/brake-left", func (n){
         var lock1 = "altitude-hold-baro";
         var lock2 = "altitude-hold-radio";
         var lock3 = "mach-climb";
-        var ico = getprop("/controls/autoflight/autopilot/ico");
-
-        pitchloopid += 1;
+        var ico = getprop("/controls/autoflight/autopilot/ico") or 0;
 
         if (n.getValue() == lock1 or n.getValue() == lock2 or n.getValue() == lock3 
             and ico == 0){
-            print("utils pitch loopid lock", pitchloopid);
-            pitchloop(pitchloopid);
+			pitchloopid += 1;
+			pitchloop(pitchloopid);
+            print("utils pitch loopid lock ", pitchloopid);
         } else {
-            print("utils pitch loopid unlock", pitchloopid);
-            pitchloopid = 0;
+			pitchloopid += 1; 
+            print("utils pitch loopid unlock ", pitchloopid);
         }
 
     },
         1,
         0);
 
-    setlistener("/autopilot/locks/heading", func (n){
-        var lock = "dg-heading-hold";
-        var ico = getprop("/controls/autoflight/autopilot/ico");
+	setlistener("/autopilot/locks/heading", func (n){
+		var lock = "dg-heading-hold";
+		var ico = getprop("/controls/autoflight/autopilot/ico") or 0;
 
-        rollloopid += 1;
+		if (n.getValue() == lock and ico == 0)
+			{
+			rollloopid += 1;
+			rollloop(rollloopid);
+			print("utils loopid lock ", rollloopid);
+			} 
+			else
+			{
+				rollloopid += 1;
+				print("utils loopid unlock ", rollloopid);
+			}
 
-        if (n.getValue() == lock and ico == 0){
-            print("utils loopid lock", rollloopid);
-            rollloop(rollloopid);
-        } else {
-            print("utils loopid unlock", rollloopid);
-            rollloopid = 0;
-        }
+		},
+			1,
+			0);
 
-    },
-        1,
-        0);
+	setlistener("/controls/autoflight/autopilot/ico", func (n){
+		var lock = getprop("/autopilot/locks/heading");
+		var lock1 = getprop("/autopilot/locks/altitude");
 
-    setlistener("/controls/autoflight/autopilot/ico", func (n){
-        var lock = getprop("/autopilot/locks/heading");
-        var lock1 = getprop("/autopilot/locks/altitude");
-        rollloopid += 1;
-        pitchloopid += 1;
+		if (n.getValue() == 1 )
+			{
+			rollloopid += 1;
+			pitchloopid += 1;
+			print("utils ico unlock", rollloopid, " ico ", n.getValue());
+			} else {
 
-        if (n.getValue() == 1 ){
-            print("utils ico unlock", rollloopid);
-            rollloopid = 0;
-            pitchloopid = 0;
-        } else {
+				if(lock == "dg-heading-hold"){
+					rollloopid += 1;
+					rollloop(rollloopid);
+					print("utils ico lock", rollloopid);
+					}
 
-            if(lock == "dg-heading-hold"){
-                print("utils ico lock", rollloopid);
-            rollloop(rollloopid);
-            }
+				if(lock1 == "altitude-hold-baro" or lock1 == "altitude-hold-radio"
+					or lock1 == "mach-climb"){
+						pitchloopid += 1;
+						pitchloop(pitchloopid);
+						print("utils ico lock", pitchloopid);
+					}
 
-            if(lock1 == "altitude-hold-baro" or lock1 == "altitude-hold-radio"
-            or lock1 == "mach-climb"){
-                pitchloop(pitchloopid);
-            }
-        }
+			}
 
-    },
-        1,
-        0);
+		},
+			1,
+			0);
 
 	# set it running on the next update cycle
 	update();
@@ -500,7 +505,6 @@ setlistener("/controls/gear/brake-left", func (n){
 	slow_update_1();
 	slow_update_2();
 	print("running Buccaneer utilities");
-
 } # end func
 
 ###
@@ -1099,6 +1103,7 @@ var Flow = {
 var rollloopid = 0;
 
      var rollloop = func(id) {
+#        print("aileron locked ", id);
          id != rollloopid and return;
          setprop("/controls/flight/aileron", 0);
          settimer(func { rollloop(id) }, 0);
@@ -1109,6 +1114,7 @@ var rollloopid = 0;
      var pitchloop = func(id) {
          id != pitchloopid and return;
          setprop("/controls/flight/elevator", 0);
+#        print("elevator locked");
          settimer(func { pitchloop(id) }, 0);
      }
 
@@ -1135,27 +1141,70 @@ var rollloopid = 0;
 		var launchbar = obj.launchbar_node.getValue();
 		var name = obj.name;
 
-		print("listener ", name, " wow ", wow, " launchbar ", launchbar );
+#		print("listener 1 ", name, " wow ", wow, " launchbar ", launchbar );
 
 		if ((wow or launchbar == "Engaged" or launchbar == "Launching") and name == "observer")
 			{
 			interpolate(obj.arm_brg_node, 1, 1);
 			interpolate(obj.arm_elev_node, 1, 1);
-			print("listener obs ", name, " wow ", wow, " launchbar ", launchbar );
+#			print("listener 1 obs ", name, " wow ", wow, " launchbar ", launchbar );
 			}
 		elsif ((launchbar == "Engaged" or launchbar == "Launching") and name == "pilot")
 			{
 			interpolate(obj.arm_brg_node, 1, 1);
 			interpolate(obj.arm_elev_node, 1, 1);
-			print("listener pilot ", name, " wow ", wow, " launchbar ", launchbar );
+			rollloopid += 1;
+			pitchloopid+= 1;
+			rollloop(rollloopid);
+			pitchloop(pitchloopid);
+#			print("listener 1 pilot ", name, " wow ", wow, " launchbar ", launchbar);
 			}
 		else
 			{
 			interpolate(obj.arm_brg_node, 0, 1);
 			interpolate(obj.arm_elev_node, 0, 1);
-			print("listener else ", name, " wow ", wow, " launchbar ", launchbar );
+			rollloopid += 1;
+			pitchloopid+= 1;
+#			print("listener 1 else ", name, " wow ", wow, " launchbar ", launchbar);
 			}
 
+		},
+		1,
+		0);
+
+		setlistener("gear/launchbar/state", func (n){
+
+		var wow = getprop("gear/gear/wow", 1) or 0;
+		var launchbar = n.getValue();
+		var name = obj.name;
+
+#		print("listener 2 ", name, " wow ", wow, " launchbar ", launchbar );
+
+		if ((wow or launchbar == "Engaged" or launchbar == "Launching") and name == "observer")
+			{
+			interpolate(obj.arm_brg_node, 1, 1);
+			interpolate(obj.arm_elev_node, 1, 1);
+#			print("listener 2 obs ", name, " wow ", wow, " launchbar ", launchbar );
+			}
+		elsif ((launchbar == "Engaged" or launchbar == "Launching") and name == "pilot")
+			{
+			interpolate(obj.arm_brg_node, 1, 1);
+			interpolate(obj.arm_elev_node, 1, 1);
+			rollloopid += 1;
+			pitchloopid+= 1;
+			rollloop(rollloopid);
+			pitchloop(pitchloopid);
+#			print("listener 2 pilot ", name, " wow ", wow, " launchbar ", launchbar);
+			}
+		else
+			{
+			interpolate(obj.arm_brg_node, 0, 1);
+			interpolate(obj.arm_elev_node, 0, 1);
+			rollloopid += 1;
+			pitchloopid+= 1;
+#			print("listener 2  else ", name, " wow ", wow, " launchbar ", launchbar );
+			}
+			
 		},
 		1,
 		0);
@@ -1215,7 +1264,7 @@ var rollloopid = 0;
 			return 10 + (rand() * 10);
 			}
 
-		print("updating ", me.name," ", view_num, " ", rel_brg);
+#		print("updating ", me.name," ", view_num, " ", rel_brg);
 		},
 		visor: func (){
 #			print("updating visor ", me.name);
