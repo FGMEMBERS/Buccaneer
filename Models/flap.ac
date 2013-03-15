@@ -7299,7 +7299,7 @@ kids 0
 OBJECT poly
 name "screws"
 loc -0.00404944 0.0746365 0.0233172
-texture "D:/Git_New/my_fgdata/Aircraft/Buccaneer/Instruments/slot_screw_pan_small.rgb"
+texture "slot_screw_pan_small.rgb"
 crease 61.000000
 numvert 292
 0.000500543 -0.0516214 -0.0363345
