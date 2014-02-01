@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-Blackburn Buccaneer simulation config. This files ties together 
-all the components used by FGFS to represent the aircraft. Components include 
+Blackburn Buccaneer simulation config. This files ties together
+all the components used by FGFS to represent the aircraft. Components include
 the flight data model, instrument panel, and external 3D model. Lots still relies
 on the Hawker Hunter/
 
@@ -347,6 +347,9 @@ Ver 0.0.1
 	<systems>
 		<refuel>
 			<type>probe</type>
+			<offset-x-m>0.8</offset-x-m>
+			<offset-y-m>0.24</offset-y-m>
+			<offset-z-m>1.18</offset-z-m>
 		</refuel>
 	</systems>
 
