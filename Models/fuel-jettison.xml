@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<!-- Fuselage Fuel Jettison Control -->
+
+<PropertyList>
+
+	<path>knurled-knob.ac</path>
+
+	<!-- Knob -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Knob</object-name>
+		<property>controls/fuel/dump-valve-lever-pos</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>2</ind>
+				<dep>90</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>Knob</object-name>
+		<property>controls/fuel/dump-valve-lever-pos</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0.005</dep>
+			</entry>
+			<entry>
+				<ind>2</ind>
+				<dep>0.005</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<visible>true</visible>
+		<object-name>Knob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-assign</command>
+				<property>controls/fuel/dump-valve-lever</property>
+				<value>1</value>
+			</binding>
+		</action>
+	</animation>
+
+	<!--Panel Lighting-->
+
+	<animation>
+		<type>material</type>
+		<emission>
+			<factor-prop>/controls/lighting/panel-norm</factor-prop>
+			<red>0.75</red>
+			<green>0.25</green>
+			<blue>0.25</blue>
+		</emission>
+	</animation>
+
+	<!-- *** LoD *** -->
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>5</max-m>
+	</animation>
+
+</PropertyList>

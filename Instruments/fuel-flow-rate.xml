@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>fuel-flow-rate.ac</path>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Needle1</object-name>
+		<property>consumables/fuel/total-fuel-rate-lbsph</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-10</dep>
+			</entry>
+			<entry>
+				<ind>2000</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>4000</ind>
+				<dep>35</dep>
+			</entry>
+			<entry>
+				<ind>6000</ind>
+				<dep>45</dep>
+			</entry>
+			<entry>
+				<ind>8000</ind>
+				<dep>200</dep>
+			</entry>
+			<entry>
+				<ind>10000</ind>
+				<dep>225</dep>
+			</entry>
+			<entry>
+				<ind>12000</ind>
+				<dep>245</dep>
+			</entry>
+			<entry>
+				<ind>14000</ind>
+				<dep>280</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Panel Lighting -->
+	<animation>
+		<type>material</type>
+		<object-name>panel-lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>lighting-group</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/instrument-lighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>noshadow</type>
+	</animation>
+
+	<!-- *** LoD *** -->
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>5</max-m>
+	</animation>
+
+</PropertyList>

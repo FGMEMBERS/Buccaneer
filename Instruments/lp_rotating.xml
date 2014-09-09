@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>indicator_green.ac</path>
+
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>light</object-name>
+	</effect>
+
+	<animation>
+		<type>select</type>
+		<object-name>lamp</object-name>
+		<condition>
+			<or>
+				<greater-than>
+					<property>engines/engine[0]/n2</property>
+					<value>5</value>
+				</greater-than>
+				<greater-than>
+					<property>engines/engine[1]/n2</property>
+					<value>5</value>
+				</greater-than>
+			</or>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>light</object-name>
+		<condition>
+			<greater-than>
+				<property>systems/electrical/outputs/radar</property>
+				<value>23</value>
+			</greater-than>
+		</condition>
+		<emission>
+			<factor-prop>sim/model/buccaneer/controls/lp_rotating</factor-prop>
+			<offset-prop>systems/electrical/outputs/panel-floodlighting</offset-prop>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<transparency>
+			<alpha-prop>sim/model/buccaneer/controls/lp_rotating</alpha-prop>
+			<factor>-1.0</factor>
+			<offset>1</offset>
+			<max>0.95</max>
+			<min>0.75</min>
+		</transparency>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>body</object-name>
+		<emission>
+			<factor-prop>systems/electrical/outputs/panel-floodlighting</factor-prop>
+			<red>0.03125</red>
+			<green>0.0089</green>
+			<blue>0.0089</blue>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>noshadow</type>
+	</animation>
+
+</PropertyList>
