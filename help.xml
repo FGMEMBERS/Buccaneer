@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<PropertyList>
+	<help>
+		<title>Blackburn Buccaneer S2</title>
+		<key>
+			<name>Ctrl-F</name>
+			<desc>emergency flap lowering</desc>
+		</key>
+		<key>
+			<name>=</name>
+			<desc>toggle formation select menu</desc>
+		</key>
+		<key>
+			<name>f/F</name>
+			<desc>canopy open/close</desc>
+		</key>
+		<key>
+			<name>j/k</name>
+			<desc> airbrake close/open</desc>
+		</key>
+		<key>
+			<name>l</name>
+			<desc>Select squadron markings</desc>
+		</key>
+		<key>
+			<name>t</name>
+			<desc>Set Autotrim</desc>
+		</key>
+		<key>
+			<name>T</name>
+			<desc>Set all trim values to 0</desc>
+		</key>
+		<key>
+			<name>u/U</name>
+			<desc>seat down/up</desc>
+		</key>
+		<key>
+			<name>Ctrl-U</name>
+			<desc>seat default</desc>
+		</key>
+		<key>
+			<name>Ctrl-J</name>
+			<desc>Jettison drop-tanks</desc>
+		</key>
+		<key>
+			<name>o/O</name>
+			<desc>hook up/down</desc>
+		</key>
+		<key>
+			<name>]/}</name>
+			<desc>aileron droop decrease/increase </desc>
+		</key>
+		<key>
+			<name>[/{</name>
+			<desc>flap decrease/increase </desc>
+		</key>
+		<line>Approach speed (full flaps/aileron droop/tail flaps/airbrake): 145 kts IAS</line>
+		<line>Touchdown speed: 130 kts IAS</line>
+		<line>-----------------------------------------------------------</line>
+		<line>There are only 120 lbs of fuel available in the recuperators for inverted flight </line>
+		<line>at a time. If you exhaust this fuel, the engines will revert to ground idle.</line>
+		<line>Return to normal flight replenishes the recuperators.</line>
+		<line> </line>
+		<line>Fuel may be jettisoned by the operation of Fuel Jettison knob. Fuel will be</line>
+		<line>jettisoned until either 4000 lbs remains, or the knob is shut.</line>
+		<line>-----------------------------------------------------------</line>
+		<line>To use the Autotrim function - put the aircraft in the attitude required with the</line>
+		<line>joystick, press key t, centre the joystick, release key t. Key T removes ALL trim </line>
+		<line>settings.</line>
+	</help>
+</PropertyList>

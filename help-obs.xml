@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<PropertyList>
+	<help>
+		<title>Blackburn Buccaneer S2 - Observer</title>
+		<key>
+			<name>u/U</name>
+			<desc>seat down/up</desc>
+		</key>
+		<key>
+			<name>Ctrl-U</name>
+			<desc>seat default</desc>
+		</key>
+
+		<line>Approach speed (full flaps/aileron droop/tail flaps/airbrake): 145 kts IAS</line>
+		<line>Touchdown speed: 130 kts IAS</line>
+		<line>-----------------------------------------------------------</line>
+		<line> To use the Back Seat View select a Buccaneer pilot in the</line>
+		<line> Buccaneer->Select MP-Pilot dialog or set</line>
+		<line> /sim/remote/pilot-callsign to the Buccaneer multiplayer</line>
+		<line> callsign you wish to link with. The other mulitplayer must</line>
+		<line> similarly select your multiplayer callsign to give you any control.</line>
+		<line> </line>
+		<line>-----------------------------------------------------------</line>
+
+	</help>
+</PropertyList>

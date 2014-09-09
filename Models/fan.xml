@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!-- Spey engine compressor fan -->
+
+<PropertyList>
+
+	<path>spey-fan.ac</path>
+
+	<animation>
+		<type>spin</type>
+		<object-name>Fan</object-name>
+		<property>engines/engine/n2</property>
+		<factor>75</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>blend</type>
+		<object-name>Fan</object-name>
+		<property>engines/engine/n2</property>
+		<factor>0.01</factor>
+		<offset>-0</offset>
+		<min>0</min>
+		<max>0.975</max>
+	</animation>
+
+	<!-- *** LoD *** -->
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>500</max-m>
+	</animation>
+</PropertyList>
