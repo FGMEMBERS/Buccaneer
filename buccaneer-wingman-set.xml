@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--
 ************************************************************************
-Blackburn Buccaneer simulation config. This files ties together 
-all the components used by FGFS to represent the aircraft. Components include 
+Blackburn Buccaneer simulation config. This files ties together
+all the components used by FGFS to represent the aircraft. Components include
 the flight data model, instrument panel, and external 3D model. Lots still relies
 on the Hawker Hunter/
 
@@ -21,6 +21,7 @@ Ver 0.0.1
 		<flight-model>yasim</flight-model>
 		<aero>buccaneer-yasim</aero>
 		<fuel-fraction>1.0</fuel-fraction>
+		<variant-of>buccaneer</variant-of>
 		<systems>
 			<autopilot>
 				<path>Aircraft/Buccaneer/Systems/buccaneer-autopilot.xml</path>
