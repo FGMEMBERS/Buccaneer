@@ -16,7 +16,7 @@ Ver 0.0.1
 		<author type="string">Vivian Meazza, Anders Gidenstam</author>
 		<status type="string">alpha</status>
 		<aircraft-version>0.1</aircraft-version>
-
+		<variant-of>buccaneer</variant-of>
 		<flight-model>null</flight-model>
 
 		<model>
