@@ -21,6 +21,23 @@ Ver 0.0.1
 		<aero>buccaneer-yasim</aero>
 		<fuel-fraction>1.0</fuel-fraction>
 
+		<tags>
+			<tag>bomber</tag>
+			<tag>hawker</tag>
+			<tag>1950s</tag>
+			<tag>1960s</tag>
+			<tag>1970s</tag>
+			<tag>1980s</tag>
+			<tag>1990s</tag>
+			<tag>hud</tag>
+			<tag>retractable-gear</tag>
+			<tag>t-tail</tag>
+			<tag>refuel</tag>
+			<tag>jet</tag>
+			<tag>twin-engine</tag>
+			<tag>tail-hook</tag>
+		</tags>
+
 		<systems>
 			<autopilot>
 				<path>Aircraft/Buccaneer/Systems/buccaneer-autopilot.xml</path>
